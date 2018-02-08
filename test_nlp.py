@@ -4,9 +4,9 @@ import tensorflow.contrib.rnn as rnn
 import tensorflow.contrib.crf as crf
 
 
-EPOCHS = 10
+EPOCHS = 100
 BATCH_SIZE = 8
-STEPS_PER_EPOCH = 1200
+STEPS_PER_EPOCH = 2000
 
 CHAR_EMBEDDING_DIM = 50
 CHAR_LSTM_UNITS = 64
@@ -56,7 +56,7 @@ def input_fn(input_file, batch_size=1000000000, shuffle_data=False):
         batch_size,
         (([], [-1], []), ([-1, -1], [-1], [-1, -1]), [-1]),
         (("", "", 0), ("", 0, tf.constant(0, tf.uint8)), "")
-    ).repeat()
+    ).repeat().prefetch(16)
 
 
 def get_char_input(char_tensor, embedding_dim):
@@ -215,7 +215,7 @@ with tf.Session() as sess:
                     dropout_rate: 0.5
                 }
             )
-            # print(epoch + 1, step + 1, train_acc)
+            print(epoch + 1, step + 1, train_acc)
 
         val_acc = sess.run(
             accuracy,
