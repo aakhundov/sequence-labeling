@@ -1,12 +1,15 @@
 import pickle
+
+from datetime import datetime
+
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
 import tensorflow.contrib.crf as crf
 
 
 EPOCHS = 100
-BATCH_SIZE = 8
-STEPS_PER_EPOCH = 2000
+BATCH_SIZE = 32
+STEPS_PER_EPOCH = 1000
 
 CHAR_EMBEDDING_DIM = 50
 CHAR_LSTM_UNITS = 64
@@ -16,7 +19,13 @@ TASK_DATA_FOLDER = "data/pos/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
 
 
-def input_fn(input_file, batch_size=1000000000, shuffle_data=False):
+def echo(*msgs):
+    print("[{}] {}".format(
+        datetime.now().strftime('%H:%M:%S.%f')[:-3], " ".join(msgs)
+    ))
+
+
+def input_fn(input_file, batch_size=None, shuffle_data=False):
     lines = tf.data.TextLineDataset(input_file)
 
     sentence_lines = lines.map(lambda x: tf.string_split([x], "\t").values[0], 4)
@@ -47,16 +56,22 @@ def input_fn(input_file, batch_size=1000000000, shuffle_data=False):
         tf.data.Dataset.zip((sentence_lines, padded_sentences, padded_sentence_length)),
         tf.data.Dataset.zip((words, padded_word_length, padded_word_bytes)),
         padded_labels
-    )).cache()
+    ))
 
-    if shuffle_data:
-        data = data.shuffle(batch_size * 128)
+    def make_padded_batches(d):
+        return d.padded_batch(
+            batch_size if batch_size is not None else 1000000000,
+            (([], [-1], []), ([-1, -1], [-1], [-1, -1]), [-1]),
+            (("", "", 0), ("", 0, tf.constant(0, tf.uint8)), "")
+        )
 
-    return data.padded_batch(
-        batch_size,
-        (([], [-1], []), ([-1, -1], [-1], [-1, -1]), [-1]),
-        (("", "", 0), ("", 0, tf.constant(0, tf.uint8)), "")
-    ).repeat().prefetch(16)
+    if batch_size is not None:
+        data = data.cache()
+        if shuffle_data:
+            data = data.shuffle(batch_size * 128)
+        return data.apply(make_padded_batches).repeat().prefetch(16)
+    else:
+        return data.apply(make_padded_batches).cache().repeat()
 
 
 def get_char_input(char_tensor, embedding_dim):
@@ -169,7 +184,7 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab):
         sentence_lines, tf_dropout_rate
 
 
-print("Preparing input...")
+echo("Preparing input...")
 
 with tf.device("/cpu:0"):
     train_data = input_fn(TASK_DATA_FOLDER + "train.txt", batch_size=BATCH_SIZE, shuffle_data=True)
@@ -182,7 +197,7 @@ next_input_values = tf.data.Iterator.from_string_handle(
 ).get_next()
 
 
-print("Building the model...")
+echo("Building the model...")
 
 label_names = [line[:-1] for line in open(TASK_DATA_FOLDER + "labels.txt").readlines()]
 polyglot_words, polyglot_embeddings = pickle.load(open(POLYGLOT_FILE, "rb"), encoding="bytes")
@@ -193,7 +208,7 @@ train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropo
 
 
 with tf.Session() as sess:
-    print("Initializing variables...")
+    echo("Initializing variables...")
 
     sess.run(tf.tables_initializer())
     sess.run(tf.global_variables_initializer())
@@ -202,20 +217,19 @@ with tf.Session() as sess:
     val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
     test_handle = sess.run(test_data.make_one_shot_iterator().string_handle())
 
-    print("Training...")
+    echo("Training...")
     print()
 
     for epoch in range(EPOCHS):
         current = 0
         for step in range(STEPS_PER_EPOCH):
-            _, train_acc = sess.run(
-                [train_op, accuracy],
+            sess.run(
+                train_op,
                 feed_dict={
                     data_handle: train_handle,
                     dropout_rate: 0.5
                 }
             )
-            print(epoch + 1, step + 1, train_acc)
 
         val_acc = sess.run(
             accuracy,
@@ -223,4 +237,4 @@ with tf.Session() as sess:
                 data_handle: val_handle
             }
         )
-        print(epoch + 1, "val acc", val_acc)
+        echo(epoch + 1, "val acc", val_acc)
