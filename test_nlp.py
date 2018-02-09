@@ -26,15 +26,13 @@ def echo(*msgs):
     ))
 
 
-def input_fn(input_file, batch_size=None, shuffle_data=False):
-    lines = tf.data.TextLineDataset(input_file)
-
-    sentence_lines = lines.map(lambda x: tf.string_split([x], "\t").values[0], 4)
+def input_fn(input_lines, batch_size=None, shuffle_data=False):
+    sentence_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[0], 4)
     sentences_tokens = sentence_lines.map(lambda x: tf.string_split([x], " ").values, 4)
     padded_sentences = sentences_tokens.map(lambda x: tf.concat((["<S>"], x, ["</S>"]), axis=0), 4)
     padded_sentence_length = padded_sentences.map(lambda x: tf.shape(x)[0])
 
-    label_lines = lines.map(lambda x: tf.string_split([x], "\t").values[-1], 4)
+    label_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[-1], 4)
     labels_tokens = label_lines.map(lambda x: tf.string_split([x], " ").values, 4)
     padded_labels = labels_tokens.map(lambda x: tf.concat(([""], x, [""]), axis=0), 4)
 
@@ -69,7 +67,7 @@ def input_fn(input_file, batch_size=None, shuffle_data=False):
     if batch_size is not None:
         data = data.cache()
         if shuffle_data:
-            data = data.shuffle(batch_size * 128)
+            data = data.shuffle(batch_size * 256)
         return data.apply(make_padded_batches).repeat().prefetch(16)
     else:
         return data.apply(make_padded_batches).cache().repeat()
@@ -188,9 +186,12 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab):
 echo("Preparing input...")
 
 with tf.device("/cpu:0"):
-    train_data = input_fn(TASK_DATA_FOLDER + "train.txt", batch_size=BATCH_SIZE, shuffle_data=True)
-    val_data = input_fn(TASK_DATA_FOLDER + "val.txt", shuffle_data=False)
-    test_data = input_fn(TASK_DATA_FOLDER + "test.txt", shuffle_data=False)
+    train_data = input_fn(
+        tf.data.TextLineDataset(TASK_DATA_FOLDER + "train.txt"),
+        batch_size=BATCH_SIZE, shuffle_data=True
+    )
+    val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"), shuffle_data=False)
+    test_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "test.txt"), shuffle_data=False)
 
 data_handle = tf.placeholder(tf.string, shape=())
 next_input_values = tf.data.Iterator.from_string_handle(
