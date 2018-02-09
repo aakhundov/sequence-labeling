@@ -21,7 +21,8 @@ POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
 
 def echo(*msgs):
     print("[{}] {}".format(
-        datetime.now().strftime('%H:%M:%S.%f')[:-3], " ".join(msgs)
+        datetime.now().strftime('%H:%M:%S.%f')[:-3],
+        " ".join([str(m) for m in msgs])
     ))
 
 
