@@ -49,6 +49,23 @@ def get_label_ids(label_tensor, labels_names):
     ), tf.int32)
 
 
+def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
+    layers_fw, layers_bw = [], []
+    for _ in range(num_layers):
+        for layers in [layers_fw, layers_bw]:
+            layers.append(
+                rnn.DropoutWrapper(
+                    rnn.BasicLSTMCell(num_units),
+                    output_keep_prob=1.0-dropout_rate
+                )
+            )
+
+    if num_layers == 1:
+        return layers_fw[0], layers_bw[0]
+    else:
+        return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
+
+
 def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1):
@@ -66,25 +83,28 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
     tf_word_embeddings = get_word_input(padded_sentences, embedding_words, embedding_matrix)
     tf_max_sentence_len = tf.shape(tf_word_embeddings)[1]
 
-    ((_, _), (tf_char_output_state_fw, tf_char_output_state_bw)) = tf.nn.bidirectional_dynamic_rnn(
-        cell_fw=rnn.BasicLSTMCell(char_lstm_units),
-        cell_bw=rnn.BasicLSTMCell(char_lstm_units),
+    tf_char_lstm_fw, tf_char_lstm_bw = create_layered_bi_lstm(
+        char_lstm_layers, char_lstm_units, tf_dropout_rate
+    )
+
+    ((tf_char_outputs_fw, tf_char_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
+        cell_fw=tf_char_lstm_fw, cell_bw=tf_char_lstm_bw,
         inputs=tf_char_inputs, sequence_length=tf_char_seq_len,
         dtype=tf.float32, scope="char_rnn"
     )
 
-    tf_char_output_states = tf.concat([tf_char_output_state_fw[1], tf_char_output_state_bw[1]], axis=1)
-    tf_char_outputs = tf.reshape(tf_char_output_states, (-1, tf_max_sentence_len, char_lstm_units * 2))
-    tf_char_outputs_dropped = tf.layers.dropout(
-        tf_char_outputs, rate=tf_dropout_rate, training=tf.greater(tf_dropout_rate, 0)
-    )
+    tf_char_outputs = tf.concat([tf_char_outputs_fw[:, -1, :], tf_char_outputs_bw[:, -1, :]], axis=1)
+    tf_char_outputs = tf.reshape(tf_char_outputs, (-1, tf_max_sentence_len, char_lstm_units * 2))
 
-    tf_word_inputs = tf.concat([tf_word_embeddings, tf_char_outputs_dropped], axis=2)
+    tf_word_inputs = tf.concat([tf_word_embeddings, tf_char_outputs], axis=2)
     tf_word_seq_len = padded_sentence_len
 
+    tf_word_lstm_fw, tf_word_lstm_bw = create_layered_bi_lstm(
+        word_lstm_layers, word_lstm_units, tf_dropout_rate
+    )
+
     ((tf_word_outputs_fw, tf_word_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
-        cell_fw=rnn.DropoutWrapper(rnn.BasicLSTMCell(word_lstm_units), output_keep_prob=1.0-tf_dropout_rate),
-        cell_bw=rnn.DropoutWrapper(rnn.BasicLSTMCell(word_lstm_units), output_keep_prob=1.0-tf_dropout_rate),
+        cell_fw=tf_word_lstm_fw, cell_bw=tf_word_lstm_bw,
         inputs=tf_word_inputs, sequence_length=tf_word_seq_len,
         dtype=tf.float32, scope="word_rnn"
     )
