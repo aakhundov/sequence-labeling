@@ -1,19 +1,19 @@
 import tensorflow as tf
 
 
-def input_fn(input_lines, batch_size=None, shuffle_data=False):
-    sentence_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[0])
-    sentences_tokens = sentence_lines.map(lambda x: tf.string_split([x], " ").values)
-    padded_sentences = sentences_tokens.map(lambda x: tf.concat((["<S>"], x, ["</S>"]), axis=0))
+def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
+    sentence_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[0], num_threads)
+    sentences_tokens = sentence_lines.map(lambda x: tf.string_split([x], " ").values, num_threads)
+    padded_sentences = sentences_tokens.map(lambda x: tf.concat((["<S>"], x, ["</S>"]), axis=0), num_threads)
     padded_sentence_length = padded_sentences.map(lambda x: tf.shape(x)[0])
 
-    label_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[-1])
-    label_tokens = label_lines.map(lambda x: tf.string_split([x], " ").values)
-    padded_labels = label_tokens.map(lambda x: tf.concat(([""], x, [""]), axis=0))
+    label_lines = input_lines.map(lambda x: tf.string_split([x], "\t").values[-1], num_threads)
+    label_tokens = label_lines.map(lambda x: tf.string_split([x], " ").values, num_threads)
+    padded_labels = label_tokens.map(lambda x: tf.concat(([""], x, [""]), axis=0), num_threads)
 
-    words = padded_sentences.map(lambda x: tf.reshape(x, [-1, 1]))
+    words = padded_sentences.map(lambda x: tf.reshape(x, [-1, 1]), num_threads)
     padded_word_length = words.map(
-        lambda x: tf.map_fn(lambda y: tf.size(tf.string_split(y, "")) + 2, x, dtype=tf.int32), 4
+        lambda x: tf.map_fn(lambda y: tf.size(tf.string_split(y, "")) + 2, x, dtype=tf.int32), num_threads
     )
 
     def decode_word(word, max_len):
@@ -21,9 +21,9 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False):
         padded = tf.pad(w_bytes, [[0, max_len - tf.shape(w_bytes)[0]]])
         return padded
 
-    max_padded_word_length = padded_word_length.map(lambda x: tf.reduce_max(x))
+    max_padded_word_length = padded_word_length.map(lambda x: tf.reduce_max(x), num_threads)
     padded_word_bytes = tf.data.Dataset.zip((words, max_padded_word_length)).map(
-        lambda x, y: tf.map_fn(lambda z: decode_word(z, y), x, dtype=tf.uint8), 4
+        lambda x, y: tf.map_fn(lambda z: decode_word(z, y), x, dtype=tf.uint8), num_threads
     )
 
     data = tf.data.Dataset.zip((
