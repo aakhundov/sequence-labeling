@@ -42,7 +42,7 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
     if batch_size is not None:
         data = data.cache()
         if shuffle_data:
-            data = data.shuffle(1000)
+            data = data.shuffle(1000000000)
         return data.apply(make_padded_batches).repeat().prefetch(1)
     else:
         return data.apply(make_padded_batches).cache().repeat()
