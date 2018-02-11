@@ -84,7 +84,7 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
     tf_max_sentence_len = tf.shape(tf_word_embeddings)[1]
 
     tf_char_lstm_fw, tf_char_lstm_bw = create_layered_bi_lstm(
-        char_lstm_layers, char_lstm_units, tf_dropout_rate
+        char_lstm_layers, char_lstm_units, 0
     )
 
     ((tf_char_outputs_fw, tf_char_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
@@ -93,8 +93,18 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
         dtype=tf.float32, scope="char_rnn"
     )
 
-    tf_char_outputs = tf.concat([tf_char_outputs_fw[:, -1, :], tf_char_outputs_bw[:, -1, :]], axis=1)
-    tf_char_outputs = tf.reshape(tf_char_outputs, (-1, tf_max_sentence_len, char_lstm_units * 2))
+    tf_last_indices, tf_range = tf.maximum(0, tf_char_seq_len-1)
+    tf_gather_indices = tf.transpose(tf.stack((tf.range(tf.shape(tf_char_seq_len)[0]), tf_last_indices)))
+    tf_char_last_outputs_fw = tf.gather_nd(tf_char_outputs_fw, tf_gather_indices)
+    tf_char_last_outputs_bw = tf.gather_nd(tf_char_outputs_bw, tf_gather_indices)
+
+    tf_char_outputs = tf.reshape(
+        tf.concat([
+            tf_char_last_outputs_fw,
+            tf_char_last_outputs_bw
+        ], axis=1),
+        (-1, tf_max_sentence_len, char_lstm_units * 2)
+    )
 
     tf_word_inputs = tf.concat([tf_word_embeddings, tf_char_outputs], axis=2)
     tf_word_seq_len = padded_sentence_len
