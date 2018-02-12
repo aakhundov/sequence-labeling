@@ -67,6 +67,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
             except tf.errors.OutOfRangeError:
                 break
 
+        sess.run(val_init_op)
         val_acc, val_loss, val_labels, val_predictions, val_sentence_len = sess.run(
             [accuracy, loss, labels, predictions, sentence_length]
         )
