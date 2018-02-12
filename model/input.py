@@ -42,10 +42,6 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
     data = data.map(lambda sl, pst, plt: (sl, pst, tf.shape(pst)[0], plt), num_threads)
 
     if shuffle_data:
-        # if shuffling is required, caching
-        # is done before shuffling to maintain
-        # different batches in every epoch
-        data = data.cache()
         # shuffling the entire dataset
         data = data.shuffle(1000000000)
 
@@ -67,13 +63,4 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
     # replacing the maximum length by the 2D tf.uint8 tensor of encoding bytes of unique words
     data = data.map(lambda d, u, uwl, mwl: (d, (u, uwl, get_word_bytes(u[0], mwl))), num_threads)
 
-    if shuffle_data:
-        # if shuffling is required, just repeating and
-        # pre-fetching (caching is done before shuffling)
-        data = data.repeat().prefetch(1)
-    else:
-        # if shuffling is not required, caching
-        # the entire final dataset at once
-        data = data.cache().repeat()
-
-    return data
+    return data.prefetch(1)

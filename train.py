@@ -1,5 +1,4 @@
 import pickle
-from datetime import datetime
 
 import tensorflow as tf
 
@@ -10,21 +9,13 @@ from model.metrics import compute_iob_metrics
 
 EPOCHS = 100
 BATCH_SIZE = 32
-STEPS_PER_EPOCH = 1000
 
 TASK_DATA_FOLDER = "data/nerc/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
 REPORT_IOB_SCORES = True
 
 
-def echo(*msgs):
-    print("[{}] {}".format(
-        datetime.now().strftime('%H:%M:%S.%f')[:-3],
-        " ".join([str(m) for m in msgs])
-    ))
-
-
-echo("Preparing input...")
+print("Setting up input pipeline...")
 
 with tf.device("/cpu:0"):
     train_data = input_fn(
@@ -34,50 +25,50 @@ with tf.device("/cpu:0"):
     val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"), shuffle_data=False)
     test_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "test.txt"), shuffle_data=False)
 
-data_handle = tf.placeholder(tf.string, shape=())
-next_input_values = tf.data.Iterator.from_string_handle(
-    data_handle, train_data.output_types, train_data.output_shapes
-).get_next()
+iterator = tf.data.Iterator.from_structure(train_data.output_types, train_data.output_shapes)
+next_input_values = iterator.get_next()
 
-
-echo("Building the model...")
+print("Loading embedding data...")
 
 label_names = [line[:-1] for line in open(TASK_DATA_FOLDER + "labels.txt").readlines()]
 polyglot_words, polyglot_embeddings = pickle.load(open(POLYGLOT_FILE, "rb"), encoding="bytes")
+
+print("Building the model...")
 
 train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
     next_input_values, polyglot_words, polyglot_embeddings, label_names
 )
 
 
-with tf.Session() as sess:
-    echo("Initializing variables...")
+with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
+    print("Initializing variables...")
 
     sess.run(tf.tables_initializer())
     sess.run(tf.global_variables_initializer())
 
-    train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
-    val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
-    test_handle = sess.run(test_data.make_one_shot_iterator().string_handle())
+    train_init_op = iterator.make_initializer(train_data)
+    val_init_op = iterator.make_initializer(val_data)
+    test_init_op = iterator.make_initializer(test_data)
 
-    echo("Training...")
+    print("Training...")
     print()
 
     for epoch in range(EPOCHS):
-        for step in range(STEPS_PER_EPOCH):
-            sess.run(
-                train_op,
-                feed_dict={
-                    data_handle: train_handle,
-                    dropout_rate: 0.5
-                }
-            )
+        sess.run(train_init_op)
+
+        while True:
+            try:
+                sess.run(
+                    train_op,
+                    feed_dict={
+                        dropout_rate: 0.5
+                    }
+                )
+            except tf.errors.OutOfRangeError:
+                break
 
         val_acc, val_loss, val_labels, val_predictions, val_sentence_len = sess.run(
-            [accuracy, loss, labels, predictions, sentence_length],
-            feed_dict={
-                data_handle: val_handle
-            }
+            [accuracy, loss, labels, predictions, sentence_length]
         )
 
         if REPORT_IOB_SCORES:
@@ -93,4 +84,4 @@ with tf.Session() as sess:
                 "EC [P {d[EC_prec]:.2f} R {d[EC_rec]:.2f} F1 {d[EC_F1]:.2f}]".format(d=iob_metrics),
             ))
         else:
-            echo(epoch + 1, "val acc", val_acc)
+            print(epoch + 1, "val acc", val_acc)
