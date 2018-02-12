@@ -71,77 +71,74 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
              char_lstm_layers=1, word_lstm_layers=1):
 
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
-        ((unique_words, unique_word_idx), unique_word_len, unique_word_bytes) = input_values
+        ((unique_words, unique_word_index), unique_word_len, unique_word_bytes) = input_values
 
-    tf_dropout_rate = tf.placeholder_with_default(0.0, shape=[])
+    dropout_rate = tf.placeholder_with_default(0.0, shape=[])
 
-    tf_char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
-    tf_word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_matrix)
+    char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
+    word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_matrix)
 
-    tf_char_inputs = tf_char_embeddings
-    tf_char_seq_len = tf.reshape(unique_word_len, [-1])
-    tf_char_lstm_fw, tf_char_lstm_bw = create_layered_bi_lstm(
-        char_lstm_layers, char_lstm_units, tf_dropout_rate
+    char_inputs = char_embeddings
+    char_seq_len = tf.reshape(unique_word_len, [-1])
+    char_lstm_fw, char_lstm_bw = create_layered_bi_lstm(
+        char_lstm_layers, char_lstm_units, dropout_rate
     )
 
-    ((tf_char_outputs_fw, tf_char_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
-        cell_fw=tf_char_lstm_fw, cell_bw=tf_char_lstm_bw,
-        inputs=tf_char_inputs, sequence_length=tf_char_seq_len,
+    ((char_outputs_fw, char_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
+        cell_fw=char_lstm_fw, cell_bw=char_lstm_bw,
+        inputs=char_inputs, sequence_length=char_seq_len,
         dtype=tf.float32, scope="char_rnn"
     )
 
-    tf_char_outputs = tf.reshape(
+    last_char_outputs = tf.reshape(
         tf.concat([
             tf.gather_nd(
-                tf_char_outputs_fw,
+                char_outputs_fw,
                 tf.transpose(tf.stack((
-                    tf.range(tf.shape(tf_char_seq_len)[0]),
-                    tf.maximum(0, tf_char_seq_len - 1)
+                    tf.range(tf.shape(char_seq_len)[0]),
+                    tf.maximum(0, char_seq_len - 1)
                 )))
             ),
-            tf_char_outputs_bw[:, 0, :]
+            char_outputs_bw[:, 0, :]
         ], axis=1),
         [-1, char_lstm_units * 2]
     )
 
-    tf_unique_word_features = tf.concat([tf_word_embeddings, tf_char_outputs], axis=1)
-    tf_sentence_word_features = tf.map_fn(lambda i: tf_unique_word_features[i], unique_word_idx,
-                                          dtype=tf_unique_word_features.dtype)
+    unique_word_features = tf.concat([word_embeddings, last_char_outputs], axis=1)
+    sentence_word_features = tf.gather(unique_word_features, unique_word_index)
 
-    tf_word_inputs = tf.reshape(tf_sentence_word_features, tf.concat(
-        (tf.shape(sentence_tokens)[:2], tf.shape(tf_sentence_word_features)[1:]), axis=0
-    ))
-    tf_word_seq_len = sentence_len
-    tf_word_lstm_fw, tf_word_lstm_bw = create_layered_bi_lstm(
-        word_lstm_layers, word_lstm_units, tf_dropout_rate
+    word_inputs = sentence_word_features
+    word_seq_len = sentence_len
+    word_lstm_fw, word_lstm_bw = create_layered_bi_lstm(
+        word_lstm_layers, word_lstm_units, dropout_rate
     )
 
-    ((tf_word_outputs_fw, tf_word_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
-        cell_fw=tf_word_lstm_fw, cell_bw=tf_word_lstm_bw,
-        inputs=tf_word_inputs, sequence_length=tf_word_seq_len,
+    ((word_outputs_fw, word_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
+        cell_fw=word_lstm_fw, cell_bw=word_lstm_bw,
+        inputs=word_inputs, sequence_length=word_seq_len,
         dtype=tf.float32, scope="word_rnn"
     )
 
-    tf_word_outputs = tf.concat([tf_word_outputs_fw, tf_word_outputs_bw], axis=2)
+    word_outputs = tf.concat([word_outputs_fw, word_outputs_bw], axis=2)
 
-    tf_labels = get_label_ids(label_tokens, label_vocab)
-    tf_logits = tf.layers.dense(tf_word_outputs, len(label_vocab), activation=None)
-    tf_log_likelihoods, tf_transitions = crf.crf_log_likelihood(tf_logits, tf_labels, tf_word_seq_len)
-    tf_loss = -tf.reduce_mean(tf_log_likelihoods)
+    labels = get_label_ids(label_tokens, label_vocab)
+    logits = tf.layers.dense(word_outputs, len(label_vocab), activation=None)
+    log_likelihoods, transitions = crf.crf_log_likelihood(logits, labels, word_seq_len)
+    loss = -tf.reduce_mean(log_likelihoods)
 
-    tf_predictions, _ = crf.crf_decode(tf_logits, tf_transitions, tf_word_seq_len)
+    predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
 
-    tf_real_word_seq_len = tf_word_seq_len - 2
-    tf_real_predictions = tf_predictions[:, 1:-1]
-    tf_real_labels = tf_labels[:, 1:-1]
+    word_seq_len_wo_padding = word_seq_len - 2
+    predictions_wo_padding = predictions[:, 1:-1]
+    labels_wo_padding = labels[:, 1:-1]
 
-    tf_word_mask = tf.sequence_mask(tf_real_word_seq_len)
-    tf_masked_predictions = tf.boolean_mask(tf_real_predictions, tf_word_mask)
-    tf_masked_labels = tf.boolean_mask(tf_real_labels, tf_word_mask)
+    word_mask = tf.sequence_mask(word_seq_len_wo_padding)
+    masked_predictions = tf.boolean_mask(predictions_wo_padding, word_mask)
+    masked_labels = tf.boolean_mask(labels_wo_padding, word_mask)
 
-    tf_accuracy = tf.reduce_mean(tf.cast(tf.equal(tf_masked_predictions, tf_masked_labels), tf.float32))
-    tf_train = tf.train.AdamOptimizer().minimize(tf_loss)
+    accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
+    train_op = tf.train.AdamOptimizer().minimize(loss)
 
-    return tf_train, tf_loss, tf_accuracy, \
-        tf_real_predictions, tf_real_labels, tf_real_word_seq_len, \
-        raw_sentences, tf_dropout_rate
+    return train_op, loss, accuracy, \
+        predictions_wo_padding, labels_wo_padding, word_seq_len_wo_padding, \
+        raw_sentences, dropout_rate

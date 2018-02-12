@@ -58,6 +58,8 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
 
     # adding a tuple of unique words in a batch and their respective indices
     data = data.map(lambda *d: (d, tf.unique(tf.reshape(d[1], [-1]))), num_threads)
+    # reshaping unique words' index (resulting from tf.unique) to 2D sentence tokens' shape
+    data = data.map(lambda d, u: (d, (u[0], tf.reshape(u[1], tf.shape(d[1])))), num_threads)
     # adding length of each unique word in a batch
     data = data.map(lambda d, u: (d, u, get_word_lengths(u[0])), num_threads)
     # (temporarily) adding the maximum length among unique words
