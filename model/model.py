@@ -3,7 +3,7 @@ import tensorflow.contrib.rnn as rnn
 import tensorflow.contrib.crf as crf
 
 
-def get_char_input(char_tensor, embedding_dim):
+def get_char_embeddings(char_tensor, embedding_dim):
     return tf.reshape(
         tf.feature_column.input_layer(
             {"chars": tf.reshape(char_tensor, [-1])},
@@ -17,7 +17,7 @@ def get_char_input(char_tensor, embedding_dim):
     )
 
 
-def get_word_input(word_tensor, embedding_words, embedding_matrix):
+def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
     _, embedding_dim = embedding_matrix.shape
 
     return tf.reshape(
@@ -70,19 +70,16 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1):
 
-    (sentence_lines, padded_sentences, padded_sentence_len), \
-        (padded_words, padded_word_len, padded_char_bytes), \
-        padded_labels = input_values
+    (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
+        ((unique_words, unique_word_idx), unique_word_len, unique_word_bytes) = input_values
 
     tf_dropout_rate = tf.placeholder_with_default(0.0, shape=[])
 
-    tf_char_embeddings = get_char_input(padded_char_bytes, char_embedding_dim)
-    tf_char_inputs = tf.reshape(tf_char_embeddings, tf.concat(([-1], tf.shape(tf_char_embeddings)[2:]), axis=0))
-    tf_char_seq_len = tf.reshape(padded_word_len, [-1])
+    tf_char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
+    tf_word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_matrix)
 
-    tf_word_embeddings = get_word_input(padded_sentences, embedding_words, embedding_matrix)
-    tf_max_sentence_len = tf.shape(tf_word_embeddings)[1]
-
+    tf_char_inputs = tf_char_embeddings
+    tf_char_seq_len = tf.reshape(unique_word_len, [-1])
     tf_char_lstm_fw, tf_char_lstm_bw = create_layered_bi_lstm(
         char_lstm_layers, char_lstm_units, tf_dropout_rate
     )
@@ -93,22 +90,28 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
         dtype=tf.float32, scope="char_rnn"
     )
 
-    tf_last_indices = tf.transpose(tf.stack((
-        tf.range(tf.shape(tf_char_seq_len)[0]),
-        tf.maximum(0, tf_char_seq_len-1)
-    )))
-
     tf_char_outputs = tf.reshape(
         tf.concat([
-            tf.gather_nd(tf_char_outputs_fw, tf_last_indices),
+            tf.gather_nd(
+                tf_char_outputs_fw,
+                tf.transpose(tf.stack((
+                    tf.range(tf.shape(tf_char_seq_len)[0]),
+                    tf.maximum(0, tf_char_seq_len - 1)
+                )))
+            ),
             tf_char_outputs_bw[:, 0, :]
         ], axis=1),
-        (-1, tf_max_sentence_len, char_lstm_units * 2)
+        [-1, char_lstm_units * 2]
     )
 
-    tf_word_inputs = tf.concat([tf_word_embeddings, tf_char_outputs], axis=2)
-    tf_word_seq_len = padded_sentence_len
+    tf_unique_word_features = tf.concat([tf_word_embeddings, tf_char_outputs], axis=1)
+    tf_sentence_word_features = tf.map_fn(lambda i: tf_unique_word_features[i], unique_word_idx,
+                                          dtype=tf_unique_word_features.dtype)
 
+    tf_word_inputs = tf.reshape(tf_sentence_word_features, tf.concat(
+        (tf.shape(sentence_tokens)[:2], tf.shape(tf_sentence_word_features)[1:]), axis=0
+    ))
+    tf_word_seq_len = sentence_len
     tf_word_lstm_fw, tf_word_lstm_bw = create_layered_bi_lstm(
         word_lstm_layers, word_lstm_units, tf_dropout_rate
     )
@@ -121,7 +124,7 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
 
     tf_word_outputs = tf.concat([tf_word_outputs_fw, tf_word_outputs_bw], axis=2)
 
-    tf_labels = get_label_ids(padded_labels, label_vocab)
+    tf_labels = get_label_ids(label_tokens, label_vocab)
     tf_logits = tf.layers.dense(tf_word_outputs, len(label_vocab), activation=None)
     tf_log_likelihoods, tf_transitions = crf.crf_log_likelihood(tf_logits, tf_labels, tf_word_seq_len)
     tf_loss = -tf.reduce_mean(tf_log_likelihoods)
@@ -141,4 +144,4 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
 
     return tf_train, tf_loss, tf_accuracy, \
         tf_real_predictions, tf_real_labels, tf_real_word_seq_len, \
-        sentence_lines, tf_dropout_rate
+        raw_sentences, tf_dropout_rate
