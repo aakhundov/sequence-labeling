@@ -9,6 +9,7 @@ from model.metrics import compute_iob_metrics
 
 EPOCHS = 100
 BATCH_SIZE = 32
+STEPS_PER_EPOCH = 1000
 
 TASK_DATA_FOLDER = "data/nerc/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
@@ -25,8 +26,10 @@ with tf.device("/cpu:0"):
     val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"), shuffle_data=False)
     test_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "test.txt"), shuffle_data=False)
 
-iterator = tf.data.Iterator.from_structure(train_data.output_types, train_data.output_shapes)
-next_input_values = iterator.get_next()
+data_handle = tf.placeholder(tf.string, shape=())
+next_input_values = tf.data.Iterator.from_string_handle(
+    data_handle, train_data.output_types, train_data.output_shapes
+).get_next()
 
 print("Loading embedding data...")
 
@@ -40,36 +43,26 @@ train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropo
 )
 
 
-with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
+with tf.Session() as sess:
     print("Initializing variables...")
 
     sess.run(tf.tables_initializer())
     sess.run(tf.global_variables_initializer())
 
-    train_init_op = iterator.make_initializer(train_data)
-    val_init_op = iterator.make_initializer(val_data)
-    test_init_op = iterator.make_initializer(test_data)
+    train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
+    val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
+    test_handle = sess.run(test_data.make_one_shot_iterator().string_handle())
 
     print("Training...")
     print()
 
     for epoch in range(EPOCHS):
-        sess.run(train_init_op)
+        for step in range(STEPS_PER_EPOCH):
+            sess.run(train_op, feed_dict={data_handle: train_handle, dropout_rate: 0.5})
 
-        while True:
-            try:
-                sess.run(
-                    train_op,
-                    feed_dict={
-                        dropout_rate: 0.5
-                    }
-                )
-            except tf.errors.OutOfRangeError:
-                break
-
-        sess.run(val_init_op)
         val_acc, val_loss, val_labels, val_predictions, val_sentence_len = sess.run(
-            [accuracy, loss, labels, predictions, sentence_length]
+            [accuracy, loss, labels, predictions, sentence_length],
+            feed_dict={data_handle: val_handle}
         )
 
         if REPORT_IOB_SCORES:
