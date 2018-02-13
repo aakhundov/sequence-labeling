@@ -37,7 +37,7 @@ def input_fn(input_lines, batch_size=None, shuffle_data=False, num_threads=4):
     # splitting sentence and label parts into respective tokens (by " ")
     data = data.map(lambda sp: (sp[0], split_string(sp[0], " "), split_string(sp[1], " ")), num_threads)
     # padding sentences (with begin- and end-of-sentence tokens) and labels respectively (with empty labels)
-    data = data.map(lambda sl, st, lt: (sl, pad_tokens("<S>", st, "</S>"), pad_tokens("", lt, "")), num_threads)
+    data = data.map(lambda sl, st, lt: (sl, pad_tokens("<S>", st, "</S>"), pad_tokens("-", lt, "-")), num_threads)
     # adding sentence lengths; result: (full sentences, sentence tokens, sentence length, label tokens)
     data = data.map(lambda sl, pst, plt: (sl, pst, tf.shape(pst)[0], plt), num_threads)
 

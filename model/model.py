@@ -26,7 +26,7 @@ def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
             {"sentences": tf.reshape(word_tensor, [-1])},
             [tf.feature_column.embedding_column(
                 tf.feature_column.categorical_column_with_vocabulary_list(
-                    "sentences", embedding_words, default_value=0    # missing words assigned index=0
+                    "sentences", embedding_words, default_value=0    # missing words assigned zero index
                 ), dimension=embedding_dim, trainable=False,
                 initializer=tf.initializers.constant(embedding_matrix)
             )]
@@ -42,7 +42,7 @@ def get_label_ids(label_tensor, labels_names):
             {"labels": tf.reshape(label_tensor, [-1])},
             [tf.feature_column.embedding_column(
                 tf.feature_column.categorical_column_with_vocabulary_list(
-                    "labels", labels_names, default_value=0    # missing labels (e.g. "") assigned index=0
+                    "labels", labels_names, default_value=len(labels_names)-1  # dummy (-) label assigned last index
                 ), dimension=1, trainable=False,
                 initializer=tf.initializers.constant([list(range(len(labels_names)))])
             )]

@@ -54,8 +54,6 @@ def compute_metrics(gold, predicted, seq_len, label_names):
     conf = np.zeros([num_labels, num_labels], dtype=np.int32)
     for i in range(len(gold)):
         for j in range(seq_len[i]):
-            gold[i, j] = gold[i, j] - 1 if gold[i, j] > 0 else num_labels - 1
-            predicted[i, j] = predicted[i, j] - 1 if predicted[i, j] > 0 else num_labels - 1
             conf[gold[i, j], predicted[i, j]] += 1
 
     acc = np.sum(np.diag(conf)) / sum(seq_len) * 100
