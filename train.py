@@ -13,9 +13,9 @@ from model.metrics import compute_metrics
 
 PHASES = 100
 BATCH_SIZE = 8
-STEPS_PER_PHASE = 100
+STEPS_PER_PHASE = 1000
 
-TASK_DATA_FOLDER = "data/ner2/"
+TASK_DATA_FOLDER = "data/nerc/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
 
 
@@ -79,8 +79,10 @@ def create_training_artifacts():
     if not os.path.exists("results"):
         os.mkdir("results")
 
-    results_folder = "results/" + TASK_DATA_FOLDER.replace("/", "_") + time.strftime("%Y%m%d%H%M%S")
-    model_folder, source_folder = os.path.join(results_folder, "model/"), os.path.join(results_folder, "source/")
+    results_folder = "results/" + TASK_DATA_FOLDER.replace("/", "_") + time.strftime("%Y%m%d%_H%M%S")
+    results_folder = results_folder.replace("data_ready_", "").replace("data_", "")
+    model_folder = os.path.join(results_folder, "model/")
+    source_folder = os.path.join(results_folder, "source/")
 
     os.mkdir(results_folder)
     os.mkdir(model_folder)
@@ -183,8 +185,8 @@ def train():
         np.set_printoptions(threshold=np.nan, linewidth=1000)
 
         echo(log)
-        echo(log, "Best phase:", best_phase)
-        echo(log, "Best metric:", best_key_metric)
+        echo(log, "Best phase: {}".format(best_phase))
+        echo(log, "Best metric: {:.2f}".format(best_key_metric))
         echo(log)
         echo(log, "Confusion matrix:\n")
         echo(log, best_metrics["confusion"])
@@ -194,7 +196,7 @@ def train():
             echo(log, "Per-class summaries:\n")
             echo(log, class_summary)
 
-        echo(log, "Predicted sentences:\n")
+        echo(log, "Predicted sentence samples:\n")
         echo(log, visualize_predictions(
             best_sentences, best_labels, best_predictions,
             best_sentence_len, label_names, 100
