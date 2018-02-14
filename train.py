@@ -13,13 +13,13 @@ from model.metrics import compute_metrics
 
 PHASES = 100
 BATCH_SIZE = 8
-STEPS_PER_PHASE = 1000
+STEPS_PER_PHASE = 100
 
-TASK_DATA_FOLDER = "data/nerc/"
+TASK_DATA_FOLDER = "data/ner2/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
 
 
-def report_performance(metrics, num_labels):
+def get_performance_summary(metrics, num_labels):
     if metrics["F1"]:
         if metrics["IOB"]:
             return "{:<39} {:<30} {:<30} {}".format(
@@ -42,6 +42,37 @@ def report_performance(metrics, num_labels):
                 ), metrics["E_F1"]
     else:
         return "acc {d[acc]:.2f}".format(d=metrics), metrics["acc"]
+
+
+def get_class_f1_summary(metrics, label_names):
+    result = ""
+    if "CLASS" in metrics and len(label_names) > 2:
+        for i in range(len(metrics["CLASS"])):
+            result += "{:<10} {:<25} {}\n".format(
+                "{}".format(label_names[i]),
+                "[TP {d[TP]} FP {d[FP]} FN {d[FN]}]".format(d=metrics["CLASS"][i]),
+                "[P {d[prec]:.2f} R {d[rec]:.2f} F1 {d[F1]:.2f}]".format(d=metrics["CLASS"][i])
+            )
+
+    return result
+
+
+def visualize_predictions(sentences, gold, predicted, seq_len, label_names, num_samples=10):
+    results = ""
+    for i in range(min(len(sentences), num_samples)):
+        visualized = "{}.".format(i+1)
+        tokens = str(sentences[i], encoding="utf-8").split(" ")
+        for j in range(seq_len[i]):
+            gold_label = label_names[gold[i][j]]
+            predicted_label = label_names[predicted[i][j]]
+            visualized += " {}_{}".format(
+                tokens[j],
+                predicted_label if predicted_label == gold_label else "{}|{}".format(
+                    predicted_label, gold_label
+                )
+            )
+        results += visualized + "\n"
+    return results
 
 
 def create_training_artifacts():
@@ -115,7 +146,7 @@ def train():
         # test_handle = sess.run(test_data.make_one_shot_iterator().string_handle())
 
         saver = tf.train.Saver()
-        best_metric, best_phase = 0, 0
+        best_metric, best_phase = -1, 0
 
         print("Training...")
         print()
@@ -130,7 +161,7 @@ def train():
             )
 
             val_metrics = compute_metrics(val_labels, val_predictions, val_sentence_len, label_names)
-            message, key_metric = report_performance(val_metrics, len(label_names))
+            message, key_metric = get_performance_summary(val_metrics, len(label_names))
 
             echo(log, "{:<17} {}".format("{0}.val: L {1:.3f}".format(phase+1, val_loss), message))
 
@@ -139,21 +170,35 @@ def train():
                 best_metric = key_metric
                 saver.save(sess, model_path)
 
-        echo(log)
-        echo(log, "Best phase:", best_phase)
-        echo(log, "Best metric:", best_metric)
-        echo(log)
-
         saver.restore(sess, model_path)
-        best_labels, best_predictions, best_sentence_len = sess.run(
-            [labels, predictions, sentence_length],
+        best_labels, best_predictions, best_sentence_len, best_sentences = sess.run(
+            [labels, predictions, sentence_length, sentences],
             feed_dict={data_handle: val_handle}
         )
 
         best_metrics = compute_metrics(best_labels, best_predictions, best_sentence_len, label_names)
+        best_message, best_key_metric = get_performance_summary(best_metrics, len(label_names))
+        class_summary = get_class_f1_summary(best_metrics, label_names)
 
         np.set_printoptions(threshold=np.nan, linewidth=1000)
+
+        echo(log)
+        echo(log, "Best phase:", best_phase)
+        echo(log, "Best metric:", best_key_metric)
+        echo(log)
+        echo(log, "Confusion matrix:\n")
         echo(log, best_metrics["confusion"])
+        echo(log)
+
+        if class_summary != "":
+            echo(log, "Per-class summaries:\n")
+            echo(log, class_summary)
+
+        echo(log, "Predicted sentences:\n")
+        echo(log, visualize_predictions(
+            best_sentences, best_labels, best_predictions,
+            best_sentence_len, label_names, 100
+        ))
 
 
 if __name__ == "__main__":

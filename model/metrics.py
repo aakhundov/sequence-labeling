@@ -101,6 +101,7 @@ def compute_metrics(gold, predicted, seq_len, label_names):
             "E_prec": e_prec, "E_rec": e_rec, "E_F1": e_f1,
             "EC_TP": ec_tp, "EC_FP": ec_fp, "EC_FN": ec_fn,
             "EC_prec": ec_prec, "EC_rec": ec_rec, "EC_F1": ec_f1,
+            "CLASS": []
         }
 
         for i in range(num_classes):
@@ -109,12 +110,10 @@ def compute_metrics(gold, predicted, seq_len, label_names):
             ec_class_fn = len([1 for p in gold_entities if p[2] == i and p not in predicted_entities])
             ec_class_prec, ec_class_rec, ec_class_f1 = compute_f1_score(ec_class_tp, ec_class_fp, ec_class_fn)
 
-            f1_metrics["EC_" + str(i) + "_TP"] = ec_class_tp
-            f1_metrics["EC_" + str(i) + "_FP"] = ec_class_fp
-            f1_metrics["EC_" + str(i) + "_FN"] = ec_class_fn
-            f1_metrics["EC_" + str(i) + "_prec"] = ec_class_prec
-            f1_metrics["EC_" + str(i) + "_rec"] = ec_class_rec
-            f1_metrics["EC_" + str(i) + "_F1"] = ec_class_f1
+            f1_metrics["CLASS"].append({
+                "TP": ec_class_tp, "FP": ec_class_fp, "FN": ec_class_fn,
+                "prec": ec_class_prec, "rec": ec_class_rec, "F1": ec_class_f1
+            })
 
         for m in f1_metrics:
             results[m] = f1_metrics[m]
