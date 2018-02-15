@@ -101,12 +101,12 @@ def convert():
     print(label_count_pairs)
     print()
 
-    for t in [["train", 0, 18], ["val", 19, 21], ["test", 22, 24]]:
+    for target, from_, to in [["train", 0, 18], ["val", 19, 21], ["test", 22, 24]]:
         sentences_written, tokens_written = 0, 0
-        out_path = os.path.join(TARGET_FOLDER, t[0] + ".txt")
+        out_path = os.path.join(TARGET_FOLDER, target + ".txt")
 
         with open(out_path, "w+") as out:
-            for section in range(t[1], t[2]+1):
+            for section in range(from_, to+1):
                 for sentence in sentences_pairs_per_section[section]:
                     out.write("{}\t{}\n".format(
                         " ".join([p[0] for p in sentence]),
@@ -116,7 +116,7 @@ def convert():
                 sentences_written += len(sentences_pairs_per_section[section])
 
         print("sections {}-{} ({} sentences, {} tokens) written to {}".format(
-            t[1], t[2], sentences_written, tokens_written, out_path
+            from_, to, sentences_written, tokens_written, out_path
         ))
 
     label_path = os.path.join(TARGET_FOLDER, "labels.txt")

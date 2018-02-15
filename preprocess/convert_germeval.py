@@ -1,27 +1,21 @@
-# This script converts CoNLL 2003 English "train", "testa", and "testb"
-# files (https://www.clips.uantwerpen.be/conll2003/ner/) to the unified
+# This script converts the original GermEval 2014 NER Shared Task data
+# files (https://sites.google.com/site/germeval2014ner/data) to the unified
 # input format of the model (each line containing space-separated lists
-# of tokens and labels of a single sentence, separated by a tab). The
-# labeling scheme is converted to IOB2 (each entity starts with a B-tag).
-# It is assumed that the three files - "eng.train", "eng.testa", and
-# "eng.testb" are copied into data/sources/conll2003 folder. The results
-# of pre-processing are written into data/ready/nerc/conll2003 folder,
-# from where a model may be trained directly using train.py.
+# of tokens and labels of a single sentence, separated by a tab). Only
+# outer span labels (third column in the original files) are taken into
+# account and used for deriving pre-processed labels. It is assumed that
+# the three original files - "NER-de-train.tsv", "NER-de-dev.tsv", and
+# "NER-de-test.tsv" are copied into data/sources/germeval folder. The
+# results of pre-processing are written into data/ready/nerc/germeval
+# folder, from where a model may be trained directly using train.py.
 
 
 import os
 
 
 DUMMY_LABEL = "O"
-SOURCE_FOLDER = "../data/sources/conll2003"
-TARGET_FOLDER = "../data/ready/nerc/conll2003"
-
-
-def fix_b_tag(pair, running_pairs):
-    if pair[1].startswith("I-"):
-        if len(running_pairs) == 0 or running_pairs[-1][1][2:] != pair[1][2:]:
-            pair[1] = "B-" + pair[1][2:]
-    return pair
+SOURCE_FOLDER = "../data/sources/germeval"
+TARGET_FOLDER = "../data/ready/nerc/germeval"
 
 
 def get_label_count_pairs(sentence_pairs_per_source):
@@ -51,16 +45,14 @@ def convert():
         print("processing data from {}".format(file_path))
 
         running_pairs = []
-        for line in file_lines:
-            if line == "" or line.startswith("-DOCSTART-"):
+        for line in file_lines + [""]:
+            if line == "" or line.startswith("#\t"):
                 if len(running_pairs) > 0:
                     sentence_pairs_per_file[file].append(running_pairs)
                     running_pairs = []
                 continue
-            pair = line.split(" ")[0::3]
-            running_pairs.append(fix_b_tag(
-                pair, running_pairs
-            ))
+            pair = line.split("\t")[1:3]
+            running_pairs.append(pair)
 
     if not os.path.exists(TARGET_FOLDER):
         os.mkdir(TARGET_FOLDER)
@@ -77,7 +69,11 @@ def convert():
     print(label_count_pairs)
     print()
 
-    for target, source in [["train", "eng.train"], ["val", "eng.testa"], ["test", "eng.testb"]]:
+    for target, source in [
+        ["train", "NER-de-train.tsv"],
+        ["val", "NER-de-dev.tsv"],
+        ["test", "NER-de-test.tsv"]
+    ]:
         sentences_written, tokens_written = 0, 0
         out_path = os.path.join(TARGET_FOLDER, target + ".txt")
 
