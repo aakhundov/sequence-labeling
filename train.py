@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import pickle
 import shutil
@@ -15,8 +16,11 @@ PHASES = 100
 BATCH_SIZE = 8
 STEPS_PER_PHASE = 1000
 
-TASK_DATA_FOLDER = "data/nerc/"
+DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
 POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
+
+TASK_DATA_FOLDER = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
+TASK_DATA_FOLDER += "" if TASK_DATA_FOLDER.endswith("/") else "/"
 
 
 def get_performance_summary(metrics, num_labels):
@@ -79,7 +83,7 @@ def create_training_artifacts():
     if not os.path.exists("results"):
         os.mkdir("results")
 
-    results_folder = "results/" + TASK_DATA_FOLDER.replace("/", "_") + time.strftime("%Y%m%d%_H%M%S")
+    results_folder = "results/" + TASK_DATA_FOLDER.replace("/", "_") + time.strftime("%Y%m%d_%H%M%S")
     results_folder = results_folder.replace("data_ready_", "").replace("data_", "")
     model_folder = os.path.join(results_folder, "model/")
     source_folder = os.path.join(results_folder, "source/")
