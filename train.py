@@ -121,7 +121,7 @@ def train():
     with tf.device("/cpu:0"):
         train_data = input_fn(
             tf.data.TextLineDataset(TASK_DATA_FOLDER + "train.txt"),
-            batch_size=BATCH_SIZE, shuffle_data=True
+            batch_size=BATCH_SIZE, shuffle=True
         )
         val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"))
         # test_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "test.txt"))
