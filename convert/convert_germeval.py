@@ -36,7 +36,7 @@ def convert():
     for file in os.listdir(SOURCE_FOLDER):
         sentence_pairs_per_file[file] = []
         file_path = os.path.join(SOURCE_FOLDER, file)
-        file_lines = [l[:-1] for l in open(file_path).readlines()]
+        file_lines = [l[:-1] for l in open(file_path, encoding="utf-8").readlines()]
 
         print("processing data from {}".format(file))
 
