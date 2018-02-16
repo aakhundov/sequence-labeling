@@ -92,7 +92,7 @@ def convert():
         sentences_written, tokens_written = 0, 0
         out_path = os.path.join(TARGET_FOLDER, target + ".txt")
 
-        with open(out_path, "w+") as out:
+        with open(out_path, "w+", encoding="utf-8") as out:
             for sentence in dataset:
                 out.write("{}\t{}\n".format(
                     " ".join([p[0] for p in sentence]),
@@ -106,7 +106,7 @@ def convert():
         ))
 
     label_path = os.path.join(TARGET_FOLDER, "labels.txt")
-    with open(label_path, "w+") as out:
+    with open(label_path, "w+", encoding="utf-8") as out:
         for lb in label_count_pairs:
             out.write("{}\n".format(lb[0]))
 
