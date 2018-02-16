@@ -8,10 +8,6 @@ def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=Tru
         """Split a single string tensor s into multiple string tokens by delimiter."""
         return tf.string_split([s], delimiter).values
 
-    def pad_tokens(pre, tokens, post):
-        """Add pre-token and pos-token to a list of tokens."""
-        return tf.concat(([pre], tokens, [post]), axis=0)
-
     def decode_word(word, max_len):
         """Convert string tensor word into a list of encoding bytes zero-padded up to max_len."""
         w_bytes = tf.concat(([1], tf.decode_raw(word, tf.uint8), [2]), axis=0)
@@ -36,8 +32,6 @@ def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=Tru
     data = input_lines.map(lambda l: split_string(l, "\t"), num_threads)
     # splitting sentence and label parts into respective tokens (by " ")
     data = data.map(lambda sp: (sp[0], split_string(sp[0], " "), split_string(sp[1], " ")), num_threads)
-    # padding sentences (with begin- and end-of-sentence tokens) and labels respectively (with empty labels)
-    data = data.map(lambda sl, st, lt: (sl, pad_tokens("<S>", st, "</S>"), pad_tokens("-", lt, "-")), num_threads)
     # adding sentence lengths; result: (full sentences, sentence tokens, sentence length, label tokens)
     data = data.map(lambda sl, pst, plt: (sl, pst, tf.shape(pst)[0], plt), num_threads)
 

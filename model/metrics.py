@@ -40,12 +40,12 @@ def are_iob_labels(label_names):
     return True
 
 
-def f1_scores_required(labels, num_labels, seq_len, min_zero_ratio=0.8):
-    num_zero = sum([sum([
+def f1_scores_required(labels, num_labels, seq_len, min_o_label_ratio=0.8):
+    num_o_labels = sum([sum([
         1 for lb in labels[i][:seq_len[i]]
         if lb == num_labels - 1
     ]) for i in range(len(seq_len))])
-    return num_zero / sum(seq_len) >= min_zero_ratio
+    return num_o_labels / sum(seq_len) >= min_o_label_ratio
 
 
 def compute_metrics(gold, predicted, seq_len, label_names):

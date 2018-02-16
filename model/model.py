@@ -27,7 +27,8 @@ def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
             [tf.feature_column.embedding_column(
                 tf.feature_column.categorical_column_with_vocabulary_list(
                     "sentences", embedding_words, default_value=0    # missing words assigned zero index
-                ), dimension=embedding_dim, trainable=False,
+                ),
+                dimension=embedding_dim, trainable=False,
                 initializer=tf.initializers.constant(embedding_matrix)
             )]
         ),
@@ -42,9 +43,12 @@ def get_label_ids(label_tensor, labels_names):
             {"labels": tf.reshape(label_tensor, [-1])},
             [tf.feature_column.embedding_column(
                 tf.feature_column.categorical_column_with_vocabulary_list(
-                    "labels", labels_names, default_value=len(labels_names)-1  # dummy (-) label assigned last index
-                ), dimension=1, trainable=False,
-                initializer=tf.initializers.constant([list(range(len(labels_names)))])
+                    "labels", labels_names
+                ),
+                dimension=1, trainable=False,
+                initializer=tf.initializers.constant(
+                    [list(range(len(labels_names)))]
+                )
             )]
         ),
         tf.shape(label_tensor)
@@ -149,22 +153,16 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
     # predictions decoded from logits and CRF transitions (using Viterbi)
     predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
 
-    # removing start- and end-of-sentence tokens
-    # from sentence lengths, predictions, and labels
-    word_seq_len_wo_padding = word_seq_len - 2
-    predictions_wo_padding = predictions[:, 1:-1]
-    labels_wo_padding = labels[:, 1:-1]
-
     # removing batch-padded empty words
     # from predictions and labels
-    word_mask = tf.sequence_mask(word_seq_len_wo_padding)
-    masked_predictions = tf.boolean_mask(predictions_wo_padding, word_mask)
-    masked_labels = tf.boolean_mask(labels_wo_padding, word_mask)
+    word_mask = tf.sequence_mask(word_seq_len)
+    masked_predictions = tf.boolean_mask(predictions, word_mask)
+    masked_labels = tf.boolean_mask(labels, word_mask)
 
     # accuracy (single number) and training op (using Adam)
     accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
     train_op = tf.train.AdamOptimizer().minimize(loss)
 
     return train_op, loss, accuracy, \
-        predictions_wo_padding, labels_wo_padding, word_seq_len_wo_padding, \
+        predictions, labels, word_seq_len, \
         raw_sentences, dropout_rate
