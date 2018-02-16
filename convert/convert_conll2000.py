@@ -61,8 +61,6 @@ def convert():
                     running_pairs = []
                 continue
             pair = line.split(" ")[0::2]
-            if len(pair) < 2:
-                print(file, pair)
             running_pairs.append(pair)
 
     if not os.path.exists(TARGET_FOLDER):
