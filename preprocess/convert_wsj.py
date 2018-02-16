@@ -4,9 +4,9 @@
 # space-separated lists of tokens and labels of a single sentence,
 # separated by a tab). It is assumed that the contents of parsed/mrg/wsj
 # folder of Treebank-3 (25 folders from "00" to "24") are copied into
-# data/sources/wsj folder. The results of pre-processing are written
-# into data/ready/pos/wsj folder, from where a model may be trained
-# directly using train.py.
+# SOURCE_FOLDER. The pre-processing results are written into
+# TARGET_FOLDER, from where a model may be trained directly
+# using train.py.
 
 
 import os

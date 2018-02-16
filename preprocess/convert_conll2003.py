@@ -4,9 +4,9 @@
 # of tokens and labels of a single sentence, separated by a tab). The
 # labeling scheme is converted to IOB2 (each entity starts with a B-tag).
 # It is assumed that the three files - "eng.train", "eng.testa", and
-# "eng.testb" are copied into data/sources/conll2003 folder. The results
-# of pre-processing are written into data/ready/nerc/conll2003 folder,
-# from where a model may be trained directly using train.py.
+# "eng.testb" are copied into SOURCE_FOLDER. The pre-processing results
+# are written into TARGET_FOLDER, from where a model may be trained
+# directly using train.py.
 
 
 import os
@@ -48,7 +48,7 @@ def convert():
         file_path = os.path.join(SOURCE_FOLDER, file)
         file_lines = [l[:-1] for l in open(file_path).readlines()]
 
-        print("processing data from {}".format(file_path))
+        print("processing data from {}".format(file))
 
         running_pairs = []
         for line in file_lines:

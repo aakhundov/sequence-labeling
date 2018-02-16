@@ -5,9 +5,9 @@
 # outer span labels (third column in the original files) are taken into
 # account and used for deriving pre-processed labels. It is assumed that
 # the three original files - "NER-de-train.tsv", "NER-de-dev.tsv", and
-# "NER-de-test.tsv" are copied into data/sources/germeval folder. The
-# results of pre-processing are written into data/ready/nerc/germeval
-# folder, from where a model may be trained directly using train.py.
+# "NER-de-test.tsv" are copied into SOURCE_FOLDER. The pre-processing
+# results are written into TARGET_FOLDER, from where a model may be
+# trained directly using train.py.
 
 
 import os
@@ -42,7 +42,7 @@ def convert():
         file_path = os.path.join(SOURCE_FOLDER, file)
         file_lines = [l[:-1] for l in open(file_path).readlines()]
 
-        print("processing data from {}".format(file_path))
+        print("processing data from {}".format(file))
 
         running_pairs = []
         for line in file_lines + [""]:
