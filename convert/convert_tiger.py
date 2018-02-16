@@ -18,7 +18,6 @@ import random
 import xml.etree.ElementTree
 
 
-DUMMY_LABEL = "$."
 SOURCE_FOLDER = "../data/sources/tiger"
 TARGET_FOLDER = "../data/ready/pos/tiger"
 
@@ -32,10 +31,7 @@ def get_label_count_pairs(sentence_pairs):
                 label_counts[label] = 0
             label_counts[label] += 1
 
-    labels = sorted(set(label_counts.keys()) - {DUMMY_LABEL}) + [DUMMY_LABEL]
-    label_count_pairs = [(lb, label_counts[lb]) for lb in labels]
-
-    return label_count_pairs
+    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
 
 
 def shuffle_and_split(data):
@@ -110,8 +106,8 @@ def convert():
         for lb in label_count_pairs:
             out.write("{}\n".format(lb[0]))
 
-    print("{} labels (with dummy \"{}\" in the end) written to {}".format(
-        len(label_count_pairs), DUMMY_LABEL, label_path
+    print("{} labels written to {}".format(
+        len(label_count_pairs), label_path
     ))
 
 
