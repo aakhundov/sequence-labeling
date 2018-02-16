@@ -17,10 +17,14 @@ BATCH_SIZE = 8
 STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
-POLYGLOT_FILE = "polyglot/polyglot-en.pkl"
+EMBEDDING_LANGUAGE = "en"
 
 TASK_DATA_FOLDER = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
 TASK_DATA_FOLDER += "" if TASK_DATA_FOLDER.endswith("/") else "/"
+
+POLYGLOT_FILE = "polyglot/polyglot-{}.pkl".format(
+    sys.argv[2] if len(sys.argv) > 2 else EMBEDDING_LANGUAGE
+)
 
 
 def get_performance_summary(metrics, num_labels):
@@ -114,9 +118,6 @@ def echo(log, *messages):
 
 
 def train():
-    print("Creating training artifacts...")
-    model_path, log = create_training_artifacts()
-
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
         train_data = input_fn(
@@ -153,6 +154,9 @@ def train():
 
         saver = tf.train.Saver()
         best_metric, best_phase = -1, 0
+
+        print("Creating training artifacts...")
+        model_path, log = create_training_artifacts()
 
         print("Training...")
         print()
