@@ -125,7 +125,6 @@ def train():
             batch_size=BATCH_SIZE, shuffle=True
         )
         val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"))
-        # test_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "test.txt"))
 
         data_handle = tf.placeholder(tf.string, shape=())
         next_input_values = tf.data.Iterator.from_string_handle(
@@ -138,19 +137,21 @@ def train():
 
     print("Building the model...")
     train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
-        next_input_values, polyglot_words, polyglot_embeddings, label_names,
+        next_input_values, polyglot_words, polyglot_embeddings, label_names, training=True,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
         char_lstm_layers=1, word_lstm_layers=1
     )
 
-    with tf.Session() as sess:
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+
+    with tf.Session(config=config) as sess:
         print("Initializing variables...")
         sess.run(tf.tables_initializer())
         sess.run(tf.global_variables_initializer())
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
         val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
-        # test_handle = sess.run(test_data.make_one_shot_iterator().string_handle())
 
         saver = tf.train.Saver()
         best_metric, best_phase = -1, 0
@@ -163,7 +164,10 @@ def train():
 
         for phase in range(PHASES):
             for step in range(STEPS_PER_PHASE):
-                sess.run(train_op, feed_dict={data_handle: train_handle, dropout_rate: 0.5})
+                try:
+                    sess.run(train_op, feed_dict={data_handle: train_handle, dropout_rate: 0.5})
+                except Exception as ex:
+                    print(ex)
 
             val_loss, val_labels, val_predictions, val_sentence_len = sess.run(
                 [loss, labels, predictions, sentence_length],
