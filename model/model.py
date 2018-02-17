@@ -75,7 +75,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
         return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
 
 
-def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
+def model_fn(input_values, embedding_words, embedding_matrix, label_vocab, training=True,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1):
 
@@ -161,7 +161,7 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab,
 
     # accuracy (single number) and training op (using Adam)
     accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
-    train_op = tf.train.AdamOptimizer().minimize(loss)
+    train_op = tf.train.AdamOptimizer().minimize(loss) if training else None
 
     return train_op, loss, accuracy, \
         predictions, labels, word_seq_len, \

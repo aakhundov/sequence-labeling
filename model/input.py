@@ -4,9 +4,9 @@ import tensorflow as tf
 def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=True, num_threads=4):
     """Process 1D string tensor input_lines into an input pipeline."""
 
-    def split_string(s, delimiter):
+    def split_string(s, delimiter, skip_empty=True):
         """Split a single string tensor s into multiple string tokens by delimiter."""
-        return tf.string_split([s], delimiter).values
+        return tf.string_split([s], delimiter, skip_empty=skip_empty).values
 
     def decode_word(word, max_len):
         """Convert string tensor word into a list of encoding bytes zero-padded up to max_len."""
@@ -29,11 +29,12 @@ def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=Tru
         )
 
     # splitting input lines into sentence and label parts (by "\t")
-    data = input_lines.map(lambda l: split_string(l, "\t"), num_threads)
+    # extra "\t" is added to create labels placeholder if line contains no labels
+    data = input_lines.map(lambda l: split_string(l + "\t", "\t", False), num_threads)
     # splitting sentence and label parts into respective tokens (by " ")
     data = data.map(lambda sp: (sp[0], split_string(sp[0], " "), split_string(sp[1], " ")), num_threads)
     # adding sentence lengths; result: (full sentences, sentence tokens, sentence length, label tokens)
-    data = data.map(lambda sl, pst, plt: (sl, pst, tf.shape(pst)[0], plt), num_threads)
+    data = data.map(lambda sl, st, lt: (sl, st, tf.shape(st)[0], lt), num_threads)
 
     if shuffle:
         if cache:
