@@ -104,7 +104,7 @@ def create_training_artifacts():
         for file in [f for f in os.listdir(folder) if f.endswith(".py")]:
             shutil.copy(folder + file, destination + file)
 
-    log_file = open(os.path.join(results_folder, "log.txt"), "w+")
+    log_file = open(os.path.join(results_folder, "log.txt"), "w+", encoding="utf-8")
     model_path = os.path.join(model_folder, "nlp-model")
 
     return model_path, log_file
@@ -133,7 +133,7 @@ def train():
         ).get_next()
 
     print("Loading embedding data...")
-    label_names = [line[:-1] for line in open(TASK_DATA_FOLDER + "labels.txt").readlines()]
+    label_names = [line[:-1] for line in open(TASK_DATA_FOLDER + "labels.txt", encoding="utf-8").readlines()]
     polyglot_words, polyglot_embeddings = pickle.load(open(POLYGLOT_FILE, "rb"), encoding="bytes")
 
     print("Building the model...")
