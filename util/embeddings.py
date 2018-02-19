@@ -4,46 +4,52 @@ import pickle
 import numpy as np
 
 
-def load_embeddings(name, id_):
+def load_embeddings(name, id_, cache=True):
     if name.lower() == "polyglot":
-        return load_polyglot(id_)
+        return load_polyglot(id_, cache)
     elif name.lower() == "glove":
-        return load_glove(id_)
+        return load_glove(id_, cache)
 
     raise Exception("Unrecognized embeddings name: {}".format(name))
 
 
-def load_polyglot(language):
-    polyglot_file = "embeddings/polyglot-{}.pkl".format(language)
-    words_file = "embeddings/polyglot-{}.words.txt".format(language)
-
-    words, vecs = pickle.load(open(polyglot_file, "rb"), encoding="bytes")
-
-    if not os.path.exists(words_file):
-        with open(words_file, "w+", encoding="utf-8") as f:
-            f.write("\n".join(words))
-
-    return words_file, vecs, False
+def load_polyglot(language, *_):
+    polyglot_file = "embeddings/polyglot/polyglot-{}.pkl".format(language)
+    words, vectors = pickle.load(open(polyglot_file, "rb"), encoding="bytes")
+    return words, vectors, False
 
 
-def load_glove(id_):
-    glove_file = "embeddings/glove.{}.txt".format(id_)
-    words_file = "embeddings/glove.{}.words.txt".format(id_.split(".")[0])
-    vecs_file = "embeddings/glove.{}.vecs.npy".format(id_)
+def load_glove(id_, cache):
+    glove_file = "embeddings/glove/glove.{}.txt".format(id_)
+    words_file = "embeddings/glove/glove.{}.txt".format(id_.split(".")[0])
+    vecs_file = "embeddings/glove/glove.{}.npy".format(id_)
 
-    if not os.path.exists(words_file) or not os.path.exists(vecs_file):
-        words, vec_lists = [], []
+    words, vectors = None, None
+
+    if not os.path.exists(words_file) or not cache:
+        words = ["<UNK>"]  # adding <UNK> word at position 0
         with open(glove_file, encoding="utf-8") as f:
             for line in [l[:-1] for l in f.readlines()]:
-                tokens = line.split(" ")
-                words.append(tokens[0])
-                vec_lists.append([float(t) for t in tokens[1:]])
-        with open(words_file, "w+", encoding="utf-8") as f:
-            f.write("\n".join(["<UNK>"] + words))                        # adding <UNK> word at position 0
-        vec_lists.insert(0, np.random.normal(size=[len(vec_lists[0])]))  # adding <UNK> vector at position 0
-        np.save(vecs_file, np.array(vec_lists))
+                words.append(line[:line.find(" ")])
+        if cache:
+            with open(words_file, "w+", encoding="utf-8") as f:
+                f.write("\n".join(words))
 
-    vecs = np.load(vecs_file)
-    uncased = id_.lower().startswith("6b")
+    if not os.path.exists(vecs_file) or not cache:
+        vector_lists = []
+        with open(glove_file, encoding="utf-8") as f:
+            for line in [l[:-1] for l in f.readlines()]:
+                vector_lists.append([float(t) for t in line.split(" ")[1:]])
+        # adding one random normal vector for <UNK> words at position 0
+        vector_lists.insert(0, np.random.normal(size=[len(vector_lists[0])]))
+        vectors = np.array(vector_lists)
+        if cache:
+            np.save(vecs_file, vectors)
 
-    return words_file, vecs, uncased
+    if words is None:
+        with open(words_file, encoding="utf-8") as wf:
+            words = [l[:-1] for l in wf.readlines()]
+    if vectors is None:
+        vectors = np.load(vecs_file)
+
+    return words, vectors, id_.lower().startswith("6b")

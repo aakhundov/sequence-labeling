@@ -15,14 +15,14 @@ def get_char_embeddings(char_tensor, embedding_dim):
     return tf.nn.embedding_lookup(char_embeddings, tf.cast(char_tensor, tf.int32))
 
 
-def get_word_embeddings(word_tensor, embedding_words_file, embedding_matrix):
+def get_word_embeddings(word_tensor, embedding_words, embedding_vectors):
     """Convert a string tensor of words into a float32 tensor of word embeddings."""
-    word_lookup = lookup.index_table_from_file(embedding_words_file, default_value=0)
+    word_lookup = lookup.index_table_from_tensor(embedding_words, default_value=0)
     word_ids = word_lookup.lookup(word_tensor)
 
     word_embeddings = tf.concat((
-        tf.get_variable(name="unknown_word_embedding", initializer=embedding_matrix[:1], trainable=True),
-        tf.get_variable(name="known_word_embeddings", initializer=embedding_matrix[1:], trainable=False)
+        tf.get_variable(name="unknown_word_embedding", initializer=embedding_vectors[:1], trainable=True),
+        tf.get_variable(name="known_word_embeddings", initializer=embedding_vectors[1:], trainable=False)
     ), axis=0)
 
     return tf.nn.embedding_lookup(word_embeddings, word_ids)
@@ -56,7 +56,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
         return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
 
 
-def model_fn(input_values, embedding_words_file, embedding_matrix, label_vocab, training=True,
+def model_fn(input_values, embedding_words, embedding_vectors, label_vocab, training=True,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1):
 
@@ -70,7 +70,7 @@ def model_fn(input_values, embedding_words_file, embedding_matrix, label_vocab, 
     # character (byte) and word embeddings created with the helper methods
     # embeddings are created (and processed) only once for each words in a batch
     char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
-    word_embeddings = get_word_embeddings(unique_words, embedding_words_file, embedding_matrix)
+    word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
     # char-bi-LSTM configuration
     char_inputs = char_embeddings

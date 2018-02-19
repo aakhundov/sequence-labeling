@@ -45,8 +45,8 @@ def create_training_artifacts(data_folder):
         if folder != "./":
             destination += folder
             os.makedirs(destination)
-        for file in [f for f in os.listdir(folder) if f.endswith(".py")]:
-            shutil.copy(folder + file, destination + file)
+        for source_file in [f for f in os.listdir(folder) if f.endswith(".py")]:
+            shutil.copy(folder + source_file, destination + source_file)
 
     log_file = open(os.path.join(results_folder, "log.txt"), "w+", encoding="utf-8")
     model_path = os.path.join(model_folder, "nlp-model")
@@ -63,7 +63,7 @@ def train():
         data_folder += "/"
 
     print("Loading embeddings data...")
-    embedding_words_file, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
+    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
     label_names = [line[:-1] for line in open(data_folder + "labels.txt", encoding="utf-8").readlines()]
 
     print("Setting up input pipeline...")
@@ -85,9 +85,10 @@ def train():
         ).get_next()
 
     print("Building the model...")
-    embeddings_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
+    embedding_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
+    embedding_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
     train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
-        next_input_values, embedding_words_file, embeddings_placeholder, label_names, training=True,
+        next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names, training=True,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
         char_lstm_layers=1, word_lstm_layers=1
     )
@@ -97,9 +98,11 @@ def train():
 
     with tf.Session(config=config) as sess:
         print("Initializing variables...")
-        sess.run(tf.tables_initializer())
+        sess.run(tf.tables_initializer(), feed_dict={
+            embedding_words_placeholder: embedding_words
+        })
         sess.run(tf.global_variables_initializer(), feed_dict={
-            embeddings_placeholder: embedding_vectors
+            embedding_vectors_placeholder: embedding_vectors
         })
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
