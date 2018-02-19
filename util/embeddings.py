@@ -33,7 +33,7 @@ def load_glove(id_):
 
     if not os.path.exists(words_file) or not os.path.exists(vecs_file):
         words, vec_lists = [], []
-        with open(glove_file) as f:
+        with open(glove_file, encoding="utf-8") as f:
             for line in [l[:-1] for l in f.readlines()]:
                 tokens = line.split(" ")
                 words.append(tokens[0])
