@@ -16,8 +16,8 @@ BATCH_SIZE = 8
 STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
-DEFAULT_EMBEDDINGS_NAME = "polyglot"
-DEFAULT_EMBEDDINGS_ID = "en"
+DEFAULT_EMBEDDINGS_NAME = "glove"
+DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
 
 def echo(log, *messages):
