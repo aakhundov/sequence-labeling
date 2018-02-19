@@ -56,9 +56,10 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
         return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
 
 
-def model_fn(input_values, embedding_words, embedding_vectors, label_vocab, training=True,
+def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
-             char_lstm_layers=1, word_lstm_layers=1):
+             char_lstm_layers=1, word_lstm_layers=1,
+             training=True, embeddings_on_cpu=True):
 
     # destructuring compound input values into components
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
@@ -67,10 +68,11 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab, trai
     # placeholder for dropout rate, to be set externally (returned)
     dropout_rate = tf.placeholder_with_default(0.0, shape=[])
 
-    # character (byte) and word embeddings created with the helper methods
-    # embeddings are created (and processed) only once for each words in a batch
-    char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
-    word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
+    with tf.device("/cpu:0" if embeddings_on_cpu else None):
+        # character (byte) and word embeddings created with the helper methods
+        # embeddings are created (and processed) only once for each words in a batch
+        char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
+        word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
     # char-bi-LSTM configuration
     char_inputs = char_embeddings
