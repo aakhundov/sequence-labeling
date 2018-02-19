@@ -3,12 +3,14 @@ import sys
 import time
 import shutil
 
+import numpy as np
 import tensorflow as tf
 
 from model.input import input_fn
 from model.model import model_fn
 from util.embeddings import load_embeddings
-from util.metrics import *
+from util.metrics import compute_metrics, get_class_f1_summary
+from util.metrics import get_performance_summary, visualize_predictions
 
 
 PHASES = 100
