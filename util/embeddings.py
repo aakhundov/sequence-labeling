@@ -40,7 +40,7 @@ def load_glove(id_, cache):
             words = [l[:-1] for l in file.readlines()]
 
     if not os.path.exists(vecs_file) or not cache:
-        dim = int(id_.split(".")[1][:-1])
+        dim = int(id_.split(".")[-1][:-1])
         vectors = np.zeros([len(words), dim])
 
         # adding random vector for <UNK> at position 0
