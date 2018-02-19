@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-import pickle
 import shutil
 
 import numpy as np
@@ -10,6 +9,7 @@ import tensorflow as tf
 from model.input import input_fn
 from model.model import model_fn
 from model.metrics import compute_metrics
+from embedding import load_embeddings
 
 
 PHASES = 100
@@ -17,14 +17,8 @@ BATCH_SIZE = 8
 STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
-EMBEDDING_LANGUAGE = "en"
-
-TASK_DATA_FOLDER = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
-TASK_DATA_FOLDER += "" if TASK_DATA_FOLDER.endswith("/") else "/"
-
-POLYGLOT_FILE = "polyglot/polyglot-{}.pkl".format(
-    sys.argv[2] if len(sys.argv) > 2 else EMBEDDING_LANGUAGE
-)
+DEFAULT_EMBEDDINGS_NAME = "glove"
+DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
 
 def get_performance_summary(metrics, num_labels):
@@ -83,11 +77,11 @@ def visualize_predictions(sentences, gold, predicted, seq_len, label_names, num_
     return results
 
 
-def create_training_artifacts():
+def create_training_artifacts(data_folder):
     if not os.path.exists("results"):
         os.mkdir("results")
 
-    results_folder = "results/" + TASK_DATA_FOLDER.replace("/", "_") + time.strftime("%Y%m%d_%H%M%S")
+    results_folder = "results/" + data_folder.replace("/", "_") + time.strftime("%Y%m%d_%H%M%S")
     results_folder = results_folder.replace("data_ready_", "").replace("data_", "")
     model_folder = os.path.join(results_folder, "model/")
     source_folder = os.path.join(results_folder, "source/")
@@ -118,26 +112,41 @@ def echo(log, *messages):
 
 
 def train():
+    data_folder = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
+    embeddings_name = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_EMBEDDINGS_NAME
+    embeddings_id = sys.argv[3] if len(sys.argv) > 3 else DEFAULT_EMBEDDINGS_ID
+
+    if not data_folder.endswith("/"):
+        data_folder += "/"
+
+    print("Loading embeddings data...")
+    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
+    label_names = [line[:-1] for line in open(data_folder + "labels.txt", encoding="utf-8").readlines()]
+
+    print(uncased_embeddings)
+
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
         train_data = input_fn(
-            tf.data.TextLineDataset(TASK_DATA_FOLDER + "train.txt"),
-            batch_size=BATCH_SIZE, shuffle=True
+            tf.data.TextLineDataset(data_folder + "train.txt"),
+            batch_size=BATCH_SIZE, lower_case_words=uncased_embeddings,
+            shuffle=True, cache=True, repeat=True
         )
-        val_data = input_fn(tf.data.TextLineDataset(TASK_DATA_FOLDER + "val.txt"))
+        val_data = input_fn(
+            tf.data.TextLineDataset(data_folder + "val.txt"),
+            batch_size=None, lower_case_words=uncased_embeddings,
+            shuffle=False, cache=True, repeat=True
+        )
 
         data_handle = tf.placeholder(tf.string, shape=())
         next_input_values = tf.data.Iterator.from_string_handle(
             data_handle, train_data.output_types, train_data.output_shapes
         ).get_next()
 
-    print("Loading embedding data...")
-    label_names = [line[:-1] for line in open(TASK_DATA_FOLDER + "labels.txt", encoding="utf-8").readlines()]
-    polyglot_words, polyglot_embeddings = pickle.load(open(POLYGLOT_FILE, "rb"), encoding="bytes")
-
     print("Building the model...")
+    embeddings_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
     train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
-        next_input_values, polyglot_words, polyglot_embeddings, label_names, training=True,
+        next_input_values, embedding_words, embeddings_placeholder, label_names, training=True,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
         char_lstm_layers=1, word_lstm_layers=1
     )
@@ -148,19 +157,30 @@ def train():
     with tf.Session(config=config) as sess:
         print("Initializing variables...")
         sess.run(tf.tables_initializer())
-        sess.run(tf.global_variables_initializer())
+        sess.run(tf.global_variables_initializer(), feed_dict={
+            embeddings_placeholder: embedding_vectors
+        })
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
         val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
 
-        saver = tf.train.Saver()
         best_metric, best_phase = -1, 0
+        saver = tf.train.Saver([
+            v for v in tf.global_variables()
+            if all(s not in v.name for s in [
+                "known_embeddings", "words_embedding", "labels_embedding"
+            ])
+        ])
 
         print("Creating training artifacts...")
-        model_path, log = create_training_artifacts()
+        model_path, log = create_training_artifacts(data_folder)
 
         print("Training...")
         print()
+
+        echo(log, "data folder:  {}".format(data_folder))
+        echo(log, "embeddings:   {}, {}".format(embeddings_name, embeddings_id))
+        echo(log)
 
         for phase in range(PHASES):
             for step in range(STEPS_PER_PHASE):

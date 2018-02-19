@@ -1,7 +1,9 @@
 import tensorflow as tf
 
 
-def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=True, num_threads=4):
+def input_fn(input_lines, batch_size=None, lower_case_words=False,
+             shuffle=False, cache=True, repeat=True, num_threads=4):
+
     """Process 1D string tensor input_lines into an input pipeline."""
 
     def split_string(s, delimiter, skip_empty=True):
@@ -27,6 +29,17 @@ def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=Tru
             lambda x: decode_word(x, max_len),
             words, dtype=tf.uint8
         )
+
+    def words_to_lower(words):
+        """Convert all strings in a 1D tensor to lower-case (same shape tensor is returned)."""
+        def to_lower(byte_string):
+            return str(byte_string, encoding="utf-8").lower()
+
+        return tf.reshape(tf.map_fn(
+            lambda x: tf.py_func(
+                to_lower, [x], tf.string, stateful=False
+            ), words
+        ), [-1])
 
     # splitting input lines into sentence and label parts (by "\t")
     # extra "\t" is added to create labels placeholder if line contains no labels
@@ -62,6 +75,10 @@ def input_fn(input_lines, batch_size=None, shuffle=False, cache=True, repeat=Tru
     data = data.map(lambda d, u, uwl: (d, u, uwl, tf.reduce_max(uwl)), num_threads)
     # replacing the maximum length by the 2D tf.uint8 tensor of encoding bytes of unique words
     data = data.map(lambda d, u, uwl, mwl: (d, (u, uwl, get_word_bytes(u[0], mwl))), num_threads)
+
+    if lower_case_words:
+        # if required, all unique words are converted to lower case (using Python function)
+        data = data.map(lambda d, w: (d, ((words_to_lower(w[0][0]), w[0][1]), w[1], w[2])))
 
     if not shuffle and cache:
         # if shuffling is not required, caching the

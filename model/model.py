@@ -3,8 +3,12 @@ import tensorflow.contrib.rnn as rnn
 import tensorflow.contrib.crf as crf
 
 
+def range_initializer(shape, dtype, **_):
+    return tf.reshape(tf.cast(tf.range(shape[0]), dtype), [-1, 1])
+
+
 def get_char_embeddings(char_tensor, embedding_dim):
-    """Convert an int tensor of character bytes into 2D tensor of char (byte) embeddings."""
+    """Convert an int tensor of character bytes into a tensor of char (byte) embeddings."""
     return tf.reshape(
         tf.feature_column.input_layer(
             {"chars": tf.reshape(char_tensor, [-1])},
@@ -19,21 +23,25 @@ def get_char_embeddings(char_tensor, embedding_dim):
 
 def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
     """Convert a string tensor of words into 2D tensor of word embeddings."""
-    _, embedding_dim = embedding_matrix.shape
-
-    return tf.reshape(
+    word_ids = tf.reshape(tf.cast(
         tf.feature_column.input_layer(
-            {"sentences": tf.reshape(word_tensor, [-1])},
+            {"words": word_tensor},
             [tf.feature_column.embedding_column(
                 tf.feature_column.categorical_column_with_vocabulary_list(
-                    "sentences", embedding_words, default_value=0    # missing words assigned zero index
+                    "words", [""] + list(embedding_words), default_value=0
                 ),
-                dimension=embedding_dim, trainable=False,
-                initializer=tf.initializers.constant(embedding_matrix)
+                dimension=1, trainable=False,
+                initializer=range_initializer
             )]
-        ),
-        tf.concat((tf.shape(word_tensor), [embedding_dim]), axis=0)
-    )
+        ), tf.int32
+    ), [-1])
+
+    embedding_dim = int(embedding_matrix.get_shape()[1])
+    known_embeddings = tf.Variable(embedding_matrix, trainable=False, name="known_embeddings")
+    unknown_embedding = tf.Variable(tf.random_normal([1, embedding_dim]), name="unknown_embedding")
+    all_embeddings = tf.concat((unknown_embedding, known_embeddings), axis=0)
+
+    return tf.nn.embedding_lookup(all_embeddings, word_ids)
 
 
 def get_label_ids(label_tensor, labels_names):
@@ -46,9 +54,7 @@ def get_label_ids(label_tensor, labels_names):
                     "labels", labels_names
                 ),
                 dimension=1, trainable=False,
-                initializer=tf.initializers.constant(
-                    [list(range(len(labels_names)))]
-                )
+                initializer=range_initializer
             )]
         ),
         tf.shape(label_tensor)
