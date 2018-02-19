@@ -3,13 +3,12 @@ import sys
 import time
 import shutil
 
-import numpy as np
 import tensorflow as tf
 
 from model.input import input_fn
 from model.model import model_fn
-from model.metrics import compute_metrics
-from embedding import load_embeddings
+from util.embeddings import load_embeddings
+from util.metrics import *
 
 
 PHASES = 100
@@ -21,60 +20,11 @@ DEFAULT_EMBEDDINGS_NAME = "polyglot"
 DEFAULT_EMBEDDINGS_ID = "en"
 
 
-def get_performance_summary(metrics, num_labels):
-    if metrics["F1"]:
-        if metrics["IOB"]:
-            return "{:<39} {:<30} {:<30} {}".format(
-                "acc [B {d[B_acc]:.2f} E {d[E_acc]:.2f} O {d[O_acc]:.2f} T {d[acc]:.2f}]".format(d=metrics),
-                "B [P {d[B_prec]:.2f} R {d[B_rec]:.2f} F1 {d[B_F1]:.2f}]".format(d=metrics),
-                "E [P {d[E_prec]:.2f} R {d[E_rec]:.2f} F1 {d[E_F1]:.2f}]".format(d=metrics),
-                "EC [P {d[EC_prec]:.2f} R {d[EC_rec]:.2f} F1 {d[EC_F1]:.2f}]".format(d=metrics)
-            ), metrics["EC_F1"]
-        else:
-            if num_labels > 2:
-                return "{:<30} {:<30} {}".format(
-                    "acc [E {d[E_acc]:.2f} O {d[O_acc]:.2f} T {d[acc]:.2f}]".format(d=metrics),
-                    "E [P {d[E_prec]:.2f} R {d[E_rec]:.2f} F1 {d[E_F1]:.2f}]".format(d=metrics),
-                    "EC [P {d[EC_prec]:.2f} R {d[EC_rec]:.2f} F1 {d[EC_F1]:.2f}]".format(d=metrics)
-                ), metrics["EC_F1"]
-            else:
-                return "{:<30} {}".format(
-                    "acc [E {d[E_acc]:.2f} O {d[O_acc]:.2f} T {d[acc]:.2f}]".format(d=metrics),
-                    "E [P {d[E_prec]:.2f} R {d[E_rec]:.2f} F1 {d[E_F1]:.2f}]".format(d=metrics)
-                ), metrics["E_F1"]
-    else:
-        return "acc {d[acc]:.2f}".format(d=metrics), metrics["acc"]
-
-
-def get_class_f1_summary(metrics, label_names):
-    result = ""
-    if "CLASS" in metrics and len(label_names) > 2:
-        for i in range(len(metrics["CLASS"])):
-            result += "{:<10} {:<25} {}\n".format(
-                "{}".format(label_names[i]),
-                "[TP {d[TP]} FP {d[FP]} FN {d[FN]}]".format(d=metrics["CLASS"][i]),
-                "[P {d[prec]:.2f} R {d[rec]:.2f} F1 {d[F1]:.2f}]".format(d=metrics["CLASS"][i])
-            )
-
-    return result
-
-
-def visualize_predictions(sentences, gold, predicted, seq_len, label_names, num_samples=10):
-    results = ""
-    for i in range(min(len(sentences), num_samples)):
-        visualized = "{}.".format(i+1)
-        tokens = str(sentences[i], encoding="utf-8").split(" ")
-        for j in range(seq_len[i]):
-            gold_label = label_names[gold[i][j]]
-            predicted_label = label_names[predicted[i][j]]
-            visualized += " {}_{}".format(
-                tokens[j],
-                predicted_label if predicted_label == gold_label else "{}|{}".format(
-                    predicted_label, gold_label
-                )
-            )
-        results += visualized + "\n"
-    return results
+def echo(log, *messages):
+    print(*messages)
+    joined = " ".join([str(m) for m in messages])
+    log.write(joined + "\n")
+    log.flush()
 
 
 def create_training_artifacts(data_folder):
@@ -90,7 +40,7 @@ def create_training_artifacts(data_folder):
     os.mkdir(model_folder)
     os.mkdir(source_folder)
 
-    for folder in ["./", "model/"]:
+    for folder in ["./", "model/", "util/"]:
         destination = source_folder
         if folder != "./":
             destination += folder
@@ -102,13 +52,6 @@ def create_training_artifacts(data_folder):
     model_path = os.path.join(model_folder, "nlp-model")
 
     return model_path, log_file
-
-
-def echo(log, *messages):
-    print(*messages)
-    joined = " ".join([str(m) for m in messages])
-    log.write(joined + "\n")
-    log.flush()
 
 
 def train():
