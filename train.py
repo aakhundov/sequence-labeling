@@ -108,9 +108,7 @@ def train():
         best_metric, best_phase = -1, 0
         saver = tf.train.Saver([
             v for v in tf.global_variables()
-            if all(s not in v.name for s in [
-                "known_embeddings", "words_embedding", "labels_embedding"
-            ])
+            if "known_word_embeddings" not in v.name
         ])
 
         print("Creating training artifacts...")

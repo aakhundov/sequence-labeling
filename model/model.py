@@ -1,64 +1,39 @@
 import tensorflow as tf
 import tensorflow.contrib.rnn as rnn
 import tensorflow.contrib.crf as crf
-
-
-def range_initializer(shape, dtype, **_):
-    return tf.reshape(tf.cast(tf.range(shape[0]), dtype), [-1, 1])
+import tensorflow.contrib.lookup as lookup
 
 
 def get_char_embeddings(char_tensor, embedding_dim):
-    """Convert an int tensor of character bytes into a tensor of char (byte) embeddings."""
-    return tf.reshape(
-        tf.feature_column.input_layer(
-            {"chars": tf.reshape(char_tensor, [-1])},
-            [tf.feature_column.embedding_column(
-                tf.feature_column.categorical_column_with_identity("chars", 256),
-                dimension=embedding_dim, trainable=True
-            )]
-        ),
-        tf.concat((tf.shape(char_tensor), [embedding_dim]), axis=0)
+    """Convert an int tensor of character bytes into a float32 tensor of char (byte) embeddings."""
+    char_embeddings = tf.get_variable(
+        name="char_embeddings", shape=[256, embedding_dim],
+        initializer=tf.initializers.random_normal(),
+        trainable=True
     )
+
+    return tf.nn.embedding_lookup(char_embeddings, tf.cast(char_tensor, tf.int32))
 
 
 def get_word_embeddings(word_tensor, embedding_words_file, embedding_matrix):
-    """Convert a string tensor of words into 2D tensor of word embeddings."""
-    word_ids = tf.reshape(tf.cast(
-        tf.feature_column.input_layer(
-            {"words": word_tensor},
-            [tf.feature_column.embedding_column(
-                tf.feature_column.categorical_column_with_vocabulary_file(
-                    "words", embedding_words_file, default_value=0, vocabulary_size=None
-                ),
-                dimension=1, trainable=False,
-                initializer=range_initializer
-            )]
-        ), tf.int32
-    ), [-1])
+    """Convert a string tensor of words into a float32 tensor of word embeddings."""
+    word_lookup = lookup.index_table_from_file(embedding_words_file, default_value=0)
+    word_ids = word_lookup.lookup(word_tensor)
 
-    all_embeddings = tf.concat((
-        tf.get_variable(initializer=embedding_matrix[:1], trainable=True, name="unknown_embedding"),
-        tf.get_variable(initializer=embedding_matrix[1:], trainable=False, name="known_embeddings")
+    word_embeddings = tf.concat((
+        tf.get_variable(name="unknown_word_embedding", initializer=embedding_matrix[:1], trainable=True),
+        tf.get_variable(name="known_word_embeddings", initializer=embedding_matrix[1:], trainable=False)
     ), axis=0)
 
-    return tf.nn.embedding_lookup(all_embeddings, word_ids)
+    return tf.nn.embedding_lookup(word_embeddings, word_ids)
 
 
 def get_label_ids(label_tensor, labels_names):
-    """Convert a string tensor of human-readable label names into integer tensor of label indices (same shape)."""
-    return tf.cast(tf.reshape(
-        tf.feature_column.input_layer(
-            {"labels": tf.reshape(label_tensor, [-1])},
-            [tf.feature_column.embedding_column(
-                tf.feature_column.categorical_column_with_vocabulary_list(
-                    "labels", labels_names
-                ),
-                dimension=1, trainable=False,
-                initializer=range_initializer
-            )]
-        ),
-        tf.shape(label_tensor)
-    ), tf.int32)
+    """Convert a string tensor of string label names into an int32 tensor of label indices (same shape)."""
+    label_lookup = lookup.index_table_from_tensor(labels_names, default_value=0)
+    label_ids = label_lookup.lookup(label_tensor)
+
+    return tf.cast(label_ids, tf.int32)
 
 
 def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
