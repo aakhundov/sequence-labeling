@@ -29,7 +29,7 @@ def load_glove(id_, cache):
     if not os.path.exists(words_file) or not cache:
         words = ["<UNK>"]  # adding <UNK> word at position 0
         with open(glove_file, encoding="utf-8") as f:
-            for line in [l[:-1] for l in f.readlines()]:
+            for line in f.readlines():
                 words.append(line[:line.find(" ")])
         if cache:
             with open(words_file, "w+", encoding="utf-8") as f:
@@ -38,8 +38,8 @@ def load_glove(id_, cache):
     if not os.path.exists(vecs_file) or not cache:
         vector_lists = []
         with open(glove_file, encoding="utf-8") as f:
-            for line in [l[:-1] for l in f.readlines()]:
-                vector_lists.append([float(t) for t in line.split(" ")[1:]])
+            for line in f.readlines():
+                vector_lists.append(np.array([float(t) for t in line[:-1].split(" ")[1:]]))
         # adding one random normal vector for <UNK> words at position 0
         vector_lists.insert(0, np.random.normal(size=[len(vector_lists[0])]))
         vectors = np.array(vector_lists)

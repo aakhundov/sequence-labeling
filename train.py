@@ -106,6 +106,7 @@ def train():
         sess.run(tf.global_variables_initializer(), feed_dict={
             embedding_vectors_placeholder: embedding_vectors
         })
+        del embedding_words, embedding_vectors
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
         val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
