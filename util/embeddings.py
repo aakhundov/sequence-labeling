@@ -22,15 +22,18 @@ def load_polyglot(language, *_):
 def load_glove(id_, cache):
     glove_file = "data/embeddings/glove/glove.{}.txt".format(id_)
     words_file = "data/embeddings/glove/glove.{}.txt".format(id_.split(".")[0])
-    vecs_file = "data/embeddings/glove/glove.{}.npy".format(id_)
+    vectors_file = "data/embeddings/glove/glove.{}.npy".format(id_)
 
     words, vectors = None, None
 
     if not os.path.exists(words_file) or not cache:
+        print("Loading GloVe words...")
+
         words = ["<UNK>"]  # adding <UNK> word at position 0
         with open(glove_file, encoding="utf-8") as file:
             for line in file:
                 words.append(line[:line.find(" ")])
+
         if cache:
             with open(words_file, "w+", encoding="utf-8") as f:
                 f.write("\n".join(words))
@@ -39,9 +42,11 @@ def load_glove(id_, cache):
         with open(words_file, encoding="utf-8") as file:
             words = [l[:-1] for l in file.readlines()]
 
-    if not os.path.exists(vecs_file) or not cache:
-        dim = int(id_.split(".")[-1][:-1])
-        vectors = np.zeros([len(words), dim])
+    if not os.path.exists(vectors_file) or not cache:
+        print("Loading GloVe vectors...")
+
+        count, dim = len(words), int(id_.split(".")[-1][:-1])
+        vectors = np.zeros([count, dim], dtype=np.float32)
 
         # adding random vector for <UNK> at position 0
         vectors[0] = np.random.normal(size=[dim])
@@ -53,13 +58,15 @@ def load_glove(id_, cache):
                     line[line.find(" ")+1:],
                     dtype=np.float32, count=dim, sep=" "
                 )
+                if cursor % 100000 == 0:
+                    print("{} vectors loaded".format(cursor))
                 cursor += 1
 
         if cache:
-            np.save(vecs_file, vectors)
+            np.save(vectors_file, vectors)
 
     if vectors is None:
-        vectors = np.load(vecs_file)
+        vectors = np.load(vectors_file)
 
     uncased = not id_.lower().startswith("840b")
 
