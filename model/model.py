@@ -21,14 +21,14 @@ def get_char_embeddings(char_tensor, embedding_dim):
     )
 
 
-def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
+def get_word_embeddings(word_tensor, embedding_words_file, embedding_matrix):
     """Convert a string tensor of words into 2D tensor of word embeddings."""
     word_ids = tf.reshape(tf.cast(
         tf.feature_column.input_layer(
             {"words": word_tensor},
             [tf.feature_column.embedding_column(
-                tf.feature_column.categorical_column_with_vocabulary_list(
-                    "words", [""] + list(embedding_words), default_value=0
+                tf.feature_column.categorical_column_with_vocabulary_file(
+                    "words", embedding_words_file, default_value=0, vocabulary_size=None
                 ),
                 dimension=1, trainable=False,
                 initializer=range_initializer
@@ -36,10 +36,10 @@ def get_word_embeddings(word_tensor, embedding_words, embedding_matrix):
         ), tf.int32
     ), [-1])
 
-    embedding_dim = int(embedding_matrix.get_shape()[1])
-    known_embeddings = tf.Variable(embedding_matrix, trainable=False, name="known_embeddings")
-    unknown_embedding = tf.Variable(tf.random_normal([1, embedding_dim]), name="unknown_embedding")
-    all_embeddings = tf.concat((unknown_embedding, known_embeddings), axis=0)
+    all_embeddings = tf.concat((
+        tf.get_variable(initializer=embedding_matrix[:1], trainable=True, name="unknown_embedding"),
+        tf.get_variable(initializer=embedding_matrix[1:], trainable=False, name="known_embeddings")
+    ), axis=0)
 
     return tf.nn.embedding_lookup(all_embeddings, word_ids)
 
@@ -81,7 +81,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
         return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
 
 
-def model_fn(input_values, embedding_words, embedding_matrix, label_vocab, training=True,
+def model_fn(input_values, embedding_words_file, embedding_matrix, label_vocab, training=True,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1):
 
@@ -95,7 +95,7 @@ def model_fn(input_values, embedding_words, embedding_matrix, label_vocab, train
     # character (byte) and word embeddings created with the helper methods
     # embeddings are created (and processed) only once for each words in a batch
     char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
-    word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_matrix)
+    word_embeddings = get_word_embeddings(unique_words, embedding_words_file, embedding_matrix)
 
     # char-bi-LSTM configuration
     char_inputs = char_embeddings

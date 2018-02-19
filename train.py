@@ -17,8 +17,8 @@ BATCH_SIZE = 8
 STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
-DEFAULT_EMBEDDINGS_NAME = "glove"
-DEFAULT_EMBEDDINGS_ID = "6B.100d"
+DEFAULT_EMBEDDINGS_NAME = "polyglot"
+DEFAULT_EMBEDDINGS_ID = "en"
 
 
 def get_performance_summary(metrics, num_labels):
@@ -120,10 +120,8 @@ def train():
         data_folder += "/"
 
     print("Loading embeddings data...")
-    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
+    embedding_words_file, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
     label_names = [line[:-1] for line in open(data_folder + "labels.txt", encoding="utf-8").readlines()]
-
-    print(uncased_embeddings)
 
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
@@ -146,7 +144,7 @@ def train():
     print("Building the model...")
     embeddings_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
     train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
-        next_input_values, embedding_words, embeddings_placeholder, label_names, training=True,
+        next_input_values, embedding_words_file, embeddings_placeholder, label_names, training=True,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
         char_lstm_layers=1, word_lstm_layers=1
     )
