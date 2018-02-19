@@ -28,27 +28,36 @@ def load_glove(id_, cache):
 
     if not os.path.exists(words_file) or not cache:
         words = ["<UNK>"]  # adding <UNK> word at position 0
-        with open(glove_file, encoding="utf-8") as f:
-            for line in f.readlines():
+        with open(glove_file, encoding="utf-8") as file:
+            for line in file:
                 words.append(line[:line.find(" ")])
         if cache:
             with open(words_file, "w+", encoding="utf-8") as f:
                 f.write("\n".join(words))
 
+    if words is None:
+        with open(words_file, encoding="utf-8") as file:
+            words = [l[:-1] for l in file.readlines()]
+
     if not os.path.exists(vecs_file) or not cache:
-        vector_lists = []
-        with open(glove_file, encoding="utf-8") as f:
-            for line in f.readlines():
-                vector_lists.append(np.array([float(t) for t in line[:-1].split(" ")[1:]]))
-        # adding one random normal vector for <UNK> words at position 0
-        vector_lists.insert(0, np.random.normal(size=[len(vector_lists[0])]))
-        vectors = np.array(vector_lists)
+        dim = int(id_.split(".")[1][:-1])
+        vectors = np.zeros([len(words), dim])
+
+        # adding random vector for <UNK> at position 0
+        vectors[0] = np.random.normal(size=[dim])
+
+        cursor = 1
+        with open(glove_file, encoding="utf-8") as file:
+            for line in file:
+                vectors[cursor] = np.fromstring(
+                    line[line.find(" ")+1:],
+                    dtype=np.float32, count=dim, sep=" "
+                )
+                cursor += 1
+
         if cache:
             np.save(vecs_file, vectors)
 
-    if words is None:
-        with open(words_file, encoding="utf-8") as wf:
-            words = [l[:-1] for l in wf.readlines()]
     if vectors is None:
         vectors = np.load(vecs_file)
 
