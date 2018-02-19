@@ -14,15 +14,15 @@ def load_embeddings(name, id_, cache=True):
 
 
 def load_polyglot(language, *_):
-    polyglot_file = "embeddings/polyglot/polyglot-{}.pkl".format(language)
+    polyglot_file = "data/embeddings/polyglot/polyglot-{}.pkl".format(language)
     words, vectors = pickle.load(open(polyglot_file, "rb"), encoding="bytes")
     return words, vectors, False
 
 
 def load_glove(id_, cache):
-    glove_file = "embeddings/glove/glove.{}.txt".format(id_)
-    words_file = "embeddings/glove/glove.{}.txt".format(id_.split(".")[0])
-    vecs_file = "embeddings/glove/glove.{}.npy".format(id_)
+    glove_file = "data/embeddings/glove/glove.{}.txt".format(id_)
+    words_file = "data/embeddings/glove/glove.{}.txt".format(id_.split(".")[0])
+    vecs_file = "data/embeddings/glove/glove.{}.npy".format(id_)
 
     words, vectors = None, None
 
