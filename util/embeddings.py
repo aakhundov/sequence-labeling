@@ -52,4 +52,6 @@ def load_glove(id_, cache):
     if vectors is None:
         vectors = np.load(vecs_file)
 
-    return words, vectors, id_.lower().startswith("6b")
+    uncased = not id_.lower().startswith("840b")
+
+    return words, vectors, uncased
