@@ -74,15 +74,15 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
     # dropping out some (whole) char embedding vectors
-    dropped_char_embeddings = tf.layers.dropout(
-        char_embeddings, dropout_rate, noise_shape=[None, None, 1],
-        training=tf.not_equal(dropout_rate, 0.0),
+    dropped_char_embeddings = tf.nn.dropout(
+        char_embeddings, 1.0-dropout_rate,
+        tf.concat((tf.shape(char_embeddings)[:-1], [1]), axis=0)
     )
 
     # dropping out some (whole) word embedding vectors
-    dropped_word_embeddings = tf.layers.dropout(
-        word_embeddings, dropout_rate, noise_shape=[None, 1],
-        training=tf.not_equal(dropout_rate, 0.0)
+    dropped_word_embeddings = tf.nn.dropout(
+        word_embeddings, 1.0-dropout_rate,
+        tf.concat((tf.shape(word_embeddings)[:-1], [1]), axis=0)
     )
 
     # char-bi-LSTM configuration
