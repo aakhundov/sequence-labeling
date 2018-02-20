@@ -73,8 +73,20 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
     word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
+    # dropping out some (whole) char embedding vectors
+    dropped_char_embeddings = tf.layers.dropout(
+        char_embeddings, dropout_rate, noise_shape=[None, None, 1],
+        training=tf.not_equal(dropout_rate, 0.0),
+    )
+
+    # dropping out some (whole) word embedding vectors
+    dropped_word_embeddings = tf.layers.dropout(
+        word_embeddings, dropout_rate, noise_shape=[None, 1],
+        training=tf.not_equal(dropout_rate, 0.0)
+    )
+
     # char-bi-LSTM configuration
-    char_inputs = char_embeddings
+    char_inputs = dropped_char_embeddings
     char_seq_len = tf.reshape(unique_word_len, [-1])
     char_lstm_fw, char_lstm_bw = create_layered_bi_lstm(
         char_lstm_layers, char_lstm_units, dropout_rate
@@ -106,7 +118,7 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     # combining the features computed for unique word in a batch
     # and expanding them into the sentence structure of sentence tensor
     # (unique_word_index pointing from unique words to sentence positions)
-    unique_word_features = tf.concat([word_embeddings, last_char_outputs], axis=1)
+    unique_word_features = tf.concat([dropped_word_embeddings, last_char_outputs], axis=1)
     sentence_word_features = tf.gather(unique_word_features, unique_word_index)
 
     # word-bi-LSTM configuration
