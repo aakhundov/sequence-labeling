@@ -14,10 +14,11 @@ from util.metrics import get_performance_summary, visualize_predictions
 
 
 PHASES = 100
-BATCH_SIZE = 8
-STEPS_PER_PHASE = 1000
+TRAIN_BATCH_SIZE = 8
+TRAIN_EVAL_SIZE = 4096
+TRAIN_STEPS_PER_PHASE = 100
 
-DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
+DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
 DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
@@ -72,12 +73,17 @@ def train():
     with tf.device("/cpu:0"):
         train_data = input_fn(
             tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=BATCH_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=TRAIN_BATCH_SIZE, limit=None, lower_case_words=uncased_embeddings,
             shuffle=True, cache=True, repeat=True
+        )
+        train_eval_data = input_fn(
+            tf.data.TextLineDataset(data_folder + "train.txt"),
+            batch_size=None, limit=TRAIN_EVAL_SIZE, lower_case_words=uncased_embeddings,
+            shuffle=False, cache=True, repeat=True
         )
         val_data = input_fn(
             tf.data.TextLineDataset(data_folder + "val.txt"),
-            batch_size=None, lower_case_words=uncased_embeddings,
+            batch_size=None, limit=None, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
 
@@ -109,6 +115,7 @@ def train():
         del embedding_words, embedding_vectors
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
+        train_eval_handle = sess.run(train_eval_data.make_one_shot_iterator().string_handle())
         val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
 
         best_metric, best_phase = -1, 0
@@ -128,25 +135,30 @@ def train():
         echo(log)
 
         for phase in range(PHASES):
-            for step in range(STEPS_PER_PHASE):
+            for step in range(TRAIN_STEPS_PER_PHASE):
                 try:
                     sess.run(train_op, feed_dict={data_handle: train_handle, dropout_rate: 0.5})
                 except Exception as ex:
                     print(ex)
 
-            val_loss, val_labels, val_predictions, val_sentence_len = sess.run(
-                [loss, labels, predictions, sentence_length],
-                feed_dict={data_handle: val_handle}
-            )
+            for set_name, set_handle in [["train", train_eval_handle], ["val", val_handle]]:
+                eval_loss, eval_labels, eval_predictions, eval_sentence_len = sess.run(
+                    [loss, labels, predictions, sentence_length],
+                    feed_dict={data_handle: set_handle}
+                )
 
-            val_metrics = compute_metrics(val_labels, val_predictions, val_sentence_len, label_names)
-            message, key_metric = get_performance_summary(val_metrics, len(label_names))
+                eval_metrics = compute_metrics(eval_labels, eval_predictions, eval_sentence_len, label_names)
+                eval_message, eval_key_metric = get_performance_summary(eval_metrics, len(label_names))
 
-            echo(log, "{:<17} {}".format("{0}.val: L {1:.3f}".format(phase+1, val_loss), message))
+                echo(log, "{:<22} {}".format(
+                    "{0}.{1:<8} L {2:.3f}".format(
+                        phase + 1, set_name, eval_loss
+                    ), eval_message
+                ))
 
-            if key_metric > best_metric:
+            if eval_key_metric > best_metric:
                 best_phase = phase + 1
-                best_metric = key_metric
+                best_metric = eval_key_metric
                 saver.save(sess, model_path)
 
         saver.restore(sess, model_path)
@@ -157,7 +169,7 @@ def train():
 
         best_metrics = compute_metrics(best_labels, best_predictions, best_sentence_len, label_names)
         best_message, best_key_metric = get_performance_summary(best_metrics, len(label_names))
-        class_summary = get_class_f1_summary(best_metrics, label_names)
+        best_class_summary = get_class_f1_summary(best_metrics, label_names)
 
         np.set_printoptions(threshold=np.nan, linewidth=1000)
 
@@ -169,9 +181,9 @@ def train():
         echo(log, best_metrics["confusion"])
         echo(log)
 
-        if class_summary != "":
+        if best_class_summary != "":
             echo(log, "Per-class summaries:\n")
-            echo(log, class_summary)
+            echo(log, best_class_summary)
 
         echo(log, "Predicted sentence samples:\n")
         echo(log, visualize_predictions(
