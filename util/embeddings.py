@@ -36,7 +36,7 @@ def load_glove(id_, cache):
 
         if cache:
             with open(words_file, "w+", encoding="utf-8") as f:
-                f.write("\n".join(words))
+                f.write("\n".join(words) + "\n")
 
     if words is None:
         with open(words_file, encoding="utf-8") as file:
