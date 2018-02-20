@@ -6,7 +6,7 @@
 # account and used for deriving pre-processed labels. It is assumed that
 # the three original files - "NER-de-train.tsv", "NER-de-dev.tsv", and
 # "NER-de-test.tsv" are copied into SOURCE_FOLDER. The pre-processing
-# results are written into TARGET_FOLDER, from where a model may be
+# results are written into TARGET_FOLDER, from where a model can be
 # trained directly using train.py.
 
 

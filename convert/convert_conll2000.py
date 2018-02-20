@@ -6,7 +6,7 @@
 # are copied into SOURCE_FOLDER. The data from "train.txt" is shuffled
 # with a fixed seed, and split into training and validation set in 90/10
 # proportion. The pre-processing results are written into TARGET_FOLDER,
-# from where a model may be trained directly using train.py.
+# from where a model can be trained directly using train.py.
 
 
 import os

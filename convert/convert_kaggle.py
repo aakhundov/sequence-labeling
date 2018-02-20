@@ -5,7 +5,7 @@
 # assumed that the file "ner_dataset.csv" containing the whole dataset is copied
 # into SOURCE_FOLDER. The data set is shuffled with a fixed seed, and split into
 # training, validation, and test sets in 80/10/10 proportion. The pre-processing
-# results are written into TARGET_FOLDER, from where a model may be trained
+# results are written into TARGET_FOLDER, from where a model can be trained
 # directly using train.py.
 
 

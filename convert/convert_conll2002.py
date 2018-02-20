@@ -5,7 +5,7 @@
 # separated by a tab). It is assumed that the six files - "esp.train",
 # "esp.testa", "eng.testb", "ned.train", "ned.testa", and "ned.testb"
 # are copied into SOURCE_FOLDER. The pre-processing results
-# are written into two TARGET_FOLDERS, from where a model may
+# are written into two TARGET_FOLDERS, from where a model can
 # be trained directly using train.py.
 
 

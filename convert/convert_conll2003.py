@@ -5,7 +5,7 @@
 # labeling scheme is converted to IOB2 (each entity starts with a B-tag).
 # It is assumed that the three files - "eng.train", "eng.testa", and
 # "eng.testb" are copied into SOURCE_FOLDER. The pre-processing results
-# are written into TARGET_FOLDER, from where a model may be trained
+# are written into TARGET_FOLDER, from where a model can be trained
 # directly using train.py.
 
 

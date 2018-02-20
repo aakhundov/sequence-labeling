@@ -8,7 +8,7 @@
 # *.xml file from is processed. The data set is shuffled with a fixed seed, and
 # split into training, validation, and test sets in 80/10/10 proportion. The
 # pre-processing results are written into TARGET_FOLDER, from where a model
-# may be trained directly using train.py.
+# can be trained directly using train.py.
 
 
 import os
