@@ -73,7 +73,7 @@ def evaluate():
             v for v in tf.global_variables()
             if "known_word_embeddings" not in v.name
         ]).restore(sess, os.path.join(
-            "results", results_folder, "model", "nlp-model"
+            results_folder, "model", "nlp-model"
         ))
 
         print("Evaluating...")
