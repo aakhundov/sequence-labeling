@@ -49,7 +49,7 @@ def load_glove(id_, cache):
         vectors = np.zeros([count, dim], dtype=np.float32)
 
         # adding random vector for <UNK> at position 0
-        vectors[0] = np.random.normal(size=[dim])
+        vectors[0] = np.random.normal(size=[dim], loc=0.0, scale=0.4)
 
         cursor = 1
         with open(glove_file, encoding="utf-8") as file:

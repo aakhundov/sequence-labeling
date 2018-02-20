@@ -27,8 +27,9 @@ def pad_and_concat(a, b):
 def evaluate():
     results_folder = sys.argv[1]
     data_file = sys.argv[2] if len(sys.argv) > 2 else "val.txt"
+    visualize = sys.argv[3] if len(sys.argv) > 3 else 0
 
-    with open(os.path.join("results", results_folder, "log.txt"), encoding="utf-8") as f:
+    with open(os.path.join(results_folder, "log.txt"), encoding="utf-8") as f:
         data_folder = re.split(":\s+", f.readline()[:-1])[1]
         embeddings_name, embeddings_id = re.split(":\s+", f.readline()[:-1])[1].split(", ")
 
@@ -125,11 +126,12 @@ def evaluate():
             print("Per-class summaries:\n")
             print(e_class_summary)
 
-        print("Predicted sentence samples:\n")
-        print(visualize_predictions(
-            e_sentences, e_labels, e_predictions,
-            e_sentence_len, label_names, 100
-        ))
+        if visualize:
+            print("Predicted sentence samples:\n")
+            print(visualize_predictions(
+                e_sentences, e_labels, e_predictions,
+                e_sentence_len, label_names, 100
+            ))
 
 
 if __name__ == "__main__":
