@@ -16,7 +16,7 @@ from util.metrics import get_performance_summary, visualize_predictions
 PHASES = 100
 TRAIN_BATCH_SIZE = 8
 TRAIN_EVAL_SIZE = 4096
-TRAIN_STEPS_PER_PHASE = 100
+TRAIN_STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
