@@ -59,7 +59,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1,
-             training=True):
+             crf_layer=True, training=True):
 
     # destructuring compound input values into components
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
@@ -145,10 +145,11 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
 
     word_mask = tf.sequence_mask(word_seq_len)
 
-    if len(label_vocab) > 2:
-        # if more than two labels, inference by applying a CRF (and Viterbi decode)
+    if crf_layer:
+        # inference by applying a CRF (and Viterbi decode)
         log_likelihoods, transitions = crf.crf_log_likelihood(logits, labels, word_seq_len)
         predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
+        # maximizing log-likelihood of CRF predictions
         loss = -tf.reduce_mean(log_likelihoods)
     else:
         # if two labels, inference directly from logits
