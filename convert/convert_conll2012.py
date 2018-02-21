@@ -13,6 +13,7 @@
 
 
 import os
+import re
 
 
 SOURCE_FOLDER = "../data/sources/conll2012"
@@ -23,6 +24,18 @@ TARGET_FOLDERS = {
 }
 
 
+def get_all_files(folder, pattern=""):
+    for entry in sorted(os.listdir(folder)):
+        path = os.path.join(folder, entry)
+        if not os.path.isdir(path):
+            if re.search(pattern, entry):
+                yield path
+        else:
+            yield from get_all_files(
+                path, pattern
+            )
+
+
 def fix_token(t):
     if "B-" in t:
         t = t.replace("-LRB-", "(")
@@ -31,10 +44,13 @@ def fix_token(t):
         t = t.replace("-RCB-", "}")
         t = t.replace("-LSB-", "[")
         t = t.replace("-RSB-", "]")
-    if t == "/.":
-        t = "."
-    if t == "/?":
-        t = "?"
+    if t.startswith("/"):
+        if t == "/.":
+            t = "."
+        if t == "/?":
+            t = "?"
+        if t == "/-":
+            t = "-"
     return t
 
 
@@ -90,7 +106,7 @@ def get_label_count_pairs(sentence_pairs_per_source):
 
 def convert():
     sentence_pairs_per_task_and_folder = {
-        task: {} for task in TARGET_FOLDERS.keys()
+        t: {} for t in TARGET_FOLDERS.keys()
     }
 
     for folder in ["train", "development", "test"]:
@@ -99,23 +115,30 @@ def convert():
 
         print("processing data from {} folder".format(folder))
 
-        for root, _, files in os.walk(os.path.join(SOURCE_FOLDER, folder)):
-            for file in [f for f in files if f.endswith(".gold_conll")]:
-                    with open(os.path.join(root, file), encoding="utf-8") as f:
-                        running_joint_pairs = []
-                        for line in [l[:-1] for l in f.readlines()]:
-                            if line == "" or line.startswith("#"):
-                                if len(running_joint_pairs) > 0:
-                                    for task, pairs in split_by_task(running_joint_pairs):
-                                        # excluding sentences with "XX" and rare labels from POS task
-                                        if task == "POS" and any([p[1] in ["XX", "*", "AFX"] for p in pairs]):
-                                            continue
-                                        sentence_pairs_per_task_and_folder[task][folder].append(pairs)
-                                    running_joint_pairs = []
-                                continue
-                            running_joint_pairs.append(
-                                get_joint_pair(line)
-                            )
+        for path in get_all_files(os.path.join(SOURCE_FOLDER, folder), "\.gold_conll$"):
+            file_pairs = {t: [] for t in TARGET_FOLDERS.keys()}
+            with open(path, encoding="utf-8") as f:
+                running_joint_pairs = []
+                for line in [l[:-1] for l in f.readlines()]:
+                    if line == "" or line.startswith("#"):
+                        if len(running_joint_pairs) > 0:
+                            for task, pairs in split_by_task(running_joint_pairs):
+                                file_pairs[task].append(pairs)
+                            running_joint_pairs = []
+                        continue
+                    running_joint_pairs.append(
+                        get_joint_pair(line)
+                    )
+
+            # excluding files with only "XX" or "VERB" POS labels from POS data
+            if any(any(p[1] not in ["XX", "VERB"] for p in s) for s in file_pairs["POS"]):
+                sentence_pairs_per_task_and_folder["POS"][folder].extend(file_pairs["POS"])
+            # excluding files without named entity labelling from NERC data
+            if any(any(p[1] != "O" for p in s) for s in file_pairs["NERC"]):
+                sentence_pairs_per_task_and_folder["NERC"][folder].extend(file_pairs["NERC"])
+            # excluding files without predicate labelling from PRED data
+            if any(any(p[1] == "V" for p in s) for s in file_pairs["PRED"]):
+                sentence_pairs_per_task_and_folder["PRED"][folder].extend(file_pairs["PRED"])
 
     for task in ["POS", "NERC", "PRED"]:
         print("\n--------------------------------------\n")

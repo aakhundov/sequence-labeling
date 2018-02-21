@@ -15,11 +15,11 @@ from util.metrics import get_performance_summary, visualize_predictions
 
 PHASES = 100
 TRAIN_BATCH_SIZE = 8
-TRAIN_EVAL_LIMIT = 4096
-VAL_EVAL_LIMIT = None
+TRAIN_EVAL_LIMIT = 6000
+VAL_EVAL_LIMIT = 6000
 TRAIN_STEPS_PER_PHASE = 1000
 
-DEFAULT_DATA_FOLDER = "data/ready/pred/conll2012/"
+DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
 DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
