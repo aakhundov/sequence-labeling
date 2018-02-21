@@ -138,9 +138,10 @@ def get_performance_summary(metrics, num_labels):
                     "EC [P {d[EC_prec]:.2f} R {d[EC_rec]:.2f} F1 {d[EC_F1]:.2f}]".format(d=metrics)
                 ), metrics["EC_F1"]
             else:
-                return "{:<30} {}".format(
+                return "{:<30} {:<30} {}".format(
                     "acc [E {d[E_acc]:.2f} O {d[O_acc]:.2f} T {d[acc]:.2f}]".format(d=metrics),
-                    "E [P {d[E_prec]:.2f} R {d[E_rec]:.2f} F1 {d[E_F1]:.2f}]".format(d=metrics)
+                    "E [TP {d[E_TP]} FP {d[E_FP]} FN {d[E_FN]}] ".format(d=metrics),
+                    "[P {d[E_prec]:.2f} R {d[E_rec]:.2f} F1 {d[E_F1]:.2f}]".format(d=metrics)
                 ), metrics["E_F1"]
     else:
         return "acc {d[acc]:.2f}".format(d=metrics), metrics["acc"]
