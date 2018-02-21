@@ -138,18 +138,26 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     # outputs from each time step are used for downstream inference
     word_outputs = tf.concat([word_outputs_fw, word_outputs_bw], axis=2)
 
-    # logits -> CRF -> likelihoods -> loss
+    # deriving logits with a linear layer
+    # applied to word-bi-LSTM outputs
     labels = get_label_ids(label_tokens, label_vocab)
     logits = tf.layers.dense(word_outputs, len(label_vocab), activation=None)
-    log_likelihoods, transitions = crf.crf_log_likelihood(logits, labels, word_seq_len)
-    loss = -tf.reduce_mean(log_likelihoods)
 
-    # predictions decoded from logits and CRF transitions (using Viterbi)
-    predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
-
-    # removing batch-padded empty words
-    # from predictions and labels
     word_mask = tf.sequence_mask(word_seq_len)
+
+    if len(label_vocab) > 2:
+        # if more than two labels, inference by applying a CRF (and Viterbi decode)
+        log_likelihoods, transitions = crf.crf_log_likelihood(logits, labels, word_seq_len)
+        predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
+        loss = -tf.reduce_mean(log_likelihoods)
+    else:
+        # if two labels, inference directly from logits
+        predictions = tf.cast(tf.argmax(logits, axis=2), tf.int32)
+        # minimizing softmax cross-entropy loss masked by word sequence lengths
+        losses = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits=logits)
+        loss = tf.reduce_mean(tf.boolean_mask(losses, word_mask))
+
+    # removing batch-padded empty words from predictions and labels
     masked_predictions = tf.boolean_mask(predictions, word_mask)
     masked_labels = tf.boolean_mask(labels, word_mask)
 
