@@ -15,8 +15,9 @@ from util.metrics import get_performance_summary, visualize_predictions
 
 PHASES = 100
 TRAIN_BATCH_SIZE = 8
-TRAIN_EVAL_SIZE = 4096
-TRAIN_STEPS_PER_PHASE = 1000
+TRAIN_EVAL_LIMIT = 4096
+VAL_EVAL_LIMIT = None
+TRAIN_STEPS_PER_PHASE = 100
 
 DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
@@ -78,12 +79,12 @@ def train():
         )
         train_eval_data = input_fn(
             tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=None, limit=TRAIN_EVAL_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=None, limit=TRAIN_EVAL_LIMIT, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
         val_data = input_fn(
             tf.data.TextLineDataset(data_folder + "val.txt"),
-            batch_size=None, limit=None, lower_case_words=uncased_embeddings,
+            batch_size=None, limit=VAL_EVAL_LIMIT, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
 
@@ -137,14 +138,20 @@ def train():
         for phase in range(PHASES):
             for step in range(TRAIN_STEPS_PER_PHASE):
                 try:
-                    sess.run(train_op, feed_dict={data_handle: train_handle, dropout_rate: 0.5})
+                    sess.run(
+                        train_op,
+                        feed_dict={
+                            data_handle: train_handle,
+                            dropout_rate: 0.5
+                        }
+                    )
                 except Exception as ex:
                     print(ex)
 
             for set_name, set_handle in [["train", train_eval_handle], ["val", val_handle]]:
                 eval_loss, eval_labels, eval_predictions, eval_sentence_len = sess.run(
                     [loss, labels, predictions, sentence_length],
-                    feed_dict={data_handle: set_handle}
+                    feed_dict={data_handle: set_handle, dropout_rate: 0.0}
                 )
 
                 eval_metrics = compute_metrics(eval_labels, eval_predictions, eval_sentence_len, label_names)
@@ -164,7 +171,7 @@ def train():
         saver.restore(sess, model_path)
         best_labels, best_predictions, best_sentence_len, best_sentences = sess.run(
             [labels, predictions, sentence_length, sentences],
-            feed_dict={data_handle: val_handle}
+            feed_dict={data_handle: val_handle, dropout_rate: 0.0}
         )
 
         best_metrics = compute_metrics(best_labels, best_predictions, best_sentence_len, label_names)
