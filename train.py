@@ -191,7 +191,7 @@ def train():
         echo(log)
 
         if best_class_summary != "":
-            echo(log, "Per-class summaries:\n")
+            echo(log, "Per-class summary:\n")
             echo(log, best_class_summary)
 
         echo(log, "Predicted sentence samples:\n")

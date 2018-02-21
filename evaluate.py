@@ -12,22 +12,52 @@ from util.metrics import compute_metrics, get_class_f1_summary
 from util.metrics import get_performance_summary, visualize_predictions
 
 
-BATCH_SIZE = 1024
-
-
 def pad_and_concat(a, b):
-    max_dim = max(a.shape[-1], b.shape[-1])
-    a_pad, b_pad = max_dim - a.shape[-1], max_dim - b.shape[-1]
+    max_dim = max(a.shape[1], b.shape[1])
     return np.concatenate([
-        np.pad(a, [[0, 0]] * (len(a.shape) - 1) + [[0, a_pad]], "constant"),
-        np.pad(b, [[0, 0]] * (len(a.shape) - 1) + [[0, b_pad]], "constant")
+        np.pad(a, [[0, 0]] + [[0, max_dim - a.shape[1]]] + [[0, 0]] * (a.ndim - 2), "constant"),
+        np.pad(b, [[0, 0]] + [[0, max_dim - b.shape[1]]] + [[0, 0]] * (b.ndim - 2), "constant")
     ])
+
+
+def fetch_in_batches(session, fetches, total, feed_dict=None, progress_callback=None):
+    results = []
+    fetched_so_far = 0
+    while fetched_so_far < total:
+        fetched = session.run(fetches, feed_dict)
+        arr = [f for f in fetched if f.ndim > 0][0]
+        num_fetched = arr.shape[0]
+
+        for i in range(len(fetched)):
+            f = fetched[i]
+            if len(results) <= i:
+                results.append(
+                    0.0 if f.ndim == 0 else
+                    np.zeros(shape=[0] * f.ndim, dtype=f.dtype)
+                )
+            if f.ndim == 0:
+                results[i] += f * num_fetched
+            elif f.ndim == 1:
+                results[i] = np.concatenate((results[i], f))
+            else:
+                results[i] = pad_and_concat(results[i], f)
+
+        fetched_so_far += num_fetched
+        if progress_callback is not None:
+            progress_callback(fetched_so_far)
+
+    for i in range(len(results)):
+        if results[i].ndim == 0:
+            results[i] /= fetched_so_far
+
+    return results
 
 
 def evaluate():
     results_folder = sys.argv[1]
     data_file = sys.argv[2] if len(sys.argv) > 2 else "val.txt"
-    visualize = sys.argv[3] if len(sys.argv) > 3 else 0
+    batch_size = int(sys.argv[3]) if len(sys.argv) > 3 else 5000
+    num_to_visualize = int(sys.argv[4]) if len(sys.argv) > 4 else 0
 
     with open(os.path.join(results_folder, "log.txt"), encoding="utf-8") as f:
         data_folder = re.split(":\s+", f.readline()[:-1])[1]
@@ -35,6 +65,7 @@ def evaluate():
 
     label_file = os.path.join(data_folder, "labels.txt")
     data_file = os.path.join(data_folder, data_file)
+    data_count = sum(1 for _ in open(data_file))
 
     print("Loading embeddings data...")
     embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
@@ -44,7 +75,7 @@ def evaluate():
     with tf.device("/cpu:0"):
         next_input_values = input_fn(
             tf.data.TextLineDataset(data_file),
-            batch_size=BATCH_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=batch_size, lower_case_words=uncased_embeddings,
             shuffle=False, cache=False, repeat=False
         ).make_one_shot_iterator().get_next()
 
@@ -79,32 +110,11 @@ def evaluate():
         print("Evaluating...")
         print()
 
-        e_loss, e_count = 0, 0
-        e_predictions = np.empty([0, 0], dtype=np.int32)
-        e_labels = np.empty([0, 0], dtype=np.int32)
-        e_sentence_len = np.empty([0], dtype=np.int32)
-        e_sentences = np.empty([0], dtype=np.string_)
+        e_loss, e_predictions, e_labels, e_sentence_len, e_sentences = fetch_in_batches(
+            sess, [loss, predictions, labels, sentence_length, sentences], total=data_count,
+            progress_callback=lambda fetched: print("{} / {} done".format(fetched, data_count))
+        )
 
-        while True:
-            try:
-                b_loss, b_predictions, b_labels, b_sentence_len, b_sentences = sess.run(
-                    [loss, predictions, labels, sentence_length, sentences]
-                )
-
-                b_count = len(b_sentence_len)
-                e_count += b_count
-
-                e_loss += b_loss * b_count
-                e_labels = pad_and_concat(e_labels, b_labels)
-                e_predictions = pad_and_concat(e_predictions, b_predictions)
-                e_sentence_len = np.concatenate([e_sentence_len, b_sentence_len])
-                e_sentences = np.concatenate([e_sentences, b_sentences])
-
-                print("{} done".format(e_count))
-            except tf.errors.OutOfRangeError:
-                break
-
-        e_loss /= e_count
         e_metrics = compute_metrics(e_labels, e_predictions, e_sentence_len, label_names)
         e_message, e_key_metric = get_performance_summary(e_metrics, len(label_names))
         e_class_summary = get_class_f1_summary(e_metrics, label_names)
@@ -123,14 +133,14 @@ def evaluate():
         print()
 
         if e_class_summary != "":
-            print("Per-class summaries:\n")
+            print("Per-class summary:\n")
             print(e_class_summary)
 
-        if visualize:
+        if num_to_visualize > 0:
             print("Predicted sentence samples:\n")
             print(visualize_predictions(
                 e_sentences, e_labels, e_predictions,
-                e_sentence_len, label_names, 100
+                e_sentence_len, label_names, num_to_visualize
             ))
 
 
