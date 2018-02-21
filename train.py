@@ -11,15 +11,16 @@ from model.model import model_fn
 from util.embeddings import load_embeddings
 from util.metrics import compute_metrics, get_class_f1_summary
 from util.metrics import get_performance_summary, visualize_predictions
+from util.misc import fetch_in_batches
 
 
 PHASES = 100
 TRAIN_BATCH_SIZE = 8
-TRAIN_EVAL_LIMIT = 5000
-VAL_EVAL_LIMIT = 5000
+TRAIN_EVAL_BATCH_SIZE = 2000
+VAL_EVAL_BATCH_SIZE = 2000
 TRAIN_STEPS_PER_PHASE = 1000
 
-DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
+DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
 DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
@@ -74,19 +75,22 @@ def train():
     with tf.device("/cpu:0"):
         train_data = input_fn(
             tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=TRAIN_BATCH_SIZE, limit=None, lower_case_words=uncased_embeddings,
+            batch_size=TRAIN_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=True, cache=True, repeat=True
         )
         train_eval_data = input_fn(
             tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=None, limit=TRAIN_EVAL_LIMIT, lower_case_words=uncased_embeddings,
+            batch_size=TRAIN_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
         val_data = input_fn(
             tf.data.TextLineDataset(data_folder + "val.txt"),
-            batch_size=None, limit=VAL_EVAL_LIMIT, lower_case_words=uncased_embeddings,
+            batch_size=VAL_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
+
+        train_data_count = sum(1 for _ in open(data_folder + "train.txt"))
+        val_data_count = sum(1 for _ in open(data_folder + "val.txt"))
 
         data_handle = tf.placeholder(tf.string, shape=())
         next_input_values = tf.data.Iterator.from_string_handle(
@@ -148,9 +152,12 @@ def train():
                 except Exception as ex:
                     print(ex)
 
-            for set_name, set_handle in [["train", train_eval_handle], ["val", val_handle]]:
-                eval_loss, eval_labels, eval_predictions, eval_sentence_len = sess.run(
-                    [loss, labels, predictions, sentence_length],
+            for set_name, set_handle, set_size in [
+                ["train", train_eval_handle, train_data_count],
+                ["val", val_handle, val_data_count]
+            ]:
+                eval_loss, eval_labels, eval_predictions, eval_sentence_len = fetch_in_batches(
+                    sess, [loss, labels, predictions, sentence_length], set_size,
                     feed_dict={data_handle: set_handle, dropout_rate: 0.0}
                 )
 
@@ -171,8 +178,8 @@ def train():
                 saver.save(sess, model_path)
 
         saver.restore(sess, model_path)
-        best_labels, best_predictions, best_sentence_len, best_sentences = sess.run(
-            [labels, predictions, sentence_length, sentences],
+        best_labels, best_predictions, best_sentence_len, best_sentences = fetch_in_batches(
+            sess, [labels, predictions, sentence_length, sentences], val_data_count,
             feed_dict={data_handle: val_handle, dropout_rate: 0.0}
         )
 

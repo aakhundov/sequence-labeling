@@ -1,10 +1,9 @@
 import tensorflow as tf
 
 
-def input_fn(input_lines, batch_size=None, limit=None, lower_case_words=False,
+def input_fn(input_lines, batch_size=None, lower_case_words=False,
              shuffle=False, cache=True, repeat=True, num_threads=4):
-
-    """Process 1D string tensor input_lines into an input pipeline."""
+    """Convert 1D string tf.data.Dataset input_lines into an input pipeline."""
 
     def split_string(s, delimiter, skip_empty=True):
         """Split a single string tensor s into multiple string tokens by delimiter."""
@@ -41,12 +40,9 @@ def input_fn(input_lines, batch_size=None, limit=None, lower_case_words=False,
             ), words
         ), [-1])
 
-    # if required, limiting the number of input data to the first <limit> lines
-    data = input_lines.take(limit) if limit is not None else input_lines
-
     # splitting input lines into sentence and label parts (by "\t")
     # extra "\t" is added to create labels placeholder if line contains no labels
-    data = data.map(lambda l: split_string(l + "\t", "\t", False), num_threads)
+    data = input_lines.map(lambda l: split_string(l + "\t", "\t", False), num_threads)
     # splitting sentence and label parts into respective tokens (by " ")
     data = data.map(lambda sp: (sp[0], split_string(sp[0], " "), split_string(sp[1], " ")), num_threads)
     # adding sentence lengths; result: (full sentences, sentence tokens, sentence length, label tokens)
