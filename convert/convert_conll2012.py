@@ -123,6 +123,9 @@ def convert():
                     if line == "" or line.startswith("#"):
                         if len(running_joint_pairs) > 0:
                             for task, pairs in split_by_task(running_joint_pairs):
+                                # excluding sentences with rare labels from POS data
+                                if task == "POS" and any(p[1] in ["*", "AFX"] for p in pairs):
+                                    continue
                                 file_pairs[task].append(pairs)
                             running_joint_pairs = []
                         continue
