@@ -15,8 +15,8 @@ from util.metrics import get_performance_summary, visualize_predictions
 
 PHASES = 100
 TRAIN_BATCH_SIZE = 8
-TRAIN_EVAL_LIMIT = 6000
-VAL_EVAL_LIMIT = 6000
+TRAIN_EVAL_LIMIT = 5000
+VAL_EVAL_LIMIT = 5000
 TRAIN_STEPS_PER_PHASE = 1000
 
 DEFAULT_DATA_FOLDER = "data/ready/pos/wsj/"
@@ -162,6 +162,8 @@ def train():
                         phase + 1, set_name, eval_loss
                     ), eval_message
                 ))
+
+            echo(log)
 
             if eval_key_metric > best_metric:
                 best_phase = phase + 1
