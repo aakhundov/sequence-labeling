@@ -14,12 +14,11 @@ from util.metrics import get_performance_summary, visualize_predictions
 from util.misc import fetch_in_batches
 
 
-PHASES = 100
-TRAIN_BATCH_SIZE = 8
-TRAIN_EVAL_BATCH_SIZE = 2000
 VAL_EVAL_BATCH_SIZE = 2000
-TRAIN_STEPS_PER_PHASE = 1000
+TRAIN_EVAL_BATCH_SIZE = 2000
 
+DEFAULT_EPOCHS = 50
+DEFAULT_BATCH_SIZE = 8
 DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
 DEFAULT_EMBEDDINGS_NAME = "glove"
 DEFAULT_EMBEDDINGS_ID = "6B.100d"
@@ -63,6 +62,8 @@ def train():
     data_folder = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
     embeddings_name = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_EMBEDDINGS_NAME
     embeddings_id = sys.argv[3] if len(sys.argv) > 3 else DEFAULT_EMBEDDINGS_ID
+    epochs = sys.argv[4] if len(sys.argv) > 4 else DEFAULT_EPOCHS
+    batch_size = sys.argv[5] if len(sys.argv) > 5 else DEFAULT_BATCH_SIZE
 
     if not data_folder.endswith("/"):
         data_folder += "/"
@@ -75,7 +76,7 @@ def train():
     with tf.device("/cpu:0"):
         train_data = input_fn(
             tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=TRAIN_BATCH_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=DEFAULT_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=True, cache=True, repeat=True
         )
         train_eval_data = input_fn(
@@ -123,7 +124,7 @@ def train():
         train_eval_handle = sess.run(train_eval_data.make_one_shot_iterator().string_handle())
         val_handle = sess.run(val_data.make_one_shot_iterator().string_handle())
 
-        best_metric, best_phase = -1, 0
+        best_metric, best_epoch = -1, 0
         saver = tf.train.Saver([
             v for v in tf.global_variables()
             if "known_word_embeddings" not in v.name
@@ -139,16 +140,13 @@ def train():
         echo(log, "embeddings:   {}, {}".format(embeddings_name, embeddings_id))
         echo(log)
 
-        for phase in range(PHASES):
-            for step in range(TRAIN_STEPS_PER_PHASE):
+        for epoch in range(epochs):
+            for step in range(-(-train_data_count // batch_size)):
                 try:
-                    sess.run(
-                        train_op,
-                        feed_dict={
-                            data_handle: train_handle,
-                            dropout_rate: 0.5
-                        }
-                    )
+                    sess.run(train_op, feed_dict={
+                        data_handle: train_handle,
+                        dropout_rate: 0.5
+                    })
                 except Exception as ex:
                     print(ex)
 
@@ -166,14 +164,14 @@ def train():
 
                 echo(log, "{:<22} {}".format(
                     "{0}.{1:<8} L {2:.3f}".format(
-                        phase + 1, set_name, eval_loss
+                        epoch + 1, set_name, eval_loss
                     ), eval_message
                 ))
 
             echo(log)
 
             if eval_key_metric > best_metric:
-                best_phase = phase + 1
+                best_epoch = epoch + 1
                 best_metric = eval_key_metric
                 saver.save(sess, model_path)
 
@@ -190,7 +188,7 @@ def train():
         np.set_printoptions(threshold=np.nan, linewidth=1000)
 
         echo(log)
-        echo(log, "Best phase: {}".format(best_phase))
+        echo(log, "Best epoch: {}".format(best_epoch))
         echo(log, "Best metric: {:.2f}".format(best_key_metric))
         echo(log)
         echo(log, "Confusion matrix:\n")
