@@ -94,8 +94,8 @@ def train():
             shuffle=False, cache=True, repeat=True
         )
 
-        train_data_count = sum(1 for _ in open(args.data_folder + "train.txt"))
-        val_data_count = sum(1 for _ in open(args.data_folder + "val.txt"))
+        train_data_count = sum(1 for _ in open(args.data_folder + "train.txt", encoding="utf-8"))
+        val_data_count = sum(1 for _ in open(args.data_folder + "val.txt", encoding="utf-8"))
 
         data_handle = tf.placeholder(tf.string, shape=())
         next_input_values = tf.data.Iterator.from_string_handle(

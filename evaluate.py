@@ -35,7 +35,7 @@ def evaluate():
 
     label_file = os.path.join(data_folder, "labels.txt")
     data_file = os.path.join(data_folder, args.data_file)
-    data_count = sum(1 for _ in open(data_file))
+    data_count = sum(1 for _ in open(data_file, encoding="utf-8"))
 
     print("Loading embeddings data...")
     embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)

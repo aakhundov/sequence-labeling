@@ -35,7 +35,7 @@ def annotate():
         embeddings_name, embeddings_id = re.split(":\s+", f.readline()[:-1])[1].split(", ")
 
     label_file = os.path.join(data_folder, "labels.txt")
-    input_count = sum(1 for _ in open(args.input_file))
+    input_count = sum(1 for _ in open(args.input_file, encoding="utf-8"))
 
     print("Loading embeddings data...")
     embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
