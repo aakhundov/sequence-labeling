@@ -1,6 +1,6 @@
 import os
 import re
-import sys
+import argparse
 
 import numpy as np
 import tensorflow as tf
@@ -14,17 +14,27 @@ from util.misc import fetch_in_batches
 
 
 def evaluate():
-    results_folder = sys.argv[1]
-    data_file = sys.argv[2] if len(sys.argv) > 2 else "val.txt"
-    batch_size = int(sys.argv[3]) if len(sys.argv) > 3 else 2000
-    num_to_visualize = int(sys.argv[4]) if len(sys.argv) > 4 else 0
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-r", "--results-folder", type=str, required=True)
+    parser.add_argument("-f", "--data-file", type=str, default="val.txt")
+    parser.add_argument("-b", "--batch-size", type=int, default=2000)
+    parser.add_argument("-v", "--num-to-show", type=int, default=0)
+    args = parser.parse_args()
 
-    with open(os.path.join(results_folder, "log.txt"), encoding="utf-8") as f:
+    assert os.path.exists(args.results_folder)
+
+    print("Results folder: {}".format(args.results_folder))
+    print("Data file: {}".format(args.data_file))
+    print("Batch size: {}".format(args.batch_size))
+    print("Samples to show: {}".format(args.num_to_show))
+    print()
+
+    with open(os.path.join(args.results_folder, "log.txt"), encoding="utf-8") as f:
         data_folder = re.split(":\s+", f.readline()[:-1])[1]
         embeddings_name, embeddings_id = re.split(":\s+", f.readline()[:-1])[1].split(", ")
 
     label_file = os.path.join(data_folder, "labels.txt")
-    data_file = os.path.join(data_folder, data_file)
+    data_file = os.path.join(data_folder, args.data_file)
     data_count = sum(1 for _ in open(data_file))
 
     print("Loading embeddings data...")
@@ -35,7 +45,7 @@ def evaluate():
     with tf.device("/cpu:0"):
         next_input_values = input_fn(
             tf.data.TextLineDataset(data_file),
-            batch_size=batch_size, lower_case_words=uncased_embeddings,
+            batch_size=args.batch_size, lower_case_words=uncased_embeddings,
             shuffle=False, cache=False, repeat=False
         ).make_one_shot_iterator().get_next()
 
@@ -61,7 +71,7 @@ def evaluate():
             v for v in tf.global_variables()
             if "known_word_embeddings" not in v.name
         ]).restore(sess, os.path.join(
-            results_folder, "model", "nlp-model"
+            args.results_folder, "model", "nlp-model"
         ))
 
         print("Evaluating...")
@@ -93,11 +103,11 @@ def evaluate():
             print("Per-class summary:\n")
             print(e_class_summary)
 
-        if num_to_visualize > 0:
+        if args.num_to_show > 0:
             print("Predicted sentence samples:\n")
             print(visualize_predictions(
                 e_sentences, e_labels, e_predictions,
-                e_sentence_len, label_names, num_to_visualize
+                e_sentence_len, label_names, args.num_to_show
             ))
 
 

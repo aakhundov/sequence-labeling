@@ -1,6 +1,6 @@
 import os
 import re
-import sys
+import argparse
 
 import tensorflow as tf
 
@@ -11,15 +11,31 @@ from util.misc import fetch_in_batches
 
 
 def annotate():
-    input_file, results_folder = sys.argv[1:3]
-    batch_size = int(sys.argv[3]) if len(sys.argv) > 3 else 2000
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input-file", type=str, required=True)
+    parser.add_argument("-r", "--results-folder", type=str, required=True)
+    parser.add_argument("-o", "--output-file", type=str, default="")
+    parser.add_argument("-b", "--batch-size", type=int, default=2000)
+    args = parser.parse_args()
 
-    with open(os.path.join(results_folder, "log.txt"), encoding="utf-8") as f:
+    assert os.path.exists(args.input_file)
+    assert os.path.exists(args.results_folder)
+
+    if args.output_file == "":
+        args.output_file = os.path.splitext(args.input_file)[0] + ".labeled.txt"
+
+    print("Input file: {}".format(args.input_file))
+    print("Output file: {}".format(args.output_file))
+    print("Results folder: {}".format(args.results_folder))
+    print("Batch size: {}".format(args.batch_size))
+    print()
+
+    with open(os.path.join(args.results_folder, "log.txt"), encoding="utf-8") as f:
         data_folder = re.split(":\s+", f.readline()[:-1])[1]
         embeddings_name, embeddings_id = re.split(":\s+", f.readline()[:-1])[1].split(", ")
 
     label_file = os.path.join(data_folder, "labels.txt")
-    input_count = sum(1 for _ in open(input_file))
+    input_count = sum(1 for _ in open(args.input_file))
 
     print("Loading embeddings data...")
     embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
@@ -28,8 +44,8 @@ def annotate():
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
         next_input_values = input_fn(
-            tf.data.TextLineDataset(input_file),
-            batch_size=batch_size, lower_case_words=uncased_embeddings,
+            tf.data.TextLineDataset(args.input_file),
+            batch_size=args.batch_size, lower_case_words=uncased_embeddings,
             shuffle=False, cache=False, repeat=False
         ).make_one_shot_iterator().get_next()
 
@@ -55,7 +71,7 @@ def annotate():
             v for v in tf.global_variables()
             if "known_word_embeddings" not in v.name
         ]).restore(sess, os.path.join(
-            results_folder, "model", "nlp-model"
+            args.results_folder, "model", "nlp-model"
         ))
 
         print("Annotating...")
@@ -68,8 +84,7 @@ def annotate():
             ))
         )
 
-        output_file = os.path.splitext(input_file)[0] + ".labeled.txt"
-        with open(output_file, "w+", encoding="utf-8") as out:
+        with open(args.output_file, "w+", encoding="utf-8") as out:
             for i in range(len(a_predictions)):
                 out.write("{}\n".format(
                     " ".join([
@@ -79,7 +94,7 @@ def annotate():
                 ))
 
         print()
-        print("Results written to {}".format(output_file))
+        print("Results written to {}".format(args.output_file))
 
 
 if __name__ == "__main__":

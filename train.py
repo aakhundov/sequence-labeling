@@ -1,7 +1,7 @@
 import os
-import sys
 import time
 import shutil
+import argparse
 
 import numpy as np
 import tensorflow as tf
@@ -16,12 +16,6 @@ from util.misc import fetch_in_batches
 
 VAL_EVAL_BATCH_SIZE = 2000
 TRAIN_EVAL_BATCH_SIZE = 2000
-
-DEFAULT_EPOCHS = 50
-DEFAULT_BATCH_SIZE = 8
-DEFAULT_DATA_FOLDER = "data/ready/nerc/conll2003/"
-DEFAULT_EMBEDDINGS_NAME = "glove"
-DEFAULT_EMBEDDINGS_ID = "6B.100d"
 
 
 def echo(log, *messages):
@@ -59,39 +53,49 @@ def create_training_artifacts(data_folder):
 
 
 def train():
-    data_folder = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DATA_FOLDER
-    embeddings_name = sys.argv[2] if len(sys.argv) > 2 else DEFAULT_EMBEDDINGS_NAME
-    embeddings_id = sys.argv[3] if len(sys.argv) > 3 else DEFAULT_EMBEDDINGS_ID
-    epochs = sys.argv[4] if len(sys.argv) > 4 else DEFAULT_EPOCHS
-    batch_size = sys.argv[5] if len(sys.argv) > 5 else DEFAULT_BATCH_SIZE
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-d", "--data-folder", type=str, required=True)
+    parser.add_argument("-em", "--embeddings-name", type=str, default="glove")
+    parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
+    parser.add_argument("-ep", "--epochs", type=int, default=50)
+    parser.add_argument("-b", "--batch-size", type=int, default=8)
+    args = parser.parse_args()
 
-    if not data_folder.endswith("/"):
-        data_folder += "/"
+    assert os.path.exists(args.data_folder)
+    if not args.data_folder.endswith("/"):
+        args.data_folder += "/"
+
+    print("Data folder: {}".format(args.data_folder))
+    print("Embeddings name: {}".format(args.embeddings_name))
+    print("Embeddings id: {}".format(args.embeddings_id))
+    print("Epochs: {}".format(args.epochs))
+    print("Batch size: {}".format(args.batch_size))
+    print()
 
     print("Loading embeddings data...")
-    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
-    label_names = [line[:-1] for line in open(data_folder + "labels.txt", encoding="utf-8").readlines()]
+    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(args.embeddings_name, args.embeddings_id)
+    label_names = [line[:-1] for line in open(args.data_folder + "labels.txt", encoding="utf-8").readlines()]
 
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
         train_data = input_fn(
-            tf.data.TextLineDataset(data_folder + "train.txt"),
-            batch_size=DEFAULT_BATCH_SIZE, lower_case_words=uncased_embeddings,
+            tf.data.TextLineDataset(args.data_folder + "train.txt"),
+            batch_size=args.batch_size, lower_case_words=uncased_embeddings,
             shuffle=True, cache=True, repeat=True
         )
         train_eval_data = input_fn(
-            tf.data.TextLineDataset(data_folder + "train.txt"),
+            tf.data.TextLineDataset(args.data_folder + "train.txt"),
             batch_size=TRAIN_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
         val_data = input_fn(
-            tf.data.TextLineDataset(data_folder + "val.txt"),
+            tf.data.TextLineDataset(args.data_folder + "val.txt"),
             batch_size=VAL_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
 
-        train_data_count = sum(1 for _ in open(data_folder + "train.txt"))
-        val_data_count = sum(1 for _ in open(data_folder + "val.txt"))
+        train_data_count = sum(1 for _ in open(args.data_folder + "train.txt"))
+        val_data_count = sum(1 for _ in open(args.data_folder + "val.txt"))
 
         data_handle = tf.placeholder(tf.string, shape=())
         next_input_values = tf.data.Iterator.from_string_handle(
@@ -127,17 +131,17 @@ def train():
         ])
 
         print("Creating training artifacts...")
-        model_path, log = create_training_artifacts(data_folder)
+        model_path, log = create_training_artifacts(args.data_folder)
 
         print("Training...")
         print()
 
-        echo(log, "data folder:  {}".format(data_folder))
-        echo(log, "embeddings:   {}, {}".format(embeddings_name, embeddings_id))
+        echo(log, "data folder:  {}".format(args.data_folder))
+        echo(log, "embeddings:   {}, {}".format(args.embeddings_name, args.embeddings_id))
         echo(log)
 
-        for epoch in range(epochs):
-            for step in range(-(-train_data_count // batch_size)):
+        for epoch in range(args.epochs):
+            for step in range(-(-train_data_count // args.batch_size)):
                 try:
                     sess.run(train_op, feed_dict={
                         data_handle: train_handle,
