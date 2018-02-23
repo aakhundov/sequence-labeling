@@ -14,10 +14,6 @@ from util.metrics import get_performance_summary, visualize_predictions
 from util.misc import fetch_in_batches
 
 
-VAL_EVAL_BATCH_SIZE = 2000
-TRAIN_EVAL_BATCH_SIZE = 2000
-
-
 def echo(log, *messages):
     print(*messages)
     joined = " ".join([str(m) for m in messages])
@@ -59,6 +55,7 @@ def train():
     parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
     parser.add_argument("-ep", "--epochs", type=int, default=50)
     parser.add_argument("-b", "--batch-size", type=int, default=8)
+    parser.add_argument("-eb", "--eval-batch-size", type=int, default=2000)
     args = parser.parse_args()
 
     assert os.path.exists(args.data_folder)
@@ -69,7 +66,8 @@ def train():
     print("Embeddings name: {}".format(args.embeddings_name))
     print("Embeddings id: {}".format(args.embeddings_id))
     print("Epochs: {}".format(args.epochs))
-    print("Batch size: {}".format(args.batch_size))
+    print("Training batch size: {}".format(args.batch_size))
+    print("Evaluation batch size: {}".format(args.eval_batch_size))
     print()
 
     print("Loading embeddings data...")
@@ -85,12 +83,12 @@ def train():
         )
         train_eval_data = input_fn(
             tf.data.TextLineDataset(args.data_folder + "train.txt"),
-            batch_size=TRAIN_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=args.eval_batch_size, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
         val_data = input_fn(
             tf.data.TextLineDataset(args.data_folder + "val.txt"),
-            batch_size=VAL_EVAL_BATCH_SIZE, lower_case_words=uncased_embeddings,
+            batch_size=args.eval_batch_size, lower_case_words=uncased_embeddings,
             shuffle=False, cache=True, repeat=True
         )
 
