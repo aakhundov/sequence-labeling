@@ -4,17 +4,14 @@
 # space-separated lists of tokens and labels of a single sentence,
 # separated by a tab). It is assumed that the contents of parsed/mrg/wsj
 # folder of Treebank-3 (25 folders from "00" to "24") are copied into
-# SOURCE_FOLDER. The pre-processing results are written into
-# TARGET_FOLDER, from where a model can be trained directly
+# --source-folder (-s). The pre-processing results are written into
+# --target-folder (-t), from where a model can be trained directly
 # using train.py.
 
 
 import os
 import re
-
-
-SOURCE_FOLDER = "../data/sources/wsj"
-TARGET_FOLDER = "../data/ready/pos/wsj"
+import argparse
 
 
 def fix_pair(p):
@@ -56,17 +53,26 @@ def get_label_count_pairs(sentence_pairs_per_source):
 
 
 def convert():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/wsj")
+    parser.add_argument("-t", "--target-folder", type=str, default="../data/ready/pos/wsj")
+    args = parser.parse_args()
+
+    print("Source folder: {}".format(args.source_folder))
+    print("Target folder: {}".format(args.target_folder))
+    print()
+
     sentences_pairs_per_section = {}
 
-    for folder in [f for f in sorted(os.listdir(SOURCE_FOLDER)) if re.match("\d{2}", f)]:
+    for folder in [f for f in sorted(os.listdir(args.source_folder)) if re.match("\d{2}", f)]:
         section = int(folder)
         sentences_pairs_per_section[section] = []
-        folder_path = os.path.join(SOURCE_FOLDER, folder)
+        folder_path = os.path.join(args.source_folder, folder)
 
-        print("processing section {} from {}".format(section, folder_path))
+        print("processing section {} from {} folder".format(section, folder_path))
 
         for file in [f for f in sorted(os.listdir(folder_path)) if re.match("wsj_\d{4}.mrg", f)]:
-            file_path = os.path.join(SOURCE_FOLDER, folder, file)
+            file_path = os.path.join(args.source_folder, folder, file)
             file_lines = [l[:-1] for l in open(file_path).readlines()]
 
             running_tree_lines = []
@@ -82,24 +88,24 @@ def convert():
                 tree_lines_to_pairs(running_tree_lines)
             )
 
-    if not os.path.exists(TARGET_FOLDER):
-        os.mkdir(TARGET_FOLDER)
+    if not os.path.exists(args.target_folder):
+        os.makedirs(args.target_folder)
 
     label_count_pairs = get_label_count_pairs(sentences_pairs_per_section)
 
     print()
-    print("total sentences: {}\ntotal tokens: {}".format(
+    print("total sentences: {:,}\ntotal tokens: {:,}".format(
         sum(len(v) for v in sentences_pairs_per_section.values()),
         sum((sum(len(s) for s in v) for v in sentences_pairs_per_section.values()))
     ))
     print()
     print("labels with occurrence counts:")
-    print(label_count_pairs)
+    print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
     print()
 
     for target, from_, to in [["train", 0, 18], ["val", 19, 21], ["test", 22, 24]]:
         sentences_written, tokens_written = 0, 0
-        out_path = os.path.join(TARGET_FOLDER, target + ".txt")
+        out_path = os.path.join(args.target_folder, target + ".txt")
 
         with open(out_path, "w+", encoding="utf-8") as out:
             for section in range(from_, to+1):
@@ -111,11 +117,11 @@ def convert():
                     tokens_written += len(sentence)
                 sentences_written += len(sentences_pairs_per_section[section])
 
-        print("sections {}-{} ({} sentences, {} tokens) written to {}".format(
+        print("sections {}-{} ({:,} sentences, {:,} tokens) written to {}".format(
             from_, to, sentences_written, tokens_written, out_path
         ))
 
-    label_path = os.path.join(TARGET_FOLDER, "labels.txt")
+    label_path = os.path.join(args.target_folder, "labels.txt")
     with open(label_path, "w+", encoding="utf-8") as out:
         for lb in label_count_pairs:
             out.write("{}\n".format(lb[0]))

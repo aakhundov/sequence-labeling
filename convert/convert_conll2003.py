@@ -4,16 +4,13 @@
 # of tokens and labels of a single sentence, separated by a tab). The
 # labeling scheme is converted to IOB2 (each entity starts with a B-tag).
 # It is assumed that the three files - "eng.train", "eng.testa", and
-# "eng.testb" are copied into SOURCE_FOLDER. The pre-processing results
-# are written into TARGET_FOLDER, from where a model can be trained
-# directly using train.py.
+# "eng.testb" are copied into --source-folder (-s). The pre-processing
+# results are written into --target-folder (-t), from where a model
+# can be trained directly using train.py.
 
 
 import os
-
-
-SOURCE_FOLDER = "../data/sources/conll2003"
-TARGET_FOLDER = "../data/ready/nerc/conll2003"
+import argparse
 
 
 def fix_b_tag(pair, running_pairs):
@@ -37,14 +34,23 @@ def get_label_count_pairs(sentence_pairs_per_source):
 
 
 def convert():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/conll2003")
+    parser.add_argument("-t", "--target-folder", type=str, default="../data/ready/nerc/conll2003")
+    args = parser.parse_args()
+
+    print("Source folder: {}".format(args.source_folder))
+    print("Target folder: {}".format(args.target_folder))
+    print()
+
     sentence_pairs_per_file = {}
 
-    for file in os.listdir(SOURCE_FOLDER):
+    for file in os.listdir(args.source_folder):
         sentence_pairs_per_file[file] = []
-        file_path = os.path.join(SOURCE_FOLDER, file)
+        file_path = os.path.join(args.source_folder, file)
         file_lines = [l[:-1] for l in open(file_path).readlines()]
 
-        print("processing data from {}".format(file))
+        print("processing data from {}".format(file_path))
 
         running_pairs = []
         for line in file_lines:
@@ -58,24 +64,24 @@ def convert():
                 pair, running_pairs
             ))
 
-    if not os.path.exists(TARGET_FOLDER):
-        os.mkdir(TARGET_FOLDER)
+    if not os.path.exists(args.target_folder):
+        os.makedirs(args.target_folder)
 
     label_count_pairs = get_label_count_pairs(sentence_pairs_per_file)
 
     print()
-    print("total sentences: {}\ntotal tokens: {}".format(
+    print("total sentences: {:,}\ntotal tokens: {:,}".format(
         sum(len(v) for v in sentence_pairs_per_file.values()),
         sum((sum(len(s) for s in v) for v in sentence_pairs_per_file.values()))
     ))
     print()
     print("labels with occurrence counts:")
-    print(label_count_pairs)
+    print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
     print()
 
     for target, source in [["train", "eng.train"], ["val", "eng.testa"], ["test", "eng.testb"]]:
         sentences_written, tokens_written = 0, 0
-        out_path = os.path.join(TARGET_FOLDER, target + ".txt")
+        out_path = os.path.join(args.target_folder, target + ".txt")
 
         with open(out_path, "w+", encoding="utf-8") as out:
             for sentence in sentence_pairs_per_file[source]:
@@ -86,11 +92,11 @@ def convert():
                 tokens_written += len(sentence)
             sentences_written += len(sentence_pairs_per_file[source])
 
-        print("data from {} ({} sentences, {} tokens) written to {}".format(
+        print("data from {} ({:,} sentences, {:,} tokens) written to {}".format(
             source, sentences_written, tokens_written, out_path
         ))
 
-    label_path = os.path.join(TARGET_FOLDER, "labels.txt")
+    label_path = os.path.join(args.target_folder, "labels.txt")
     with open(label_path, "w+", encoding="utf-8") as out:
         for lb in label_count_pairs:
             out.write("{}\n".format(lb[0]))

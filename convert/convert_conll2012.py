@@ -5,23 +5,18 @@
 # assumed that the three folders - "train", "development", and "test" -
 # from the "data" folder in the original corpus containing "*.gold_conll"
 # files with resolved tokens ([WORD] placeholders substituted by real words)
-# are copied into SOURCE_FOLDER. Data for three tasks - POS (Part-Of-Speech
-# Tagging), NERC (Named Entity Recognition and Classification), and PRED
-# (PREdicate Detection) - is extracted from the corpus simultaneously and
-# written to separate TARGET_FOLDERS, from where models can be trained
+# are copied into --source-folder (-s). Data for three different tasks -
+# POS (Part-Of-Speech Tagging), NERC (Named Entity Recognition and
+# Classification), and PRED (PREdicate Detection) - is extracted from
+# the corpus simultaneously and written to three separate target folders:
+# --target-folder-pos (-tp), --target-folder-nerc (-tn), and
+# --target-folder-pred (-tpr), from where models can be trained
 # directly using train.py.
 
 
 import os
 import re
-
-
-SOURCE_FOLDER = "../data/sources/conll2012"
-TARGET_FOLDERS = {
-    "POS": "../data/ready/pos/conll2012",
-    "NERC": "../data/ready/nerc/conll2012",
-    "PRED": "../data/ready/pred/conll2012"
-}
+import argparse
 
 
 def get_all_files(folder, pattern=""):
@@ -105,18 +100,38 @@ def get_label_count_pairs(sentence_pairs_per_source):
 
 
 def convert():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/conll2012")
+    parser.add_argument("-tp", "--target-folder-pos", type=str, default="../data/ready/pos/conll2012")
+    parser.add_argument("-tn", "--target-folder-nerc", type=str, default="../data/ready/nerc/conll2012")
+    parser.add_argument("-tpr", "--target-folder-pred", type=str, default="../data/ready/pred/conll2012")
+    args = parser.parse_args()
+
+    print("Source folder: {}".format(args.source_folder))
+    print("Target folder for POS task: {}".format(args.target_folder_pos))
+    print("Target folder for NERC task: {}".format(args.target_folder_nerc))
+    print("Target folder for PRED task: {}".format(args.target_folder_pred))
+    print()
+
+    args.target_folders = {
+        "POS": args.target_folder_pos,
+        "NERC": args.target_folder_nerc,
+        "PRED": args.target_folder_pred
+    }
+
     sentence_pairs_per_task_and_folder = {
-        t: {} for t in TARGET_FOLDERS.keys()
+        t: {} for t in args.target_folders.keys()
     }
 
     for folder in ["train", "development", "test"]:
+        folder_path = os.path.join(args.source_folder, folder)
         for task in sentence_pairs_per_task_and_folder.keys():
             sentence_pairs_per_task_and_folder[task][folder] = []
 
-        print("processing data from {} folder".format(folder))
+        print("processing data from {} folder".format(folder_path))
 
-        for path in get_all_files(os.path.join(SOURCE_FOLDER, folder), "\.gold_conll$"):
-            file_pairs = {t: [] for t in TARGET_FOLDERS.keys()}
+        for path in get_all_files(folder_path, "\.gold_conll$"):
+            file_pairs = {t: [] for t in args.target_folders.keys()}
             with open(path, encoding="utf-8") as f:
                 running_joint_pairs = []
                 for line in [l[:-1] for l in f.readlines()]:
@@ -147,18 +162,18 @@ def convert():
         print("\n--------------------------------------\n")
         print("Data for {} task:\n".format(task))
 
-        target_folder = TARGET_FOLDERS[task]
+        target_folder = args.target_folders[task]
         if not os.path.exists(target_folder):
-            os.mkdir(target_folder)
+            os.makedirs(target_folder)
 
         label_count_pairs = get_label_count_pairs(sentence_pairs_per_task_and_folder[task])
 
-        print("total sentences: {}\ntotal tokens: {}\n".format(
+        print("total sentences: {:,}\ntotal tokens: {:,}\n".format(
             sum(len(v) for v in sentence_pairs_per_task_and_folder[task].values()),
             sum((sum(len(s) for s in v) for v in sentence_pairs_per_task_and_folder[task].values()))
         ))
         print("labels with occurrence counts:")
-        print(label_count_pairs)
+        print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
         print()
 
         for target, source in [["train", "train"], ["val", "development"], ["test", "test"]]:
@@ -174,7 +189,7 @@ def convert():
                     tokens_written += len(sentence)
                 sentences_written += len(sentence_pairs_per_task_and_folder[task][source])
 
-            print("data from {} folder ({} sentences, {} tokens) written to {}".format(
+            print("data from {} folder ({:,} sentences, {:,} tokens) written to {}".format(
                 source, sentences_written, tokens_written, out_path
             ))
 
