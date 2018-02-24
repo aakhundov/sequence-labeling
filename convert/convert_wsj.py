@@ -13,6 +13,8 @@ import os
 import re
 import argparse
 
+import common
+
 
 def fix_pair(p):
     if "\\" in p[0]:
@@ -37,19 +39,6 @@ def tree_lines_to_pairs(tree):
                 pair = [pair[1], pair[0]]
                 sentence.append(fix_pair(pair))
     return sentence
-
-
-def get_label_count_pairs(sentence_pairs_per_source):
-    label_counts = {}
-    for file in sentence_pairs_per_source.keys():
-        for sentence in sentence_pairs_per_source[file]:
-            for pair in sentence:
-                label = pair[1]
-                if label not in label_counts:
-                    label_counts[label] = 0
-                label_counts[label] += 1
-
-    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
 
 
 def convert():
@@ -91,17 +80,8 @@ def convert():
     if not os.path.exists(args.target_folder):
         os.makedirs(args.target_folder)
 
-    label_count_pairs = get_label_count_pairs(sentences_pairs_per_section)
-
-    print()
-    print("total sentences: {:,}\ntotal tokens: {:,}".format(
-        sum(len(v) for v in sentences_pairs_per_section.values()),
-        sum((sum(len(s) for s in v) for v in sentences_pairs_per_section.values()))
-    ))
-    print()
-    print("labels with occurrence counts:")
-    print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
-    print()
+    label_count_pairs = common.get_label_count_pairs(sentences_pairs_per_section)
+    common.report_statistics(sentences_pairs_per_section, label_count_pairs)
 
     for target, from_, to in [["train", 0, 18], ["val", 19, 21], ["test", 22, 24]]:
         sentences_written, tokens_written = 0, 0

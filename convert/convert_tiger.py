@@ -13,37 +13,11 @@
 
 import os
 import re
-import random
 import argparse
 
 import xml.etree.ElementTree
 
-
-def get_label_count_pairs(sentence_pairs):
-    label_counts = {}
-    for sentence in sentence_pairs:
-        for pair in sentence:
-            label = pair[1]
-            if label not in label_counts:
-                label_counts[label] = 0
-            label_counts[label] += 1
-
-    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
-
-
-def shuffle_and_split(data):
-    random.seed(12345)
-    random.shuffle(data)
-    random.seed()
-
-    train_bound = int(len(data) * 0.8)
-    val_bound = int(len(data) * 0.9)
-
-    train = data[:train_bound]
-    val = data[train_bound:val_bound]
-    test = data[val_bound:]
-
-    return train, val, test
+import common
 
 
 def convert():
@@ -76,20 +50,14 @@ def convert():
     if not os.path.exists(args.target_folder):
         os.makedirs(args.target_folder)
 
-    label_count_pairs = get_label_count_pairs(sentence_pairs)
-
-    print()
-    print("total sentences: {:,}\ntotal tokens: {:,}".format(
-        len(sentence_pairs), sum(len(s) for s in sentence_pairs)
-    ))
-    print()
-    print("labels with occurrence counts:")
-    print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
-    print()
+    label_count_pairs = common.get_label_count_pairs(sentence_pairs)
+    common.report_statistics(sentence_pairs, label_count_pairs)
 
     for target, dataset in zip(
-            ["train", "val", "test"],
-            shuffle_and_split(sentence_pairs)
+        ["train", "val", "test"],
+        common.shuffle_and_split(
+            sentence_pairs, split_points=(0.8, 0.9)
+        )
     ):
         sentences_written, tokens_written = 0, 0
         out_path = os.path.join(args.target_folder, target + ".txt")

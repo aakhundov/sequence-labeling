@@ -4,27 +4,18 @@
 # space-separated lists of tokens and labels of a single sentence,
 # separated by a tab). It is assumed that the six files - "esp.train",
 # "esp.testa", "eng.testb", "ned.train", "ned.testa", and "ned.testb"
-# are copied into --source-folder (-s). The pre-processing results
-# are written into two target folders: --target-folder-esp (-te) for
-# Spanish data and --target-folder-ned (-tn) for Dutch data, from
-# where models can be trained directly using train.py.
+# are copied into --source-folder (-s). By default, the tags are
+# converted to IOBES tagging scheme (this may be switched off by
+# setting --iobes (-i) to False, to get IOB2 tags). The pre-processing
+# results are written into two target folders: --target-folder-esp
+# (-te) for Spanish data and --target-folder-ned (-tn) for Dutch
+# data, from where models can be trained directly using train.py.
 
 
 import os
 import argparse
 
-
-def get_label_count_pairs(sentence_pairs_per_source):
-    label_counts = {}
-    for file in sentence_pairs_per_source.keys():
-        for sentence in sentence_pairs_per_source[file]:
-            for pair in sentence:
-                label = pair[1]
-                if label not in label_counts:
-                    label_counts[label] = 0
-                label_counts[label] += 1
-
-    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
+import common
 
 
 def convert():
@@ -32,11 +23,13 @@ def convert():
     parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/conll2002")
     parser.add_argument("-te", "--target-folder-esp", type=str, default="../data/ready/nerc/conll2002_esp")
     parser.add_argument("-tn", "--target-folder-ned", type=str, default="../data/ready/nerc/conll2002_ned")
+    parser.add_argument("-i", "--iobes", type=bool, default=True)
     args = parser.parse_args()
 
     print("Source folder: {}".format(args.source_folder))
     print("Target folder (Spanish): {}".format(args.target_folder_esp))
     print("Target folder (Dutch): {}".format(args.target_folder_ned))
+    print("Convert to IOBES: {}".format(args.iobes))
     print()
 
     args.target_folders = {
@@ -59,7 +52,10 @@ def convert():
                 for line in file_lines:
                     if line == "" or line.startswith("-DOCSTART-"):
                         if len(running_pairs) > 0:
-                            sentence_pairs_per_file[file].append(running_pairs)
+                            sentence_pairs_per_file[file].append(
+                                common.convert_to_iobes_tags(running_pairs)
+                                if args.iobes else running_pairs
+                            )
                             running_pairs = []
                         continue
                     pair = line.split(" ")[0::2]
@@ -68,16 +64,8 @@ def convert():
         if not os.path.exists(args.target_folders[language]):
             os.makedirs(args.target_folders[language])
 
-        label_count_pairs = get_label_count_pairs(sentence_pairs_per_file)
-
-        print()
-        print("total sentences: {:,}\ntotal tokens: {:,}".format(
-            sum(len(v) for v in sentence_pairs_per_file.values()),
-            sum((sum(len(s) for s in v) for v in sentence_pairs_per_file.values()))
-        ))
-        print()
-        print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
-        print()
+        label_count_pairs = common.get_label_count_pairs(sentence_pairs_per_file)
+        common.report_statistics(sentence_pairs_per_file, label_count_pairs)
 
         for target, source in [
             ["train", "{}.train".format(language)],

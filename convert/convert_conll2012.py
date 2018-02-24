@@ -1,32 +1,33 @@
-# This script converts CoNLL 2012 English training, development, and
-# testing data (http://conll.cemantix.org/2012/data.html) to the unified
-# input format of the model (each line containing space-separated lists
-# of tokens and labels of a single sentence, separated by a tab). It is
-# assumed that the three folders - "train", "development", and "test" -
-# from the "data" folder in the original corpus containing "*.gold_conll"
-# files with resolved tokens ([WORD] placeholders substituted by real words)
-# are copied into --source-folder (-s). Data for three different tasks -
-# POS (Part-Of-Speech Tagging), NERC (Named Entity Recognition and
-# Classification), and PRED (PREdicate Detection) - is extracted from
-# the corpus simultaneously and written to three separate target folders:
-# --target-folder-pos (-tp), --target-folder-nerc (-tn), and
-# --target-folder-pred (-tpr), from where models can be trained
-# directly using train.py.
+# This script converts CoNLL 2012 English training, development, and testing data
+# (http://conll.cemantix.org/2012/data.html) to the unified input format of the model
+# (each line containing space-separated lists of tokens and labels of a single sentence,
+# separated by a tab). It is assumed that the three folders - "train", "development",
+# and "test" - from the "data" folder in the original corpus containing "*.gold_conll"
+# files with resolved tokens ([WORD] placeholders substituted by real words) are copied
+# into --source-folder (-s). Data for three different tasks - POS (Part-Of-Speech
+# Tagging), NERC (Named Entity Recognition and Classification), and PRED (PREdicate
+# Detection) - is extracted from the corpus simultaneously and written to three
+# separate target folders: --target-folder-pos (-tp), --target-folder-nerc (-tn),
+# and --target-folder-pred (-tpr), from where models can be trained directly using
+# train.py. By default, the NERC tags are converted to IOBES tagging scheme (this
+# may be switched off by setting --iobes (-i) to False, to get IOB2 tags).
 
 
 import os
 import re
 import argparse
 
+import common
 
-def get_all_files(folder, pattern=""):
+
+def enumerate_files(folder, pattern=""):
     for entry in sorted(os.listdir(folder)):
         path = os.path.join(folder, entry)
         if not os.path.isdir(path):
             if re.search(pattern, entry):
                 yield path
         else:
-            yield from get_all_files(
+            yield from enumerate_files(
                 path, pattern
             )
 
@@ -86,31 +87,20 @@ def get_joint_pair(line):
     return pair
 
 
-def get_label_count_pairs(sentence_pairs_per_source):
-    label_counts = {}
-    for file in sentence_pairs_per_source.keys():
-        for sentence in sentence_pairs_per_source[file]:
-            for pair in sentence:
-                label = pair[1]
-                if label not in label_counts:
-                    label_counts[label] = 0
-                label_counts[label] += 1
-
-    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
-
-
 def convert():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/conll2012")
     parser.add_argument("-tp", "--target-folder-pos", type=str, default="../data/ready/pos/conll2012")
     parser.add_argument("-tn", "--target-folder-nerc", type=str, default="../data/ready/nerc/conll2012")
     parser.add_argument("-tpr", "--target-folder-pred", type=str, default="../data/ready/pred/conll2012")
+    parser.add_argument("-i", "--iobes", type=bool, default=True)
     args = parser.parse_args()
 
     print("Source folder: {}".format(args.source_folder))
     print("Target folder for POS task: {}".format(args.target_folder_pos))
     print("Target folder for NERC task: {}".format(args.target_folder_nerc))
     print("Target folder for PRED task: {}".format(args.target_folder_pred))
+    print("Convert to IOBES: {}".format(args.iobes))
     print()
 
     args.target_folders = {
@@ -130,7 +120,7 @@ def convert():
 
         print("processing data from {} folder".format(folder_path))
 
-        for path in get_all_files(folder_path, "\.gold_conll$"):
+        for path in enumerate_files(folder_path, "\.gold_conll$"):
             file_pairs = {t: [] for t in args.target_folders.keys()}
             with open(path, encoding="utf-8") as f:
                 running_joint_pairs = []
@@ -141,7 +131,10 @@ def convert():
                                 # excluding sentences with rare labels from POS data
                                 if task == "POS" and any(p[1] in ["*", "AFX"] for p in pairs):
                                     continue
-                                file_pairs[task].append(pairs)
+                                file_pairs[task].append(
+                                    common.convert_to_iobes_tags(pairs)
+                                    if task == "NERC" and args.iobes else pairs
+                                )
                             running_joint_pairs = []
                         continue
                     running_joint_pairs.append(
@@ -166,15 +159,8 @@ def convert():
         if not os.path.exists(target_folder):
             os.makedirs(target_folder)
 
-        label_count_pairs = get_label_count_pairs(sentence_pairs_per_task_and_folder[task])
-
-        print("total sentences: {:,}\ntotal tokens: {:,}\n".format(
-            sum(len(v) for v in sentence_pairs_per_task_and_folder[task].values()),
-            sum((sum(len(s) for s in v) for v in sentence_pairs_per_task_and_folder[task].values()))
-        ))
-        print("labels with occurrence counts:")
-        print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
-        print()
+        label_count_pairs = common.get_label_count_pairs(sentence_pairs_per_task_and_folder[task])
+        common.report_statistics(sentence_pairs_per_task_and_folder[task], label_count_pairs)
 
         for target, source in [["train", "train"], ["val", "development"], ["test", "test"]]:
             sentences_written, tokens_written = 0, 0

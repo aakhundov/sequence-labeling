@@ -4,52 +4,30 @@
 # lists of tokens and labels of a single sentence, separated by a tab). It is
 # assumed that the file "ner_dataset.csv" containing the whole dataset is copied
 # into --source-folder (-s). The data set is shuffled with a fixed seed, and split
-# into training, validation, and test sets in 80/10/10 proportion. The pre-processing
-# results are written into --target-folder (-t), from where a model can be trained
+# into training, validation, and test sets in 80/10/10 proportion. By default,
+# the tags are converted to IOBES tagging scheme (this may be switched off by
+# setting --iobes (-i) to False, to get IOB2 tags).The pre-processing results
+# are written into --target-folder (-t), from where a model can be trained
 # directly using train.py.
 
 
 import os
 import csv
-import random
 import argparse
 
-
-def get_label_count_pairs(sentence_pairs):
-    label_counts = {}
-    for sentence in sentence_pairs:
-        for pair in sentence:
-            label = pair[1]
-            if label not in label_counts:
-                label_counts[label] = 0
-            label_counts[label] += 1
-
-    return [(lb, label_counts[lb]) for lb in sorted(label_counts.keys())]
-
-
-def shuffle_and_split(data):
-    random.seed(12345)
-    random.shuffle(data)
-    random.seed()
-
-    train_bound = int(len(data) * 0.8)
-    val_bound = int(len(data) * 0.9)
-
-    train = data[:train_bound]
-    val = data[train_bound:val_bound]
-    test = data[val_bound:]
-
-    return train, val, test
+import common
 
 
 def convert():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s", "--source-folder", type=str, default="../data/sources/kaggle")
     parser.add_argument("-t", "--target-folder", type=str, default="../data/ready/nerc/kaggle")
+    parser.add_argument("-i", "--iobes", type=bool, default=True)
     args = parser.parse_args()
 
     print("Source folder: {}".format(args.source_folder))
     print("Target folder: {}".format(args.target_folder))
+    print("Convert to IOBES: {}".format(args.iobes))
     print()
 
     sentence_pairs = []
@@ -63,7 +41,10 @@ def convert():
     running_pairs = []
     for tokens in csv.reader(file_lines[1:]):
         if tokens[0].startswith("Sentence:") and len(running_pairs) > 0:
-            sentence_pairs.append(running_pairs)
+            sentence_pairs.append(
+                common.convert_to_iobes_tags(running_pairs)
+                if args.iobes else running_pairs
+            )
             running_pairs = []
         running_pairs.append(tokens[1::2])
     if len(running_pairs) > 0:
@@ -72,20 +53,14 @@ def convert():
     if not os.path.exists(args.target_folder):
         os.makedirs(args.target_folder)
 
-    label_count_pairs = get_label_count_pairs(sentence_pairs)
-
-    print()
-    print("total sentences: {:,}\ntotal tokens: {:,}".format(
-        len(sentence_pairs), sum(len(s) for s in sentence_pairs)
-    ))
-    print()
-    print("labels with occurrence counts:")
-    print([(lb, "{:,}".format(lbc)) for lb, lbc in label_count_pairs])
-    print()
+    label_count_pairs = common.get_label_count_pairs(sentence_pairs)
+    common.report_statistics(sentence_pairs, label_count_pairs)
 
     for target, dataset in zip(
-            ["train", "val", "test"],
-            shuffle_and_split(sentence_pairs)
+        ["train", "val", "test"],
+        common.shuffle_and_split(
+            sentence_pairs, split_points=(0.8, 0.9)
+        )
     ):
         sentences_written, tokens_written = 0, 0
         out_path = os.path.join(args.target_folder, target + ".txt")
