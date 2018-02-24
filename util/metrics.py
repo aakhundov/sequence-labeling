@@ -34,10 +34,12 @@ def compute_f1_score(tp, fp, fn):
 
 
 def are_iob_labels(label_names):
-    for lb in label_names:
-        if not (lb.startswith("I-") or lb.startswith("B-") or lb == "O"):
-            return False
-    return True
+    return all(lb[:2] in ["B-", "I-"] or lb == "O" for lb in label_names)
+
+
+def are_iobes_labels(label_names):
+    return all(lb[:2] in ["B-", "I-", "E-", "S-"] or lb == "O" for lb in label_names) and \
+           any(lb[:2] in ["E-", "S-"] for lb in label_names)
 
 
 def f1_scores_required(labels, num_labels, seq_len, min_o_label_ratio=0.8):
@@ -48,7 +50,34 @@ def f1_scores_required(labels, num_labels, seq_len, min_o_label_ratio=0.8):
     return num_o_labels / sum(seq_len) >= min_o_label_ratio
 
 
+def iobes_to_iob(gold, predicted, label_names, seq_len):
+    num_classes = (len(label_names) - 1) // 4
+    gold, predicted = gold[:], predicted[:]
+
+    for matrix in [gold, predicted]:
+        for i in range(len(matrix)):
+            for j in range(seq_len[i]):
+                if matrix[i][j] >= 2 * num_classes:
+                    if matrix[i][j] == 4 * num_classes:
+                        matrix[i][j] -= 2 * num_classes
+                    elif matrix[i][j] >= 3 * num_classes:
+                        matrix[i][j] -= 3 * num_classes
+                    else:
+                        matrix[i][j] -= num_classes
+
+    b_labels = label_names[:num_classes]
+    i_labels = label_names[num_classes*2:num_classes*3]
+    label_names = b_labels + i_labels + [label_names[-1]]
+
+    return gold, predicted, label_names
+
+
 def compute_metrics(gold, predicted, seq_len, label_names):
+    if are_iobes_labels(label_names):
+        gold, predicted, label_names = iobes_to_iob(
+            gold, predicted, label_names, seq_len
+        )
+
     num_labels = len(label_names)
 
     conf = np.zeros([num_labels, num_labels], dtype=np.int32)
@@ -151,8 +180,8 @@ def get_class_f1_summary(metrics, label_names):
     result = ""
     if "CLASS" in metrics and len(label_names) > 2:
         for i in range(len(metrics["CLASS"])):
-            result += "{:<10} {:<25} {}\n".format(
-                "{}".format(label_names[i]),
+            result += "{:<15} {:<25} {}\n".format(
+                "{}".format(label_names[i][:2]),
                 "[TP {d[TP]} FP {d[FP]} FN {d[FN]}]".format(d=metrics["CLASS"][i]),
                 "[P {d[prec]:.2f} R {d[rec]:.2f} F1 {d[F1]:.2f}]".format(d=metrics["CLASS"][i])
             )
