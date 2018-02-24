@@ -49,7 +49,7 @@ def get_all_sentences(sentence_pairs_collection):
         else sentence_pairs_collection
 
 
-def get_label_count_pairs(sentence_pairs_collection):
+def get_label_count_pairs(sentence_pairs_collection, dummy_label=None):
     label_counts = {}
     for sentence in get_all_sentences(sentence_pairs_collection):
         for pair in sentence:
@@ -61,8 +61,10 @@ def get_label_count_pairs(sentence_pairs_collection):
     label_counts = complete_label_counts(label_counts)
     labels = sorted(label_counts.keys())
 
-    if are_iob_labels(labels) or are_iobes_labels(labels):
-        labels = sorted(set(labels) - {"O"}) + ["O"]
+    if dummy_label is None and (are_iob_labels(labels) or are_iobes_labels(labels)):
+        dummy_label = "O"
+    if dummy_label is not None:
+        labels = sorted(set(labels) - {dummy_label}) + [dummy_label]
 
     return [(lb, label_counts[lb]) for lb in labels]
 

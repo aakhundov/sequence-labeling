@@ -181,7 +181,7 @@ def get_class_f1_summary(metrics, label_names):
     if "CLASS" in metrics and len(label_names) > 2:
         for i in range(len(metrics["CLASS"])):
             result += "{:<15} {:<25} {}\n".format(
-                "{}".format(label_names[i][:2]),
+                "{}".format(label_names[i][2:]),
                 "[TP {d[TP]} FP {d[FP]} FN {d[FN]}]".format(d=metrics["CLASS"][i]),
                 "[P {d[prec]:.2f} R {d[rec]:.2f} F1 {d[F1]:.2f}]".format(d=metrics["CLASS"][i])
             )

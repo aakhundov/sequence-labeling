@@ -82,7 +82,7 @@ def get_joint_pair(line):
     tokens = list(filter(None, line.split(" ")))
     pair = [tokens[3], {
         "POS": tokens[4], "NERC": tokens[10],
-        "PRED": "V" if "(V*)" in tokens[11:-1] else "X"
+        "PRED": "V" if "(V*)" in tokens[11:-1] else "-"
     }]
     return pair
 
@@ -153,13 +153,14 @@ def convert():
 
     for task in ["POS", "NERC", "PRED"]:
         print("\n--------------------------------------\n")
-        print("Data for {} task:\n".format(task))
+        print("Data for {} task:".format(task))
 
         target_folder = args.target_folders[task]
         if not os.path.exists(target_folder):
             os.makedirs(target_folder)
 
-        label_count_pairs = common.get_label_count_pairs(sentence_pairs_per_task_and_folder[task])
+        dummy = "-" if task == "PRED" else None
+        label_count_pairs = common.get_label_count_pairs(sentence_pairs_per_task_and_folder[task], dummy)
         common.report_statistics(sentence_pairs_per_task_and_folder[task], label_count_pairs)
 
         for target, source in [["train", "train"], ["val", "development"], ["test", "test"]]:
