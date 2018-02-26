@@ -52,7 +52,7 @@ def f1_scores_required(labels, num_labels, seq_len, min_o_label_ratio=0.8):
 
 def iobes_to_iob(gold, predicted, label_names, seq_len):
     num_classes = (len(label_names) - 1) // 4
-    gold, predicted = gold[:], predicted[:]
+    gold, predicted = np.copy(gold), np.copy(predicted)
 
     for matrix in [gold, predicted]:
         for i in range(len(matrix)):
