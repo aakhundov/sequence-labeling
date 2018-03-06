@@ -4,12 +4,13 @@
 # space-separated lists of tokens and labels of a single sentence,
 # separated by a tab). It is assumed that the six files - "esp.train",
 # "esp.testa", "eng.testb", "ned.train", "ned.testa", and "ned.testb"
-# are copied into --source-folder (-s). By default, the tags are
-# converted to IOBES tagging scheme (this may be switched off by
-# setting --iobes (-i) to False, to get IOB2 tags). The pre-processing
-# results are written into two target folders: --target-folder-esp
-# (-te) for Spanish data and --target-folder-ned (-tn) for Dutch
-# data, from where models can be trained directly using train.py.
+# (or just three files corresponding to one of the languages) are copied
+# into --source-folder (-s). By default, the tags are converted to IOBES
+# tagging scheme (this may be switched off by setting --iobes (-i) to
+# False, to get IOB2 tags). The pre-processing results are written into
+# two target folders: --target-folder-esp (-te) for Spanish data and
+# --target-folder-ned (-tn) for Dutch data, from where models can be
+# trained directly using train.py.
 
 
 import os
@@ -58,8 +59,13 @@ def convert():
                             )
                             running_pairs = []
                         continue
-                    pair = line.split(" ")[0::2]
+                    tokens = line.split(" ")
+                    pair = [tokens[0], tokens[-1]]
                     running_pairs.append(pair)
+
+        if len(sentence_pairs_per_file) == 0:
+            print("{} files not found\n".format(language))
+            continue
 
         if not os.path.exists(args.target_folders[language]):
             os.makedirs(args.target_folders[language])
