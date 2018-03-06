@@ -59,6 +59,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1, training=True,
+             learning_rate=0.001, gradient_clipping_norm=None,
              use_char_embeddings=True, use_crf_layer=True):
 
     # destructuring compound input values into components
@@ -169,7 +170,19 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
 
     # accuracy (single number) and training op (using Adam)
     accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
-    train_op = tf.train.AdamOptimizer().minimize(loss) if training else None
+
+    if training:
+        optimizer = tf.train.AdamOptimizer(learning_rate)
+        grads, variables = zip(*optimizer.compute_gradients(loss))
+
+        if gradient_clipping_norm is not None:
+            # clipping the gradients by global norm, if required
+            grads = tf.clip_by_global_norm(grads, gradient_clipping_norm)[0]
+
+        grads_and_vars = list(zip(grads, variables))
+        train_op = optimizer.apply_gradients(grads_and_vars)
+    else:
+        train_op = None
 
     return train_op, loss, accuracy, \
         predictions, labels, word_seq_len, \
