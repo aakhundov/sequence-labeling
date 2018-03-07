@@ -5,10 +5,11 @@
 # assumed that a single *.xml file containing the whole set of structured data
 # (e.g. "tiger_release_aug07.corrected.16012013.xml") is copied into SOURCE_FOLDER.
 # In case if --source-folder (-s) contains multiple *.xml files, only the first
-# found *.xml file from is processed. The data set is shuffled with a fixed seed,
-# and split into training, validation, and test sets in 80/10/10 proportion. The
-# pre-processing results are written into --target-folder (-t), from where a
-# model can be trained directly using train.py.
+# found *.xml file from is processed. The split into training, validation, and test
+# set is performed in accordance with https://dl.acm.org/citation.cfm?id=2464105
+# and assumes that the dataset contains exactly 50,472 sentences (the split from
+# the paper is 40,472 / 5,000 / 5,000). The pre-processing results are written into
+# --target-folder (-t), from where a model can be trained directly using train.py.
 
 
 import os
@@ -53,12 +54,12 @@ def convert():
     label_count_pairs = common.get_label_count_pairs(sentence_pairs)
     common.report_statistics(sentence_pairs, label_count_pairs)
 
-    for target, dataset in zip(
-        ["train", "val", "test"],
-        common.shuffle_and_split(
-            sentence_pairs, split_points=(0.8, 0.9)
-        )
-    ):
+    train_bound, val_bound = 40472, 40472 + 5000
+    split = sentence_pairs[:train_bound], \
+        sentence_pairs[train_bound:val_bound], \
+        sentence_pairs[val_bound:]
+
+    for target, dataset in zip(["train", "val", "test"], split):
         sentences_written, tokens_written = 0, 0
         out_path = os.path.join(args.target_folder, target + ".txt")
 
