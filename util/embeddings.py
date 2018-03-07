@@ -9,6 +9,8 @@ def load_embeddings(name, id_, cache=True):
         return load_polyglot(id_, cache)
     elif name.lower() == "glove":
         return load_glove(id_, cache)
+    elif name.lower() == "senna":
+        return load_senna()
 
     raise Exception("Unrecognized embeddings name: {}".format(name))
 
@@ -71,3 +73,21 @@ def load_glove(id_, cache):
     uncased = not id_.lower().startswith("840b")
 
     return words, vectors, uncased
+
+
+def load_senna():
+    words_file = "data/embeddings/senna/hash/words.lst"
+    vectors_file = "data/embeddings/senna/embeddings/embeddings.txt"
+
+    vectors = np.loadtxt(vectors_file)
+    with open(words_file, encoding="utf-8") as file:
+        words = [l[:-1] for l in file.readlines()]
+
+    # adding random vector for <UNK> at position 0
+    words = ["<UNK>"] + words
+    vectors = np.concatenate([
+        np.random.normal(size=[1, 50], loc=0.0, scale=1.0),
+        vectors
+    ])
+
+    return words, vectors, True
