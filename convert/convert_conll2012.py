@@ -142,12 +142,15 @@ def convert():
                     )
 
             # excluding files with only "XX" or "VERB" POS labels from POS data
+            # (if everything is normal with the dataset, there should't be any)
             if any(any(p[1] not in ["XX", "VERB"] for p in s) for s in file_pairs["POS"]):
                 sentence_pairs_per_task_and_folder["POS"][folder].extend(file_pairs["POS"])
             # excluding files without named entity labelling from NERC data
+            # (this should correspond to "New Testament" files: /pt/nt/*)
             if any(any(p[1] != "O" for p in s) for s in file_pairs["NERC"]):
                 sentence_pairs_per_task_and_folder["NERC"][folder].extend(file_pairs["NERC"])
             # excluding files without predicate labelling from PRED data
+            # (if everything is normal with the dataset, there should't be any)
             if any(any(p[1] == "V" for p in s) for s in file_pairs["PRED"]):
                 sentence_pairs_per_task_and_folder["PRED"][folder].extend(file_pairs["PRED"])
 
