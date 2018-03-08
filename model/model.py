@@ -59,15 +59,17 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1, training=True,
-             learning_rate=0.001, gradient_clipping_norm=None,
+             initial_learning_rate=0.001, lr_decay_rate=0.1,
+             gradient_clipping_norm=None,
              use_char_embeddings=True, use_crf_layer=True):
 
     # destructuring compound input values into components
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
         ((unique_words, unique_word_index), unique_word_len, unique_word_bytes) = input_values
 
-    # placeholder for dropout rate, to be set externally (returned)
+    # placeholders, to be set externally (returned)
     dropout_rate = tf.placeholder_with_default(0.0, shape=[])
+    completed_epochs = tf.placeholder_with_default(0.0, shape=[])
 
     # character (byte) and word embeddings created with the helper methods
     # embeddings are created (and processed) only once for each words in a batch
@@ -172,6 +174,8 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
 
     if training:
+        learning_rate = initial_learning_rate / (1.0 + lr_decay_rate * completed_epochs)
+
         optimizer = tf.train.AdamOptimizer(learning_rate)
         grads, variables = zip(*optimizer.compute_gradients(loss))
 
@@ -186,4 +190,4 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
 
     return train_op, loss, accuracy, \
         predictions, labels, word_seq_len, \
-        raw_sentences, dropout_rate
+        raw_sentences, dropout_rate, completed_epochs

@@ -101,21 +101,25 @@ def train():
         ).get_next()
 
     print("Building the model...")
-    embedding_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
-    embedding_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
-    train_op, loss, accuracy, predictions, labels, sentence_length, sentences, dropout_rate = model_fn(
-        next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names, training=True,
-        char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
-        char_lstm_layers=1, word_lstm_layers=1
-    )
+    emb_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
+    emb_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
+    train_op, loss, accuracy, predictions, labels, \
+        sentence_length, sentences, dropout_rate, completed_epochs = model_fn(
+            next_input_values, emb_words_placeholder, emb_vectors_placeholder, label_names,
+            char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
+            char_lstm_layers=1, word_lstm_layers=1, training=True,
+            initial_learning_rate=0.001, lr_decay_rate=0.05,
+            gradient_clipping_norm=None,
+            use_char_embeddings=True, use_crf_layer=True
+        )
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
 
     with tf.Session(config=config) as sess:
         print("Initializing variables...")
-        sess.run(tf.tables_initializer(), feed_dict={embedding_words_placeholder: embedding_words})
-        sess.run(tf.global_variables_initializer(), feed_dict={embedding_vectors_placeholder: embedding_vectors})
+        sess.run(tf.tables_initializer(), feed_dict={emb_words_placeholder: embedding_words})
+        sess.run(tf.global_variables_initializer(), feed_dict={emb_vectors_placeholder: embedding_vectors})
         del embedding_words, embedding_vectors
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
@@ -143,6 +147,7 @@ def train():
                 try:
                     sess.run(train_op, feed_dict={
                         data_handle: train_handle,
+                        completed_epochs: epoch,
                         dropout_rate: 0.5
                     })
                 except Exception as ex:
