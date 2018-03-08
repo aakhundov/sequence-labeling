@@ -52,7 +52,7 @@ def annotate():
     print("Building the model...")
     embedding_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
     embedding_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
-    _, _, _, predictions, _, sentence_length, _, _ = model_fn(
+    _, _, _, predictions, _, sentence_length, _, _, _ = model_fn(
         next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names, training=False,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
         char_lstm_layers=1, word_lstm_layers=1
