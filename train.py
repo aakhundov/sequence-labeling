@@ -50,10 +50,10 @@ def create_training_artifacts(data_folder):
 
 def train():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--data-folder", type=str, required=True)
+    parser.add_argument("-d", "--data-folder", type=str, default="data/ready/nerc/conll2012")
     parser.add_argument("-em", "--embeddings-name", type=str, default="glove")
     parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
-    parser.add_argument("-ep", "--epochs", type=int, default=50)
+    parser.add_argument("-ep", "--epochs", type=int, default=100)
     parser.add_argument("-b", "--batch-size", type=int, default=8)
     parser.add_argument("-eb", "--eval-batch-size", type=int, default=2000)
     parser.add_argument("-lr", "--initial-learning-rate", type=float, default=0.001)
@@ -70,13 +70,6 @@ def train():
     assert os.path.exists(args.data_folder)
     if not args.data_folder.endswith("/"):
         args.data_folder += "/"
-
-    print("Epochs: {}".format(args.epochs))
-    print("Training batch size: {}".format(args.batch_size))
-    print("Evaluation batch size: {}".format(args.eval_batch_size))
-    print("Initial learning rate: {}".format(args.initial_learning_rate))
-    print("LR decay rate: {}".format(args.lr_decay_rate))
-    print()
 
     print("Loading embeddings data...")
     emb_words, emb_vectors, uncased_embeddings = load_embeddings(args.embeddings_name, args.embeddings_id)
@@ -150,6 +143,10 @@ def train():
 
         echo(log, "data folder: {}".format(args.data_folder))
         echo(log, "embeddings: {}, {}".format(args.embeddings_name, args.embeddings_id))
+        echo(log, "epochs: {}".format(args.epochs))
+        echo(log, "batch size: {}".format(args.batch_size))
+        echo(log, "initial learning rate: {}".format(args.initial_learning_rate))
+        echo(log, "l.r. decay rate: {}".format(args.lr_decay_rate))
         echo(log, "byte lstm units: {}".format(args.byte_lstm_units))
         echo(log, "word lstm units: {}".format(args.word_lstm_units))
         echo(log, "byte embedding dim: {}".format(args.byte_embedding_dim))
