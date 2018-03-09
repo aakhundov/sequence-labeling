@@ -50,7 +50,7 @@ def create_training_artifacts(data_folder):
 
 def train():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--data-folder", type=str, default="data/ready/chunk/conll2000")
+    parser.add_argument("-d", "--data-folder", type=str, required=True)
     parser.add_argument("-em", "--embeddings-name", type=str, default="glove")
     parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
     parser.add_argument("-ep", "--epochs", type=int, default=50)
@@ -58,12 +58,12 @@ def train():
     parser.add_argument("-eb", "--eval-batch-size", type=int, default=2000)
     parser.add_argument("-lr", "--initial-learning-rate", type=float, default=0.001)
     parser.add_argument("-lrd", "--lr-decay-rate", type=float, default=0.05)
-    parser.add_argument("-clu", "--char-lstm-units", type=int, default=64)
+    parser.add_argument("-clu", "--byte-lstm-units", type=int, default=64)
     parser.add_argument("-wlu", "--word-lstm-units", type=int, default=128)
-    parser.add_argument("-ced", "--char-embedding-dim", type=int, default=50)
-    parser.add_argument("-cll", "--char-lstm-layers", type=int, default=1)
+    parser.add_argument("-ced", "--byte-embedding-dim", type=int, default=50)
+    parser.add_argument("-cll", "--byte-lstm-layers", type=int, default=1)
     parser.add_argument("-wll", "--word-lstm-layers", type=int, default=1)
-    parser.add_argument("-ce", "--use-char-embeddings", type=int, default=1)
+    parser.add_argument("-ce", "--use-byte-embeddings", type=int, default=1)
     parser.add_argument("-crf", "--use-crf-layer", type=int, default=1)
     args = parser.parse_args()
 
@@ -115,11 +115,11 @@ def train():
         sentence_length, sentences, dropout_rate, completed_epochs = model_fn(
             input_values=next_input_values, label_vocab=label_names,
             embedding_words=emb_words_placeholder, embedding_vectors=emb_vectors_placeholder,
-            char_lstm_units=args.char_lstm_units, word_lstm_units=args.word_lstm_units,
-            char_lstm_layers=args.char_lstm_layers, word_lstm_layers=args.word_lstm_layers,
-            char_embedding_dim=args.char_embedding_dim, training=True,
+            byte_lstm_units=args.byte_lstm_units, word_lstm_units=args.word_lstm_units,
+            byte_lstm_layers=args.byte_lstm_layers, word_lstm_layers=args.word_lstm_layers,
+            byte_embedding_dim=args.byte_embedding_dim, training=True,
             initial_learning_rate=args.initial_learning_rate, lr_decay_rate=args.lr_decay_rate,
-            use_char_embeddings=bool(args.use_char_embeddings),
+            use_byte_embeddings=bool(args.use_byte_embeddings),
             use_crf_layer=bool(args.use_crf_layer)
         )
 
@@ -150,12 +150,12 @@ def train():
 
         echo(log, "data folder: {}".format(args.data_folder))
         echo(log, "embeddings: {}, {}".format(args.embeddings_name, args.embeddings_id))
-        echo(log, "char lstm units: {}".format(args.char_lstm_units))
+        echo(log, "byte lstm units: {}".format(args.byte_lstm_units))
         echo(log, "word lstm units: {}".format(args.word_lstm_units))
-        echo(log, "char embedding dim: {}".format(args.char_embedding_dim))
-        echo(log, "char lstm layers: {}".format(args.char_lstm_layers))
+        echo(log, "byte embedding dim: {}".format(args.byte_embedding_dim))
+        echo(log, "byte lstm layers: {}".format(args.byte_lstm_layers))
         echo(log, "word lstm layers: {}".format(args.word_lstm_layers))
-        echo(log, "use char embeddings: {}".format(args.use_char_embeddings))
+        echo(log, "use byte embeddings: {}".format(args.use_byte_embeddings))
         echo(log, "use crf layer: {}".format(args.use_crf_layer))
         echo(log)
 

@@ -23,7 +23,7 @@ def input_fn(input_lines, batch_size=None, lower_case_words=False,
         )
 
     def get_word_bytes(words, max_len):
-        """Retrieve encoding bytes of each word in a 1D string tensor."""
+        """Retrieve UTF-8 bytes of each word in a 1D string tensor."""
         return tf.map_fn(
             lambda x: decode_word(x, max_len),
             words, dtype=tf.uint8

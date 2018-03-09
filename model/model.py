@@ -4,15 +4,15 @@ import tensorflow.contrib.crf as crf
 import tensorflow.contrib.lookup as lookup
 
 
-def get_char_embeddings(char_tensor, embedding_dim):
-    """Convert an int tensor of character bytes into a float32 tensor of char (byte) embeddings."""
-    char_embeddings = tf.get_variable(
-        name="char_embeddings", shape=[256, embedding_dim],
+def get_byte_embeddings(byte_tensor, embedding_dim):
+    """Convert an int tensor of UTF-8 bytes into a float32 tensor of byte embeddings."""
+    byte_embeddings = tf.get_variable(
+        name="byte_embeddings", shape=[256, embedding_dim],
         initializer=tf.initializers.random_normal(),
         trainable=True
     )
 
-    return tf.nn.embedding_lookup(char_embeddings, tf.cast(char_tensor, tf.int32))
+    return tf.nn.embedding_lookup(byte_embeddings, tf.cast(byte_tensor, tf.int32))
 
 
 def get_word_embeddings(word_tensor, embedding_words, embedding_vectors):
@@ -57,9 +57,9 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 
 
 def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
-             char_lstm_units, word_lstm_units, char_lstm_layers, word_lstm_layers, char_embedding_dim,
+             byte_lstm_units, word_lstm_units, byte_lstm_layers, word_lstm_layers, byte_embedding_dim,
              training=False, initial_learning_rate=0.001, lr_decay_rate=0.05,
-             use_char_embeddings=True, use_crf_layer=True):
+             use_byte_embeddings=True, use_crf_layer=True):
 
     # destructuring compound input values into components
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
@@ -69,14 +69,14 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     dropout_rate = tf.placeholder_with_default(0.0, shape=[])
     completed_epochs = tf.placeholder_with_default(0.0, shape=[])
 
-    # character (byte) and word embeddings created with the helper methods
-    # embeddings are created (and processed) only once for each words in a batch
-    char_embeddings = get_char_embeddings(unique_word_bytes, char_embedding_dim)
+    # byte (morphology) and word (semantics) embeddings created with the helper methods
+    # embeddings are created (and further processed) only once for each words in a batch
+    byte_embeddings = get_byte_embeddings(unique_word_bytes, byte_embedding_dim)
     word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
-    # dropping out char embeddings
-    dropped_char_embeddings = tf.layers.dropout(
-        char_embeddings, dropout_rate,
+    # dropping out byte embeddings
+    dropped_byte_embeddings = tf.layers.dropout(
+        byte_embeddings, dropout_rate,
         training=tf.greater(dropout_rate, 0.0)
     )
 
@@ -86,39 +86,39 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
         training=tf.greater(dropout_rate, 0.0)
     )
 
-    # char-bi-LSTM configuration
-    char_inputs = dropped_char_embeddings
-    char_seq_len = tf.reshape(unique_word_len, [-1])
-    char_lstm_fw, char_lstm_bw = create_layered_bi_lstm(
-        char_lstm_layers, char_lstm_units, dropout_rate
+    # byte-bi-LSTM configuration
+    byte_inputs = dropped_byte_embeddings
+    byte_seq_len = tf.reshape(unique_word_len, [-1])
+    byte_lstm_fw, byte_lstm_bw = create_layered_bi_lstm(
+        byte_lstm_layers, byte_lstm_units, dropout_rate
     )
 
-    # char-bi-LSTM: input - bytes (time-steps) of each word (batch item)
-    ((char_outputs_fw, char_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
-        cell_fw=char_lstm_fw, cell_bw=char_lstm_bw,
-        inputs=char_inputs, sequence_length=char_seq_len,
-        dtype=tf.float32, scope="char_rnn"
+    # byte-bi-LSTM: input - bytes (time-steps) of each word (batch item)
+    ((byte_outputs_fw, byte_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
+        cell_fw=byte_lstm_fw, cell_bw=byte_lstm_bw,
+        inputs=byte_inputs, sequence_length=byte_seq_len,
+        dtype=tf.float32, scope="byte_lstm"
     )
 
-    # fetching a pair of (fw and bw) last outputs for every
-    # item in the batch (used as char-embedding of a word)
-    last_char_outputs = tf.reshape(
+    # fetching and concatenating a pair (fw and bw) of last outputs
+    # for every item in the batch (used as byte-embedding of a word)
+    last_byte_outputs = tf.reshape(
         tf.concat([
             tf.gather_nd(
-                char_outputs_fw,
+                byte_outputs_fw,
                 tf.transpose(tf.stack((
-                    tf.range(tf.shape(char_seq_len)[0]),
-                    tf.maximum(0, char_seq_len - 1)
+                    tf.range(tf.shape(byte_seq_len)[0]),
+                    tf.maximum(0, byte_seq_len - 1)
                 )))
             ),
-            char_outputs_bw[:, 0, :]
+            byte_outputs_bw[:, 0, :]
         ], axis=1),
-        [-1, char_lstm_units * 2]
+        [-1, byte_lstm_units * 2]
     )
 
-    if use_char_embeddings:
-        # combining the (computed) char and word embedding features for unique words in a batch
-        unique_word_features = tf.concat([dropped_word_embeddings, last_char_outputs], axis=1)
+    if use_byte_embeddings:
+        # combining the (computed) byte and word embedding features for unique words in a batch
+        unique_word_features = tf.concat([dropped_word_embeddings, last_byte_outputs], axis=1)
     else:
         # using only word embeddings
         unique_word_features = dropped_word_embeddings
@@ -138,7 +138,7 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     ((word_outputs_fw, word_outputs_bw), (_, _)) = tf.nn.bidirectional_dynamic_rnn(
         cell_fw=word_lstm_fw, cell_bw=word_lstm_bw,
         inputs=word_inputs, sequence_length=word_seq_len,
-        dtype=tf.float32, scope="word_rnn"
+        dtype=tf.float32, scope="word_lstm"
     )
 
     # outputs from each time step are used for downstream inference

@@ -32,12 +32,12 @@ def evaluate():
 
     data_folder = params["data folder"]
     embeddings_name, embeddings_id = params["embeddings"].split(", ")
-    char_lstm_units = int(params["char lstm units"]) if "char lstm units" in params else 64
+    byte_lstm_units = int(params["byte lstm units"]) if "byte lstm units" in params else 64
     word_lstm_units = int(params["word lstm units"]) if "word lstm units" in params else 128
-    char_embedding_dim = int(params["char embedding dim"]) if "char embedding dim" in params else 50
-    char_lstm_layers = int(params["char lstm layers"]) if "char lstm layers" in params else 1
+    byte_embedding_dim = int(params["byte embedding dim"]) if "byte embedding dim" in params else 50
+    byte_lstm_layers = int(params["byte lstm layers"]) if "byte lstm layers" in params else 1
     word_lstm_layers = int(params["word lstm layers"]) if "word lstm layers" in params else 1
-    use_char_embeddings = int(params["use char embeddings"]) if "use char embeddings" in params else 1
+    use_byte_embeddings = int(params["use byte embeddings"]) if "use byte embeddings" in params else 1
     use_crf_layer = int(params["use crf layer"]) if "use crf layer" in params else 1
 
     label_file = os.path.join(data_folder, "labels.txt")
@@ -62,10 +62,10 @@ def evaluate():
     _, loss, _, predictions, labels, sentence_length, sentences, _, _ = model_fn(
         input_values=next_input_values, label_vocab=label_names,
         embedding_words=emb_words_placeholder, embedding_vectors=emb_vectors_placeholder,
-        char_lstm_units=char_lstm_units, word_lstm_units=word_lstm_units,
-        char_lstm_layers=char_lstm_layers, word_lstm_layers=word_lstm_layers,
-        char_embedding_dim=char_embedding_dim,
-        use_char_embeddings=bool(use_char_embeddings),
+        byte_lstm_units=byte_lstm_units, word_lstm_units=word_lstm_units,
+        byte_lstm_layers=byte_lstm_layers, word_lstm_layers=word_lstm_layers,
+        byte_embedding_dim=byte_embedding_dim,
+        use_byte_embeddings=bool(use_byte_embeddings),
         use_crf_layer=bool(use_crf_layer)
     )
 
