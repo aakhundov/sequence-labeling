@@ -56,6 +56,8 @@ def train():
     parser.add_argument("-ep", "--epochs", type=int, default=50)
     parser.add_argument("-b", "--batch-size", type=int, default=8)
     parser.add_argument("-eb", "--eval-batch-size", type=int, default=2000)
+    parser.add_argument("-ce", "--use-char-embeddings", type=int, default=0)
+    parser.add_argument("-crf", "--use-crf-layer", type=int, default=0)
     args = parser.parse_args()
 
     assert os.path.exists(args.data_folder)
@@ -68,10 +70,12 @@ def train():
     print("Epochs: {}".format(args.epochs))
     print("Training batch size: {}".format(args.batch_size))
     print("Evaluation batch size: {}".format(args.eval_batch_size))
+    print("Use char embeddings: {}".format(args.use_char_embeddings))
+    print("Use CRF layer: {}".format(args.use_crf_layer))
     print()
 
     print("Loading embeddings data...")
-    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(args.embeddings_name, args.embeddings_id)
+    emb_words, emb_vectors, uncased_embeddings = load_embeddings(args.embeddings_name, args.embeddings_id)
     label_names = [line[:-1] for line in open(args.data_folder + "labels.txt", encoding="utf-8").readlines()]
 
     print("Setting up input pipeline...")
@@ -101,16 +105,16 @@ def train():
         ).get_next()
 
     print("Building the model...")
-    emb_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
-    emb_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
+    emb_words_placeholder = tf.placeholder(tf.string, [len(emb_words)])
+    emb_vectors_placeholder = tf.placeholder(tf.float32, emb_vectors.shape)
     train_op, loss, accuracy, predictions, labels, \
         sentence_length, sentences, dropout_rate, completed_epochs = model_fn(
             next_input_values, emb_words_placeholder, emb_vectors_placeholder, label_names,
             char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
             char_lstm_layers=1, word_lstm_layers=1, training=True,
             initial_learning_rate=0.001, lr_decay_rate=0.05,
-            gradient_clipping_norm=None,
-            use_char_embeddings=True, use_crf_layer=True
+            use_char_embeddings=bool(args.use_char_embeddings),
+            use_crf_layer=bool(args.use_crf_layer)
         )
 
     config = tf.ConfigProto()
@@ -118,9 +122,9 @@ def train():
 
     with tf.Session(config=config) as sess:
         print("Initializing variables...")
-        sess.run(tf.tables_initializer(), feed_dict={emb_words_placeholder: embedding_words})
-        sess.run(tf.global_variables_initializer(), feed_dict={emb_vectors_placeholder: embedding_vectors})
-        del embedding_words, embedding_vectors
+        sess.run(tf.tables_initializer(), feed_dict={emb_words_placeholder: emb_words})
+        sess.run(tf.global_variables_initializer(), feed_dict={emb_vectors_placeholder: emb_vectors})
+        del emb_words, emb_vectors
 
         train_handle = sess.run(train_data.make_one_shot_iterator().string_handle())
         train_eval_handle = sess.run(train_eval_data.make_one_shot_iterator().string_handle())
@@ -138,8 +142,10 @@ def train():
         print("Training...")
         print()
 
-        echo(log, "data folder:  {}".format(args.data_folder))
-        echo(log, "embeddings:   {}, {}".format(args.embeddings_name, args.embeddings_id))
+        echo(log, "data folder: {}".format(args.data_folder))
+        echo(log, "embeddings: {}, {}".format(args.embeddings_name, args.embeddings_id))
+        echo(log, "use char embeddings: {}".format(args.use_char_embeddings))
+        echo(log, "use crf layer: {}".format(args.use_crf_layer))
         echo(log)
 
         for epoch in range(args.epochs):

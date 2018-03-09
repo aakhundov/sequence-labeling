@@ -1,5 +1,4 @@
 import os
-import re
 import argparse
 
 import numpy as np
@@ -10,7 +9,7 @@ from model.model import model_fn
 from util.embeddings import load_embeddings
 from util.metrics import compute_metrics, get_class_f1_summary
 from util.metrics import get_performance_summary, visualize_predictions
-from util.misc import fetch_in_batches
+from util.misc import fetch_in_batches, read_params_from_log
 
 
 def evaluate():
@@ -29,9 +28,12 @@ def evaluate():
     print("Samples to show: {}".format(args.num_to_show))
     print()
 
-    with open(os.path.join(args.results_folder, "log.txt"), encoding="utf-8") as f:
-        data_folder = re.split(":\s+", f.readline()[:-1])[1]
-        embeddings_name, embeddings_id = re.split(":\s+", f.readline()[:-1])[1].split(", ")
+    log_path = os.path.join(args.results_folder, "log.txt")
+    params = read_params_from_log(log_path)
+    data_folder = params["data folder"]
+    embeddings_name, embeddings_id = params["embeddings"].split(", ")
+    use_char_embeddings = int(params["use char embeddings"]) if "use char embeddings" in params else 1
+    use_crf_layer = int(params["use crf layer"]) if "use crf layer" in params else 1
 
     label_file = os.path.join(data_folder, "labels.txt")
     data_file = os.path.join(data_folder, args.data_file)
@@ -53,9 +55,11 @@ def evaluate():
     embedding_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
     embedding_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
     _, loss, _, predictions, labels, sentence_length, sentences, _, _ = model_fn(
-        next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names, training=False,
+        next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names,
         char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
-        char_lstm_layers=1, word_lstm_layers=1
+        char_lstm_layers=1, word_lstm_layers=1, training=False,
+        use_char_embeddings=bool(use_char_embeddings),
+        use_crf_layer=bool(use_crf_layer)
     )
 
     config = tf.ConfigProto()

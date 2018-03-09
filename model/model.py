@@ -60,7 +60,6 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
              char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
              char_lstm_layers=1, word_lstm_layers=1, training=True,
              initial_learning_rate=0.001, lr_decay_rate=0.1,
-             gradient_clipping_norm=None,
              use_char_embeddings=True, use_crf_layer=True):
 
     # destructuring compound input values into components
@@ -157,10 +156,10 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
         # inference by applying a CRF (and Viterbi decode)
         log_likelihoods, transitions = crf.crf_log_likelihood(logits, labels, word_seq_len)
         predictions, _ = crf.crf_decode(logits, transitions, word_seq_len)
-        # maximizing log-likelihood of CRF predictions
+        # minimizing negative log-likelihood of CRF predictions
         loss = -tf.reduce_mean(log_likelihoods)
     else:
-        # if two labels, inference directly from logits
+        # inference directly from logits by taking argmax
         predictions = tf.cast(tf.argmax(logits, axis=2), tf.int32)
         # minimizing softmax cross-entropy loss masked by word sequence lengths
         losses = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=labels, logits=logits)
@@ -173,20 +172,11 @@ def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
     # accuracy (single number) and training op (using Adam)
     accuracy = tf.reduce_mean(tf.cast(tf.equal(masked_predictions, masked_labels), tf.float32))
 
-    if training:
-        learning_rate = initial_learning_rate / (1.0 + lr_decay_rate * completed_epochs)
+    # learning rate with per-epoch LR / (1 + epochs * rate) decay schedule
+    learning_rate = initial_learning_rate / (1.0 + lr_decay_rate * completed_epochs)
 
-        optimizer = tf.train.AdamOptimizer(learning_rate)
-        grads, variables = zip(*optimizer.compute_gradients(loss))
-
-        if gradient_clipping_norm is not None:
-            # clipping the gradients by global norm, if required
-            grads = tf.clip_by_global_norm(grads, gradient_clipping_norm)[0]
-
-        grads_and_vars = list(zip(grads, variables))
-        train_op = optimizer.apply_gradients(grads_and_vars)
-    else:
-        train_op = None
+    # training op through minimizing given loss (CRF or X-entropy) with Adam optimizer
+    train_op = tf.train.AdamOptimizer(learning_rate).minimize(loss) if training else None
 
     return train_op, loss, accuracy, \
         predictions, labels, word_seq_len, \

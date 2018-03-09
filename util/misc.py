@@ -1,3 +1,4 @@
+import re
 import numpy as np
 
 
@@ -40,3 +41,15 @@ def fetch_in_batches(session, fetches, total, feed_dict=None, progress_callback=
             results[i] /= fetched_so_far
 
     return results
+
+
+def read_params_from_log(log_path):
+    params = {}
+    with open(log_path, encoding="utf-8") as f:
+        for line in [l[:-1] for l in f.readlines()]:
+            if line != "":
+                tokens = re.split(":\s+", line)
+                params[tokens[0]] = tokens[1]
+            else:
+                break
+    return params
