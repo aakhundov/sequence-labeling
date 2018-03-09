@@ -29,10 +29,15 @@ def annotate():
     print("Batch size: {}".format(args.batch_size))
     print()
 
-    log_path = os.path.join(args.results_folder, "log.txt")
-    params = read_params_from_log(log_path)
+    params = read_params_from_log(os.path.join(args.results_folder, "log.txt"))
+
     data_folder = params["data folder"]
     embeddings_name, embeddings_id = params["embeddings"].split(", ")
+    char_lstm_units = int(params["char lstm units"]) if "char lstm units" in params else 64
+    word_lstm_units = int(params["word lstm units"]) if "word lstm units" in params else 128
+    char_embedding_dim = int(params["char embedding dim"]) if "char embedding dim" in params else 50
+    char_lstm_layers = int(params["char lstm layers"]) if "char lstm layers" in params else 1
+    word_lstm_layers = int(params["word lstm layers"]) if "word lstm layers" in params else 1
     use_char_embeddings = int(params["use char embeddings"]) if "use char embeddings" in params else 1
     use_crf_layer = int(params["use crf layer"]) if "use crf layer" in params else 1
 
@@ -40,7 +45,7 @@ def annotate():
     input_count = sum(1 for _ in open(args.input_file, encoding="utf-8"))
 
     print("Loading embeddings data...")
-    embedding_words, embedding_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
+    emb_words, emb_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
     label_names = [line[:-1] for line in open(label_file, encoding="utf-8").readlines()]
 
     print("Setting up input pipeline...")
@@ -52,12 +57,14 @@ def annotate():
         ).make_one_shot_iterator().get_next()
 
     print("Building the model...")
-    embedding_words_placeholder = tf.placeholder(tf.string, [len(embedding_words)])
-    embedding_vectors_placeholder = tf.placeholder(tf.float32, embedding_vectors.shape)
+    emb_words_placeholder = tf.placeholder(tf.string, [len(emb_words)])
+    emb_vectors_placeholder = tf.placeholder(tf.float32, emb_vectors.shape)
     _, _, _, predictions, _, sentence_length, _, _, _ = model_fn(
-        next_input_values, embedding_words_placeholder, embedding_vectors_placeholder, label_names,
-        char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
-        char_lstm_layers=1, word_lstm_layers=1, training=False,
+        input_values=next_input_values, label_vocab=label_names,
+        embedding_words=emb_words_placeholder, embedding_vectors=emb_vectors_placeholder,
+        char_lstm_units=char_lstm_units, word_lstm_units=word_lstm_units,
+        char_lstm_layers=char_lstm_layers, word_lstm_layers=word_lstm_layers,
+        char_embedding_dim=char_embedding_dim,
         use_char_embeddings=bool(use_char_embeddings),
         use_crf_layer=bool(use_crf_layer)
     )
@@ -67,9 +74,9 @@ def annotate():
 
     with tf.Session(config=config) as sess:
         print("Initializing variables...")
-        sess.run(tf.tables_initializer(), feed_dict={embedding_words_placeholder: embedding_words})
-        sess.run(tf.global_variables_initializer(), feed_dict={embedding_vectors_placeholder: embedding_vectors})
-        del embedding_words, embedding_vectors
+        sess.run(tf.tables_initializer(), feed_dict={emb_words_placeholder: emb_words})
+        sess.run(tf.global_variables_initializer(), feed_dict={emb_vectors_placeholder: emb_vectors})
+        del emb_words, emb_vectors
 
         tf.train.Saver([
             v for v in tf.global_variables()

@@ -56,10 +56,9 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
         return rnn.MultiRNNCell(layers_fw), rnn.MultiRNNCell(layers_bw)
 
 
-def model_fn(input_values, embedding_words, embedding_vectors, label_vocab,
-             char_lstm_units=64, word_lstm_units=128, char_embedding_dim=50,
-             char_lstm_layers=1, word_lstm_layers=1, training=True,
-             initial_learning_rate=0.001, lr_decay_rate=0.1,
+def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
+             char_lstm_units, word_lstm_units, char_lstm_layers, word_lstm_layers, char_embedding_dim,
+             training=False, initial_learning_rate=0.001, lr_decay_rate=0.05,
              use_char_embeddings=True, use_crf_layer=True):
 
     # destructuring compound input values into components
