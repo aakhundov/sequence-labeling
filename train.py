@@ -50,7 +50,7 @@ def create_training_artifacts(data_folder):
 
 def train():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--data-folder", type=str, default="data/ready/nerc/conll2012")
+    parser.add_argument("-d", "--data-folder", type=str, required=True)
     parser.add_argument("-em", "--embeddings-name", type=str, default="glove")
     parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
     parser.add_argument("-ep", "--epochs", type=int, default=100)
