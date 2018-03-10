@@ -45,7 +45,7 @@ def convert():
             if file.startswith(language):
                 sentence_pairs_per_file[file] = []
                 file_path = os.path.join(args.source_folder, file)
-                file_lines = [l[:-1] for l in open(file_path).readlines()]
+                file_lines = [l[:-1] for l in open(file_path, encoding="utf-8").readlines()]
 
                 print("processing data from {}".format(file_path))
 
