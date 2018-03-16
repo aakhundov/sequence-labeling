@@ -59,7 +59,10 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
              byte_lstm_units, word_lstm_units, byte_lstm_layers, word_lstm_layers, byte_embedding_dim,
              training=False, initial_learning_rate=0.001, lr_decay_rate=0.05,
-             use_byte_embeddings=True, use_crf_layer=True):
+             use_byte_embeddings=True, use_word_embeddings=True, use_crf_layer=True):
+
+    if not use_byte_embeddings and not use_word_embeddings:
+        raise Exception("Either byte or word embeddings must be used.")
 
     # destructuring compound input values into components
     (raw_sentences, sentence_tokens, sentence_len, label_tokens), \
@@ -117,10 +120,14 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     )
 
     if use_byte_embeddings:
-        # combining the (computed) byte and word embedding features for unique words in a batch
-        unique_word_features = tf.concat([dropped_word_embeddings, last_byte_outputs], axis=1)
+        if use_word_embeddings:
+            # combining (computed) byte and (pre-trained) word embeddings for unique words in a batch
+            unique_word_features = tf.concat([dropped_word_embeddings, last_byte_outputs], axis=1)
+        else:
+            # using only (computed) byte embeddings
+            unique_word_features = last_byte_outputs
     else:
-        # using only word embeddings
+        # using only (pre-trained) word embeddings
         unique_word_features = dropped_word_embeddings
 
     # expanding unique words into the sentence structure of sentence tensor

@@ -64,6 +64,7 @@ def train():
     parser.add_argument("-bll", "--byte-lstm-layers", type=int, default=1)
     parser.add_argument("-wll", "--word-lstm-layers", type=int, default=1)
     parser.add_argument("-be", "--use-byte-embeddings", type=int, default=1)
+    parser.add_argument("-we", "--use-word-embeddings", type=int, default=1)
     parser.add_argument("-crf", "--use-crf-layer", type=int, default=1)
     args = parser.parse_args()
 
@@ -113,6 +114,7 @@ def train():
             byte_embedding_dim=args.byte_embedding_dim, training=True,
             initial_learning_rate=args.initial_learning_rate, lr_decay_rate=args.lr_decay_rate,
             use_byte_embeddings=bool(args.use_byte_embeddings),
+            use_word_embeddings=bool(args.use_word_embeddings),
             use_crf_layer=bool(args.use_crf_layer)
         )
 
@@ -153,6 +155,7 @@ def train():
         echo(log, "byte lstm layers: {}".format(args.byte_lstm_layers))
         echo(log, "word lstm layers: {}".format(args.word_lstm_layers))
         echo(log, "use byte embeddings: {}".format(args.use_byte_embeddings))
+        echo(log, "use word embeddings: {}".format(args.use_word_embeddings))
         echo(log, "use crf layer: {}".format(args.use_crf_layer))
         echo(log)
 

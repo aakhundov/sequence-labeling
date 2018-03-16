@@ -39,6 +39,7 @@ def annotate():
     byte_lstm_layers = int(params["byte lstm layers"]) if "byte lstm layers" in params else 1
     word_lstm_layers = int(params["word lstm layers"]) if "word lstm layers" in params else 1
     use_byte_embeddings = int(params["use byte embeddings"]) if "use byte embeddings" in params else 1
+    use_word_embeddings = int(params["use word embeddings"]) if "use word embeddings" in params else 1
     use_crf_layer = int(params["use crf layer"]) if "use crf layer" in params else 1
 
     label_file = os.path.join(data_folder, "labels.txt")
@@ -66,6 +67,7 @@ def annotate():
         byte_lstm_layers=byte_lstm_layers, word_lstm_layers=word_lstm_layers,
         byte_embedding_dim=byte_embedding_dim,
         use_byte_embeddings=bool(use_byte_embeddings),
+        use_word_embeddings=bool(use_word_embeddings),
         use_crf_layer=bool(use_crf_layer)
     )
 
