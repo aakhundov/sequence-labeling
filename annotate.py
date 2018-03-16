@@ -7,6 +7,32 @@ from model.input import input_fn
 from model.model import model_fn
 from util.embeddings import load_embeddings
 from util.misc import fetch_in_batches, read_params_from_log
+from util.metrics import are_iob_labels, are_iobes_labels
+
+
+def iobes_to_iob(iobes_labels):
+    iob_labels = []
+    for label in iobes_labels:
+        if label.startswith("S-"):
+            iob_labels.append("B-" + label[2:])
+        elif label.startswith("E-"):
+            iob_labels.append("I-" + label[2:])
+        else:
+            iob_labels.append(label)
+    return iob_labels
+
+
+def fix_initial_i_tags(labels):
+    num_fixed = 0
+    fixed_labels = []
+    for i in range(len(labels)):
+        label = labels[i]
+        if label.startswith("I-") and (i == 0 or labels[i-1][2:] != label[2:]):
+            fixed_labels.append("B-" + label[2:])
+            num_fixed += 1
+        else:
+            fixed_labels.append(label)
+    return fixed_labels, num_fixed
 
 
 def annotate():
@@ -15,6 +41,8 @@ def annotate():
     parser.add_argument("-r", "--results-folder", type=str, required=True)
     parser.add_argument("-o", "--output-file", type=str, default="")
     parser.add_argument("-b", "--batch-size", type=int, default=2000)
+    parser.add_argument("-iob", "--convert-to-iob", type=int, default=0)
+    parser.add_argument("-fix", "--fix-i-tags", type=int, default=0)
     args = parser.parse_args()
 
     assert os.path.exists(args.input_file)
@@ -27,6 +55,8 @@ def annotate():
     print("Output file: {}".format(args.output_file))
     print("Results folder: {}".format(args.results_folder))
     print("Batch size: {}".format(args.batch_size))
+    print("Convert to IOB tags: {}".format(args.convert_to_iob))
+    print("Fix initial I-tags: {}".format(args.fix_i_tags))
     print()
 
     params = read_params_from_log(os.path.join(args.results_folder, "log.txt"))
@@ -48,6 +78,12 @@ def annotate():
     print("Loading embeddings data...")
     emb_words, emb_vectors, uncased_embeddings = load_embeddings(embeddings_name, embeddings_id)
     label_names = [line[:-1] for line in open(label_file, encoding="utf-8").readlines()]
+
+    iob_labels = are_iob_labels(label_names)
+    iobes_labels = are_iobes_labels(label_names)
+
+    if args.fix_i_tags and not (iob_labels or (iobes_labels and args.convert_to_iob)):
+        raise Exception("Initial I-tags can be fixed only within IOB tagging scheme.")
 
     print("Setting up input pipeline...")
     with tf.device("/cpu:0"):
@@ -97,17 +133,25 @@ def annotate():
             ))
         )
 
+        total_fixed = 0
         with open(args.output_file, "w+", encoding="utf-8") as out:
             for i in range(len(a_predictions)):
-                out.write("{}\n".format(
-                    " ".join([
-                        label_names[lb] for lb in
-                        a_predictions[i][:a_sentence_len[i]]
-                    ])
-                ))
+                labels = [label_names[lb] for lb in a_predictions[i][:a_sentence_len[i]]]
+
+                if iobes_labels or iob_labels:
+                    if iobes_labels and args.convert_to_iob:
+                        labels = iobes_to_iob(labels)
+                    if (iob_labels or (iobes_labels and args.convert_to_iob)) and args.fix_i_tags:
+                        labels, num_fixed = fix_initial_i_tags(labels)
+                        total_fixed += num_fixed
+
+                out.write("{}\n".format(" ".join(labels)))
 
         print()
         print("Results written to {}".format(args.output_file))
+
+        if args.fix_i_tags:
+            print("({} initial I-tags were fixed)".format(total_fixed))
 
 
 if __name__ == "__main__":
