@@ -1,0 +1,441 @@
+data folder: data/ready/nerc/conll2003_eng/
+embeddings: glove, 6B.100d
+epochs: 100
+batch size: 8
+initial learning rate: 0.001
+l.r. decay rate: 0.05
+byte lstm units: 64
+word lstm units: 128
+byte embedding dim: 50
+byte lstm layers: 1
+word lstm layers: 1
+use byte embeddings: 0
+use word embeddings: 1
+use crf layer: 0
+
+1.train    L 0.197     acc [B 73.22 E 69.87 O 99.67 T 94.69]   B [P 94.55 R 77.45 F1 85.15]   E [P 85.46 R 72.35 F1 78.36]   EC [P 82.80 R 70.10 F1 75.92]
+1.val      L 0.204     acc [B 73.95 E 69.86 O 99.73 T 94.73]   B [P 95.58 R 77.85 F1 85.81]   E [P 87.05 R 73.06 F1 79.44]   EC [P 84.40 R 70.83 F1 77.02]
+
+2.train    L 0.145     acc [B 81.51 E 78.23 O 99.69 T 96.10]   B [P 96.25 R 85.48 F1 90.55]   E [P 89.00 R 80.74 F1 84.67]   EC [P 86.45 R 78.42 F1 82.24]
+2.val      L 0.157     acc [B 81.50 E 77.32 O 99.73 T 95.98]   B [P 96.60 R 85.70 F1 90.82]   E [P 89.17 R 81.07 F1 84.93]   EC [P 86.19 R 78.36 F1 82.09]
+
+3.train    L 0.120     acc [B 84.70 E 82.12 O 99.68 T 96.74]   B [P 96.81 R 88.57 F1 92.51]   E [P 90.68 R 84.73 F1 87.60]   EC [P 88.06 R 82.28 F1 85.07]
+3.val      L 0.138     acc [B 84.99 E 81.25 O 99.68 T 96.59]   B [P 96.68 R 89.20 F1 92.79]   E [P 90.43 R 85.04 F1 87.65]   EC [P 87.58 R 82.36 F1 84.89]
+
+4.train    L 0.113     acc [B 85.04 E 82.56 O 99.71 T 96.84]   B [P 97.31 R 88.50 F1 92.69]   E [P 91.61 R 84.92 F1 88.14]   EC [P 89.28 R 82.75 F1 85.89]
+4.val      L 0.134     acc [B 85.02 E 81.45 O 99.73 T 96.67]   B [P 96.80 R 88.67 F1 92.56]   E [P 90.88 R 84.69 F1 87.67]   EC [P 88.30 R 82.28 F1 85.18]
+
+5.train    L 0.099     acc [B 86.95 E 85.31 O 99.66 T 97.26]   B [P 97.66 R 90.21 F1 93.78]   E [P 92.06 R 87.05 F1 89.48]   EC [P 89.96 R 85.06 F1 87.44]
+5.val      L 0.123     acc [B 86.87 E 83.69 O 99.67 T 97.00]   B [P 97.04 R 90.42 F1 93.61]   E [P 91.02 R 86.65 F1 88.78]   EC [P 88.76 R 84.50 F1 86.58]
+
+6.train    L 0.093     acc [B 87.28 E 85.57 O 99.71 T 97.35]   B [P 97.77 R 90.31 F1 93.89]   E [P 92.49 R 87.16 F1 89.75]   EC [P 90.49 R 85.28 F1 87.81]
+6.val      L 0.119     acc [B 86.74 E 83.51 O 99.67 T 96.96]   B [P 96.90 R 90.37 F1 93.52]   E [P 91.16 R 86.59 F1 88.81]   EC [P 88.73 R 84.28 F1 86.45]
+
+7.train    L 0.086     acc [B 88.43 E 87.06 O 99.70 T 97.58]   B [P 97.89 R 91.43 F1 94.55]   E [P 92.80 R 88.51 F1 90.60]   EC [P 90.98 R 86.77 F1 88.83]
+7.val      L 0.112     acc [B 87.56 E 84.90 O 99.67 T 97.19]   B [P 97.01 R 91.15 F1 93.99]   E [P 91.23 R 87.58 F1 89.37]   EC [P 89.06 R 85.49 F1 87.24]
+
+8.train    L 0.081     acc [B 89.20 E 88.30 O 99.63 T 97.74]   B [P 97.98 R 92.15 F1 94.97]   E [P 93.11 R 89.37 F1 91.21]   EC [P 91.14 R 87.48 F1 89.27]
+8.val      L 0.110     acc [B 87.85 E 85.48 O 99.60 T 97.23]   B [P 97.16 R 91.43 F1 94.21]   E [P 91.13 R 87.80 F1 89.43]   EC [P 88.93 R 85.68 F1 87.27]
+
+9.train    L 0.076     acc [B 89.43 E 88.61 O 99.70 T 97.85]   B [P 98.10 R 92.06 F1 94.98]   E [P 93.60 R 89.57 F1 91.54]   EC [P 91.90 R 87.94 F1 89.87]
+9.val      L 0.107     acc [B 87.95 E 85.40 O 99.65 T 97.26]   B [P 97.11 R 91.16 F1 94.05]   E [P 91.79 R 87.90 F1 89.80]   EC [P 89.68 R 85.88 F1 87.74]
+
+10.train    L 0.080    acc [B 88.85 E 87.16 O 99.82 T 97.70]   B [P 98.29 R 91.50 F1 94.77]   E [P 93.98 R 88.71 F1 91.27]   EC [P 92.35 R 87.17 F1 89.69]
+10.val      L 0.116    acc [B 87.28 E 84.23 O 99.76 T 97.16]   B [P 97.27 R 90.68 F1 93.86]   E [P 92.56 R 87.51 F1 89.97]   EC [P 90.21 R 85.29 F1 87.68]
+
+11.train    L 0.070    acc [B 90.21 E 89.30 O 99.73 T 97.98]   B [P 98.20 R 92.76 F1 95.40]   E [P 94.03 R 90.28 F1 92.12]   EC [P 92.42 R 88.72 F1 90.53]
+11.val      L 0.107    acc [B 88.44 E 85.70 O 99.64 T 97.31]   B [P 96.88 R 91.52 F1 94.12]   E [P 92.11 R 88.46 F1 90.25]   EC [P 90.05 R 86.47 F1 88.22]
+
+12.train    L 0.069    acc [B 89.71 E 88.85 O 99.78 T 97.95]   B [P 98.42 R 92.25 F1 95.23]   E [P 94.27 R 89.89 F1 92.03]   EC [P 92.67 R 88.37 F1 90.47]
+12.val      L 0.108    acc [B 87.80 E 85.32 O 99.71 T 97.30]   B [P 97.22 R 91.20 F1 94.11]   E [P 92.50 R 88.19 F1 90.29]   EC [P 90.19 R 85.98 F1 88.03]
+
+13.train    L 0.064    acc [B 90.80 E 90.20 O 99.72 T 98.13]   B [P 98.23 R 93.23 F1 95.66]   E [P 94.33 R 91.04 F1 92.65]   EC [P 92.73 R 89.50 F1 91.08]
+13.val      L 0.101    acc [B 88.79 E 86.53 O 99.65 T 97.45]   B [P 97.08 R 91.80 F1 94.37]   E [P 92.69 R 89.01 F1 90.81]   EC [P 90.71 R 87.11 F1 88.87]
+
+14.train    L 0.062    acc [B 91.33 E 90.91 O 99.68 T 98.22]   B [P 98.25 R 93.68 F1 95.91]   E [P 94.56 R 91.53 F1 93.02]   EC [P 92.94 R 89.96 F1 91.42]
+14.val      L 0.102    acc [B 88.94 E 86.64 O 99.58 T 97.41]   B [P 96.93 R 91.92 F1 94.36]   E [P 92.00 R 88.86 F1 90.40]   EC [P 89.96 R 86.89 F1 88.40]
+
+15.train    L 0.059    acc [B 91.95 E 91.55 O 99.69 T 98.32]   B [P 98.14 R 94.28 F1 96.18]   E [P 94.34 R 92.09 F1 93.20]   EC [P 92.82 R 90.61 F1 91.71]
+15.val      L 0.100    acc [B 89.16 E 86.95 O 99.55 T 97.44]   B [P 96.65 R 92.28 F1 94.41]   E [P 91.78 R 89.23 F1 90.49]   EC [P 89.77 R 87.28 F1 88.51]
+
+16.train    L 0.058    acc [B 91.79 E 91.36 O 99.74 T 98.34]   B [P 98.41 R 93.98 F1 96.15]   E [P 94.71 R 91.85 F1 93.26]   EC [P 93.29 R 90.47 F1 91.86]
+16.val      L 0.100    acc [B 89.28 E 86.95 O 99.63 T 97.50]   B [P 97.00 R 92.11 F1 94.49]   E [P 92.47 R 89.28 F1 90.85]   EC [P 90.67 R 87.55 F1 89.08]
+
+17.train    L 0.057    acc [B 91.74 E 91.20 O 99.77 T 98.34]   B [P 98.51 R 93.96 F1 96.18]   E [P 94.82 R 91.85 F1 93.31]   EC [P 93.39 R 90.46 F1 91.90]
+17.val      L 0.101    acc [B 88.83 E 86.50 O 99.67 T 97.46]   B [P 97.14 R 91.97 F1 94.48]   E [P 92.58 R 89.01 F1 90.76]   EC [P 90.58 R 87.09 F1 88.80]
+
+18.train    L 0.056    acc [B 91.97 E 91.41 O 99.78 T 98.38]   B [P 98.47 R 94.21 F1 96.29]   E [P 94.99 R 92.05 F1 93.50]   EC [P 93.52 R 90.63 F1 92.05]
+18.val      L 0.103    acc [B 89.08 E 86.64 O 99.64 T 97.47]   B [P 96.93 R 92.33 F1 94.57]   E [P 92.36 R 89.30 F1 90.80]   EC [P 90.22 R 87.23 F1 88.70]
+
+19.train    L 0.052    acc [B 92.55 E 92.53 O 99.70 T 98.50]   B [P 98.36 R 94.71 F1 96.50]   E [P 95.05 R 92.92 F1 93.97]   EC [P 93.60 R 91.50 F1 92.54]
+19.val      L 0.096    acc [B 89.45 E 87.33 O 99.55 T 97.51]   B [P 96.80 R 92.71 F1 94.71]   E [P 92.08 R 89.67 F1 90.86]   EC [P 89.98 R 87.61 F1 88.78]
+
+20.train    L 0.053    acc [B 92.26 E 91.81 O 99.77 T 98.44]   B [P 98.43 R 94.31 F1 96.33]   E [P 95.09 R 92.27 F1 93.66]   EC [P 93.79 R 91.00 F1 92.37]
+20.val      L 0.102    acc [B 89.33 E 86.90 O 99.66 T 97.52]   B [P 97.03 R 92.39 F1 94.66]   E [P 92.65 R 89.31 F1 90.95]   EC [P 90.73 R 87.46 F1 89.07]
+
+21.train    L 0.051    acc [B 92.61 E 92.69 O 99.71 T 98.54]   B [P 98.56 R 94.64 F1 96.56]   E [P 95.11 R 92.88 F1 93.98]   EC [P 93.79 R 91.58 F1 92.67]
+21.val      L 0.096    acc [B 89.77 E 87.82 O 99.56 T 97.59]   B [P 97.04 R 92.71 F1 94.83]   E [P 92.06 R 89.62 F1 90.82]   EC [P 90.20 R 87.80 F1 88.98]
+
+22.train    L 0.050    acc [B 92.49 E 92.39 O 99.78 T 98.54]   B [P 98.65 R 94.51 F1 96.53]   E [P 95.41 R 92.78 F1 94.08]   EC [P 94.04 R 91.46 F1 92.73]
+22.val      L 0.099    acc [B 89.28 E 87.07 O 99.64 T 97.54]   B [P 97.29 R 92.36 F1 94.76]   E [P 92.37 R 89.40 F1 90.86]   EC [P 90.44 R 87.53 F1 88.96]
+
+23.train    L 0.049    acc [B 92.84 E 93.06 O 99.71 T 98.60]   B [P 98.57 R 94.69 F1 96.59]   E [P 95.36 R 93.06 F1 94.20]   EC [P 94.10 R 91.83 F1 92.95]
+23.val      L 0.095    acc [B 89.65 E 87.89 O 99.57 T 97.61]   B [P 97.16 R 92.61 F1 94.83]   E [P 92.33 R 89.68 F1 90.99]   EC [P 90.33 R 87.75 F1 89.02]
+
+24.train    L 0.048    acc [B 92.92 E 93.13 O 99.72 T 98.61]   B [P 98.59 R 94.86 F1 96.69]   E [P 95.41 R 93.26 F1 94.32]   EC [P 94.07 R 91.94 F1 92.99]
+24.val      L 0.096    acc [B 89.77 E 87.82 O 99.54 T 97.58]   B [P 97.08 R 92.76 F1 94.87]   E [P 92.22 R 89.75 F1 90.97]   EC [P 90.25 R 87.83 F1 89.02]
+
+25.train    L 0.046    acc [B 93.09 E 93.16 O 99.75 T 98.65]   B [P 98.68 R 94.94 F1 96.77]   E [P 95.56 R 93.28 F1 94.40]   EC [P 94.35 R 92.10 F1 93.21]
+25.val      L 0.096    acc [B 89.68 E 87.56 O 99.60 T 97.58]   B [P 97.09 R 92.71 F1 94.85]   E [P 92.39 R 89.75 F1 91.05]   EC [P 90.47 R 87.88 F1 89.16]
+
+26.train    L 0.045    acc [B 93.35 E 93.38 O 99.76 T 98.70]   B [P 98.65 R 95.11 F1 96.85]   E [P 95.75 R 93.42 F1 94.57]   EC [P 94.56 R 92.26 F1 93.40]
+26.val      L 0.096    acc [B 89.70 E 87.74 O 99.60 T 97.61]   B [P 97.06 R 92.71 F1 94.84]   E [P 92.69 R 89.90 F1 91.28]   EC [P 90.68 R 87.95 F1 89.30]
+
+27.train    L 0.045    acc [B 93.27 E 93.18 O 99.81 T 98.70]   B [P 98.79 R 95.03 F1 96.87]   E [P 95.79 R 93.28 F1 94.52]   EC [P 94.62 R 92.14 F1 93.37]
+27.val      L 0.097    acc [B 89.65 E 87.38 O 99.61 T 97.56]   B [P 97.11 R 92.66 F1 94.83]   E [P 92.52 R 89.73 F1 91.11]   EC [P 90.49 R 87.77 F1 89.11]
+
+28.train    L 0.044    acc [B 93.43 E 93.32 O 99.80 T 98.71]   B [P 98.75 R 95.08 F1 96.88]   E [P 95.92 R 93.37 F1 94.63]   EC [P 94.80 R 92.28 F1 93.53]
+28.val      L 0.097    acc [B 89.78 E 87.45 O 99.64 T 97.60]   B [P 96.96 R 92.73 F1 94.80]   E [P 92.51 R 89.80 F1 91.14]   EC [P 90.53 R 87.88 F1 89.19]
+
+29.train    L 0.044    acc [B 93.47 E 93.75 O 99.74 T 98.74]   B [P 98.70 R 95.23 F1 96.93]   E [P 95.90 R 93.75 F1 94.81]   EC [P 94.66 R 92.53 F1 93.58]
+29.val      L 0.096    acc [B 90.10 E 88.13 O 99.55 T 97.64]   B [P 97.00 R 92.91 F1 94.91]   E [P 92.25 R 89.94 F1 91.08]   EC [P 90.38 R 88.12 F1 89.24]
+
+30.train    L 0.043    acc [B 93.78 E 93.88 O 99.75 T 98.77]   B [P 98.62 R 95.61 F1 97.09]   E [P 95.92 R 94.14 F1 95.02]   EC [P 94.64 R 92.88 F1 93.75]
+30.val      L 0.096    acc [B 89.82 E 87.84 O 99.54 T 97.58]   B [P 96.84 R 92.90 F1 94.83]   E [P 92.37 R 90.09 F1 91.22]   EC [P 90.34 R 88.10 F1 89.21]
+
+31.train    L 0.042    acc [B 93.74 E 93.85 O 99.79 T 98.80]   B [P 98.73 R 95.43 F1 97.05]   E [P 96.06 R 93.89 F1 94.96]   EC [P 94.91 R 92.77 F1 93.83]
+31.val      L 0.096    acc [B 89.80 E 87.48 O 99.61 T 97.58]   B [P 96.98 R 92.88 F1 94.89]   E [P 92.65 R 89.89 F1 91.24]   EC [P 90.65 R 87.95 F1 89.28]
+
+32.train    L 0.041    acc [B 93.92 E 93.99 O 99.78 T 98.81]   B [P 98.66 R 95.60 F1 97.10]   E [P 96.10 R 94.09 F1 95.09]   EC [P 94.95 R 92.96 F1 93.94]
+32.val      L 0.097    acc [B 89.84 E 87.71 O 99.57 T 97.58]   B [P 96.86 R 92.88 F1 94.83]   E [P 92.29 R 89.78 F1 91.02]   EC [P 90.38 R 87.93 F1 89.14]
+
+33.train    L 0.041    acc [B 93.93 E 93.97 O 99.79 T 98.82]   B [P 98.73 R 95.59 F1 97.14]   E [P 96.05 R 94.01 F1 95.02]   EC [P 94.89 R 92.87 F1 93.87]
+33.val      L 0.098    acc [B 89.85 E 87.62 O 99.56 T 97.56]   B [P 96.61 R 93.02 F1 94.78]   E [P 92.44 R 90.17 F1 91.29]   EC [P 90.37 R 88.15 F1 89.25]
+
+34.train    L 0.039    acc [B 94.09 E 94.25 O 99.78 T 98.86]   B [P 98.72 R 95.74 F1 97.21]   E [P 96.09 R 94.26 F1 95.17]   EC [P 94.97 R 93.16 F1 94.06]
+34.val      L 0.096    acc [B 89.87 E 87.98 O 99.57 T 97.63]   B [P 96.96 R 92.93 F1 94.90]   E [P 92.79 R 90.27 F1 91.51]   EC [P 90.80 R 88.34 F1 89.55]
+
+35.train    L 0.039    acc [B 94.15 E 94.42 O 99.75 T 98.86]   B [P 98.72 R 95.90 F1 97.29]   E [P 96.04 R 94.47 F1 95.25]   EC [P 94.81 R 93.26 F1 94.03]
+35.val      L 0.095    acc [B 89.97 E 88.05 O 99.53 T 97.61]   B [P 96.77 R 93.15 F1 94.92]   E [P 92.27 R 90.36 F1 91.30]   EC [P 90.24 R 88.37 F1 89.30]
+
+36.train    L 0.038    acc [B 94.30 E 94.64 O 99.78 T 98.92]   B [P 98.80 R 95.91 F1 97.34]   E [P 96.37 R 94.62 F1 95.49]   EC [P 95.22 R 93.48 F1 94.34]
+36.val      L 0.095    acc [B 90.00 E 88.14 O 99.55 T 97.64]   B [P 96.97 R 93.08 F1 94.99]   E [P 92.57 R 90.39 F1 91.47]   EC [P 90.55 R 88.42 F1 89.48]
+
+37.train    L 0.038    acc [B 93.96 E 94.19 O 99.82 T 98.88]   B [P 98.89 R 95.52 F1 97.18]   E [P 96.42 R 94.13 F1 95.26]   EC [P 95.34 R 93.07 F1 94.19]
+37.val      L 0.099    acc [B 89.63 E 87.63 O 99.60 T 97.60]   B [P 96.99 R 92.66 F1 94.78]   E [P 92.47 R 89.87 F1 91.15]   EC [P 90.51 R 87.97 F1 89.22]
+
+38.train    L 0.038    acc [B 94.58 E 95.03 O 99.72 T 98.94]   B [P 98.71 R 96.11 F1 97.39]   E [P 96.27 R 94.91 F1 95.58]   EC [P 95.15 R 93.81 F1 94.48]
+38.val      L 0.095    acc [B 90.05 E 88.47 O 99.48 T 97.64]   B [P 96.85 R 93.00 F1 94.88]   E [P 92.37 R 90.46 F1 91.40]   EC [P 90.46 R 88.59 F1 89.52]
+
+39.train    L 0.036    acc [B 94.63 E 94.87 O 99.78 T 98.96]   B [P 98.73 R 96.28 F1 97.49]   E [P 96.32 R 94.92 F1 95.62]   EC [P 95.17 R 93.78 F1 94.47]
+39.val      L 0.096    acc [B 90.15 E 88.25 O 99.55 T 97.66]   B [P 96.80 R 93.20 F1 94.97]   E [P 92.35 R 90.44 F1 91.39]   EC [P 90.43 R 88.56 F1 89.48]
+
+40.train    L 0.037    acc [B 94.56 E 94.90 O 99.74 T 98.93]   B [P 98.72 R 96.15 F1 97.42]   E [P 96.19 R 94.78 F1 95.48]   EC [P 95.04 R 93.65 F1 94.34]
+40.val      L 0.095    acc [B 90.21 E 88.46 O 99.51 T 97.66]   B [P 96.68 R 93.15 F1 94.88]   E [P 92.29 R 90.51 F1 91.39]   EC [P 90.37 R 88.62 F1 89.49]
+
+41.train    L 0.036    acc [B 94.39 E 94.83 O 99.79 T 98.96]   B [P 98.95 R 95.89 F1 97.40]   E [P 96.71 R 94.70 F1 95.70]   EC [P 95.63 R 93.65 F1 94.63]
+41.val      L 0.096    acc [B 89.90 E 88.04 O 99.56 T 97.63]   B [P 96.87 R 92.83 F1 94.81]   E [P 92.23 R 90.12 F1 91.16]   EC [P 90.30 R 88.24 F1 89.26]
+
+42.train    L 0.036    acc [B 94.62 E 94.94 O 99.77 T 98.96]   B [P 98.80 R 96.03 F1 97.39]   E [P 96.56 R 94.77 F1 95.66]   EC [P 95.56 R 93.78 F1 94.66]
+42.val      L 0.096    acc [B 90.00 E 88.29 O 99.53 T 97.65]   B [P 96.88 R 92.93 F1 94.86]   E [P 92.37 R 90.24 F1 91.29]   EC [P 90.51 R 88.42 F1 89.45]
+
+43.train    L 0.036    acc [B 94.33 E 94.64 O 99.80 T 98.94]   B [P 98.88 R 95.76 F1 97.30]   E [P 96.66 R 94.45 F1 95.54]   EC [P 95.64 R 93.45 F1 94.53]
+43.val      L 0.099    acc [B 89.90 E 88.05 O 99.59 T 97.66]   B [P 96.94 R 92.75 F1 94.80]   E [P 92.70 R 90.15 F1 91.41]   EC [P 90.83 R 88.34 F1 89.57]
+
+44.train    L 0.035    acc [B 94.77 E 95.18 O 99.76 T 98.99]   B [P 98.82 R 96.29 F1 97.54]   E [P 96.63 R 95.10 F1 95.86]   EC [P 95.54 R 94.03 F1 94.78]
+44.val      L 0.096    acc [B 90.04 E 88.29 O 99.49 T 97.62]   B [P 96.91 R 93.03 F1 94.93]   E [P 92.34 R 90.32 F1 91.32]   EC [P 90.33 R 88.35 F1 89.33]
+
+45.train    L 0.035    acc [B 94.35 E 94.79 O 99.80 T 98.96]   B [P 98.95 R 95.80 F1 97.35]   E [P 96.81 R 94.61 F1 95.70]   EC [P 95.77 R 93.59 F1 94.67]
+45.val      L 0.098    acc [B 89.84 E 87.85 O 99.57 T 97.60]   B [P 97.08 R 92.78 F1 94.88]   E [P 92.67 R 89.94 F1 91.28]   EC [P 90.79 R 88.12 F1 89.44]
+
+46.train    L 0.033    acc [B 94.75 E 95.10 O 99.81 T 99.02]   B [P 98.95 R 96.21 F1 97.56]   E [P 96.85 R 95.03 F1 95.93]   EC [P 95.80 R 94.00 F1 94.89]
+46.val      L 0.098    acc [B 90.19 E 87.98 O 99.57 T 97.63]   B [P 96.98 R 93.02 F1 94.96]   E [P 92.64 R 90.21 F1 91.41]   EC [P 90.77 R 88.39 F1 89.56]
+
+47.train    L 0.034    acc [B 94.88 E 95.27 O 99.78 T 99.03]   B [P 98.88 R 96.35 F1 97.60]   E [P 96.90 R 95.21 F1 96.05]   EC [P 95.84 R 94.17 F1 95.00]
+47.val      L 0.096    acc [B 90.21 E 88.35 O 99.54 T 97.66]   B [P 96.75 R 93.18 F1 94.93]   E [P 92.45 R 90.47 F1 91.45]   EC [P 90.47 R 88.54 F1 89.50]
+
+48.train    L 0.033    acc [B 94.90 E 95.30 O 99.79 T 99.04]   B [P 98.88 R 96.46 F1 97.65]   E [P 96.72 R 95.25 F1 95.98]   EC [P 95.61 R 94.15 F1 94.88]
+48.val      L 0.096    acc [B 90.14 E 88.16 O 99.55 T 97.64]   B [P 96.90 R 93.12 F1 94.97]   E [P 92.41 R 90.39 F1 91.39]   EC [P 90.43 R 88.46 F1 89.43]
+
+49.train    L 0.033    acc [B 95.00 E 95.49 O 99.77 T 99.05]   B [P 98.88 R 96.43 F1 97.64]   E [P 96.80 R 95.31 F1 96.05]   EC [P 95.74 R 94.26 F1 95.00]
+49.val      L 0.094    acc [B 90.29 E 88.57 O 99.49 T 97.66]   B [P 96.80 R 93.25 F1 94.99]   E [P 91.99 R 90.41 F1 91.19]   EC [P 90.07 R 88.52 F1 89.29]
+
+50.train    L 0.032    acc [B 94.98 E 95.32 O 99.82 T 99.07]   B [P 98.96 R 96.42 F1 97.67]   E [P 96.93 R 95.24 F1 96.08]   EC [P 95.88 R 94.20 F1 95.03]
+50.val      L 0.096    acc [B 89.99 E 88.03 O 99.58 T 97.64]   B [P 96.95 R 93.03 F1 94.95]   E [P 92.43 R 90.26 F1 91.33]   EC [P 90.43 R 88.30 F1 89.36]
+
+51.train    L 0.032    acc [B 95.43 E 95.80 O 99.76 T 99.10]   B [P 98.78 R 96.88 F1 97.82]   E [P 96.81 R 95.76 F1 96.28]   EC [P 95.71 R 94.67 F1 95.19]
+51.val      L 0.095    acc [B 90.26 E 88.42 O 99.48 T 97.63]   B [P 96.61 R 93.39 F1 94.97]   E [P 91.91 R 90.61 F1 91.25]   EC [P 89.88 R 88.61 F1 89.24]
+
+52.train    L 0.032    acc [B 94.97 E 95.36 O 99.79 T 99.05]   B [P 98.93 R 96.40 F1 97.64]   E [P 96.90 R 95.27 F1 96.08]   EC [P 95.79 R 94.19 F1 94.98]
+52.val      L 0.097    acc [B 90.12 E 88.28 O 99.55 T 97.66]   B [P 96.80 R 93.03 F1 94.88]   E [P 92.50 R 90.29 F1 91.38]   EC [P 90.64 R 88.47 F1 89.54]
+
+53.train    L 0.031    acc [B 95.06 E 95.44 O 99.82 T 99.09]   B [P 98.98 R 96.49 F1 97.72]   E [P 97.02 R 95.35 F1 96.18]   EC [P 95.96 R 94.31 F1 95.13]
+53.val      L 0.097    acc [B 89.72 E 87.90 O 99.59 T 97.63]   B [P 96.84 R 92.91 F1 94.84]   E [P 92.77 R 90.42 F1 91.58]   EC [P 90.66 R 88.37 F1 89.50]
+
+54.train    L 0.031    acc [B 94.97 E 95.41 O 99.82 T 99.08]   B [P 99.03 R 96.39 F1 97.69]   E [P 97.05 R 95.28 F1 96.16]   EC [P 96.00 R 94.25 F1 95.11]
+54.val      L 0.098    acc [B 89.77 E 87.76 O 99.58 T 97.60]   B [P 96.82 R 92.86 F1 94.80]   E [P 92.40 R 90.07 F1 91.22]   EC [P 90.37 R 88.08 F1 89.21]
+
+55.train    L 0.031    acc [B 95.20 E 95.63 O 99.81 T 99.11]   B [P 99.00 R 96.59 F1 97.78]   E [P 97.08 R 95.48 F1 96.28]   EC [P 96.06 R 94.48 F1 95.27]
+55.val      L 0.096    acc [B 89.94 E 88.12 O 99.53 T 97.62]   B [P 96.68 R 92.98 F1 94.79]   E [P 92.41 R 90.34 F1 91.36]   EC [P 90.34 R 88.32 F1 89.32]
+
+56.train    L 0.031    acc [B 95.37 E 95.80 O 99.79 T 99.12]   B [P 98.91 R 96.76 F1 97.82]   E [P 96.99 R 95.69 F1 96.34]   EC [P 95.98 R 94.69 F1 95.33]
+56.val      L 0.096    acc [B 90.10 E 88.23 O 99.51 T 97.62]   B [P 96.53 R 93.15 F1 94.81]   E [P 92.43 R 90.58 F1 91.49]   EC [P 90.38 R 88.57 F1 89.47]
+
+57.train    L 0.030    acc [B 95.26 E 95.70 O 99.80 T 99.12]   B [P 99.01 R 96.60 F1 97.79]   E [P 97.11 R 95.53 F1 96.31]   EC [P 96.10 R 94.54 F1 95.31]
+57.val      L 0.096    acc [B 90.15 E 88.33 O 99.53 T 97.65]   B [P 96.65 R 93.15 F1 94.87]   E [P 92.40 R 90.59 F1 91.49]   EC [P 90.41 R 88.64 F1 89.51]
+
+58.train    L 0.030    acc [B 95.36 E 95.81 O 99.80 T 99.13]   B [P 98.93 R 96.70 F1 97.80]   E [P 97.13 R 95.67 F1 96.39]   EC [P 96.10 R 94.66 F1 95.38]
+58.val      L 0.095    acc [B 90.15 E 88.42 O 99.52 T 97.66]   B [P 96.75 R 93.18 F1 94.93]   E [P 92.29 R 90.61 F1 91.44]   EC [P 90.32 R 88.67 F1 89.49]
+
+59.train    L 0.030    acc [B 95.12 E 95.48 O 99.83 T 99.11]   B [P 99.03 R 96.40 F1 97.70]   E [P 97.19 R 95.27 F1 96.22]   EC [P 96.28 R 94.37 F1 95.31]
+59.val      L 0.098    acc [B 90.19 E 88.04 O 99.60 T 97.67]   B [P 97.07 R 93.05 F1 95.02]   E [P 93.05 R 90.31 F1 91.66]   EC [P 91.19 R 88.51 F1 89.83]
+
+60.train    L 0.029    acc [B 95.54 E 96.03 O 99.78 T 99.15]   B [P 98.93 R 96.86 F1 97.88]   E [P 97.01 R 95.81 F1 96.41]   EC [P 96.04 R 94.86 F1 95.45]
+60.val      L 0.094    acc [B 90.29 E 88.63 O 99.51 T 97.69]   B [P 96.89 R 93.23 F1 95.03]   E [P 92.41 R 90.79 F1 91.60]   EC [P 90.39 R 88.81 F1 89.59]
+
+61.train    L 0.029    acc [B 95.41 E 95.91 O 99.80 T 99.15]   B [P 98.99 R 96.71 F1 97.84]   E [P 97.13 R 95.71 F1 96.42]   EC [P 96.16 R 94.75 F1 95.45]
+61.val      L 0.097    acc [B 90.19 E 88.39 O 99.51 T 97.65]   B [P 96.81 R 93.05 F1 94.89]   E [P 92.32 R 90.46 F1 91.38]   EC [P 90.43 R 88.61 F1 89.51]
+
+62.train    L 0.029    acc [B 95.46 E 95.84 O 99.81 T 99.14]   B [P 98.94 R 96.77 F1 97.84]   E [P 97.14 R 95.72 F1 96.42]   EC [P 96.17 R 94.77 F1 95.47]
+62.val      L 0.097    acc [B 90.21 E 88.21 O 99.55 T 97.65]   B [P 96.85 R 93.12 F1 94.95]   E [P 92.54 R 90.44 F1 91.48]   EC [P 90.49 R 88.44 F1 89.45]
+
+63.train    L 0.029    acc [B 95.48 E 95.98 O 99.82 T 99.18]   B [P 99.03 R 96.84 F1 97.92]   E [P 97.25 R 95.86 F1 96.55]   EC [P 96.25 R 94.87 F1 95.56]
+63.val      L 0.096    acc [B 90.05 E 88.12 O 99.55 T 97.63]   B [P 97.00 R 93.08 F1 95.00]   E [P 92.47 R 90.46 F1 91.45]   EC [P 90.50 R 88.54 F1 89.51]
+
+64.train    L 0.029    acc [B 95.53 E 96.13 O 99.78 T 99.17]   B [P 99.02 R 96.78 F1 97.89]   E [P 97.12 R 95.78 F1 96.45]   EC [P 96.19 R 94.87 F1 95.52]
+64.val      L 0.093    acc [B 90.19 E 88.69 O 99.48 T 97.67]   B [P 97.00 R 93.12 F1 95.02]   E [P 92.10 R 90.46 F1 91.27]   EC [P 90.18 R 88.57 F1 89.37]
+
+65.train    L 0.028    acc [B 95.76 E 96.26 O 99.80 T 99.21]   B [P 99.04 R 96.97 F1 98.00]   E [P 97.29 R 96.04 F1 96.66]   EC [P 96.37 R 95.13 F1 95.74]
+65.val      L 0.094    acc [B 90.41 E 88.63 O 99.50 T 97.68]   B [P 96.80 R 93.27 F1 95.00]   E [P 92.29 R 90.63 F1 91.45]   EC [P 90.37 R 88.74 F1 89.55]
+
+66.train    L 0.028    acc [B 95.44 E 95.97 O 99.82 T 99.17]   B [P 99.05 R 96.64 F1 97.83]   E [P 97.37 R 95.73 F1 96.54]   EC [P 96.46 R 94.83 F1 95.64]
+66.val      L 0.098    acc [B 89.94 E 88.11 O 99.57 T 97.65]   B [P 96.89 R 92.85 F1 94.83]   E [P 92.98 R 90.44 F1 91.69]   EC [P 90.99 R 88.51 F1 89.73]
+
+67.train    L 0.028    acc [B 95.58 E 96.07 O 99.82 T 99.20]   B [P 99.07 R 96.86 F1 97.95]   E [P 97.30 R 95.84 F1 96.57]   EC [P 96.35 R 94.91 F1 95.62]
+67.val      L 0.096    acc [B 89.90 E 88.06 O 99.57 T 97.64]   B [P 96.90 R 92.97 F1 94.89]   E [P 92.46 R 90.39 F1 91.41]   EC [P 90.51 R 88.49 F1 89.49]
+
+68.train    L 0.028    acc [B 95.64 E 96.05 O 99.85 T 99.21]   B [P 99.09 R 96.91 F1 97.98]   E [P 97.39 R 95.92 F1 96.65]   EC [P 96.46 R 95.00 F1 95.72]
+68.val      L 0.098    acc [B 89.97 E 87.84 O 99.60 T 97.63]   B [P 96.90 R 93.03 F1 94.93]   E [P 92.62 R 90.36 F1 91.47]   EC [P 90.65 R 88.44 F1 89.53]
+
+69.train    L 0.028    acc [B 95.82 E 96.25 O 99.81 T 99.22]   B [P 98.99 R 97.08 F1 98.03]   E [P 97.33 R 96.10 F1 96.71]   EC [P 96.38 R 95.16 F1 95.77]
+69.val      L 0.097    acc [B 90.14 E 88.31 O 99.50 T 97.63]   B [P 96.65 R 93.18 F1 94.88]   E [P 92.18 R 90.44 F1 91.30]   EC [P 90.19 R 88.49 F1 89.33]
+
+70.train    L 0.027    acc [B 95.63 E 96.01 O 99.85 T 99.21]   B [P 99.12 R 96.84 F1 97.96]   E [P 97.42 R 95.88 F1 96.65]   EC [P 96.52 R 95.00 F1 95.75]
+70.val      L 0.100    acc [B 90.02 E 87.83 O 99.59 T 97.62]   B [P 96.83 R 92.93 F1 94.84]   E [P 92.46 R 90.22 F1 91.33]   EC [P 90.53 R 88.34 F1 89.42]
+
+71.train    L 0.027    acc [B 95.75 E 96.21 O 99.82 T 99.22]   B [P 99.02 R 96.97 F1 97.98]   E [P 97.34 R 96.04 F1 96.69]   EC [P 96.43 R 95.14 F1 95.78]
+71.val      L 0.098    acc [B 90.02 E 87.98 O 99.54 T 97.61]   B [P 96.81 R 93.03 F1 94.88]   E [P 92.40 R 90.39 F1 91.38]   EC [P 90.40 R 88.44 F1 89.41]
+
+72.train    L 0.027    acc [B 95.91 E 96.38 O 99.81 T 99.24]   B [P 98.99 R 97.14 F1 98.06]   E [P 97.34 R 96.18 F1 96.75]   EC [P 96.42 R 95.27 F1 95.84]
+72.val      L 0.098    acc [B 90.22 E 88.24 O 99.54 T 97.65]   B [P 96.73 R 93.18 F1 94.93]   E [P 92.33 R 90.51 F1 91.41]   EC [P 90.39 R 88.61 F1 89.49]
+
+73.train    L 0.027    acc [B 95.68 E 96.15 O 99.83 T 99.22]   B [P 99.06 R 96.87 F1 97.96]   E [P 97.35 R 95.88 F1 96.61]   EC [P 96.46 R 95.01 F1 95.73]
+73.val      L 0.099    acc [B 89.85 E 87.84 O 99.57 T 97.61]   B [P 96.79 R 92.91 F1 94.81]   E [P 92.24 R 90.22 F1 91.22]   EC [P 90.21 R 88.24 F1 89.21]
+
+74.train    L 0.027    acc [B 95.88 E 96.47 O 99.80 T 99.25]   B [P 99.07 R 97.04 F1 98.04]   E [P 97.41 R 96.11 F1 96.75]   EC [P 96.55 R 95.26 F1 95.90]
+74.val      L 0.095    acc [B 90.17 E 88.54 O 99.50 T 97.66]   B [P 96.80 R 93.12 F1 94.92]   E [P 92.46 R 90.58 F1 91.51]   EC [P 90.50 R 88.66 F1 89.57]
+
+75.train    L 0.027    acc [B 95.77 E 96.23 O 99.83 T 99.23]   B [P 99.08 R 96.99 F1 98.02]   E [P 97.37 R 96.02 F1 96.69]   EC [P 96.45 R 95.11 F1 95.78]
+75.val      L 0.099    acc [B 90.05 E 88.09 O 99.56 T 97.63]   B [P 96.83 R 93.08 F1 94.92]   E [P 92.59 R 90.41 F1 91.49]   EC [P 90.50 R 88.37 F1 89.42]
+
+76.train    L 0.026    acc [B 96.12 E 96.59 O 99.80 T 99.26]   B [P 98.95 R 97.38 F1 98.16]   E [P 97.39 R 96.46 F1 96.93]   EC [P 96.42 R 95.50 F1 95.96]
+76.val      L 0.096    acc [B 90.49 E 88.60 O 99.48 T 97.66]   B [P 96.56 R 93.54 F1 95.02]   E [P 92.11 R 90.79 F1 91.45]   EC [P 90.05 R 88.76 F1 89.40]
+
+77.train    L 0.027    acc [B 96.10 E 96.58 O 99.79 T 99.25]   B [P 98.94 R 97.36 F1 98.14]   E [P 97.28 R 96.41 F1 96.84]   EC [P 96.33 R 95.47 F1 95.90]
+77.val      L 0.097    acc [B 90.53 E 88.75 O 99.46 T 97.66]   B [P 96.54 R 93.49 F1 94.99]   E [P 92.14 R 90.93 F1 91.53]   EC [P 90.06 R 88.88 F1 89.46]
+
+78.train    L 0.026    acc [B 95.97 E 96.47 O 99.83 T 99.27]   B [P 99.12 R 97.11 F1 98.11]   E [P 97.47 R 96.17 F1 96.82]   EC [P 96.62 R 95.34 F1 95.97]
+78.val      L 0.096    acc [B 90.32 E 88.53 O 99.55 T 97.71]   B [P 96.85 R 93.22 F1 95.00]   E [P 92.17 R 90.53 F1 91.34]   EC [P 90.27 R 88.66 F1 89.45]
+
+79.train    L 0.026    acc [B 95.98 E 96.46 O 99.84 T 99.28]   B [P 99.12 R 97.19 F1 98.14]   E [P 97.50 R 96.22 F1 96.86]   EC [P 96.60 R 95.33 F1 95.96]
+79.val      L 0.097    acc [B 90.12 E 88.11 O 99.57 T 97.65]   B [P 96.80 R 93.13 F1 94.93]   E [P 92.33 R 90.53 F1 91.42]   EC [P 90.37 R 88.61 F1 89.48]
+
+80.train    L 0.025    acc [B 96.06 E 96.58 O 99.83 T 99.28]   B [P 99.10 R 97.24 F1 98.16]   E [P 97.54 R 96.37 F1 96.95]   EC [P 96.65 R 95.48 F1 96.07]
+80.val      L 0.096    acc [B 90.24 E 88.46 O 99.54 T 97.69]   B [P 96.87 R 93.18 F1 94.99]   E [P 92.46 R 90.76 F1 91.60]   EC [P 90.50 R 88.84 F1 89.66]
+
+81.train    L 0.025    acc [B 96.10 E 96.63 O 99.83 T 99.29]   B [P 99.12 R 97.27 F1 98.19]   E [P 97.69 R 96.45 F1 97.07]   EC [P 96.78 R 95.54 F1 96.16]
+81.val      L 0.096    acc [B 90.32 E 88.49 O 99.52 T 97.67]   B [P 96.69 R 93.29 F1 94.96]   E [P 92.34 R 90.66 F1 91.49]   EC [P 90.28 R 88.64 F1 89.45]
+
+82.train    L 0.025    acc [B 96.14 E 96.73 O 99.82 T 99.30]   B [P 99.10 R 97.31 F1 98.20]   E [P 97.62 R 96.50 F1 97.06]   EC [P 96.72 R 95.62 F1 96.17]
+82.val      L 0.096    acc [B 90.26 E 88.41 O 99.48 T 97.63]   B [P 96.65 R 93.25 F1 94.92]   E [P 91.92 R 90.42 F1 91.17]   EC [P 89.96 R 88.49 F1 89.22]
+
+83.train    L 0.025    acc [B 96.08 E 96.61 O 99.84 T 99.30]   B [P 99.15 R 97.25 F1 98.19]   E [P 97.69 R 96.41 F1 97.05]   EC [P 96.82 R 95.55 F1 96.18]
+83.val      L 0.097    acc [B 90.36 E 88.38 O 99.53 T 97.67]   B [P 96.72 R 93.27 F1 94.96]   E [P 92.22 R 90.54 F1 91.37]   EC [P 90.33 R 88.69 F1 89.50]
+
+84.train    L 0.025    acc [B 95.97 E 96.55 O 99.85 T 99.30]   B [P 99.18 R 97.13 F1 98.14]   E [P 97.75 R 96.32 F1 97.03]   EC [P 96.87 R 95.46 F1 96.16]
+84.val      L 0.098    acc [B 90.09 E 88.20 O 99.56 T 97.66]   B [P 96.85 R 93.13 F1 94.96]   E [P 92.42 R 90.47 F1 91.44]   EC [P 90.41 R 88.51 F1 89.45]
+
+85.train    L 0.025    acc [B 96.03 E 96.64 O 99.83 T 99.30]   B [P 99.16 R 97.14 F1 98.14]   E [P 97.72 R 96.33 F1 97.02]   EC [P 96.88 R 95.51 F1 96.19]
+85.val      L 0.096    acc [B 90.02 E 88.28 O 99.52 T 97.64]   B [P 96.75 R 93.05 F1 94.86]   E [P 92.22 R 90.42 F1 91.32]   EC [P 90.35 R 88.59 F1 89.46]
+
+86.train    L 0.025    acc [B 96.11 E 96.71 O 99.83 T 99.31]   B [P 99.15 R 97.23 F1 98.18]   E [P 97.77 R 96.50 F1 97.13]   EC [P 96.87 R 95.61 F1 96.23]
+86.val      L 0.098    acc [B 90.15 E 88.33 O 99.53 T 97.66]   B [P 96.86 R 93.02 F1 94.90]   E [P 92.38 R 90.41 F1 91.38]   EC [P 90.47 R 88.54 F1 89.50]
+
+87.train    L 0.024    acc [B 96.30 E 96.77 O 99.84 T 99.33]   B [P 99.10 R 97.44 F1 98.26]   E [P 97.69 R 96.62 F1 97.15]   EC [P 96.82 R 95.75 F1 96.28]
+87.val      L 0.098    acc [B 90.31 E 88.34 O 99.52 T 97.65]   B [P 96.63 R 93.23 F1 94.90]   E [P 92.19 R 90.58 F1 91.38]   EC [P 90.30 R 88.72 F1 89.51]
+
+88.train    L 0.024    acc [B 96.02 E 96.59 O 99.85 T 99.30]   B [P 99.20 R 97.16 F1 98.17]   E [P 97.72 R 96.33 F1 97.02]   EC [P 96.85 R 95.47 F1 96.16]
+88.val      L 0.098    acc [B 90.00 E 88.07 O 99.56 T 97.64]   B [P 96.93 R 93.03 F1 94.94]   E [P 92.34 R 90.29 F1 91.30]   EC [P 90.34 R 88.34 F1 89.33]
+
+89.train    L 0.024    acc [B 96.29 E 96.85 O 99.82 T 99.32]   B [P 99.10 R 97.43 F1 98.26]   E [P 97.67 R 96.66 F1 97.16]   EC [P 96.79 R 95.78 F1 96.28]
+89.val      L 0.097    acc [B 90.24 E 88.42 O 99.51 T 97.65]   B [P 96.80 R 93.20 F1 94.97]   E [P 92.36 R 90.54 F1 91.44]   EC [P 90.39 R 88.61 F1 89.49]
+
+90.train    L 0.024    acc [B 96.28 E 96.74 O 99.86 T 99.34]   B [P 99.16 R 97.42 F1 98.28]   E [P 97.76 R 96.60 F1 97.18]   EC [P 96.91 R 95.76 F1 96.33]
+90.val      L 0.098    acc [B 90.41 E 88.28 O 99.59 T 97.70]   B [P 96.89 R 93.23 F1 95.03]   E [P 92.62 R 90.63 F1 91.61]   EC [P 90.78 R 88.83 F1 89.79]
+
+91.train    L 0.024    acc [B 96.26 E 96.80 O 99.83 T 99.33]   B [P 99.13 R 97.40 F1 98.25]   E [P 97.69 R 96.56 F1 97.12]   EC [P 96.84 R 95.72 F1 96.28]
+91.val      L 0.097    acc [B 90.31 E 88.48 O 99.54 T 97.69]   B [P 96.79 R 93.25 F1 94.99]   E [P 92.25 R 90.56 F1 91.40]   EC [P 90.35 R 88.69 F1 89.51]
+
+92.train    L 0.024    acc [B 96.25 E 96.72 O 99.85 T 99.32]   B [P 99.12 R 97.36 F1 98.23]   E [P 97.73 R 96.53 F1 97.13]   EC [P 96.88 R 95.68 F1 96.28]
+92.val      L 0.098    acc [B 90.36 E 88.47 O 99.55 T 97.70]   B [P 96.75 R 93.27 F1 94.98]   E [P 92.48 R 90.61 F1 91.53]   EC [P 90.55 R 88.72 F1 89.63]
+
+93.train    L 0.024    acc [B 96.29 E 96.78 O 99.86 T 99.35]   B [P 99.22 R 97.38 F1 98.29]   E [P 97.88 R 96.64 F1 97.25]   EC [P 97.02 R 95.79 F1 96.40]
+93.val      L 0.099    acc [B 90.24 E 88.21 O 99.56 T 97.66]   B [P 96.78 R 93.18 F1 94.95]   E [P 92.42 R 90.46 F1 91.43]   EC [P 90.53 R 88.61 F1 89.56]
+
+94.train    L 0.024    acc [B 96.17 E 96.74 O 99.86 T 99.34]   B [P 99.27 R 97.24 F1 98.24]   E [P 97.94 R 96.52 F1 97.23]   EC [P 97.10 R 95.70 F1 96.40]
+94.val      L 0.099    acc [B 90.12 E 88.26 O 99.58 T 97.68]   B [P 96.95 R 93.07 F1 94.97]   E [P 92.50 R 90.47 F1 91.48]   EC [P 90.54 R 88.56 F1 89.54]
+
+95.train    L 0.023    acc [B 96.28 E 96.82 O 99.86 T 99.35]   B [P 99.21 R 97.33 F1 98.26]   E [P 97.95 R 96.62 F1 97.28]   EC [P 97.15 R 95.82 F1 96.48]
+95.val      L 0.098    acc [B 90.31 E 88.34 O 99.55 T 97.68]   B [P 96.77 R 93.27 F1 94.99]   E [P 92.31 R 90.44 F1 91.36]   EC [P 90.40 R 88.57 F1 89.48]
+
+96.train    L 0.023    acc [B 96.48 E 96.97 O 99.84 T 99.36]   B [P 99.11 R 97.57 F1 98.34]   E [P 97.81 R 96.85 F1 97.33]   EC [P 96.97 R 96.01 F1 96.49]
+96.val      L 0.098    acc [B 90.39 E 88.52 O 99.53 T 97.68]   B [P 96.64 R 93.35 F1 94.97]   E [P 92.42 R 90.71 F1 91.56]   EC [P 90.45 R 88.77 F1 89.60]
+
+97.train    L 0.023    acc [B 96.51 E 97.00 O 99.84 T 99.37]   B [P 99.10 R 97.59 F1 98.34]   E [P 97.82 R 96.86 F1 97.34]   EC [P 97.00 R 96.04 F1 96.51]
+97.val      L 0.098    acc [B 90.56 E 88.60 O 99.53 T 97.70]   B [P 96.67 R 93.39 F1 95.00]   E [P 92.42 R 90.69 F1 91.55]   EC [P 90.64 R 88.94 F1 89.78]
+
+98.train    L 0.023    acc [B 96.25 E 96.82 O 99.86 T 99.36]   B [P 99.24 R 97.31 F1 98.27]   E [P 97.87 R 96.57 F1 97.21]   EC [P 97.06 R 95.77 F1 96.41]
+98.val      L 0.099    acc [B 90.24 E 88.18 O 99.59 T 97.68]   B [P 96.95 R 93.13 F1 95.00]   E [P 92.47 R 90.46 F1 91.45]   EC [P 90.56 R 88.59 F1 89.56]
+
+99.train    L 0.023    acc [B 96.35 E 96.93 O 99.85 T 99.36]   B [P 99.20 R 97.41 F1 98.30]   E [P 97.92 R 96.74 F1 97.32]   EC [P 97.10 R 95.92 F1 96.51]
+99.val      L 0.098    acc [B 90.26 E 88.31 O 99.52 T 97.64]   B [P 96.60 R 93.22 F1 94.88]   E [P 91.97 R 90.41 F1 91.18]   EC [P 90.09 R 88.56 F1 89.32]
+
+100.train    L 0.023   acc [B 96.48 E 96.99 O 99.85 T 99.37]   B [P 99.14 R 97.52 F1 98.32]   E [P 97.86 R 96.82 F1 97.34]   EC [P 97.06 R 96.02 F1 96.54]
+100.val      L 0.099   acc [B 90.44 E 88.41 O 99.54 T 97.68]   B [P 96.64 R 93.42 F1 95.00]   E [P 92.14 R 90.59 F1 91.36]   EC [P 90.24 R 88.72 F1 89.48]
+
+
+Best epoch: 59
+Best metric: 89.83
+
+Confusion matrix:
+
+[[ 1750    11    20     2     9     1     1     1    42]
+ [   15   725    12    10     0     2     1     0   157]
+ [   38     9  1101    33     0     0    15     0   145]
+ [   13     4     3  1783     0     0     0     8    31]
+ [    9     1     0     0   209     3     6     1    28]
+ [    2    18     2     2     1   204     2     4   111]
+ [   15     2    15     0     7     4   536    16   156]
+ [    0     0     0    12     0     0     1  1266    28]
+ [   22    12    31    24    11    17    50     3 42589]]
+
+Per-class summary:
+
+LOC             [TP 1738 FP 135 FN 99]    [P 92.79 R 94.61 F1 93.69]
+MISC            [TP 699 FP 96 FN 223]     [P 87.92 R 75.81 F1 81.42]
+ORG             [TP 1056 FP 167 FN 285]   [P 86.35 R 78.75 F1 82.37]
+PER             [TP 1766 FP 110 FN 76]    [P 94.14 R 95.87 F1 95.00]
+
+Predicted sentence samples:
+
+1. CRICKET_O -_O LEICESTERSHIRE_S-ORG TAKE_O OVER_O AT_O TOP_O AFTER_O INNINGS_O VICTORY_O ._O
+2. LONDON_S-LOC 1996-08-30_O
+3. West_B-MISC Indian_E-MISC all-rounder_O Phil_B-PER Simmons_E-PER took_O four_O for_O 38_O on_O Friday_O as_O Leicestershire_S-ORG beat_O Somerset_S-ORG by_O an_O innings_O and_O 39_O runs_O in_O two_O days_O to_O take_O over_O at_O the_O head_O of_O the_O county_O championship_O ._O
+4. Their_O stay_O on_O top_O ,_O though_O ,_O may_O be_O short-lived_O as_O title_O rivals_O Essex_S-ORG ,_O Derbyshire_S-ORG and_O Surrey_S-ORG all_O closed_O in_O on_O victory_O while_O Kent_S-ORG made_O up_O for_O lost_O time_O in_O their_O rain-affected_O match_O against_O Nottinghamshire_S-ORG ._O
+5. After_O bowling_O Somerset_S-ORG out_O for_O 83_O on_O the_O opening_O morning_O at_O Grace_B-LOC Road_E-LOC ,_O Leicestershire_S-ORG extended_O their_O first_O innings_O by_O 94_O runs_O before_O being_O bowled_O out_O for_O 296_O with_O England_S-LOC discard_O Andy_B-PER Caddick_E-PER taking_O three_O for_O 83_O ._O
+6. Trailing_O by_O 213_O ,_O Somerset_S-ORG got_O a_O solid_O start_O to_O their_O second_O innings_O before_O Simmons_S-PER stepped_O in_O to_O bundle_O them_O out_O for_O 174_O ._O
+7. Essex_S-ORG ,_O however_O ,_O look_O certain_O to_O regain_O their_O top_O spot_O after_O Nasser_B-PER Hussain_E-PER and_O Peter_S-PER|B-PER Such_O|E-PER gave_O them_O a_O firm_O grip_O on_O their_O match_O against_O Yorkshire_S-ORG at_O Headingley_S-LOC ._O
+8. Hussain_S-PER ,_O considered_O surplus_O to_O England_S-LOC 's_O one-day_O requirements_O ,_O struck_O 158_O ,_O his_O first_O championship_O century_O of_O the_O season_O ,_O as_O Essex_S-ORG reached_O 372_O and_O took_O a_O first_O innings_O lead_O of_O 82_O ._O
+9. By_O the_O close_O Yorkshire_S-ORG had_O turned_O that_O into_O a_O 37-run_O advantage_O but_O off-spinner_O Such_O|S-PER had_O scuttled_O their_O hopes_O ,_O taking_O four_O for_O 24_O in_O 48_O balls_O and_O leaving_O them_O hanging_O on_O 119_O for_O five_O and_O praying_O for_O rain_O ._O
+10. At_O the_B-LOC|O Oval_E-LOC|S-LOC ,_O Surrey_S-ORG captain_O Chris_B-PER Lewis_E-PER ,_O another_O man_O dumped_O by_O England_S-LOC ,_O continued_O to_O silence_O his_O critics_O as_O he_O followed_O his_O four_O for_O 45_O on_O Thursday_O with_O 80_O not_O out_O on_O Friday_O in_O the_O match_O against_O Warwickshire_S-ORG ._O
+11. He_O was_O well_O backed_O by_O England_S-LOC hopeful_O Mark_B-PER Butcher_E-PER who_O made_O 70_O as_O Surrey_S-ORG closed_O on_O 429_O for_O seven_O ,_O a_O lead_O of_O 234_O ._O
+12. Derbyshire_S-ORG kept_O up_O the_O hunt_O for_O their_O first_O championship_O title_O since_O 1936_O by_O reducing_O Worcestershire_S-ORG to_O 133_O for_O five_O in_O their_O second_O innings_O ,_O still_O 100_O runs_O away_O from_O avoiding_O an_O innings_O defeat_O ._O
+13. Australian_S-MISC Tom_B-PER Moody_E-PER took_O six_O for_O 82_O but_O Chris_B-PER Adams_E-PER ,_O 123_O ,_O and_O Tim_B-PER O'Gorman_E-PER ,_O 109_O ,_O took_O Derbyshire_S-ORG to_O 471_O and_O a_O first_O innings_O lead_O of_O 233_O ._O
+14. After_O the_O frustration_O of_O seeing_O the_O opening_O day_O of_O their_O match_O badly_O affected_O by_O the_O weather_O ,_O Kent_S-PER|S-ORG stepped_O up_O a_O gear_O to_O dismiss_O Nottinghamshire_S-ORG for_O 214_O ._O
+15. They_O were_O held_O up_O by_O a_O gritty_O 84_O from_O Paul_B-PER Johnson_E-PER but_O ex-England_O|S-MISC fast_O bowler_O Martin_B-PER McCague_E-PER took_O four_O for_O 55_O ._O
+16. By_O stumps_O Kent_S-ORG had_O reached_O 108_O for_O three_O ._O
+17. CRICKET_O -_O ENGLISH_B-MISC COUNTY_I-MISC CHAMPIONSHIP_E-MISC SCORES_O ._O
+18. LONDON_S-LOC 1996-08-30_O
+19. Result_O and_O close_O of_O play_O scores_O in_O English_B-MISC|S-MISC county_O championship_O matches_O on_O Friday_O :_O
+20. Leicester_S-LOC :_O Leicestershire_S-ORG beat_O Somerset_S-ORG by_O an_O innings_O and_O 39_O runs_O ._O
+21. Somerset_S-ORG 83_O and_O 174_O (_O P._B-PER Simmons_E-PER 4-38_O )_O ,_O Leicestershire_S-ORG 296_O ._O
+22. Leicestershire_S-ORG 22_O points_O ,_O Somerset_S-ORG 4_O ._O
+23. Chester-le-Street_S-LOC :_O Glamorgan_S-ORG 259_O and_O 207_O (_O A._B-PER Dale_E-PER 69_O ,_O H._B-PER Morris_E-PER 69_O ;_O D._B-PER Blenkiron_E-PER 4-43_O )_O ,_O Durham_S-ORG 114_O (_O S._B-PER Watkin_E-PER 4-28_O )_O and_O 81-3_S-ORG|O ._O
+24. Tunbridge_B-LOC Wells_E-LOC :_O Nottinghamshire_S-ORG 214_O (_O P._B-PER Johnson_E-PER 84_O ;_O M._B-PER McCague_E-PER 4-55_O )_O ,_O Kent_S-PER|S-ORG 108-3_O ._O
+25. London_S-LOC (_O The_B-LOC Oval_E-LOC )_O :_O Warwickshire_S-ORG 195_O ,_O Surrey_S-ORG 429-7_O (_O C._B-PER Lewis_E-PER 80_O not_O out_O ,_O M._B-PER Butcher_E-PER 70_O ,_O G._B-PER Kersey_E-PER 63_O ,_O J._B-PER Ratcliffe_E-PER 63_O ,_O D._B-PER Bicknell_E-PER 55_O )_O ._O
+26. Hove_S-LOC :_O Sussex_S-ORG 363_O (_O W._B-PER Athey_E-PER 111_O ,_O V._B-PER Drakes_E-PER 52_O ;_O I._B-PER Austin_E-PER 4-37_O )_O ,_O Lancashire_S-ORG 197-8_O (_O W._B-PER Hegg_E-PER 54_O )_O
+27. Portsmouth_S-LOC :_O Middlesex_S-ORG 199_O and_O 426_O (_O J._B-PER Pooley_E-PER 111_O ,_O M._B-PER Ramprakash_E-PER 108_O ,_O M._B-PER Gatting_E-PER 83_O )_O ,_O Hampshire_S-ORG 232_O and_O 109-5_S-PER|O ._O
+28. Chesterfield_S-LOC :_O Worcestershire_S-ORG 238_O and_O 133-5_O ,_O Derbyshire_S-ORG 471_O (_O J._B-PER Adams_E-PER 123_O ,_O T.O'Gorman_S-PER 109_O not_O out_O ,_O K._B-PER Barnett_E-PER 87_O ;_O T._B-PER Moody_E-PER 6-82_O )_O
+29. Bristol_S-LOC :_O Gloucestershire_S-ORG 183_O and_O 185-6_O (_O J._B-PER Russell_E-PER 56_O not_O out_O )_O ,_O Northamptonshire_S-ORG 190_O (_O K._B-PER Curran_E-PER 52_O ;_O A._B-PER Smith_E-PER 5-68_O )_O ._O
+30. CRICKET_O -_O 1997_O ASHES_O|S-MISC INTINERARY_O ._O
+31. LONDON_S-LOC 1996-08-30_O
+32. Australia_S-LOC will_O defend_O the_O Ashes_O|S-MISC in_O
+33. a_O six-test_O series_O against_O England_S-LOC during_O a_O four-month_O tour_O
+34. starting_O on_O May_O 13_O next_O year_O ,_O the_O Test_O|B-ORG and_O|I-ORG County_B-ORG|I-ORG Cricket_I-ORG Board_E-ORG
+35. said_O on_O Friday_O ._O
+36. Australia_S-LOC will_O also_O play_O three_O one-day_O internationals_O and_O
+37. four_O one-day_O warm-up_O matches_O at_O the_O start_O of_O the_O tour_O ._O
+38. The_O tourists_O will_O play_O nine_O first-class_O matches_O against_O
+39. English_S-MISC county_O sides_O and_O another_O against_O British_S-MISC|B-ORG Universities_O|E-ORG ,_O
+40. as_O well_O as_O one-day_O matches_O against_O the_O Minor_O|B-ORG Counties_O|E-ORG and_O
+41. Scotland_S-LOC ._O
+42. Tour_O itinerary_O :_O
+43. May_O
+44. May_O 13_O Arrive_O in_O London_S-LOC
+45. May_O 14_O Practice_O at_O Lord_O|B-LOC 's_O|E-LOC
+46. May_O 15_O v_O Duke_O|B-ORG of_O|I-ORG Norfolk_E-ORG|I-ORG 's_O|I-ORG XI_O|E-ORG (_O at_O Arundel_S-LOC )_O
+47. May_O 17_O v_O Northampton_S-ORG
+48. May_O 18_O v_O Worcestershire_S-ORG
+49. May_O 20_O v_O Durham_S-ORG
+50. May_O 22_O First_O one-day_O international_O (_O at_O Headingley_S-LOC ,_O
+51. Leeds_S-ORG )_O
+52. May_O 24_O Second_O one-day_O international_O (_O at_O The_B-LOC Oval_E-LOC ,_O
+53. London_S-LOC )_O
+54. May_O 25_O Third_O one-day_O international_O (_O at_O Lord_B-LOC 's_E-LOC ,_O London_S-LOC )_O
+55. May_O 27-29_O v_O Gloucestershire_S-ORG or_O Sussex_S-LOC|S-ORG or_O Surrey_S-ORG (_O three_O
+56. days_O )_O
+57. May_O 31_O -_O June_O 2_O v_O Derbyshire_S-ORG (_O three_O days_O )_O
+58. June_O
+59. June_O 5-9_O First_O test_O match_O (_O at_O Edgbaston_S-LOC ,_O Birmingham_S-LOC )_O
+60. June_O 11-13_O v_O a_O first_O class_O county_O (_O to_O be_O confirmed_O )_O
+61. June_O 14-16_O v_O Leicestershire_S-ORG (_O three_O days_O )_O
+62. June_O 19-23_O Second_O test_O (_O at_O Lord_B-LOC 's_E-LOC )_O
+63. June_O 25-27_O v_O British_S-MISC|B-ORG Universities_O|E-ORG (_O at_O Oxford_S-LOC ,_O three_O days_O )_O
+64. June_O 28-30_O v_O Hampshire_S-LOC|S-ORG (_O three_O days_O )_O
+65. July_O
+66. July_O 3-7_O Third_O test_O (_O at_O Old_B-LOC Trafford_E-LOC ,_O Manchester_S-LOC )_O
+67. July_O 9_O v_O Minor_O|B-ORG Counties_O|I-ORG XI_O|E-ORG
+68. July_O 12_O v_O Scotland_S-LOC
+69. July_O 16-18_O v_O Glamorgan_S-ORG (_O three_O days_O )_O
+70. July_O 19-21_O v_O Middlesex_S-ORG (_O three_O days_O )_O
+71. July_O 24-28_O Fourth_O test_O (_O at_O Headingley_S-LOC )_O
+72. August_O
+73. August_O 1-4_O v_O Somerset_S-ORG (_O four_O days_O )_O
+74. August_O 7-11_O Fifth_O test_O (_O at_O Trent_B-LOC Bridge_E-LOC ,_O Nottingham_S-LOC )_O
+75. August_O 16-18_O v_O Kent_S-LOC|S-ORG (_O three_O days_O )_O
+76. August_O 21-25_O Sixth_O test_O (_O at_O The_B-LOC Oval_E-LOC ,_O London_S-LOC )_O ._O
+77. SOCCER_O -_O SHEARER_S-PER NAMED_O AS_O ENGLAND_S-LOC CAPTAIN_O ._O
+78. LONDON_S-LOC 1996-08-30_O
+79. The_O world_O 's_O costliest_O footballer_O Alan_B-PER Shearer_E-PER was_O named_O as_O the_O new_B-LOC|O England_E-LOC|S-LOC captain_O on_O Friday_O ._O
+80. The_O 26-year-old_O ,_O who_O joined_O Newcastle_S-ORG for_O 15_O million_O pounds_O sterling_O (_O $_O 23.4_O million_O )_O ,_O takes_O over_O from_O Tony_B-PER Adams_E-PER ,_O who_O led_O the_O side_O during_O the_O European_S-MISC championship_O in_O June_O ,_O and_O former_O captain_O David_B-PER Platt_E-PER ._O
+81. Adams_S-PER and_O Platt_S-PER are_O both_O injured_O and_O will_O miss_O England_S-LOC 's_O opening_O World_B-MISC Cup_E-MISC qualifier_O against_O Moldova_S-LOC on_O Sunday_O ._O
+82. Shearer_S-PER takes_O the_O captaincy_O on_O a_O trial_O basis_O ,_O but_O new_O coach_O Glenn_B-PER Hoddle_E-PER said_O he_O saw_O no_O reason_O why_O the_O former_O Blackburn_S-ORG and_O Southampton_S-ORG skipper_O should_O not_O make_O the_O post_O his_O own_O ._O
+83. "_O I_O 'm_O sure_O there_O wo_O n't_O be_O a_O problem_O ,_O I_O 'm_O sure_O Alan_S-PER is_O the_O man_O for_O the_O job_O ,_O "_O Hoddle_S-PER said_O ._O
+84. "_O There_O were_O three_O or_O four_O people_O who_O could_O have_O done_O it_O but_O when_O I_O spoke_O to_O Alan_S-PER he_O was_O up_O for_O it_O and_O really_O wanted_O it_O ._O
+85. "_O In_O four_O days_O it_O 's_O very_O difficult_O to_O come_O to_O a_O 100_O percent_O conclusion_O about_O something_O like_O this_O ..._O
+86. but_O he_O knows_O how_O to_O conduct_O himself_O ,_O his_O team_O mates_O respect_O him_O and_O he_O knows_O about_O the_O team_O situation_O even_O though_O he_O plays_O up_O front_O ._O "_O
+87. Shearer_S-PER 's_O Euro_B-MISC 96_O|E-MISC striking_O partner_O Teddy_B-PER Sheringham_E-PER withdrew_O from_O the_O squad_O with_O an_O injury_O on_O Friday_O ._O
+88. He_O will_O probably_O be_O replaced_O by_O Shearer_S-PER 's_O Newcastle_S-ORG team_O mate_O Les_B-PER Ferdinand_E-PER ._O
+89. BASKETBALL_O -_O INTERNATIONAL_B-MISC|O TOURNAMENT_E-MISC|O RESULT_O ._O
+90. BELGRADE_S-LOC 1996-08-30_O
+91. Result_O in_O an_O international_O
+92. basketball_O tournament_O on_O Friday_O :_O
+93. Red_B-ORG Star_E-ORG (_O Yugoslavia_S-LOC )_O beat_O Dinamo_S-ORG (_O Russia_S-LOC )_O 92-90_O (_O halftime_O
+94. 47-47_O )_O
+95. SOCCER_O -_O ROMANIA_S-LOC BEAT_O LITHUANIA_S-LOC IN_O UNDER-21_O MATCH_O ._O
+96. BUCHAREST_S-LOC 1996-08-30_O
+97. Romania_S-LOC beat_O Lithuania_S-LOC 2-1_O (_O halftime_O 1-1_O )_O in_O their_O European_S-MISC under-21_O soccer_O match_O on_O Friday_O ._O
+98. Scorers_O :_O
+99. Romania_S-LOC -_O Cosmin_B-PER Contra_E-PER (_O 31st_O )_O ,_O Mihai_B-PER Tararache_E-PER (_O 75th_O )_O
+100. Lithuania_S-LOC -_O Danius_B-PER Gleveckas_E-PER (_O 13rd_S-LOC|O )_O
+

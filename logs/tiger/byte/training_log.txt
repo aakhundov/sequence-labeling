@@ -1,0 +1,479 @@
+data folder: data/ready/pos/tiger/
+embeddings: polyglot, de
+epochs: 100
+batch size: 8
+initial learning rate: 0.001
+l.r. decay rate: 0.05
+byte lstm units: 64
+word lstm units: 128
+byte embedding dim: 50
+byte lstm layers: 1
+word lstm layers: 1
+use byte embeddings: 1
+use word embeddings: 0
+use crf layer: 0
+
+1.train    L 0.219     acc 93.08
+1.val      L 0.220     acc 93.15
+
+2.train    L 0.157     acc 95.00
+2.val      L 0.161     acc 94.94
+
+3.train    L 0.130     acc 95.83
+3.val      L 0.137     acc 95.70
+
+4.train    L 0.114     acc 96.40
+4.val      L 0.124     acc 96.18
+
+5.train    L 0.101     acc 96.80
+5.val      L 0.109     acc 96.61
+
+6.train    L 0.094     acc 97.03
+6.val      L 0.104     acc 96.77
+
+7.train    L 0.089     acc 97.18
+7.val      L 0.102     acc 96.88
+
+8.train    L 0.084     acc 97.34
+8.val      L 0.096     acc 97.02
+
+9.train    L 0.080     acc 97.46
+9.val      L 0.095     acc 97.13
+
+10.train    L 0.077    acc 97.54
+10.val      L 0.091    acc 97.16
+
+11.train    L 0.074    acc 97.64
+11.val      L 0.089    acc 97.26
+
+12.train    L 0.072    acc 97.72
+12.val      L 0.088    acc 97.34
+
+13.train    L 0.070    acc 97.77
+13.val      L 0.086    acc 97.33
+
+14.train    L 0.068    acc 97.83
+14.val      L 0.086    acc 97.37
+
+15.train    L 0.065    acc 97.91
+15.val      L 0.083    acc 97.50
+
+16.train    L 0.064    acc 97.93
+16.val      L 0.082    acc 97.51
+
+17.train    L 0.063    acc 97.98
+17.val      L 0.082    acc 97.53
+
+18.train    L 0.063    acc 98.00
+18.val      L 0.084    acc 97.51
+
+19.train    L 0.060    acc 98.08
+19.val      L 0.080    acc 97.60
+
+20.train    L 0.059    acc 98.13
+20.val      L 0.077    acc 97.66
+
+21.train    L 0.058    acc 98.13
+21.val      L 0.079    acc 97.60
+
+22.train    L 0.058    acc 98.13
+22.val      L 0.080    acc 97.62
+
+23.train    L 0.056    acc 98.21
+23.val      L 0.078    acc 97.68
+
+24.train    L 0.056    acc 98.21
+24.val      L 0.078    acc 97.66
+
+25.train    L 0.054    acc 98.28
+25.val      L 0.077    acc 97.74
+
+26.train    L 0.053    acc 98.28
+26.val      L 0.076    acc 97.73
+
+27.train    L 0.052    acc 98.31
+27.val      L 0.076    acc 97.77
+
+28.train    L 0.052    acc 98.34
+28.val      L 0.075    acc 97.79
+
+29.train    L 0.051    acc 98.36
+29.val      L 0.074    acc 97.80
+
+30.train    L 0.050    acc 98.37
+30.val      L 0.075    acc 97.77
+
+31.train    L 0.050    acc 98.40
+31.val      L 0.073    acc 97.81
+
+32.train    L 0.049    acc 98.43
+32.val      L 0.074    acc 97.80
+
+33.train    L 0.048    acc 98.44
+33.val      L 0.074    acc 97.83
+
+34.train    L 0.048    acc 98.46
+34.val      L 0.073    acc 97.85
+
+35.train    L 0.047    acc 98.47
+35.val      L 0.073    acc 97.87
+
+36.train    L 0.047    acc 98.49
+36.val      L 0.073    acc 97.85
+
+37.train    L 0.048    acc 98.45
+37.val      L 0.076    acc 97.75
+
+38.train    L 0.046    acc 98.50
+38.val      L 0.074    acc 97.82
+
+39.train    L 0.045    acc 98.54
+39.val      L 0.073    acc 97.85
+
+40.train    L 0.045    acc 98.56
+40.val      L 0.073    acc 97.88
+
+41.train    L 0.045    acc 98.58
+41.val      L 0.072    acc 97.89
+
+42.train    L 0.044    acc 98.59
+42.val      L 0.072    acc 97.87
+
+43.train    L 0.044    acc 98.60
+43.val      L 0.071    acc 97.92
+
+44.train    L 0.043    acc 98.62
+44.val      L 0.071    acc 97.92
+
+45.train    L 0.043    acc 98.62
+45.val      L 0.070    acc 97.94
+
+46.train    L 0.043    acc 98.62
+46.val      L 0.071    acc 97.94
+
+47.train    L 0.042    acc 98.64
+47.val      L 0.070    acc 97.95
+
+48.train    L 0.042    acc 98.65
+48.val      L 0.071    acc 97.98
+
+49.train    L 0.041    acc 98.68
+49.val      L 0.070    acc 97.95
+
+50.train    L 0.041    acc 98.67
+50.val      L 0.070    acc 97.99
+
+51.train    L 0.041    acc 98.68
+51.val      L 0.070    acc 97.97
+
+52.train    L 0.041    acc 98.68
+52.val      L 0.071    acc 97.95
+
+53.train    L 0.040    acc 98.71
+53.val      L 0.071    acc 97.96
+
+54.train    L 0.040    acc 98.71
+54.val      L 0.071    acc 97.95
+
+55.train    L 0.040    acc 98.71
+55.val      L 0.070    acc 98.00
+
+56.train    L 0.039    acc 98.74
+56.val      L 0.070    acc 97.97
+
+57.train    L 0.039    acc 98.75
+57.val      L 0.070    acc 98.01
+
+58.train    L 0.039    acc 98.74
+58.val      L 0.070    acc 97.98
+
+59.train    L 0.038    acc 98.76
+59.val      L 0.069    acc 97.99
+
+60.train    L 0.038    acc 98.76
+60.val      L 0.071    acc 97.97
+
+61.train    L 0.038    acc 98.76
+61.val      L 0.071    acc 97.99
+
+62.train    L 0.038    acc 98.78
+62.val      L 0.071    acc 97.98
+
+63.train    L 0.037    acc 98.78
+63.val      L 0.069    acc 98.01
+
+64.train    L 0.037    acc 98.81
+64.val      L 0.070    acc 98.00
+
+65.train    L 0.037    acc 98.80
+65.val      L 0.068    acc 98.05
+
+66.train    L 0.037    acc 98.81
+66.val      L 0.070    acc 98.05
+
+67.train    L 0.037    acc 98.82
+67.val      L 0.069    acc 98.05
+
+68.train    L 0.036    acc 98.83
+68.val      L 0.069    acc 98.06
+
+69.train    L 0.036    acc 98.84
+69.val      L 0.069    acc 98.05
+
+70.train    L 0.036    acc 98.84
+70.val      L 0.068    acc 98.05
+
+71.train    L 0.036    acc 98.85
+71.val      L 0.069    acc 98.07
+
+72.train    L 0.036    acc 98.85
+72.val      L 0.070    acc 98.05
+
+73.train    L 0.035    acc 98.87
+73.val      L 0.069    acc 98.06
+
+74.train    L 0.035    acc 98.86
+74.val      L 0.069    acc 98.05
+
+75.train    L 0.035    acc 98.87
+75.val      L 0.070    acc 98.07
+
+76.train    L 0.035    acc 98.88
+76.val      L 0.069    acc 98.07
+
+77.train    L 0.035    acc 98.87
+77.val      L 0.070    acc 98.06
+
+78.train    L 0.034    acc 98.89
+78.val      L 0.071    acc 98.06
+
+79.train    L 0.034    acc 98.90
+79.val      L 0.069    acc 98.06
+
+80.train    L 0.034    acc 98.89
+80.val      L 0.070    acc 98.05
+
+81.train    L 0.034    acc 98.91
+81.val      L 0.069    acc 98.06
+
+82.train    L 0.034    acc 98.91
+82.val      L 0.070    acc 98.08
+
+83.train    L 0.033    acc 98.92
+83.val      L 0.069    acc 98.04
+
+84.train    L 0.033    acc 98.93
+84.val      L 0.068    acc 98.08
+
+85.train    L 0.033    acc 98.93
+85.val      L 0.069    acc 98.07
+
+86.train    L 0.033    acc 98.93
+86.val      L 0.069    acc 98.08
+
+87.train    L 0.033    acc 98.93
+87.val      L 0.069    acc 98.07
+
+88.train    L 0.033    acc 98.94
+88.val      L 0.069    acc 98.07
+
+89.train    L 0.032    acc 98.96
+89.val      L 0.067    acc 98.09
+
+90.train    L 0.033    acc 98.94
+90.val      L 0.069    acc 98.05
+
+91.train    L 0.032    acc 98.97
+91.val      L 0.068    acc 98.10
+
+92.train    L 0.032    acc 98.96
+92.val      L 0.069    acc 98.07
+
+93.train    L 0.032    acc 98.97
+93.val      L 0.069    acc 98.07
+
+94.train    L 0.032    acc 98.98
+94.val      L 0.069    acc 98.09
+
+95.train    L 0.031    acc 98.99
+95.val      L 0.069    acc 98.06
+
+96.train    L 0.031    acc 98.98
+96.val      L 0.070    acc 98.06
+
+97.train    L 0.031    acc 98.99
+97.val      L 0.068    acc 98.09
+
+98.train    L 0.031    acc 98.99
+98.val      L 0.069    acc 98.09
+
+99.train    L 0.031    acc 99.00
+99.val      L 0.069    acc 98.10
+
+100.train    L 0.031   acc 99.00
+100.val      L 0.068   acc 98.09
+
+
+Best epoch: 91
+Best metric: 98.10
+
+Confusion matrix:
+
+[[ 2445     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0  2941     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0  4207     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0  4231     1     2     0     1     0     0     1     0     1     0     0     0     0     0     4    13     0     0     0     2     4     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     4     0     0     0     1     0]
+ [    0     0     0     9  1412    25     0     1     0     0     0     2     0     0     0     0     0     0     3     8     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     6     0     3     0    54     0]
+ [    0     0     0     1    20  3182     0    12     0     0     0     0     0     0     0     2     0     0     2     1     0     0     0     1    16     0     0     0     0     0     0     2     0     0     0    10     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0]
+ [    0     0     0     0     0     0    35     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     2    13     0  6895     0     1     0     0     0     0     2     7     2     1     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0  1310     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     2     0     9     0    43     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     3     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0  8766     0     0     0     0     0     0     0     0     0     0     0     5     0     0     0     0     0     0    13     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     1     0     0     0     0     0     0     2  2089     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     3     4     0     0     0     0     1     0    15     0     0     0     0     0   152    23     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     4     0     0     0     0     0     0   210     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     3     0     2     0     0     0     0     0     0     4  1648     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     3     0     0     0     0     0     0     0     0    82     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   464     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     7     4     4     0     4     0     0     0     3     1     0     0     0     0     0  3879   490     0     1     1     1     0     0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     3]
+ [    0     0     0    17     6     1     0     2     0     0     0     3     0     0     0     0     0     0   185 16611     0     0     0     0     1     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     1     0     3     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   224     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     6     0     0     0     0     0     0     0     0     0     0     3   243     0     0     0     0     0     2     3     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     3     8     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   460     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     3     0    16     0     0     0     0     3     0     0     0     0     0     0     0     0     0     0     0     2    11   313     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   786     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   486     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    22     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   396     0     0     0     0     0     0     0     0     0     3     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0   423     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   491     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    33     0     0     0     3     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   381     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0    15     8     0     1     0     0     0     0     1     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0   492     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     1     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0   343     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    10     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     4     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    91     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     7     0     0     0     0     0     0     0     0     0    40     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   144     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1903     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   276     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    94     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   948     1     0     1     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    36     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0]
+ [    0     0     0     6     2     3     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0  3149     0     6     0     7     0]
+ [    0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2    17     0     0     0     0]
+ [    0     0     0     2     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     9     0  1311     4     8     0]
+ [    0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   128     0     0]
+ [    0     0     0     0     4     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     9     0     4     0  1426     0]
+ [    0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     3     0     0    20     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0   112]]
+
+Predicted sentence samples:
+
+1. Damit_KOUS die_ART bisherige_ADJA Obergrenze_NN der_ART EU-Eigenmittel_NN von_APPR 1,27_CARD Prozent_NN des_ART Bruttosozialprodukts_NN auch_ADV künftig_ADJD eingehalten_VVPP werden_VAINF könne_VMFIN ,_$, müßten_VMFIN Reformen_NN bei_APPR den_ART großen_ADJA Etatblöcken_NN angegangen_VVPP werden_VAINF ._$.
+2. Die_ART Agrarausgaben_NN ,_$, die_PRELS bisher_ADV rund_ADV die_ART Hälfte_NN des_ART Brüsseler_ADJA Haushalts_NN ausmachen_VVFIN ,_$, sind_VAFIN nach_APPR Ansicht_NN der_ART SPD_NE durch_APPR eine_ART Abkehr_NN vom_APPRART bisherigen_ADJA Subventionssystem_NN deutlich_ADJD zu_PTKZU reduzieren_VVINF ._$.
+3. Über_APPR neun_CARD Milliarden_NN Mark_NN jährlich_ADJD (_$( wovon_PWAV ein_ART Viertel_NN auf_APPR die_ART Bundesrepublik_NN entfällt_VVFIN )_$( lassen_VVFIN sich_PRF der_ART Partei_NN zufolge_APPO durch_APPR eine_ART ``_$( Teilliberalisierung_NN ''_$( der_ART Preise_NN einsparen_VVINF ._$.
+4. Um_KOUI extreme_ADJA Härten_NN für_APPR einzelne_ADJA Landwirte_NN zu_PTKZU mildern_VVINF ,_$, sollten_VMFIN nach_APPR ökologischen_ADJA Gesichtspunkten_NN Flächenbeihilfen_NN gezahlt_VVPP werden_VAINF ._$.
+5. Deutlich_ADJD|ADV verringern_VVINF will_VMFIN die_ART SPD_NE auch_ADV die_ART Zahl_NN der_ART Gebiete_NN ,_$, die_PRELS bislang_ADV Fördermittel_NN erhalten_VVFIN ._$.
+6. Der_ART Anteil_NN der_ART Bevölkerung_NN ,_$, der_PRELS dort_ADV lebt_VVFIN ,_$, betrage_VVFIN zur_APPRART Zeit_NN 51_CARD Prozent_NN ,_$, sagte_VVFIN Wieczorek-Zeul_NE ._$.
+7. Eine_ART sinnvolle_ADJA ``_$( Zielgröße_NN ''_$( seien_VAFIN 35_CARD Prozent_NN ._$.
+8. Für_APPR die_ART Regionen_NN ,_$, die_PRELS dann_ADV keine_PIAT Zuschüsse_NN mehr_ADV bekommen_VVFIN ,_$, solle_VMFIN es_PPER übergangsweise_ADV Darlehen_NN geben_VVINF ._$.
+9. Falls_KOUS die_ART bisherige_ADJA Brüsseler_ADJA Strukturpolitik_NN beibehalten_VVPP würde_VAFIN ,_$, müßten_VMFIN die_ART osteuropäischen_ADJA Beitrittsländer_NN -_$( nach_APPR heutigen_ADJA Regeln_NN -_$( durchschnittlich_ADJD 17_CARD Prozent_NN ihres_PPOSAT Inlandsproduktes_NN aus_APPR Mitteln_NN des_ART Strukturfonds_NN erhalten_VVINF ._$.
+10. Das_PDS sei_VAFIN ``_$( weder_KON zu_PTKZU finanzieren_VVINF noch_KON zu_PTKZU verwalten_VVINF ''_$( ._$.
+11. Die_ART EU-Kommission_NN ,_$, die_PRELS in_APPR der_ART nächsten_ADJA Woche_NN ihre_PPOSAT Stellungnahme_NN zu_APPR den_ART Anträgen_NN der_ART Kandidaten_NN vorlegen_VVINF will_VMFIN ,_$, sollte_VMFIN nach_APPR Ansicht_NN der_ART Sozialdemokraten_NN auch_ADV schon_ADV jetzt_ADV den_ART Wandel_NN bei_APPR den_ART künftigen_ADJA neuen_ADJA Mitgliedern_NN wirksamer_ADJD unterstützen_VVINF ._$.
+12. Sie_PPER schlagen_VVFIN vor_PTKVZ ,_$, bestehende_ADJA Programme_NN zu_APPR einem_ART Fonds_NN zusammenzufassen_VVIZU|VVINF ._$.
+13. Durch_APPR frühe_ADJA Hilfen_NN beim_APPRART Aufbau_NN von_APPR Verwaltungen_NN und_KON Infrastruktur_NN könnten_VMFIN die_ART Kosten_NN nach_APPR der_ART tatsächlichen_ADJA Aufnahme_NN in_APPR die_ART Europäische_ADJA Union_NN geringer_ADJD ausfallen_VVINF ._$.
+14. Tarifverträge_NN
+15. Preise_NN eilen_VVFIN Einkommen_NN voraus_PTKVZ
+16. prw_XY
+17. FRANKFURT_NE A._APPRART M._NE
+18. Die_ART Tarifabschlüsse_NN in_APPR Westdeutschland_NE blieben_VVFIN im_APPRART ersten_ADJA Halbjahr_NN noch_ADV hinter_APPR der_ART Preissteigerungsrate_NN zurück_PTKVZ ._$.
+19. Eine_ART Übersicht_NN des_ART Wirtschafts-_TRUNC und_KON Sozialwissenschaftlichen_ADJA Instituts_NN (_$( WSI_NE )_$( des_ART DGB_NE zeigt_VVFIN ,_$, daß_KOUS für_APPR 9,3_CARD Millionen_NN Beschäftigte_NN Lohn-_TRUNC und_KON Gehaltserhöhungen_NN von_APPR im_APPRART Schnitt_NN 1,5_CARD Prozent_NN vereinbart_VVPP wurden_VAFIN ._$.
+20. Demgegenüber_PROAV kletterten_VVFIN die_ART Lebenshaltungskosten_NN um_APPR 1,6_CARD Prozent_NN ._$.
+21. In_APPR den_ART neuen_ADJA Bundesländern_NN wurde_VAFIN eine_ART durchschnittliche_ADJA Anhebung_NN um_APPR 2,5_CARD Prozent_NN ausgehandelt_VVPP ._$.
+22. Eines_PIS der_ART brisantesten_ADJA sozialpolitischen_ADJA Themen_NN war_VAFIN in_APPR dieser_PDAT Runde_NN die_ART volle_ADJA Lohnfortzahlung_NN bei_APPR Krankheit_NN ._$.
+23. In_APPR rund_ADV 80_CARD Wirtschaftszweigen_NN und_KON damit_PROAV für_APPR knapp_ADV 14_CARD Millionen_NN Arbeitnehmer_NN haben_VAFIN die_ART Gewerkschaften_NN die_ART hundert_CARD Prozent_NN retten_VVINF können_VMINF|VVINF ,_$, mußten_VMFIN aber_ADV zumeist_ADV Abstriche_NN beim_APPRART Weihnachtsgeld_NN und_KON sonstigen_ADJA Sonderzahlungen_NN machen_VVINF ._$.
+24. Altersteilszeit-Regelungen_NN gab_VVFIN es_PPER in_APPR zehn_CARD Branchen_NN ._$.
+25. Ihr_PPOSAT überwiegender_ADJA Inhalt_NN :_$. Beschäftigte_NN können_VMFIN vom_APPRART 55._ADJA Lebensjahr_NN an_APPR|APZR ihre_PPOSAT Arbeitszeit_NN um_APPR die_ART Hälfte_NN reduzieren_VVINF und_KON erhalten_VVFIN noch_ADV 85_CARD Prozent_NN des_ART bisherigen_ADJA Nettoverdienstes_NN ._$.
+26. Die_ART Rentenbeiträge_NN werden_VAFIN auf_APPR 90_CARD Prozent_NN aufgestockt_VVPP ._$.
+27. BfG_NE Bank_NE|NN erneut_ADJD im_APPRART Gerede_NN
+28. Gewerkschaftsholding_NN strebt_VVFIN Verkauf_NN zum_APPRART Schuldenabbau_NN an_PTKVZ
+29. wb_XY
+30. FRANKFURT_NE A._APPRART M._NE
+31. Weiterer_ADJA Schuldenabbau_NN steht_VVFIN auch_ADV für_APPR Rolf_NE Freyberg_NE ganz_ADV oben_ADV auf_APPR der_ART Agenda_NN ._$.
+32. Der_ART neue_ADJA Chef_NN der_ART BGAG_NE will_VMFIN die_ART Gewerkschaftsholding_NN in_APPR die_ART Lage_NN versetzen_VVINF ,_$, ihr_PPOSAT Kapital_NN ``_$( angemessen_ADJD und_KON nachhaltig_ADJD zu_PTKZU verzinsen_VVINF ''_$( ._$.
+33. Für_APPR die_ART weitere_ADJA Zukunft_NN soll_VMFIN dazu_PROAV insbesondere_ADV eine_ART ``_$( Neuorientierung_NN ''_$( bei_APPR der_ART BfG_NE Bank_NN beitragen_VVINF ,_$, an_APPR der_PRELS die_ART Dachgesellschaft_NN noch_ADV knapp_ADV 25_CARD Prozent_NN hält_VVFIN ._$.
+34. Den_ART Substanzwert_NN des_ART einst_ADV reinrassigen_ADJA Gewerkschaftsinstituts_NN beziffert_VVFIN Freyberg_NE auf_APPR den_ART stolzen_ADJA Betrag_NN von_APPR vier_CARD Milliarden_NN Mark_NN ._$.
+35. ``_$( Wenn_KOUS wir_PPER dafür_PROAV verkaufen_VVINF könnten_VMFIN ,_$, wären_VAFIN alle_PIAT Aktionäre_NN zufrieden_ADJD ._$. ''_$(
+36. Dazu_PROAV zählen_VVFIN insbesondere_ADV der_ART schwer_ADJD angeschlagene_ADJA Crédit_NE Lyonnais_NE (_$( CL_NE )_$( sowie_KON der_ART Aachener_ADJA Versicherungsverbund_NN AMB_NE ._$.
+37. Freyberg_NE weiß_VVFIN freilich_ADV ,_$, daß_KOUS der_ART Ertragswert_NN ,_$, auf_APPR den_PRELS ein_ART potentieller_ADJA Käufer_NN schaut_VVFIN ,_$, erheblich_ADJD darunter_PROAV liegt_VVFIN ._$.
+38. Doch_KON habe_VAFIN die_ART BfG_NE ``_$( intaktes_ADJA Eigenkapital_NN ''_$( von_APPR 2,5_CARD Milliarden_NN ,_$, zudem_PROAV schlummerten_VVFIN hohe_ADJA stille_ADJA Reserven_NN in_APPR ihren_PPOSAT Büchern_NN ._$.
+39. Verhandelt_VVPP werde_VAFIN aber_ADV noch_ADV nicht_PTKNEG ,_$, bisher_ADV gebe_VVFIN es_PPER nur_ADV ``_$( Überlegungen_NN und_KON Ideen_NN ''_$( ._$.
+40. Freyberg_NE glaubt_VVFIN daran_PROAV ,_$, daß_KOUS eine_ART Neuordnung_NN bei_APPR der_ART BfG_NE ``_$( im_APPRART Strom_NN ''_$( der_ART sich_PRF abzeichnenden_ADJA Konzentration_NN der_ART hiesigen_ADJA Kreditwirtschaft_NN ``_$( mitschwimmt_VVFIN ''_$( ._$.
+41. Der_ART Manager_NN kann_VMFIN sich_PRF einen_ART nationalen_ADJA oder_KON europäischen_ADJA Interessenten_NN durchaus_ADV vorstellen_VVINF ._$.
+42. Die_ART BGAG_NE selbst_ADV habe_VAFIN sich_PRF durch_APPR Abmachungen_NN zum_APPRART Zeitpunkt_NN ,_$, als_KOUS der_ART Crédit_NN|NE bei_APPR der_ART Bank_NN eingetreten_VVPP sei_VAFIN ,_$, gut_ADJD abgesichert_VVPP ._$.
+43. So_ADV dürften_VMFIN die_ART Franzosen_NN nur_ADV Kasse_NN machen_VVINF ,_$, wenn_KOUS sie_PPER die_ART BGAG-_TRUNC und_KON AMB-Anteile_NN erst_ADV ablösten_VVFIN und_KON dann_ADV zum_APPRART Paket_NN geschnürt_VVPP|ADJD abstießen_VVFIN ._$.
+44. Mit_APPR Blick_NN auf_APPR den_ART Mehrheitsaktionär_NN ``_$( in_APPR Abwicklung_NN ''_$( ,_$, der_PRELS einen_ART bis_KON|APPR 1999_CARD laufenden_ADJA Beherrschungsvertrag_NN in_APPR der_ART Tasche_NN hat_VAFIN ,_$, zieht_VVFIN Freyberg_NE schwer_ADJD vom_APPRART Leder_NN :_$.
+45. Der_ART französische_ADJA Staatsriese_NN ``_$( hat_VAFIN das_ART Geschäft_NN der_ART Bank_NN behindert_VVPP ''_$( ._$.
+46. Synergieeffekte_NN gebe_VVFIN es_PPER so_ADV gut_ADJD wie_KOKOM keine_PIS|PIAT ._$.
+47. Wenn_KOUS die_ART Pariser_NN könnten_VMFIN ,_$, würden_VAFIN sie_PPER aussteigen_VVINF ,_$, glaubt_VVFIN er_PPER ._$.
+48. Allerdings_ADV müsse_VMFIN jeder_PIAT Schritt_NN des_ART CL_NE von_APPR der_ART Brüsseler_ADJA EU-Kommission_NN genehmigt_VVPP werden_VAINF ._$.
+49. Die_ART BfG_NE ,_$, die_PRELS sich_PRF von_APPR der_ART Universalbank_NN zum_APPRART Spezialanbieter_NN für_APPR Privatkunden_NN wandle_VVFIN ,_$, habe_VAFIN eine_ART Zukunft_NN nur_ADV in_APPR einer_ART neuen_ADJA Anteilseigner-Struktur_NN ._$.
+50. Die_ART Hoffnungen_NN ,_$, die_PRELS sein_PPOSAT Haus_NN einst_ADV auf_APPR die_ART Franzosen_NN gesetzt_VVPP habe_VAFIN ,_$, hätten_VAFIN getrogen_VVPP ._$.
+51. Die_ART BGAG_NE kassierte_VVFIN 1996_CARD erstmals_ADV die_ART Garantiedividende_NN von_APPR zehn_CARD Prozent_NN aus_APPR ihrer_PPOSAT Beteiligung_NN ._$.
+52. Von_APPR den_ART drei_CARD Säulen_NN der_ART Holding_NN stehen_VVFIN Finanzdienstleistungen_NN noch_ADV für_APPR 80_CARD Prozent_NN des_ART Beteiligungsvermögens_NN ._$.
+53. Ein_ART Fünftel_NN bringt_VVFIN das_ART Immobiliengeschäft_NN auf_APPR die_ART Waage_NN ,_$, während_KOUS übrige_ADJA Service-Anbieter_NN dabei_PROAV so_ADV gut_ADJD wie_KOKOM nichts_PIS ausmachen_VVFIN ._$.
+54. Noch_ADV nicht_PTKNEG fündig_ADJD geworden_VAPP ist_VAFIN Freyberg_NE bei_APPR der_ART Suche_NN nach_APPR einem_ART Anteilseigner_NN der_ART Allgemeinen_ADJA Deutschen_ADJA Direktbank_NN ._$.
+55. Diese_PDAT Ertragsperle_NN benötige_ADJA|VVFIN Eigenkapital_NN für_APPR Investitionen_NN und_KON einen_ART Partner_NN ,_$, der_PRELS neue_ADJA Chancen_NN eröffne_VVFIN ._$.
+56. Verhandlungen_NN mit_APPR Interessenten_NN liefen_VVFIN ._$.
+57. Das_ART Engagement_NN bei_APPR der_ART BHW_NE Holding_NE|NN bilde_VVFIN das_ART Rückgrat_NN der_ART BGAG_NE im_APPRART Finanz-Zweig_NN ._$.
+58. Aus_APPR deren_PDS Börsengang_NN ,_$, der_PRELS 351_CARD Millionen_NN in_APPR die_ART Kasse_NN der_ART Holding_NN spülte_VVFIN ,_$, bleibt_VVFIN 1997_CARD ein_ART Buchgewinn_NN von_APPR 150_CARD Millionen_NN hängen_VVINF|PTKVZ ._$.
+59. Ob_KOUS die_ART Gewerkschaften_NN davon_PROAV profitieren_VVFIN ,_$, läßt_VVFIN Freyberg_NE offen_ADJD|PTKVZ ._$.
+60. Sein_PPOSAT Haus_NN läßt_VVFIN die_ART Aktionäre_NN seit_APPR Jahren_NN leer_ADJD ausgehen_VVINF ._$.
+61. Er_PPER denkt_VVFIN über_APPR ``_$( intelligente_ADJA Formen_NN der_ART Teilhabe_NN ''_$( nach_PTKVZ ._$.
+62. Die_ART BGAG_NE weist_VVFIN für_APPR 1996_CARD einen_ART von_APPR 76_CARD auf_APPR 54_CARD Millionen_NN gesunkenen_ADJA Überschuß_NN aus_PTKVZ ._$.
+63. Die_ART Holding_NN steht_VVFIN mit_APPR knapp_ADV drei_CARD Milliarden_NN Mark_NN in_APPR der_ART Kreide_NN ._$.
+64. Der_ART Nettozinsaufwand_NN betrug_VVFIN 133_CARD Millionen_NN ._$.
+65. Das_ART Eigenkapital_NN deckt_VVFIN 39_CARD Prozent_NN der_ART Bilanzsumme_NN ._$.
+66. Siehe_VVIMP auch_ADV Feuilleton_NN auf_APPR Seite_NN 8_CARD )_$(
+67. FIRMEN-TELEGRAMM_NN
+68. Langer_ADJA Draht_NN zur_APPRART Lufthansa_NE
+69. Ein_ART Reservierungszentrum_NN eröffnet_VVFIN die_ART Lufthansa_NE in_APPR Dublin_NE ._$.
+70. In_APPR der_ART irischen_ADJA Hauptstadt_NN werden_VAFIN dafür_PROAV 45_CARD Leute_NN angestellt_VVPP ._$.
+71. Das_ART neue_ADJA Call_NN|FM Center_NE|FM soll_VMFIN die_ART Zentralreservierung_NN in_APPR Kassel_NE entlasten_VVINF ._$.
+72. Bei_APPR belegten_ADJA Leitungen_NN zur_APPRART Nordhessen-Metropole_NN werden_VAFIN die_ART Anrufe_NN direkt_ADJD nach_APPR Dublin_NE weitergeleitet_VVPP ._$.
+73. Chrysler_NE tritt_VVFIN in_APPR Europa_NE neu_ADJD an_PTKVZ
+74. Seine_PPOSAT Vertriebsrechte_NN für_APPR Deutschland_NE ,_$, Holland_NE und_KON Belgien_NE will_VMFIN der_ART US-Autokonzern_NN Chrysler_NE von_APPR der_ART belgischen_ADJA Louwman-Gruppe_NN|NE zurückkaufen_VVINF ._$.
+75. Chrysler-Fahrzeuge_NN verkaufen_VVFIN in_APPR den_ART drei_CARD genannten_ADJA Ländern_NN 333_CARD Händler_NN ._$.
+76. Saltus_NN|NE macht_VVFIN großen_ADJA Sprung_NN
+77. Wegen_APPR ``_$( massiver_ADJA Nachfrage_NN ''_$( nach_APPR den_ART Aktien_NN des_ART Börsenneulings_NN Saltus_NE Technology_NE ist_VAFIN die_ART Annahme_NN von_APPR Aufträgen_NN vorzeitig_ADJD beendet_VVPP worden_VAPP ._$.
+78. Die_ART Offerte_NN war_VAFIN mehr_PIS|ADV als_KOKOM hundertfach_ADJD überzeichnet_VVPP ._$.
+79. Schleicher_NN|NE kommt_VVFIN voran_PTKVZ
+80. Aktenvernichter_NN Schleicher_NE &_KON Co_NE|NN hat_VAFIN im_APPRART Turnus_NN 1996_CARD /_$( 97_CARD (_$( per_APPR Ende_NN März_NN )_$( das_ART Defizit_NN im_APPRART normalen_ADJA Geschäft_NN von_APPR 23_CARD auf_APPR vier_CARD Millionen_NN Mark_NN reduziert_VVPP ._$.
+81. Für_APPR die_ART laufende_ADJA Periode_NN rechnen_VVFIN die_ART Markdorfer_NN mit_APPR einem_ART positiven_ADJA Ergebnis_NN ._$.
+82. Bilfinger_NE baut_VVFIN für_APPR Procter_NN|NE
+83. An_APPR einem_ART Großauftrag_NN in_APPR den_ART USA_NE beteiligt_VVFIN sich_PRF der_ART Baukonzern_NN Bilfinger_NE +_KON Berger_NE ._$.
+84. Die_ART amerikanische_ADJA Beteiligung_NN Fru-Con_NE erhielt_VVFIN als_APPR Mitglied_NN eines_ART Konsortiums_NN von_APPR Procter_NN|NE &_KON Gamble_NN|NE die_ART Order_NN für_APPR die_ART Errichtung_NN einer_ART Papierfabrik_NN ._$.
+85. Das_ART Bestellvolumen_NN beträgt_VVFIN 600_CARD Millionen_NN Mark_NN ._$.
+86. Auf_APPR Fru-Con_NE entfällt_VVFIN ein_ART Drittel_NN ._$.
+87. Dresdner_ADJA Bank_NN
+88. Ehemaliger_ADJA Angestellter_NN in_APPR Untersuchungshaft_NN
+89. stg_XY
+90. BREMEN_NE ._$.
+91. Die_ART Bremer_ADJA Nordfinanz-Bank_NN|NE (_$( NF_NE )_$( rechnet_VVFIN sich_PRF für_APPR ihre_PPOSAT Schadenersatzklage_NN gegen_APPR die_ART Dresdner_ADJA Bank_NN und_KON zwei_CARD ehemalige_ADJA leitende_ADJA Angestellte_NN (_$( siehe_VVIMP FR_NE von_APPR gestern_ADV )_$( gute_ADJA Chancen_NN aus_PTKVZ ,_$, weil_KOUS auch_ADV schon_ADV Strafermittlungen_NN gegen_APPR die_ART beiden_PIAT Banker_NN und_KON zwei_CARD noch_ADV amtierende_ADJA Beschäftigte_NN der_ART Dresdner_NN|ADJA laufen_VVFIN ._$.
+92. Die_ART Bielefelder_ADJA Staatsanwaltschaft_NN wirft_VVFIN ihnen_PPER Beihilfe_NN zum_APPRART Betrug_NN vor_PTKVZ ._$.
+93. Sie_PPER sollen_VMFIN von_APPR den_ART Machenschaften_NN mutmaßlicher_ADJA Anlagebetrüger_NN gewußt_VVPP haben_VAINF ,_$, die_PRELS Tausende_NN von_APPR Campingplatzparzellen_NN zu_APPR angeblich_ADJD weit_ADJD überhöhten_ADJA Preisen_NN an_APPR Kleininvestoren_NN verkauft_VVPP hatten_VAFIN ._$.
+94. Einer_PIS der_ART Bank-Angestellten_NN wurde_VAFIN jetzt_ADV in_APPR Untersuchungshaft_NN genommen_VVPP ,_$, weil_KOUS er_PPER von_APPR den_ART Betrügern_NN angeblich_ADJD Schmiergelder_NN kassiert_VVPP hat_VAFIN ._$.
+95. Gutgläubige_ADJA Erwerber_NN der_ART Campingplatzparzellen_NN hatten_VAFIN für_APPR die_ART Bezahlung_NN Kredite_NN der_ART Dresdner_NN|NE und_KON der_ART NF_NE aufgenommen_VVPP ._$.
+96. Nach_APPR dem_ART Auffliegen_NN des_ART mutmaßlichen_ADJA Schwindels_NN stoppten_VVFIN die_ART Käufer_NN die_ART Darlehenstilgung_NN ._$.
+97. Bei_APPR einem_ART Vergleich_NN mit_APPR ihnen_PPER erlitt_VVFIN die_ART NF_NE nach_APPR eigenen_ADJA Angaben_NN 13_CARD Millionen_NN Mark_NN Verlust_NN ._$.
+98. Diesen_PDAT Betrag_NN will_VMFIN sich_PRF das_ART Bremer_ADJA Institut_NN jetzt_ADV von_APPR der_ART Dresdner_NN|ADJA und_KON deren_PDS ehemaligen_ADJA Beschäftigten_NN zurückholen_VVINF ,_$, weil_KOUS sie_PPER angeblich_ADJD ``_$( genau_ADJD über_APPR diese_PDAT Dinge_NN Bescheid_NN wußten_VVFIN ''_$( und_KON die_ART betrügerische_ADJA Anlagefirma_NN ``_$( künstlich_ADJD am_APPRART Leben_NN gehalten_VVPP ''_$( hätten_VAFIN ._$.
+99. Die_ART verklagte_ADJA Bank_NN erklärte_VVFIN dazu_PROAV ,_$, bisher_ADV habe_VAFIN sie_PPER keine_PIAT Erkenntnisse_NN über_APPR betrügerische_ADJA Manipulationen_NN einzelner_ADJA Mitarbeiter_NN ._$.
+100. Allerdings_ADV habe_VAFIN man_PIS sich_PRF per_APPR Aufhebungsvertrag_NN von_APPR den_ART beiden_PIAT Hauptbeschuldigten_NN getrennt_VVPP ,_$, um_KOUI Rufschädigungen_NN zu_PTKZU vermeiden_VVINF ._$.
+

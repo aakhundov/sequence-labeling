@@ -1,0 +1,462 @@
+data folder: data/ready/chunk/conll2000/
+embeddings: glove, 6B.100d
+epochs: 100
+batch size: 8
+initial learning rate: 0.001
+l.r. decay rate: 0.05
+byte lstm units: 64
+word lstm units: 128
+byte embedding dim: 50
+byte lstm layers: 1
+word lstm layers: 1
+use byte embeddings: 0
+use word embeddings: 1
+use crf layer: 1
+
+1.train    L 10.119    acc [B 83.22 E 86.46 O 94.39 T 87.51]   B [P 94.58 R 91.36 F1 92.94]   E [P 84.82 R 82.01 F1 83.40]   EC [P 79.81 R 77.16 F1 78.46]
+1.val      L 10.513    acc [B 82.96 E 85.92 O 94.81 T 87.09]   B [P 94.17 R 91.45 F1 92.79]   E [P 84.03 R 81.67 F1 82.84]   EC [P 78.75 R 76.54 F1 77.63]
+
+2.train    L 6.729     acc [B 87.87 E 90.17 O 94.19 T 90.70]   B [P 95.82 R 94.09 F1 94.95]   E [P 88.79 R 87.20 F1 87.98]   EC [P 84.80 R 83.29 F1 84.04]
+2.val      L 6.998     acc [B 87.74 E 89.68 O 94.35 T 90.30]   B [P 95.39 R 93.94 F1 94.66]   E [P 87.63 R 86.30 F1 86.96]   EC [P 83.80 R 82.53 F1 83.16]
+
+3.train    L 5.354     acc [B 89.58 E 91.48 O 95.00 T 91.95]   B [P 96.50 R 94.65 F1 95.56]   E [P 90.28 R 88.55 F1 89.40]   EC [P 87.10 R 85.43 F1 86.26]
+3.val      L 5.621     acc [B 89.18 E 90.92 O 95.16 T 91.48]   B [P 96.11 R 94.30 F1 95.19]   E [P 89.16 R 87.48 F1 88.31]   EC [P 86.08 R 84.46 F1 85.26]
+
+4.train    L 4.574     acc [B 90.76 E 92.33 O 95.49 T 92.75]   B [P 96.76 R 95.32 F1 96.03]   E [P 91.22 R 89.86 F1 90.54]   EC [P 88.33 R 87.01 F1 87.67]
+4.val      L 4.883     acc [B 90.30 E 91.64 O 95.55 T 92.16]   B [P 96.26 R 94.94 F1 95.60]   E [P 89.78 R 88.55 F1 89.17]   EC [P 86.93 R 85.74 F1 86.33]
+
+5.train    L 4.044     acc [B 91.03 E 93.13 O 94.52 T 93.32]   B [P 97.51 R 94.94 F1 96.21]   E [P 92.28 R 89.85 F1 91.05]   EC [P 89.83 R 87.47 F1 88.64]
+5.val      L 4.390     acc [B 90.47 E 92.33 O 94.17 T 92.57]   B [P 96.90 R 94.53 F1 95.70]   E [P 90.70 R 88.48 F1 89.58]   EC [P 88.20 R 86.05 F1 87.11]
+
+6.train    L 3.613     acc [B 91.89 E 93.81 O 94.74 T 93.93]   B [P 97.72 R 95.62 F1 96.66]   E [P 93.17 R 91.17 F1 92.16]   EC [P 90.75 R 88.80 F1 89.77]
+6.val      L 3.929     acc [B 91.22 E 93.05 O 94.31 T 93.22]   B [P 97.26 R 95.18 F1 96.21]   E [P 91.75 R 89.80 F1 90.76]   EC [P 89.31 R 87.41 F1 88.35]
+
+7.train    L 3.290     acc [B 93.20 E 94.30 O 95.71 T 94.49]   B [P 97.44 R 96.72 F1 97.08]   E [P 93.47 R 92.78 F1 93.12]   EC [P 91.20 R 90.52 F1 90.86]
+7.val      L 3.643     acc [B 92.66 E 93.50 O 95.44 T 93.76]   B [P 96.82 R 96.39 F1 96.60]   E [P 92.00 R 91.59 F1 91.80]   EC [P 89.67 R 89.27 F1 89.47]
+
+8.train    L 3.074     acc [B 93.55 E 94.60 O 95.85 T 94.77]   B [P 97.58 R 96.91 F1 97.25]   E [P 93.89 R 93.24 F1 93.56]   EC [P 91.64 R 91.01 F1 91.32]
+8.val      L 3.473     acc [B 93.05 E 93.84 O 95.44 T 94.05]   B [P 97.01 R 96.55 F1 96.78]   E [P 92.35 R 91.91 F1 92.13]   EC [P 90.13 R 89.69 F1 89.91]
+
+9.train    L 2.946     acc [B 93.36 E 94.85 O 95.41 T 94.92]   B [P 98.04 R 96.43 F1 97.23]   E [P 94.31 R 92.77 F1 93.54]   EC [P 92.28 R 90.77 F1 91.52]
+9.val      L 3.379     acc [B 92.62 E 94.05 O 94.56 T 94.12]   B [P 97.61 R 95.89 F1 96.74]   E [P 92.91 R 91.28 F1 92.09]   EC [P 90.80 R 89.20 F1 89.99]
+
+10.train    L 2.823    acc [B 93.94 E 94.94 O 96.05 T 95.08]   B [P 97.73 R 97.03 F1 97.38]   E [P 94.24 R 93.57 F1 93.90]   EC [P 92.22 R 91.56 F1 91.89]
+10.val      L 3.280    acc [B 93.25 E 94.15 O 95.48 T 94.32]   B [P 97.24 R 96.56 F1 96.90]   E [P 92.89 R 92.24 F1 92.57]   EC [P 90.80 R 90.17 F1 90.48]
+
+11.train    L 2.720    acc [B 94.16 E 95.13 O 95.94 T 95.24]   B [P 97.77 R 97.10 F1 97.43]   E [P 94.38 R 93.74 F1 94.06]   EC [P 92.45 R 91.82 F1 92.14]
+11.val      L 3.193    acc [B 93.40 E 94.30 O 95.44 T 94.45]   B [P 97.30 R 96.62 F1 96.96]   E [P 92.99 R 92.33 F1 92.66]   EC [P 90.94 R 90.30 F1 90.62]
+
+12.train    L 2.581    acc [B 94.14 E 95.36 O 95.93 T 95.43]   B [P 98.13 R 96.92 F1 97.52]   E [P 94.86 R 93.70 F1 94.28]   EC [P 93.00 R 91.86 F1 92.42]
+12.val      L 3.065    acc [B 93.34 E 94.48 O 95.06 T 94.56]   B [P 97.62 R 96.37 F1 96.99]   E [P 93.42 R 92.22 F1 92.81]   EC [P 91.44 R 90.27 F1 90.85]
+
+13.train    L 2.539    acc [B 94.19 E 95.32 O 96.11 T 95.42]   B [P 98.04 R 96.95 F1 97.49]   E [P 94.75 R 93.70 F1 94.22]   EC [P 92.95 R 91.92 F1 92.43]
+13.val      L 3.071    acc [B 93.09 E 94.20 O 95.06 T 94.31]   B [P 97.46 R 96.20 F1 96.83]   E [P 92.90 R 91.70 F1 92.30]   EC [P 90.97 R 89.80 F1 90.38]
+
+14.train    L 2.425    acc [B 94.78 E 95.57 O 96.40 T 95.68]   B [P 97.90 R 97.48 F1 97.69]   E [P 94.91 R 94.50 F1 94.70]   EC [P 93.13 R 92.72 F1 92.92]
+14.val      L 2.976    acc [B 93.69 E 94.42 O 95.66 T 94.58]   B [P 97.27 R 96.80 F1 97.03]   E [P 93.18 R 92.73 F1 92.95]   EC [P 91.24 R 90.80 F1 91.02]
+
+15.train    L 2.334    acc [B 94.91 E 95.74 O 96.44 T 95.83]   B [P 98.04 R 97.51 F1 97.77]   E [P 95.16 R 94.65 F1 94.91]   EC [P 93.42 R 92.92 F1 93.17]
+15.val      L 2.885    acc [B 93.86 E 94.63 O 95.59 T 94.76]   B [P 97.43 R 96.85 F1 97.14]   E [P 93.47 R 92.92 F1 93.19]   EC [P 91.59 R 91.05 F1 91.32]
+
+16.train    L 2.325    acc [B 94.65 E 95.79 O 96.00 T 95.82]   B [P 98.28 R 97.16 F1 97.72]   E [P 95.25 R 94.17 F1 94.71]   EC [P 93.62 R 92.56 F1 93.09]
+16.val      L 2.898    acc [B 93.48 E 94.60 O 95.02 T 94.65]   B [P 97.66 R 96.45 F1 97.05]   E [P 93.46 R 92.30 F1 92.88]   EC [P 91.60 R 90.47 F1 91.03]
+
+17.train    L 2.251    acc [B 94.82 E 95.89 O 96.17 T 95.93]   B [P 98.29 R 97.28 F1 97.78]   E [P 95.38 R 94.40 F1 94.89]   EC [P 93.77 R 92.80 F1 93.29]
+17.val      L 2.860    acc [B 93.63 E 94.67 O 95.23 T 94.75]   B [P 97.68 R 96.50 F1 97.09]   E [P 93.54 R 92.41 F1 92.97]   EC [P 91.78 R 90.67 F1 91.22]
+
+18.train    L 2.199    acc [B 94.97 E 95.99 O 96.30 T 96.03]   B [P 98.31 R 97.35 F1 97.83]   E [P 95.48 R 94.55 F1 95.02]   EC [P 93.91 R 92.99 F1 93.45]
+18.val      L 2.800    acc [B 93.85 E 94.89 O 95.62 T 94.98]   B [P 97.80 R 96.64 F1 97.21]   E [P 93.82 R 92.71 F1 93.27]   EC [P 92.08 R 90.99 F1 91.53]
+
+19.train    L 2.155    acc [B 95.20 E 96.07 O 96.27 T 96.10]   B [P 98.20 R 97.57 F1 97.89]   E [P 95.51 R 94.90 F1 95.20]   EC [P 93.91 R 93.31 F1 93.61]
+19.val      L 2.787    acc [B 94.07 E 94.84 O 95.55 T 94.93]   B [P 97.53 R 96.87 F1 97.20]   E [P 93.61 R 92.98 F1 93.30]   EC [P 91.89 R 91.27 F1 91.58]
+
+20.train    L 2.112    acc [B 95.31 E 96.18 O 96.30 T 96.19]   B [P 98.26 R 97.69 F1 97.97]   E [P 95.67 R 95.11 F1 95.39]   EC [P 94.07 R 93.51 F1 93.79]
+20.val      L 2.771    acc [B 94.05 E 94.82 O 95.23 T 94.87]   B [P 97.48 R 96.91 F1 97.19]   E [P 93.55 R 93.00 F1 93.27]   EC [P 91.73 R 91.19 F1 91.46]
+
+21.train    L 2.072    acc [B 95.21 E 96.20 O 96.25 T 96.21]   B [P 98.40 R 97.50 F1 97.95]   E [P 95.78 R 94.91 F1 95.34]   EC [P 94.23 R 93.37 F1 93.80]
+21.val      L 2.755    acc [B 93.84 E 94.78 O 95.37 T 94.86]   B [P 97.73 R 96.69 F1 97.21]   E [P 93.80 R 92.81 F1 93.31]   EC [P 92.01 R 91.04 F1 91.52]
+
+22.train    L 2.050    acc [B 95.30 E 96.29 O 95.90 T 96.24]   B [P 98.41 R 97.58 F1 97.99]   E [P 95.79 R 94.98 F1 95.38]   EC [P 94.25 R 93.45 F1 93.85]
+22.val      L 2.715    acc [B 94.06 E 95.11 O 94.92 T 95.08]   B [P 97.83 R 96.77 F1 97.30]   E [P 94.00 R 92.98 F1 93.49]   EC [P 92.27 R 91.27 F1 91.76]
+
+23.train    L 1.995    acc [B 95.62 E 96.38 O 96.62 T 96.41]   B [P 98.31 R 97.86 F1 98.08]   E [P 95.89 R 95.45 F1 95.67]   EC [P 94.38 R 93.95 F1 94.17]
+23.val      L 2.676    acc [B 94.18 E 94.98 O 95.44 T 95.04]   B [P 97.68 R 96.94 F1 97.31]   E [P 93.84 R 93.14 F1 93.49]   EC [P 92.13 R 91.44 F1 91.79]
+
+24.train    L 1.974    acc [B 95.50 E 96.39 O 96.58 T 96.41]   B [P 98.46 R 97.67 F1 98.06]   E [P 96.00 R 95.23 F1 95.61]   EC [P 94.52 R 93.76 F1 94.14]
+24.val      L 2.680    acc [B 94.03 E 94.93 O 95.59 T 95.02]   B [P 97.79 R 96.80 F1 97.29]   E [P 93.97 R 93.01 F1 93.48]   EC [P 92.23 R 91.29 F1 91.75]
+
+25.train    L 1.926    acc [B 95.82 E 96.41 O 96.90 T 96.48]   B [P 98.24 R 97.99 F1 98.11]   E [P 95.86 R 95.61 F1 95.74]   EC [P 94.40 R 94.16 F1 94.28]
+25.val      L 2.661    acc [B 94.59 E 95.06 O 96.08 T 95.20]   B [P 97.49 R 97.21 F1 97.35]   E [P 93.79 R 93.52 F1 93.65]   EC [P 92.19 R 91.93 F1 92.06]
+
+26.train    L 1.954    acc [B 95.94 E 96.40 O 96.90 T 96.47]   B [P 98.10 R 98.15 F1 98.13]   E [P 95.75 R 95.79 F1 95.77]   EC [P 94.26 R 94.31 F1 94.28]
+26.val      L 2.699    acc [B 94.68 E 94.98 O 96.05 T 95.12]   B [P 97.31 R 97.48 F1 97.40]   E [P 93.61 R 93.78 F1 93.69]   EC [P 91.87 R 92.04 F1 91.96]
+
+27.train    L 1.894    acc [B 95.78 E 96.51 O 96.80 T 96.55]   B [P 98.38 R 97.95 F1 98.16]   E [P 96.04 R 95.62 F1 95.83]   EC [P 94.59 R 94.18 F1 94.38]
+27.val      L 2.617    acc [B 94.43 E 95.13 O 95.80 T 95.22]   B [P 97.71 R 97.15 F1 97.43]   E [P 94.09 R 93.55 F1 93.82]   EC [P 92.36 R 91.83 F1 92.10]
+
+28.train    L 1.874    acc [B 95.86 E 96.56 O 96.77 T 96.59]   B [P 98.38 R 97.96 F1 98.17]   E [P 96.05 R 95.64 F1 95.84]   EC [P 94.63 R 94.23 F1 94.43]
+28.val      L 2.634    acc [B 94.53 E 95.16 O 95.69 T 95.23]   B [P 97.69 R 97.17 F1 97.43]   E [P 94.03 R 93.53 F1 93.78]   EC [P 92.38 R 91.88 F1 92.13]
+
+29.train    L 1.845    acc [B 95.76 E 96.64 O 96.73 T 96.65]   B [P 98.57 R 97.81 F1 98.19]   E [P 96.28 R 95.54 F1 95.91]   EC [P 94.88 R 94.15 F1 94.52]
+29.val      L 2.597    acc [B 94.33 E 95.12 O 95.66 T 95.19]   B [P 97.81 R 97.03 F1 97.42]   E [P 94.15 R 93.40 F1 93.77]   EC [P 92.43 R 91.69 F1 92.06]
+
+30.train    L 1.827    acc [B 95.92 E 96.68 O 96.73 T 96.69]   B [P 98.48 R 97.99 F1 98.24]   E [P 96.27 R 95.79 F1 96.03]   EC [P 94.85 R 94.38 F1 94.61]
+30.val      L 2.605    acc [B 94.51 E 95.21 O 95.69 T 95.28]   B [P 97.71 R 97.25 F1 97.48]   E [P 94.11 R 93.67 F1 93.89]   EC [P 92.39 R 91.95 F1 92.17]
+
+31.train    L 1.805    acc [B 95.78 E 96.73 O 96.45 T 96.70]   B [P 98.65 R 97.76 F1 98.21]   E [P 96.40 R 95.53 F1 95.96]   EC [P 95.03 R 94.18 F1 94.60]
+31.val      L 2.587    acc [B 94.26 E 95.28 O 95.13 T 95.26]   B [P 97.98 R 96.84 F1 97.41]   E [P 94.30 R 93.21 F1 93.75]   EC [P 92.64 R 91.56 F1 92.10]
+
+32.train    L 1.777    acc [B 96.01 E 96.69 O 96.89 T 96.71]   B [P 98.45 R 98.06 F1 98.26]   E [P 96.28 R 95.89 F1 96.08]   EC [P 94.88 R 94.50 F1 94.69]
+32.val      L 2.576    acc [B 94.63 E 95.28 O 95.97 T 95.37]   B [P 97.76 R 97.24 F1 97.50]   E [P 94.24 R 93.74 F1 93.99]   EC [P 92.57 R 92.08 F1 92.33]
+
+33.train    L 1.752    acc [B 96.11 E 96.72 O 96.99 T 96.76]   B [P 98.41 R 98.13 F1 98.27]   E [P 96.26 R 95.98 F1 96.12]   EC [P 94.89 R 94.61 F1 94.75]
+33.val      L 2.574    acc [B 94.62 E 95.16 O 95.97 T 95.27]   B [P 97.64 R 97.25 F1 97.44]   E [P 94.09 R 93.71 F1 93.90]   EC [P 92.42 R 92.05 F1 92.24]
+
+34.train    L 1.721    acc [B 96.25 E 96.80 O 97.14 T 96.85]   B [P 98.43 R 98.23 F1 98.33]   E [P 96.37 R 96.18 F1 96.27]   EC [P 95.00 R 94.82 F1 94.91]
+34.val      L 2.561    acc [B 94.79 E 95.20 O 96.15 T 95.32]   B [P 97.54 R 97.39 F1 97.47]   E [P 94.08 R 93.93 F1 94.01]   EC [P 92.45 R 92.30 F1 92.38]
+
+35.train    L 1.719    acc [B 96.22 E 96.80 O 97.10 T 96.84]   B [P 98.47 R 98.18 F1 98.32]   E [P 96.40 R 96.12 F1 96.26]   EC [P 95.05 R 94.78 F1 94.91]
+35.val      L 2.568    acc [B 94.71 E 95.25 O 95.94 T 95.34]   B [P 97.69 R 97.31 F1 97.49]   E [P 94.17 R 93.80 F1 93.99]   EC [P 92.54 R 92.18 F1 92.35]
+
+36.train    L 1.699    acc [B 96.23 E 96.91 O 96.95 T 96.92]   B [P 98.56 R 98.15 F1 98.35]   E [P 96.50 R 96.10 F1 96.30]   EC [P 95.18 R 94.77 F1 94.97]
+36.val      L 2.563    acc [B 94.59 E 95.21 O 95.73 T 95.28]   B [P 97.68 R 97.29 F1 97.49]   E [P 94.17 R 93.79 F1 93.98]   EC [P 92.44 R 92.06 F1 92.25]
+
+37.train    L 1.683    acc [B 96.18 E 96.92 O 96.90 T 96.92]   B [P 98.60 R 98.09 F1 98.34]   E [P 96.55 R 96.06 F1 96.30]   EC [P 95.24 R 94.75 F1 95.00]
+37.val      L 2.550    acc [B 94.56 E 95.33 O 95.69 T 95.38]   B [P 97.83 R 97.16 F1 97.49]   E [P 94.29 R 93.65 F1 93.97]   EC [P 92.63 R 92.00 F1 92.32]
+
+38.train    L 1.667    acc [B 96.24 E 96.96 O 97.06 T 96.97]   B [P 98.64 R 98.11 F1 98.37]   E [P 96.63 R 96.12 F1 96.38]   EC [P 95.34 R 94.83 F1 95.08]
+38.val      L 2.519    acc [B 94.56 E 95.34 O 95.80 T 95.40]   B [P 97.91 R 97.13 F1 97.52]   E [P 94.42 R 93.67 F1 94.04]   EC [P 92.78 R 92.04 F1 92.40]
+
+39.train    L 1.659    acc [B 96.37 E 96.92 O 97.20 T 96.96]   B [P 98.51 R 98.26 F1 98.38]   E [P 96.52 R 96.27 F1 96.40]   EC [P 95.23 R 94.98 F1 95.11]
+39.val      L 2.534    acc [B 94.68 E 95.22 O 96.08 T 95.34]   B [P 97.68 R 97.29 F1 97.49]   E [P 94.21 R 93.82 F1 94.02]   EC [P 92.58 R 92.20 F1 92.39]
+
+40.train    L 1.633    acc [B 96.28 E 97.05 O 96.77 T 97.01]   B [P 98.66 R 98.14 F1 98.40]   E [P 96.71 R 96.19 F1 96.45]   EC [P 95.41 R 94.90 F1 95.15]
+40.val      L 2.517    acc [B 94.58 E 95.36 O 95.41 T 95.37]   B [P 97.80 R 97.18 F1 97.49]   E [P 94.30 R 93.70 F1 94.00]   EC [P 92.65 R 92.06 F1 92.35]
+
+41.train    L 1.635    acc [B 96.35 E 96.95 O 97.17 T 96.98]   B [P 98.55 R 98.20 F1 98.38]   E [P 96.56 R 96.22 F1 96.39]   EC [P 95.29 R 94.95 F1 95.12]
+41.val      L 2.555    acc [B 94.66 E 95.26 O 95.87 T 95.34]   B [P 97.73 R 97.26 F1 97.49]   E [P 94.25 R 93.80 F1 94.02]   EC [P 92.61 R 92.17 F1 92.39]
+
+42.train    L 1.616    acc [B 96.43 E 97.07 O 97.12 T 97.07]   B [P 98.61 R 98.27 F1 98.44]   E [P 96.69 R 96.35 F1 96.52]   EC [P 95.43 R 95.10 F1 95.27]
+42.val      L 2.540    acc [B 94.56 E 95.33 O 95.73 T 95.38]   B [P 97.81 R 97.19 F1 97.50]   E [P 94.32 R 93.73 F1 94.03]   EC [P 92.66 R 92.07 F1 92.36]
+
+43.train    L 1.602    acc [B 96.50 E 97.06 O 97.31 T 97.09]   B [P 98.61 R 98.31 F1 98.46]   E [P 96.72 R 96.43 F1 96.57]   EC [P 95.46 R 95.18 F1 95.32]
+43.val      L 2.536    acc [B 94.71 E 95.26 O 96.08 T 95.36]   B [P 97.70 R 97.27 F1 97.48]   E [P 94.22 R 93.80 F1 94.01]   EC [P 92.63 R 92.22 F1 92.43]
+
+44.train    L 1.594    acc [B 96.40 E 97.09 O 96.94 T 97.07]   B [P 98.64 R 98.21 F1 98.43]   E [P 96.70 R 96.27 F1 96.48]   EC [P 95.46 R 95.04 F1 95.25]
+44.val      L 2.529    acc [B 94.68 E 95.39 O 95.73 T 95.44]   B [P 97.84 R 97.28 F1 97.56]   E [P 94.35 R 93.80 F1 94.08]   EC [P 92.76 R 92.23 F1 92.50]
+
+45.train    L 1.557    acc [B 96.51 E 97.14 O 97.17 T 97.14]   B [P 98.66 R 98.27 F1 98.47]   E [P 96.80 R 96.42 F1 96.61]   EC [P 95.58 R 95.20 F1 95.39]
+45.val      L 2.496    acc [B 94.54 E 95.24 O 96.01 T 95.35]   B [P 97.82 R 97.22 F1 97.52]   E [P 94.31 R 93.73 F1 94.02]   EC [P 92.65 R 92.08 F1 92.36]
+
+46.train    L 1.562    acc [B 96.47 E 97.20 O 96.94 T 97.17]   B [P 98.73 R 98.23 F1 98.47]   E [P 96.87 R 96.38 F1 96.62]   EC [P 95.65 R 95.16 F1 95.41]
+46.val      L 2.487    acc [B 94.64 E 95.42 O 95.73 T 95.46]   B [P 97.89 R 97.26 F1 97.58]   E [P 94.52 R 93.91 F1 94.21]   EC [P 92.83 R 92.23 F1 92.53]
+
+47.train    L 1.557    acc [B 96.48 E 97.18 O 96.88 T 97.14]   B [P 98.68 R 98.27 F1 98.47]   E [P 96.82 R 96.41 F1 96.61]   EC [P 95.58 R 95.19 F1 95.38]
+47.val      L 2.484    acc [B 94.92 E 95.55 O 95.73 T 95.57]   B [P 97.82 R 97.45 F1 97.64]   E [P 94.53 R 94.17 F1 94.35]   EC [P 92.88 R 92.53 F1 92.70]
+
+48.train    L 1.541    acc [B 96.56 E 97.25 O 97.07 T 97.22]   B [P 98.73 R 98.31 F1 98.52]   E [P 96.91 R 96.50 F1 96.70]   EC [P 95.70 R 95.29 F1 95.49]
+48.val      L 2.485    acc [B 94.74 E 95.42 O 95.76 T 95.47]   B [P 97.81 R 97.34 F1 97.58]   E [P 94.41 R 93.95 F1 94.18]   EC [P 92.74 R 92.30 F1 92.52]
+
+49.train    L 1.530    acc [B 96.58 E 97.27 O 97.09 T 97.25]   B [P 98.74 R 98.32 F1 98.53]   E [P 96.95 R 96.54 F1 96.74]   EC [P 95.73 R 95.33 F1 95.53]
+49.val      L 2.472    acc [B 94.81 E 95.50 O 95.80 T 95.54]   B [P 97.89 R 97.40 F1 97.64]   E [P 94.56 R 94.08 F1 94.32]   EC [P 92.88 R 92.42 F1 92.65]
+
+50.train    L 1.500    acc [B 96.67 E 97.30 O 97.16 T 97.28]   B [P 98.71 R 98.37 F1 98.54]   E [P 96.95 R 96.62 F1 96.79]   EC [P 95.77 R 95.44 F1 95.61]
+50.val      L 2.452    acc [B 94.80 E 95.43 O 95.90 T 95.49]   B [P 97.84 R 97.42 F1 97.63]   E [P 94.57 R 94.16 F1 94.36]   EC [P 92.87 R 92.46 F1 92.66]
+
+51.train    L 1.509    acc [B 96.55 E 97.32 O 96.72 T 97.24]   B [P 98.79 R 98.26 F1 98.52]   E [P 97.01 R 96.49 F1 96.75]   EC [P 95.80 R 95.29 F1 95.55]
+51.val      L 2.462    acc [B 94.73 E 95.52 O 95.37 T 95.50]   B [P 97.92 R 97.23 F1 97.57]   E [P 94.53 R 93.86 F1 94.19]   EC [P 92.92 R 92.27 F1 92.59]
+
+52.train    L 1.498    acc [B 96.73 E 97.32 O 97.17 T 97.30]   B [P 98.69 R 98.44 F1 98.56]   E [P 96.96 R 96.71 F1 96.83]   EC [P 95.76 R 95.52 F1 95.64]
+52.val      L 2.472    acc [B 94.89 E 95.45 O 95.87 T 95.51]   B [P 97.74 R 97.46 F1 97.60]   E [P 94.45 R 94.18 F1 94.31]   EC [P 92.79 R 92.53 F1 92.66]
+
+53.train    L 1.475    acc [B 96.72 E 97.42 O 96.94 T 97.35]   B [P 98.81 R 98.38 F1 98.59]   E [P 97.12 R 96.70 F1 96.91]   EC [P 95.96 R 95.54 F1 95.75]
+53.val      L 2.429    acc [B 94.92 E 95.60 O 95.69 T 95.62]   B [P 97.91 R 97.41 F1 97.66]   E [P 94.64 R 94.16 F1 94.40]   EC [P 93.05 R 92.57 F1 92.81]
+
+54.train    L 1.467    acc [B 96.77 E 97.39 O 97.18 T 97.36]   B [P 98.75 R 98.42 F1 98.58]   E [P 97.05 R 96.72 F1 96.88]   EC [P 95.90 R 95.57 F1 95.74]
+54.val      L 2.449    acc [B 94.93 E 95.47 O 95.83 T 95.52]   B [P 97.80 R 97.47 F1 97.63]   E [P 94.47 R 94.16 F1 94.31]   EC [P 92.85 R 92.54 F1 92.69]
+
+55.train    L 1.465    acc [B 96.72 E 97.40 O 96.93 T 97.34]   B [P 98.78 R 98.38 F1 98.58]   E [P 97.09 R 96.70 F1 96.89]   EC [P 95.93 R 95.54 F1 95.73]
+55.val      L 2.439    acc [B 94.90 E 95.58 O 95.48 T 95.57]   B [P 97.88 R 97.36 F1 97.62]   E [P 94.59 R 94.09 F1 94.34]   EC [P 93.06 R 92.57 F1 92.82]
+
+56.train    L 1.464    acc [B 96.75 E 97.39 O 97.12 T 97.36]   B [P 98.77 R 98.41 F1 98.59]   E [P 97.06 R 96.70 F1 96.88]   EC [P 95.90 R 95.55 F1 95.73]
+56.val      L 2.453    acc [B 94.95 E 95.54 O 95.73 T 95.57]   B [P 97.81 R 97.49 F1 97.65]   E [P 94.54 R 94.23 F1 94.38]   EC [P 92.97 R 92.67 F1 92.82]
+
+57.train    L 1.445    acc [B 96.77 E 97.40 O 97.26 T 97.38]   B [P 98.78 R 98.41 F1 98.60]   E [P 97.10 R 96.74 F1 96.92]   EC [P 95.96 R 95.60 F1 95.78]
+57.val      L 2.460    acc [B 94.90 E 95.53 O 96.01 T 95.59]   B [P 97.86 R 97.38 F1 97.62]   E [P 94.57 R 94.10 F1 94.33]   EC [P 93.02 R 92.56 F1 92.79]
+
+58.train    L 1.443    acc [B 96.85 E 97.43 O 97.24 T 97.40]   B [P 98.73 R 98.49 F1 98.61]   E [P 97.06 R 96.83 F1 96.94]   EC [P 95.91 R 95.68 F1 95.79]
+58.val      L 2.454    acc [B 94.93 E 95.53 O 95.97 T 95.59]   B [P 97.78 R 97.47 F1 97.63]   E [P 94.51 R 94.21 F1 94.36]   EC [P 92.93 R 92.64 F1 92.78]
+
+59.train    L 1.436    acc [B 96.80 E 97.36 O 97.40 T 97.37]   B [P 98.74 R 98.43 F1 98.58]   E [P 97.04 R 96.73 F1 96.88]   EC [P 95.91 R 95.60 F1 95.76]
+59.val      L 2.449    acc [B 94.93 E 95.44 O 96.15 T 95.54]   B [P 97.75 R 97.44 F1 97.60]   E [P 94.40 R 94.10 F1 94.25]   EC [P 92.84 R 92.55 F1 92.69]
+
+60.train    L 1.411    acc [B 96.88 E 97.51 O 97.20 T 97.47]   B [P 98.81 R 98.50 F1 98.65]   E [P 97.21 R 96.89 F1 97.05]   EC [P 96.07 R 95.76 F1 95.92]
+60.val      L 2.425    acc [B 94.96 E 95.63 O 95.83 T 95.66]   B [P 97.88 R 97.41 F1 97.64]   E [P 94.63 R 94.18 F1 94.40]   EC [P 93.10 R 92.65 F1 92.87]
+
+61.train    L 1.421    acc [B 96.84 E 97.46 O 97.16 T 97.42]   B [P 98.80 R 98.46 F1 98.63]   E [P 97.14 R 96.82 F1 96.98]   EC [P 96.00 R 95.68 F1 95.84]
+61.val      L 2.452    acc [B 94.96 E 95.61 O 95.83 T 95.64]   B [P 97.86 R 97.43 F1 97.64]   E [P 94.60 R 94.18 F1 94.39]   EC [P 93.06 R 92.65 F1 92.85]
+
+62.train    L 1.396    acc [B 96.88 E 97.52 O 97.26 T 97.49]   B [P 98.86 R 98.48 F1 98.67]   E [P 97.26 R 96.89 F1 97.08]   EC [P 96.14 R 95.77 F1 95.95]
+62.val      L 2.420    acc [B 94.86 E 95.55 O 95.80 T 95.58]   B [P 97.89 R 97.39 F1 97.64]   E [P 94.62 R 94.14 F1 94.38]   EC [P 93.07 R 92.59 F1 92.83]
+
+63.train    L 1.385    acc [B 96.87 E 97.55 O 97.02 T 97.48]   B [P 98.88 R 98.46 F1 98.67]   E [P 97.27 R 96.86 F1 97.07]   EC [P 96.16 R 95.75 F1 95.95]
+63.val      L 2.422    acc [B 94.88 E 95.65 O 95.52 T 95.63]   B [P 97.95 R 97.40 F1 97.67]   E [P 94.73 R 94.19 F1 94.46]   EC [P 93.16 R 92.63 F1 92.89]
+
+64.train    L 1.380    acc [B 96.95 E 97.57 O 97.21 T 97.53]   B [P 98.85 R 98.55 F1 98.70]   E [P 97.28 R 96.99 F1 97.14]   EC [P 96.15 R 95.86 F1 96.00]
+64.val      L 2.420    acc [B 95.03 E 95.60 O 95.87 T 95.63]   B [P 97.83 R 97.52 F1 97.67]   E [P 94.59 R 94.30 F1 94.44]   EC [P 93.02 R 92.73 F1 92.88]
+
+65.train    L 1.377    acc [B 96.95 E 97.58 O 97.10 T 97.52]   B [P 98.85 R 98.55 F1 98.70]   E [P 97.29 R 97.00 F1 97.14]   EC [P 96.15 R 95.86 F1 96.01]
+65.val      L 2.415    acc [B 95.00 E 95.69 O 95.66 T 95.69]   B [P 97.93 R 97.46 F1 97.69]   E [P 94.76 R 94.31 F1 94.54]   EC [P 93.22 R 92.78 F1 93.00]
+
+66.train    L 1.374    acc [B 97.00 E 97.54 O 97.37 T 97.52]   B [P 98.78 R 98.62 F1 98.70]   E [P 97.24 R 97.08 F1 97.16]   EC [P 96.08 R 95.93 F1 96.01]
+66.val      L 2.445    acc [B 95.06 E 95.64 O 95.87 T 95.67]   B [P 97.84 R 97.58 F1 97.71]   E [P 94.63 R 94.39 F1 94.51]   EC [P 93.04 R 92.80 F1 92.92]
+
+67.train    L 1.359    acc [B 96.97 E 97.58 O 97.30 T 97.54]   B [P 98.85 R 98.55 F1 98.70]   E [P 97.32 R 97.02 F1 97.17]   EC [P 96.20 R 95.90 F1 96.05]
+67.val      L 2.414    acc [B 94.97 E 95.59 O 95.90 T 95.63]   B [P 97.87 R 97.44 F1 97.66]   E [P 94.64 R 94.23 F1 94.44]   EC [P 93.08 R 92.68 F1 92.88]
+
+68.train    L 1.352    acc [B 97.04 E 97.60 O 97.47 T 97.58]   B [P 98.83 R 98.63 F1 98.73]   E [P 97.31 R 97.11 F1 97.21]   EC [P 96.18 R 95.98 F1 96.08]
+68.val      L 2.415    acc [B 95.06 E 95.52 O 96.01 T 95.58]   B [P 97.74 R 97.53 F1 97.63]   E [P 94.50 R 94.30 F1 94.40]   EC [P 92.97 R 92.77 F1 92.87]
+
+69.train    L 1.360    acc [B 97.07 E 97.55 O 97.51 T 97.54]   B [P 98.76 R 98.62 F1 98.69]   E [P 97.18 R 97.05 F1 97.12]   EC [P 96.09 R 95.96 F1 96.03]
+69.val      L 2.449    acc [B 95.04 E 95.53 O 96.12 T 95.61]   B [P 97.75 R 97.59 F1 97.67]   E [P 94.52 R 94.37 F1 94.44]   EC [P 92.90 R 92.76 F1 92.83]
+
+70.train    L 1.355    acc [B 96.98 E 97.62 O 97.15 T 97.55]   B [P 98.86 R 98.56 F1 98.71]   E [P 97.32 R 97.02 F1 97.17]   EC [P 96.20 R 95.91 F1 96.05]
+70.val      L 2.424    acc [B 94.87 E 95.60 O 95.59 T 95.60]   B [P 97.91 R 97.39 F1 97.65]   E [P 94.67 R 94.16 F1 94.41]   EC [P 93.09 R 92.59 F1 92.84]
+
+71.train    L 1.338    acc [B 97.08 E 97.61 O 97.42 T 97.59]   B [P 98.81 R 98.65 F1 98.73]   E [P 97.31 R 97.15 F1 97.23]   EC [P 96.20 R 96.04 F1 96.12]
+71.val      L 2.405    acc [B 95.06 E 95.59 O 96.15 T 95.67]   B [P 97.84 R 97.55 F1 97.69]   E [P 94.67 R 94.39 F1 94.53]   EC [P 93.09 R 92.81 F1 92.95]
+
+72.train    L 1.329    acc [B 97.00 E 97.65 O 97.23 T 97.59]   B [P 98.90 R 98.55 F1 98.73]   E [P 97.39 R 97.04 F1 97.21]   EC [P 96.29 R 95.95 F1 96.12]
+72.val      L 2.414    acc [B 95.00 E 95.69 O 95.69 T 95.69]   B [P 97.94 R 97.50 F1 97.72]   E [P 94.82 R 94.40 F1 94.61]   EC [P 93.21 R 92.80 F1 93.00]
+
+73.train    L 1.327    acc [B 97.09 E 97.66 O 97.30 T 97.62]   B [P 98.87 R 98.62 F1 98.74]   E [P 97.38 R 97.14 F1 97.26]   EC [P 96.30 R 96.06 F1 96.18]
+73.val      L 2.409    acc [B 95.00 E 95.62 O 95.76 T 95.64]   B [P 97.88 R 97.47 F1 97.68]   E [P 94.71 R 94.31 F1 94.51]   EC [P 93.15 R 92.76 F1 92.95]
+
+74.train    L 1.319    acc [B 97.14 E 97.68 O 97.38 T 97.64]   B [P 98.84 R 98.68 F1 98.76]   E [P 97.37 R 97.20 F1 97.28]   EC [P 96.30 R 96.13 F1 96.22]
+74.val      L 2.414    acc [B 95.08 E 95.63 O 96.01 T 95.68]   B [P 97.85 R 97.56 F1 97.70]   E [P 94.70 R 94.43 F1 94.56]   EC [P 93.10 R 92.83 F1 92.97]
+
+75.train    L 1.323    acc [B 97.11 E 97.67 O 97.36 T 97.63]   B [P 98.87 R 98.62 F1 98.74]   E [P 97.36 R 97.11 F1 97.23]   EC [P 96.28 R 96.04 F1 96.16]
+75.val      L 2.414    acc [B 95.03 E 95.62 O 95.80 T 95.64]   B [P 97.85 R 97.47 F1 97.66]   E [P 94.65 R 94.28 F1 94.46]   EC [P 93.09 R 92.73 F1 92.91]
+
+76.train    L 1.298    acc [B 97.16 E 97.74 O 97.48 T 97.70]   B [P 98.92 R 98.64 F1 98.78]   E [P 97.49 R 97.21 F1 97.35]   EC [P 96.44 R 96.17 F1 96.31]
+76.val      L 2.377    acc [B 95.09 E 95.61 O 95.90 T 95.65]   B [P 97.83 R 97.51 F1 97.67]   E [P 94.61 R 94.31 F1 94.46]   EC [P 93.11 R 92.80 F1 92.96]
+
+77.train    L 1.309    acc [B 97.06 E 97.73 O 97.34 T 97.67]   B [P 98.97 R 98.55 F1 98.76]   E [P 97.48 R 97.07 F1 97.28]   EC [P 96.42 R 96.02 F1 96.22]
+77.val      L 2.418    acc [B 94.88 E 95.57 O 95.80 T 95.60]   B [P 97.91 R 97.31 F1 97.61]   E [P 94.59 R 94.01 F1 94.30]   EC [P 93.08 R 92.51 F1 92.79]
+
+78.train    L 1.298    acc [B 97.13 E 97.67 O 97.50 T 97.65]   B [P 98.85 R 98.65 F1 98.75]   E [P 97.37 R 97.17 F1 97.27]   EC [P 96.30 R 96.10 F1 96.20]
+78.val      L 2.414    acc [B 95.05 E 95.49 O 96.12 T 95.57]   B [P 97.73 R 97.46 F1 97.60]   E [P 94.45 R 94.18 F1 94.32]   EC [P 92.91 R 92.66 F1 92.79]
+
+79.train    L 1.291    acc [B 97.09 E 97.72 O 97.41 T 97.68]   B [P 98.93 R 98.59 F1 98.76]   E [P 97.46 R 97.13 F1 97.29]   EC [P 96.40 R 96.07 F1 96.24]
+79.val      L 2.385    acc [B 95.04 E 95.64 O 95.97 T 95.68]   B [P 97.86 R 97.47 F1 97.67]   E [P 94.64 R 94.26 F1 94.45]   EC [P 93.13 R 92.76 F1 92.94]
+
+80.train    L 1.286    acc [B 97.12 E 97.75 O 97.34 T 97.69]   B [P 98.94 R 98.61 F1 98.77]   E [P 97.47 R 97.15 F1 97.31]   EC [P 96.42 R 96.10 F1 96.26]
+80.val      L 2.385    acc [B 95.06 E 95.71 O 95.80 T 95.72]   B [P 97.90 R 97.50 F1 97.70]   E [P 94.77 R 94.39 F1 94.58]   EC [P 93.26 R 92.88 F1 93.07]
+
+81.train    L 1.278    acc [B 97.20 E 97.79 O 97.43 T 97.74]   B [P 98.94 R 98.67 F1 98.81]   E [P 97.54 R 97.27 F1 97.40]   EC [P 96.48 R 96.22 F1 96.35]
+81.val      L 2.380    acc [B 95.11 E 95.70 O 96.08 T 95.75]   B [P 97.88 R 97.56 F1 97.72]   E [P 94.75 R 94.44 F1 94.60]   EC [P 93.20 R 92.90 F1 93.05]
+
+82.train    L 1.278    acc [B 97.24 E 97.76 O 97.52 T 97.73]   B [P 98.89 R 98.72 F1 98.80]   E [P 97.47 R 97.30 F1 97.39]   EC [P 96.41 R 96.25 F1 96.33]
+82.val      L 2.407    acc [B 95.18 E 95.59 O 96.22 T 95.68]   B [P 97.76 R 97.64 F1 97.70]   E [P 94.63 R 94.52 F1 94.57]   EC [P 93.12 R 93.01 F1 93.06]
+
+83.train    L 1.262    acc [B 97.28 E 97.78 O 97.61 T 97.76]   B [P 98.89 R 98.72 F1 98.81]   E [P 97.49 R 97.32 F1 97.41]   EC [P 96.47 R 96.30 F1 96.39]
+83.val      L 2.379    acc [B 95.22 E 95.73 O 96.22 T 95.79]   B [P 97.87 R 97.62 F1 97.75]   E [P 94.79 R 94.55 F1 94.67]   EC [P 93.32 R 93.08 F1 93.20]
+
+84.train    L 1.264    acc [B 97.21 E 97.79 O 97.52 T 97.76]   B [P 98.95 R 98.64 F1 98.80]   E [P 97.52 R 97.21 F1 97.36]   EC [P 96.51 R 96.20 F1 96.36]
+84.val      L 2.378    acc [B 95.08 E 95.68 O 96.08 T 95.74]   B [P 97.93 R 97.49 F1 97.71]   E [P 94.72 R 94.29 F1 94.50]   EC [P 93.22 R 92.80 F1 93.01]
+
+85.train    L 1.259    acc [B 97.16 E 97.79 O 97.35 T 97.74]   B [P 98.98 R 98.59 F1 98.79]   E [P 97.54 R 97.16 F1 97.35]   EC [P 96.53 R 96.15 F1 96.34]
+85.val      L 2.380    acc [B 95.07 E 95.71 O 95.83 T 95.73]   B [P 97.93 R 97.50 F1 97.71]   E [P 94.76 R 94.35 F1 94.56]   EC [P 93.25 R 92.84 F1 93.04]
+
+86.train    L 1.253    acc [B 97.30 E 97.81 O 97.64 T 97.79]   B [P 98.92 R 98.73 F1 98.82]   E [P 97.54 R 97.35 F1 97.45]   EC [P 96.52 R 96.34 F1 96.43]
+86.val      L 2.392    acc [B 95.12 E 95.62 O 95.97 T 95.67]   B [P 97.77 R 97.56 F1 97.66]   E [P 94.58 R 94.37 F1 94.47]   EC [P 93.07 R 92.86 F1 92.96]
+
+87.train    L 1.257    acc [B 97.32 E 97.82 O 97.58 T 97.79]   B [P 98.90 R 98.76 F1 98.83]   E [P 97.52 R 97.38 F1 97.45]   EC [P 96.49 R 96.36 F1 96.43]
+87.val      L 2.400    acc [B 95.18 E 95.58 O 96.05 T 95.64]   B [P 97.73 R 97.61 F1 97.67]   E [P 94.54 R 94.43 F1 94.48]   EC [P 93.04 R 92.93 F1 92.98]
+
+88.train    L 1.253    acc [B 97.29 E 97.83 O 97.50 T 97.78]   B [P 98.92 R 98.72 F1 98.82]   E [P 97.52 R 97.32 F1 97.42]   EC [P 96.51 R 96.31 F1 96.41]
+88.val      L 2.396    acc [B 95.08 E 95.64 O 95.90 T 95.68]   B [P 97.88 R 97.55 F1 97.71]   E [P 94.73 R 94.41 F1 94.57]   EC [P 93.16 R 92.84 F1 93.00]
+
+89.train    L 1.246    acc [B 97.29 E 97.86 O 97.42 T 97.80]   B [P 98.95 R 98.72 F1 98.83]   E [P 97.58 R 97.34 F1 97.46]   EC [P 96.56 R 96.33 F1 96.44]
+89.val      L 2.378    acc [B 95.12 E 95.71 O 95.76 T 95.71]   B [P 97.87 R 97.54 F1 97.70]   E [P 94.75 R 94.43 F1 94.59]   EC [P 93.23 R 92.91 F1 93.07]
+
+90.train    L 1.240    acc [B 97.32 E 97.85 O 97.55 T 97.81]   B [P 98.93 R 98.75 F1 98.84]   E [P 97.57 R 97.38 F1 97.47]   EC [P 96.55 R 96.37 F1 96.46]
+90.val      L 2.381    acc [B 95.09 E 95.65 O 95.90 T 95.68]   B [P 97.85 R 97.53 F1 97.69]   E [P 94.68 R 94.36 F1 94.52]   EC [P 93.17 R 92.86 F1 93.02]
+
+91.train    L 1.247    acc [B 97.32 E 97.81 O 97.62 T 97.78]   B [P 98.88 R 98.78 F1 98.83]   E [P 97.51 R 97.41 F1 97.46]   EC [P 96.48 R 96.38 F1 96.43]
+91.val      L 2.403    acc [B 95.20 E 95.64 O 96.19 T 95.71]   B [P 97.77 R 97.63 F1 97.70]   E [P 94.62 R 94.49 F1 94.56]   EC [P 93.13 R 93.00 F1 93.06]
+
+92.train    L 1.227    acc [B 97.27 E 97.87 O 97.44 T 97.82]   B [P 99.00 R 98.67 F1 98.84]   E [P 97.64 R 97.31 F1 97.47]   EC [P 96.63 R 96.31 F1 96.47]
+92.val      L 2.381    acc [B 95.08 E 95.72 O 95.69 T 95.71]   B [P 97.95 R 97.46 F1 97.71]   E [P 94.74 R 94.27 F1 94.50]   EC [P 93.25 R 92.79 F1 93.02]
+
+93.train    L 1.226    acc [B 97.31 E 97.90 O 97.47 T 97.84]   B [P 98.99 R 98.71 F1 98.85]   E [P 97.64 R 97.36 F1 97.50]   EC [P 96.65 R 96.37 F1 96.51]
+93.val      L 2.380    acc [B 95.10 E 95.73 O 95.83 T 95.75]   B [P 97.94 R 97.53 F1 97.74]   E [P 94.85 R 94.44 F1 94.65]   EC [P 93.30 R 92.91 F1 93.11]
+
+94.train    L 1.216    acc [B 97.37 E 97.89 O 97.70 T 97.87]   B [P 98.97 R 98.76 F1 98.87]   E [P 97.64 R 97.43 F1 97.53]   EC [P 96.65 R 96.44 F1 96.54]
+94.val      L 2.373    acc [B 95.14 E 95.68 O 96.15 T 95.75]   B [P 97.89 R 97.57 F1 97.73]   E [P 94.72 R 94.42 F1 94.57]   EC [P 93.22 R 92.92 F1 93.07]
+
+95.train    L 1.221    acc [B 97.36 E 97.91 O 97.59 T 97.87]   B [P 98.99 R 98.75 F1 98.87]   E [P 97.65 R 97.41 F1 97.53]   EC [P 96.66 R 96.43 F1 96.55]
+95.val      L 2.388    acc [B 95.09 E 95.58 O 96.05 T 95.64]   B [P 97.80 R 97.57 F1 97.69]   E [P 94.64 R 94.43 F1 94.53]   EC [P 93.10 R 92.89 F1 93.00]
+
+96.train    L 1.216    acc [B 97.32 E 97.88 O 97.54 T 97.84]   B [P 98.97 R 98.73 F1 98.85]   E [P 97.62 R 97.39 F1 97.50]   EC [P 96.62 R 96.39 F1 96.51]
+96.val      L 2.381    acc [B 95.11 E 95.70 O 95.94 T 95.73]   B [P 97.93 R 97.56 F1 97.74]   E [P 94.81 R 94.45 F1 94.63]   EC [P 93.30 R 92.94 F1 93.12]
+
+97.train    L 1.212    acc [B 97.35 E 97.93 O 97.48 T 97.87]   B [P 99.00 R 98.74 F1 98.87]   E [P 97.68 R 97.42 F1 97.55]   EC [P 96.69 R 96.44 F1 96.57]
+97.val      L 2.369    acc [B 95.19 E 95.79 O 95.90 T 95.81]   B [P 97.94 R 97.57 F1 97.75]   E [P 94.85 R 94.50 F1 94.67]   EC [P 93.35 R 93.01 F1 93.18]
+
+98.train    L 1.206    acc [B 97.37 E 97.90 O 97.58 T 97.86]   B [P 98.97 R 98.77 F1 98.87]   E [P 97.65 R 97.45 F1 97.55]   EC [P 96.65 R 96.46 F1 96.56]
+98.val      L 2.380    acc [B 95.18 E 95.69 O 96.19 T 95.75]   B [P 97.88 R 97.60 F1 97.74]   E [P 94.77 R 94.50 F1 94.64]   EC [P 93.25 R 92.98 F1 93.11]
+
+99.train    L 1.194    acc [B 97.44 E 97.97 O 97.58 T 97.92]   B [P 99.00 R 98.81 F1 98.91]   E [P 97.73 R 97.55 F1 97.64]   EC [P 96.75 R 96.57 F1 96.66]
+99.val      L 2.367    acc [B 95.17 E 95.74 O 96.01 T 95.78]   B [P 97.91 R 97.56 F1 97.73]   E [P 94.81 R 94.47 F1 94.64]   EC [P 93.35 R 93.01 F1 93.18]
+
+100.train    L 1.195   acc [B 97.43 E 97.96 O 97.57 T 97.91]   B [P 98.99 R 98.80 F1 98.90]   E [P 97.71 R 97.52 F1 97.62]   EC [P 96.73 R 96.55 F1 96.64]
+100.val      L 2.378   acc [B 95.17 E 95.69 O 95.90 T 95.72]   B [P 97.87 R 97.58 F1 97.73]   E [P 94.74 R 94.46 F1 94.60]   EC [P 93.28 R 93.00 F1 93.14]
+
+
+Best epoch: 83
+Best metric: 93.20
+
+Confusion matrix:
+
+[[ 159    8    0    0    0    7    5    0    1    0    5    6    1    0    0    0   10    0    0    0    0   19    3]
+ [  13  331    1    0    0   19   10    7    2    0   13    1    4    0    0    0    6    0    0    0    0    6    1]
+ [   0    0    5    0    0    0    3    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    3]
+ [   0    1    0    0    0    2    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   4   18    0    0    0 5367    6    1   15    0   17    0    2    0    0    0  100    0    0    0    0   12   11]
+ [   0    6    1    0    0    3 2084    3    2    0    9    1    1    0    0    0    7    1    0    0    0    1    6]
+ [   0    4    0    0    0    0    6   48    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   0    2    0    0    0    1   14    0  201    0    0    0    0    0    0    0    0    0    0    0    0    1    1]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   2   12    0    0    0   25   11    0    0    0 2088    0    2    0    0    0   21    0    0    0    0   29    1]
+ [   4    2    0    0    0    2    0    0    0    0    0   48    3    0    0    0    4    0    0    0    0    1    0]
+ [   1    3    0    0    0    2    2    1    0    0    1    6   27    1    0    0    3    0    0    0    0    1    0]
+ [   0    1    0    0    0    0    0    0    1    0    0    0    0    8    0    0    0    3    0    0    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   0    3    0    0    0   95    6    0    0    0   16    1    4    0    0    0 6335    0    0    0    0    1   50]
+ [   0    0    0    0    0    1    4    0    0    0    0    0    0    2    0    0    0   19    0    0    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    7    0    0    0]
+ [   0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0    0]
+ [   9    3    0    0    0   12    1    0    0    0   17    1    4    0    0    0    5    0    0    0    0 1149    5]
+ [   1    5    1    0    0   18    4    0    6    0    7    1    2    1    0    0   49    0    0    1    0   11 2725]]
+
+Per-class summary:
+
+ADJP            [TP 157 FP 36 FN 67]      [P 81.35 R 70.09 F1 75.30]
+ADVP            [TP 326 FP 73 FN 88]      [P 81.70 R 78.74 F1 80.20]
+CONJP           [TP 5 FP 3 FN 6]          [P 62.50 R 45.45 F1 52.63]
+INTJ            [TP 0 FP 0 FN 3]          [P 0.00 R 0.00 F1 0.00]
+LST             [TP 0 FP 0 FN 0]          [P 0.00 R 0.00 F1 0.00]
+NP              [TP 5211 FP 343 FN 342]   [P 93.82 R 93.84 F1 93.83]
+PP              [TP 2083 FP 73 FN 42]     [P 96.61 R 98.02 F1 97.31]
+PRT             [TP 48 FP 12 FN 10]       [P 80.00 R 82.76 F1 81.36]
+SBAR            [TP 201 FP 27 FN 19]      [P 88.16 R 91.36 F1 89.73]
+UCP             [TP 0 FP 0 FN 0]          [P 0.00 R 0.00 F1 0.00]
+VP              [TP 2021 FP 152 FN 170]   [P 93.01 R 92.24 F1 92.62]
+
+Predicted sentence samples:
+
+1. Air-freight_B-NP carriers_E-NP raised_S-VP their_B-NP rates_E-NP for_S-PP U.S._B-NP products_E-NP going_S-VP across_S-PP the_B-NP Pacific_E-NP to_S-PP Asia_S-NP by_S-PP about_B-NP 20_I-NP %_E-NP earlier_B-NP this_I-NP month_E-NP ._O
+2. It_S-NP 's_S-VP already_S-ADVP that_S-SBAR|S-NP in_S-PP the_B-NP Bush_I-NP administration_E-NP ,_O at_B-ADVP least_E-ADVP for_S-PP any_B-NP job_E-NP in_S-PP which_S-NP abortion_S-NP is_S-VP even_B-ADJP|B-ADVP remotely_E-ADJP|E-ADVP an_B-NP issue_E-NP ._O
+3. Energy_B-NP prices_E-NP continued_B-VP to_I-VP fall_E-VP at_S-PP the_B-NP retail_I-NP level_E-NP ,_O but_O economists_S-NP worried_S-VP about_S-PP a_B-NP big_I-NP rise_E-NP in_S-PP wholesale_B-NP energy_I-NP costs_E-NP ._O
+4. Finally_S-ADVP ,_O as_S-SBAR shown_S-VP in_S-PP the_B-NP table_E-NP ,_O Democrats_S-NP allocate_S-VP a_B-NP higher_I-NP proportion_E-NP of_S-PP their_B-NP personal_I-NP staffs_E-NP to_S-PP district_B-NP offices_E-NP --_O where_S-ADVP local_B-NP benefit-seeking_I-NP duties_E-NP matter_S-VP more_B-NP|S-ADVP and_I-NP|O national_I-NP|B-NP policy_E-NP|I-NP making_S-VP|I-NP activities_S-NP|E-NP matter_S-VP less_B-ADJP|S-ADVP relative_E-ADJP|S-ADVP to_S-PP Washington_B-NP offices_E-NP ._O
+5. On_S-PP my_B-NP four-mile_I-NP drive_E-NP to_S-PP farm_B-NP headquarters_E-NP each_B-NP morning_E-NP ,_O I_S-NP drive_S-VP by_S-PP another_B-NP four_I-NP empty_I-NP houses_E-NP ._O
+6. Or_O an_B-NP interest_E-NP in_S-PP a_B-NP retirement_I-NP community_E-NP in_S-PP Nevada_S-NP that_S-NP will_B-VP knock_E-VP your_B-NP socks_E-NP off_S-ADVP ,_O once_S-ADVP|S-SBAR it_S-NP is_B-VP built_E-VP ?_O
+7. A_B-NP computer_I-NP failure_E-NP delayed_S-VP its_B-NP earnings_I-NP announcement_E-NP ,_O and_O some_B-NP investors_E-NP think_S-VP it_S-NP might_B-VP have_E-VP extra_B-NP costs_E-NP to_B-VP repair_E-VP damaged_B-NP telephone_I-NP lines_E-NP ._O
+8. Beginning_S-NP|S-PP in_S-PP December_B-NP 1995_E-NP ,_O Galileo_S-NP will_B-VP begin_E-VP a_B-NP two-year_I-NP tour_E-NP of_S-PP the_B-NP Jovian_I-NP moons_E-NP ._O
+9. Evaluating_S-VP asset-backed_B-NP securities_E-NP poses_S-VP another_B-NP problem_E-NP ._O
+10. Bolstered_S-VP by_S-PP strong_B-NP performances_E-NP by_S-PP its_B-NP psychiatric_I-NP hospitals_E-NP ,_O National_B-NP Medical_I-NP Enterprises_I-NP Inc._E-NP ,_O Los_B-NP Angeles_E-NP ,_O reported_S-VP net_B-NP income_E-NP of_S-PP $_B-NP 50_I-NP million_E-NP ,_O or_O 65_B-NP cents_E-NP a_B-NP share_E-NP ,_O for_S-PP the_B-NP first_I-NP quarter_E-NP ended_S-VP Aug._B-NP 31_E-NP ,_O up_S-ADVP from_S-PP $_B-NP 41_I-NP million_E-NP ,_O or_O 56_B-NP cents_E-NP a_B-NP share_E-NP ,_O a_B-NP year_E-NP earlier_S-ADVP ._O
+11. The_B-NP average_I-NP maturity_E-NP of_S-PP the_B-NP funds_E-NP tracked_S-VP by_S-PP IBC\/Donoghue_S-NP 's_S-NP remained_S-VP at_S-PP 38_B-NP days_E-NP for_S-PP the_B-NP third_I-NP consecutive_I-NP week_E-NP ._O
+12. In_S-PP New_B-NP York_I-NP Stock_I-NP Exchange_I-NP composite_I-NP trading_E-NP ,_O Contel_S-NP closed_S-VP at_S-PP $_B-NP 33.75_E-NP a_B-NP share_E-NP ,_O down_S-ADVP .50_B-NP cents_E-NP ._O
+13. The_B-NP Nasdaq_I-NP composite_E-NP leaped_S-VP 7.52_B-NP points_E-NP ,_O or_O 1.6_B-NP %_E-NP ,_O to_S-PP 470.80_S-NP ._O
+14. ``_O Until_S-PP|S-SBAR the_B-NP new_I-NP mainframe_I-NP products_E-NP kick_S-VP in_S-PRT ,_O there_S-NP wo_B-VP n't_I-VP be_E-VP a_B-NP lot_E-NP of_S-PP revenue_B-NP contribution_E-NP at_S-PP the_B-NP high_I-NP end_E-NP ,_O and_O that_S-NP 's_B-VP hurt_E-VP us_S-NP ,_O ''_O said_S-VP Mark_B-NP Steinkrauss_E-NP ,_O Digital_S-NP 's_B-NP director_E-NP of_S-PP investor_B-NP relations_E-NP ._O
+15. ``_O Our_B-NP goal_E-NP is_S-VP to_B-VP develop_E-VP quite_B-ADVP rapidly_E-ADVP to_S-PP a_B-NP top-10_I-NP position_E-NP ..._O by_S-PP the_B-NP end_E-NP of_S-PP three_B-NP years_E-NP from_S-PP now_S-NP ._O
+16. Under_S-PP the_B-NP exchange_E-NP 's_B-NP definitions_E-NP ,_O program_B-NP trading_E-NP also_S-ADVP describes_S-VP a_B-NP number_E-NP of_S-PP other_B-NP strategies_E-NP that_S-NP ,_O in_S-PP the_B-NP opinion_E-NP of_S-PP some_B-NP traders_E-NP ,_O do_B-VP n't_I-VP cause_E-VP big_B-NP swings_E-NP in_S-PP the_B-NP market_E-NP ._O
+17. Among_S-PP possible_B-NP delays_E-NP ,_O the_B-NP sales_E-NP of_S-PP Saks_B-NP|S-NP and_I-NP|O Marshall_I-NP|B-NP Field_E-NP --_O which_S-NP were_B-VP expected_I-VP to_I-VP be_E-VP on_S-PP the_B-NP block_E-NP soon_S-ADVP after_S-PP the_B-NP crucial_I-NP Christmas_I-NP season_E-NP --_O may_B-VP slide_E-VP into_S-PP the_B-NP second_I-NP quarter_E-NP|I-NP or_O|I-NP second_B-NP|I-NP half_E-NP ._O
+18. I_S-NP could_B-VP n't_I-VP decide_E-VP if_S-SBAR I_S-NP should_B-VP come_E-VP home_S-ADVP to_S-PP Marin_S-NP ,_O because_S-SBAR my_B-NP house_E-NP is_S-VP on_S-PP stilts_S-NP ._O
+19. John_B-NP Uphoff_E-NP ,_O an_B-NP analyst_E-NP with_S-PP Raymond_B-NP James_I-NP &_I-NP Associates_E-NP ,_O said_S-VP the_B-NP results_E-NP were_S-VP n't_O surprising_S-ADJP ,_O and_O attributed_S-VP the_B-NP buy-back_E-NP to_S-PP management_S-NP 's_B-NP confidence_E-NP in_S-PP the_B-NP Mirage_E-NP 's_B-NP ability_E-NP to_B-VP generate_E-VP strong_B-NP cash_I-NP flow_E-NP in_S-PP 1990_S-NP ._O
+20. ``_O We_S-NP are_S-VP not_O in_S-PP any_B-NP hurry_E-NP to_B-VP sell_E-VP ''_O Saks_S-NP ,_O Marshall_B-NP Field_E-NP or_O B.A.T_S-NP 's_B-NP other_I-NP U.S._I-NP retail_I-NP properties_E-NP ,_O said_S-VP Chairman_B-NP Patrick_I-NP Sheehy_E-NP ._O
+21. Mr._B-NP Byrne_E-NP says_S-VP Fireman_S-NP 's_B-NP Fund_E-NP will_B-VP probably_I-VP pay_E-VP hundreds_S-NP of_S-PP millions_S-NP in_S-PP primary_B-NP claims_E-NP ,_O but_O ,_O after_S-PP taxes_B-NP|S-NP and_I-NP|O use_E-NP|S-NP of_S-PP its_B-NP reinsurance_I-NP lines_E-NP ,_O the_B-NP company_E-NP 's_B-NP fourthquarter_I-NP charge_E-NP against_S-PP earnings_S-NP should_B-VP n't_I-VP top_E-VP $_B-NP 50_I-NP million_E-NP ._O
+22. For_S-PP the_B-NP nine_I-NP months_E-NP ,_O Golden_B-NP Nugget_E-NP reported_S-VP a_B-NP net_I-NP loss_E-NP of_S-PP $_B-NP 11.4_I-NP million_E-NP ,_O or_O 69_B-NP cents_E-NP a_B-NP share_E-NP ,_O based_S-PP on_S-PP 16.6_B-NP million_I-NP common_I-NP and_I-NP dilutive_I-NP equivalents_I-NP outstanding_E-NP ._O
+23. The_B-NP university_E-NP implied_S-VP that_S-SBAR it_S-NP would_B-VP drop_E-VP its_B-NP opposition_E-NP to_S-PP foreign_B-NP ownership_E-NP if_S-SBAR Ciba-Geigy_B-NP|S-NP and_I-NP|O Chiron_E-NP|S-NP are_B-VP|S-VP successful_E-VP|S-ADJP with_S-PP their_B-NP lower_I-NP bid_E-NP ._O
+24. In_S-PP addition_S-NP to_S-PP Carat_S-NP ,_O WCRS_S-NP will_B-VP hold_E-VP onto_S-PP its_B-NP public_I-NP relations_E-NP|I-NP ,_O|I-NP TV_B-NP|I-NP programming_E-NP|I-NP and_O|I-NP other_B-NP|I-NP businesses_E-NP ._O
+25. Four_B-NP years_E-NP ago_S-ADVP ,_O Pittsburgh_S-NP was_B-VP designated_E-VP the_B-NP most-livable_I-NP U.S._I-NP city_E-NP by_S-PP Rand_B-NP McNally_E-NP 's_B-NP Places_I-NP Rated_I-NP Almanac_E-NP ,_O and_O the_B-NP honor_E-NP did_B-VP|S-VP wonders_I-VP|S-NP to_I-VP|B-VP improve_E-VP Pittsburgh_S-NP 's_B-NP soot-stained_I-NP image_E-NP ._O
+26. Mortgage_B-NP securities_E-NP ended_S-VP little_B-ADVP|B-ADJP changed_E-ADVP|E-ADJP after_S-PP light_B-NP dealings_E-NP ._O
+27. It_S-NP 's_S-VP hard_S-ADJP to_B-VP accept_E-VP that_S-SBAR it_S-NP 's_S-VP over_B-ADVP|S-ADVP and_I-ADVP|O only_E-ADVP|B-VP took_S-VP|E-VP 15_B-NP seconds_E-NP ._O
+28. As_S-PP part_S-NP of_S-PP the_B-NP restructuring_E-NP ,_O WCRS_B-NP and_I-NP Eurocom_E-NP said_S-VP they_S-NP will_B-VP look_E-VP for_S-PP ways_S-NP to_B-VP combine_E-VP their_B-NP media_I-NP buying_E-NP across_S-PP Europe_S-NP ._O
+29. The_B-NP cycle_E-NP has_B-VP been_I-VP repeated_E-VP several_B-NP times_E-NP since_S-SBAR China_S-NP began_B-VP reforming_E-VP its_B-NP planned_I-NP economy_E-NP in_S-PP 1979_S-NP ._O
+30. THE_B-NP NATION'S_I-NP carriers_E-NP also_S-ADVP provide_S-VP discounts_S-NP to_S-PP Red_B-NP Cross_I-NP workers_E-NP ,_O retired_B-NP military_I-NP personnel_I-NP|E-NP and_I-NP|O medical_I-NP|B-NP students_E-NP ._O
+31. ``_O If_S-SBAR you_S-NP 're_B-VP selling_E-VP equities_S-NP ,_O you_S-NP do_B-VP n't_I-VP start_I-VP getting_E-VP proceeds_S-NP for_S-PP five_B-NP to_I-NP seven_I-NP days_E-NP ,_O ''_O said_S-VP Frank_B-NP Rachwalski_E-NP ,_O who_S-NP manages_S-VP the_B-NP Kemper_I-NP Money_I-NP Market_I-NP Fund_E-NP ._O
+32. Foreign_B-NP Bonds_E-NP
+33. First_S-ADVP ,_O a_B-NP pop_I-NP quiz_E-NP ._O
+34. But_O investors_S-NP are_B-VP betting_E-VP that_S-SBAR the_B-NP financial_I-NP and_I-NP psychological_I-NP impact_E-NP of_S-PP the_B-NP earthquake_E-NP ,_O coming_S-VP so_B-ADVP soon_E-ADVP after_S-PP the_B-NP hurricane_E-NP ,_O will_B-VP help_I-VP stem_E-VP more_B-NP than_I-NP two_I-NP years_E-NP of_S-PP intense_B-NP price-cutting_I-NP wars_E-NP among_S-PP business_B-NP insurers_E-NP ._O
+35. The_B-NP industry_E-NP had_B-VP shown_E-VP signs_S-NP of_S-PP recovery_S-NP this_B-NP summer_E-NP ,_O after_S-SBAR the_B-NP central_I-NP bank_E-NP began_B-VP to_I-VP relax_E-VP its_B-NP clamp_E-NP on_S-PP credit_S-NP ,_O allowing_S-VP interest_B-NP rates_E-NP to_B-VP drop_E-VP a_B-NP bit_E-NP after_S-PP pushing_S-VP them_S-NP up_S-PRT for_S-PP a_B-NP year_E-NP ._O
+36. SEC_B-NP Chairman_I-NP Richard_I-NP Breeden_E-NP said_S-VP the_B-NP cooperation_E-NP by_S-PP the_B-NP exchanges_E-NP would_B-VP enable_E-VP investors_S-NP to_B-VP buy_I-VP and_I-VP sell_E-VP options_S-NP listed_S-VP solely_S-ADVP on_S-PP the_B-NP Pacific_I-NP exchange_E-NP ,_O guaranteeing_S-VP the_B-NP liquidity_E-NP of_S-PP the_B-NP market_E-NP ._O
+37. Still_S-ADVP ,_O without_S-PP the_B-NP assurance_E-NP of_S-PP British_B-NP Airways_E-NP '_B-NP financial_I-NP backing_E-NP ,_O it_S-NP will_B-VP be_E-VP tougher_S-ADJP for_S-PP|S-SBAR the_B-NP buy-out_I-NP group_E-NP to_B-VP convince_E-VP already-reluctant_B-NP banks_E-NP to_B-VP make_E-VP loan_B-NP commitments_E-NP for_S-PP a_B-NP revised_I-NP bid_E-NP ,_O especially_S-ADVP since_S-PP|S-SBAR British_B-NP Air_E-NP 's_B-NP original_I-NP investment_E-NP represented_S-VP 78_B-NP %_E-NP of_S-PP the_B-NP cash_I-NP equity_I-NP contribution_E-NP for_S-PP the_B-NP bid_E-NP ._O
+38. None_B-NP|S-NP sustained_I-NP|S-VP ``_I-NP|B-NP significant_I-NP ''_I-NP damage_E-NP ,_O a_B-NP spokesman_E-NP said_S-VP ,_O adding_S-VP that_S-SBAR ``_O the_B-NP delicate_I-NP manufacturing_I-NP process_I-NP machines_E-NP were_B-VP checked_E-VP and_O were_B-VP|S-VP all_I-VP|O found_I-VP|B-VP to_I-VP be_I-VP operating_E-VP normally_S-ADVP ._O ''_O
+39. For_S-PP example_S-NP ,_O about_B-NP 88_I-NP %_E-NP of_S-PP Journal_B-NP readers_E-NP owned_S-VP stock_S-NP -LRB-_S-VP|O down_S-ADVP slightly_S-ADVP from_S-PP 91_B-NP %_E-NP in_S-PP a_B-NP similar_I-NP poll_E-NP last_B-NP year_E-NP -RRB-_O ._O
+40. To_B-VP get_E-VP the_B-NP necessary_I-NP growth_E-NP ,_O adds_S-VP Murray_B-NP Ruffel_E-NP ,_O a_B-NP marketing_I-NP official_E-NP at_S-PP the_B-NP Financial_I-NP Programs_I-NP mutual-fund_I-NP group_E-NP ,_O ``_O you_S-NP need_B-VP to_I-VP go_E-VP to_S-PP the_B-NP stock_I-NP market_E-NP ._O ''_O
+41. But_O some_B-NP observers_E-NP believe_S-VP Paramount_B-NP Chairman_I-NP Martin_I-NP Davis_E-NP wanted_B-VP to_I-VP avoid_E-VP the_B-NP possible_I-NP taint_E-NP of_S-PP being_B-VP perceived_E-VP as_S-PP a_B-NP corporate_I-NP raider_E-NP in_S-PP his_B-NP controversial_I-NP bid_E-NP for_S-PP Time_S-NP ._O
+42. But_O foreign_B-NP exploration_I-NP and_I-NP production_I-NP earnings_E-NP fell_S-VP sharply_S-ADVP ,_O to_S-PP $_B-NP 12_I-NP million_E-NP from_S-PP $_B-NP 95_I-NP million_E-NP ._O
+43. The_B-NP Associated_I-NP Press_E-NP 's_B-NP earthquake_I-NP coverage_E-NP drew_S-VP attention_S-NP to_S-PP a_B-NP phenomenon_E-NP that_S-NP deserves_S-VP some_B-NP thought_E-NP by_S-PP public_B-NP officials_E-NP and_O other_B-NP policy_I-NP makers_E-NP ._O
+44. So_O the_B-NP producers_E-NP went_S-VP to_S-PP Capitol_B-NP Hill_E-NP ,_O where_S-ADVP a_B-NP congressman_E-NP from_S-PP Georgia_S-NP introduced_S-VP a_B-NP measure_E-NP to_B-VP ban_E-VP centrifugal_B-NP egg-breaking_I-NP machines_E-NP ._O
+45. Today_S-NP should_B-VP be_E-VP interesting_S-ADJP as_S-SBAR people_S-NP realize_S-VP how_S-ADVP hard_B-NP|O life_E-NP|S-NP is_B-VP going_I-VP to_I-VP be_E-VP here_S-ADVP for_S-PP a_B-NP while_E-NP ._O
+46. Call_S-VP it_S-NP the_B-NP uninformed_E-NP trudging_S-VP after_S-PP the_B-NP incomprehensible_E-NP ._O
+47. At_S-PP the_B-NP same_I-NP time_E-NP ,_O a_B-NP small_I-NP group_E-NP of_S-PP Senate_B-NP Democrats_E-NP are_B-VP working_E-VP on_S-PP a_B-NP similar_I-NP plan_E-NP and_O may_B-VP introduce_E-VP it_S-NP soon_S-ADVP ._O
+48. From_S-PP its_B-NP peak_E-NP in_S-PP 1972_S-NP of_S-PP $_B-NP 198.41_E-NP ,_O the_B-NP average_I-NP American_I-NP weekly_I-NP wage_E-NP had_B-VP fallen_E-VP to_S-PP $_B-NP 169.28_E-NP in_S-PP 1987_S-NP --_O both_B-NP figures_E-NP being_B-VP expressed_E-VP in_S-PP 1977_B-NP dollars_E-NP ._O
+49. But_O Japanese_B-NP institutions_E-NP shied_S-VP away_S-ADVP from_S-PP bidding_S-NP|S-VP on_S-PP the_B-NP high-profile_I-NP tower_E-NP out_S-PP of_S-PP fear_S-NP their_B-NP purchase_E-NP of_S-PP the_B-NP property_E-NP would_B-VP trigger_E-VP anti-Japanese_B-NP sentiment_E-NP ._O
+50. An_B-NP L.L._I-NP Bean_I-NP spokeswoman_E-NP notes_S-VP :_O ``_O People_S-NP are_B-VP|S-VP just_I-VP|S-ADVP used_E-VP|S-ADJP to_S-PP living_S-NP|S-VP in_S-PP a_B-NP last-minute_I-NP society_E-NP ._O ''_O
+51. Senate_B-NP Commerce_I-NP Committee_I-NP Chairman_I-NP Ernest_I-NP Hollings_E-NP -LRB-_O D._S-NP ,_O S.C._S-NP -RRB-_O ,_O who_S-NP also_S-ADVP chairs_S-VP the_B-NP Senate_I-NP appropriations_I-NP subcommittee_E-NP for_S-PP the_B-NP department_E-NP ,_O attached_S-VP $_B-NP 10_I-NP million_E-NP for_S-PP an_B-NP advanced_I-NP technology_I-NP initiative_E-NP ,_O including_S-PP work_S-NP on_S-PP high-definition_B-NP television_E-NP ._O
+52. For_S-PP example_S-NP ,_O 12_B-NP %_E-NP of_S-PP this_B-NP year_E-NP 's_B-NP respondents_E-NP said_S-VP they_S-NP expect_S-VP a_B-NP recession_E-NP within_S-PP 12_B-NP months_E-NP ._O
+53. For_S-PP instance_S-NP ,_O some_B-NP investors_E-NP have_B-VP sworn_E-VP off_S-PRT stocks_S-NP since_S-PP the_B-NP 1987_I-NP market_I-NP crash_E-NP ;_O last_B-NP Friday_E-NP 's_B-NP debacle_E-NP only_S-ADVP reinforced_S-VP those_B-NP feelings_E-NP ._O
+54. But_O while_S-SBAR history_S-NP can_B-VP suggest_E-VP what_S-NP is_S-VP reasonable_S-ADJP to_B-VP expect_E-VP there_S-NP 's_S-VP no_B-NP guarantee_E-NP that_S-SBAR the_B-NP past_E-NP will_B-VP repeat_E-VP itself_S-NP ._O
+55. Before_S-PP July_S-NP ,_O pro-choice_B-NP voters_E-NP could_B-VP safely_I-VP make_E-VP political_B-NP decisions_E-NP without_S-PP focusing_S-VP narrowly_S-ADVP on_S-PP abortion_S-NP ._O
+56. If_S-SBAR LIN_S-NP is_B-VP put_E-VP up_S-PRT for_S-PP sale_S-NP rather_B-CONJP than_E-CONJP purchased_S-VP by_S-PP McCaw_S-NP in_S-PP five_B-NP years_E-NP ,_O McCaw_S-NP wo_B-VP n't_I-VP submit_E-VP a_B-NP bid_E-NP unless_S-SBAR the_B-NP independent_I-NP directors_E-NP request_S-VP it_S-NP ,_O and_O the_B-NP independent_I-NP directors_E-NP will_B-VP run_E-VP the_B-NP bidding_E-NP ._O
+57. Neither_S-SBAR|O she_S-NP nor_S-VP|O other_B-NP real-estate_I-NP executives_I-NP and_I-NP brokers_E-NP could_B-VP project_E-VP how_B-ADVP|B-NP much_E-ADVP|I-NP less_B-NP|E-NP Marina_I-NP|B-NP properties_E-NP might_B-VP bring_E-VP ,_O but_O she_S-NP said_S-VP the_B-NP two-tier_I-NP price_I-NP structure_E-NP would_B-VP affect_E-VP prices_S-NP ``_O for_S-PP a_B-NP while_E-NP ._O ''_O
+58. I_S-NP call_S-VP her_B-NP agent_E-NP ,_O David_B-NP Dominici_E-NP ._O
+59. Subsequently_S-ADVP ,_O however_S-ADVP ,_O the_B-NP ill_I-NP effects_E-NP are_S-VP likely_S-ADJP to_B-VP be_I-VP offset_E-VP ,_O at_B-ADVP least_E-ADVP in_S-PP economic_B-NP terms_E-NP ,_O as_S-SBAR construction_B-NP activity_E-NP begins_S-VP ._O
+60. The_B-NP British_I-NP Deloitte_I-NP firm_E-NP recently_S-ADVP withdrew_S-VP from_S-PP the_B-NP merger_E-NP of_S-PP Deloitte_B-NP and_I-NP Touche_I-NP world-wide_E-NP and_O joined_B-NP|S-VP Coopers_I-NP|B-NP &_I-NP Lybrand_E-NP ._O
+61. But_O whether_S-SBAR this_B-NP price_E-NP|I-NP break_S-VP|E-NP has_B-VP|S-VP implications_E-VP|S-NP for_S-PP this_B-NP week_E-NP ,_O he_S-NP said_S-VP ,_O ``_O we_S-NP will_B-VP know_E-VP more_S-NP when_S-ADVP the_B-NP London_I-NP Metal_I-NP Exchange_I-NP copper_I-NP stock_I-NP levels_E-NP are_B-VP released_E-VP Monday_B-NP morning_E-NP ._O ''_O
+62. Instead_S-SBAR|S-ADVP it_S-NP 's_S-VP a_B-NP form_E-NP of_S-PP ``_O enhanced_B-NP rescission_E-NP ,_O ''_O giving_S-VP a_B-NP President_E-NP a_B-NP chance_E-NP to_B-VP rescind_E-VP|I-VP ,_O|I-VP or_O|I-VP strike_S-NP|E-VP ,_O specific_B-NP spending_I-NP items_E-NP that_S-NP just_S-ADVP go_S-VP too_B-ADVP far_E-ADVP ._O
+63. A_B-NP panel_I-NP system_E-NP like_S-PP that_S-NP in_S-PP the_B-NP Bob_I-NP Stone_E-NP|I-NP example_S-ADVP|E-NP enjoys_S-VP such_B-NP advantages_E-NP as_S-PP high_B-NP credibility_E-NP and_O ,_O for_S-PP the_B-NP panelists_E-NP ,_O mutual_B-NP support_E-NP ._O
+64. Whitbread_S-NP also_S-ADVP owns_S-VP the_B-NP license_E-NP to_B-VP brew_I-VP and_I-VP distribute_E-VP Heineken_S-NP and_O Stella_B-NP Artois_I-NP beers_E-NP in_S-PP Britain_S-NP ._O
+65. The_B-NP FTC_E-NP first_B-VP|S-ADVP issued_E-VP|S-VP an_B-NP administrative_I-NP complaint_E-NP in_S-PP the_B-NP case_E-NP in_S-PP 1985_S-NP ._O
+66. The_B-NP Westin_I-NP staff_E-NP had_S-VP ,_O kindly_S-ADVP ,_O set_S-VP out_S-PRT lighted_B-NP candles_E-NP in_S-PP the_B-NP ballroom_E-NP ,_O prepared_S-VP a_B-NP|S-NP cold-cuts_I-NP|B-NP buffet_E-NP and_O passed_S-VP around_S-PP|S-PRT pillows_B-NP and_I-NP blankets_E-NP ._O
+67. Responses_S-NP were_B-VP weighted_E-VP on_S-PP the_B-NP basis_E-NP of_S-PP age_B-NP and_I-NP gender_E-NP to_B-VP conform_E-VP with_S-PP U.S._B-NP Census_I-NP data_E-NP ._O
+68. On_S-PP average_S-NP ,_O something_S-NP that_S-NP cost_S-VP $_B-NP 100_E-NP 30_B-NP years_E-NP ago_S-ADVP now_B-VP|S-ADVP costs_E-VP|S-VP $_B-NP 425_E-NP ._O
+69. Any_B-NP secret_E-NP can_B-VP be_I-VP pirated_E-VP ,_O the_B-NP experts_E-NP said_S-VP ,_O if_S-SBAR it_S-NP is_B-VP transmitted_E-VP over_S-PP the_B-NP air_E-NP ._O
+70. Only_B-NP five_E-NP of_S-PP 496_B-NP branches_I-NP|E-NP statewide_E-NP|S-ADVP remain_S-VP closed_S-ADJP ,_O while_S-SBAR 23_S-NP of_S-PP 600_B-NP automated-teller_I-NP machines_E-NP remained_S-VP out_S-PP of_S-PP order_S-NP ._O
+71. Mid-sized_B-NP companies_E-NP were_B-VP most_I-VP affected_E-VP by_S-PP talk_S-NP of_S-PP layoffs_S-NP or_O plant_B-NP closings_E-NP ._O
+72. ``_O I_S-NP 'm_S-VP sure_S-ADJP they_S-NP 'll_B-VP formulate_E-VP a_B-NP reform_E-NP that_S-NP will_B-VP be_E-VP a_B-NP recipe_E-NP for_S-PP the_B-NP GDR_E-NP 's_B-NP future_E-NP as_S-PP a_B-NP separately_I-NP identifiable_I-NP state_E-NP ,_O ''_O says_S-VP Michael_B-NP Simmons_E-NP ,_O a_B-NP British_I-NP journalist_E-NP whose_B-NP book_E-NP on_S-PP East_B-NP Germany_E-NP ,_O entitled_S-VP ``_O The_B-NP Unloved_I-NP Country_E-NP ,_O ''_O was_B-VP published_E-VP this_B-NP month_E-NP ._O
+73. But_O when_S-ADVP the_B-NP Pemex_I-NP plant_E-NP shut_S-VP down_S-PRT for_S-PP an_B-NP annual_I-NP overhaul_E-NP ,_O it_S-NP would_B-VP never_I-VP give_E-VP notice_S-NP to_S-PP its_B-NP customers_E-NP ._O
+74. When_S-ADVP an_B-NP electric_I-NP current_E-NP is_B-VP applied_E-VP to_S-PP the_B-NP palladium_I-NP and_I-NP platinum_I-NP electrodes_E-NP ,_O the_B-NP heavy_I-NP water_E-NP did_B-VP begin_I-VP to_I-VP break_E-VP up_S-PRT ,_O or_O dissociate_S-VP ._O
+75. Former_B-NP Democratic_I-NP fund-raiser_I-NP Thomas_I-NP M._I-NP Gaubert_E-NP ,_O whose_B-NP savings_I-NP and_I-NP loan_E-NP was_B-VP wrested_E-VP from_S-PP his_B-NP control_E-NP by_S-PP federal_B-NP thrift_I-NP regulators_E-NP ,_O has_B-VP been_I-VP granted_E-VP court_B-NP permission_E-NP to_B-VP sue_E-VP the_B-NP regulators_E-NP ._O
+76. ``_O Some_B-NP people_E-NP flat_S-VP|B-ADVP out_S-PRT|E-ADVP did_B-VP n't_I-VP know_E-VP what_S-NP to_B-VP do_E-VP ,_O ''_O says_S-VP Robert_B-NP G._I-NP Lee_E-NP ,_O vice_B-NP president_E-NP for_S-PP emergency_B-NP planning_E-NP and_O corporate_B-NP security_E-NP at_S-PP Great_B-NP Western_E-NP ._O
+77. Ford_B-NP and_I-NP Saab_E-NP ended_S-VP talks_S-NP about_S-PP a_B-NP possible_I-NP alliance_E-NP after_S-SBAR Ford_S-NP concluded_S-VP that_S-SBAR the_B-NP cost_E-NP to_B-VP modernize_E-VP Saab_S-NP 's_B-NP car_I-NP operations_E-NP would_B-VP outweigh_E-VP the_B-NP likely_I-NP return_E-NP ._O
+78. Mark_S-NP ,_O an_B-NP oil_I-NP and_I-NP gas_I-NP concern_E-NP ,_O said_S-VP the_B-NP 15-year_I-NP debentures_E-NP are_S-VP convertible_S-ADJP before_S-PP maturity_S-NP at_S-PP C$_B-NP 12.50_E-NP for_S-PP each_B-NP Mark_I-NP common_I-NP share_E-NP ,_O and_O can_B-VP be_I-VP redeemed_E-VP at_S-PP the_B-NP company_E-NP 's_B-NP option_E-NP ,_O under_S-PP certain_B-NP conditions_E-NP ,_O after_S-PP Nov._B-NP 30_I-NP ,_I-NP 1992_E-NP ._O
+79. The_B-NP 1988_I-NP quarter_E-NP also_S-ADVP included_S-VP one-time_B-NP gains_E-NP totaling_S-VP about_B-NP $_I-NP 35_I-NP million_E-NP ._O
+80. F-16_B-NP deliveries_E-NP also_S-ADVP have_B-VP fallen_E-VP ``_O slightly_S-ADVP behind_S-PP schedule_S-NP ,_O ''_O although_S-SBAR a_B-NP return_E-NP to_S-PP the_B-NP previous_I-NP schedule_E-NP is_B-VP expected_E-VP in_S-PP 1990_S-NP ,_O the_B-NP company_E-NP said_S-VP ._O
+81. Power_S-NP of_S-PP Suggestion_B-NP|S-NP Stronger_E-NP|S-ADJP in_S-PP Japan_S-NP
+82. General_B-NP Motors_I-NP Corp._E-NP ,_O meanwhile_S-ADVP ,_O said_S-VP it_S-NP will_B-VP idle_E-VP for_S-PP yet_B-NP another_I-NP week_E-NP its_B-NP Linden_I-NP ,_I-NP N.J._I-NP ,_I-NP assembly_I-NP plant_E-NP ,_O bringing_S-VP to_S-PP three_B-NP weeks_E-NP the_B-NP total_I-NP time_E-NP that_B-NP plant_E-NP will_B-VP be_I-VP idled_E-VP during_S-PP October_S-NP ._O
+83. In_S-PP May_S-NP ,_O Mr._B-NP Brierley_E-NP 's_B-NP stake_E-NP shrank_S-VP to_S-PP 8.7_B-NP %_E-NP after_S-PP|S-SBAR ranging_S-NP|S-VP between_S-PP 9_B-NP %_E-NP and_O 11_B-NP %_E-NP for_S-PP much_S-NP of_S-PP the_B-NP previous_I-NP year_E-NP ._O
+84. But_O agreement_S-NP aparently_S-NP|S-ADVP could_B-VP n't_I-VP be_I-VP reached_E-VP because_B-PP of_E-PP opposition_S-NP from_S-PP the_B-NP states_E-NP of_S-PP Hamburg_B-NP and_I-NP Bremen_E-NP ,_O which_S-NP are_B-VP demanding_E-VP more_B-NP influence_E-NP over_S-PP the_B-NP German_I-NP Airbus_I-NP operations_E-NP and_O a_B-NP better_I-NP guarantee_E-NP against_S-PP job_S-VP|B-NP losses_S-NP|E-NP in_S-PP the_B-NP troubled_I-NP Northern_I-NP German_I-NP region_E-NP ._O
+85. In_S-PP composite_B-NP trading_E-NP on_S-PP the_B-NP Big_I-NP Board_E-NP ,_O Bell_B-NP Atlantic_E-NP closed_S-VP at_S-PP $_B-NP 100.625_E-NP ,_O up_S-ADVP $_B-NP 1.50_E-NP a_B-NP share_E-NP ._O
+86. Adds_S-VP Robert_B-NP Juliano_E-NP ,_O the_B-NP head_I-NP lobbyist_E-NP for_S-PP a_B-NP variety_E-NP of_S-PP interests_S-NP that_S-NP want_B-VP to_I-VP protect_E-VP the_B-NP tax_I-NP deduction_E-NP for_S-PP travel_B-NP and_I-NP entertainment_I-NP expenses_E-NP :_O ``_O It_S-NP appears_S-VP as_B-SBAR though_E-SBAR the_B-NP whole_I-NP thing_E-NP is_S-VP wide_S-ADJP|B-ADJP open_B-ADVP|E-ADJP again_E-ADVP|S-ADVP ._O ''_O
+87. Revenue_S-NP of_S-PP $_B-NP 1.73_I-NP billion_E-NP was_S-VP almost_B-ADJP unchanged_E-ADJP from_S-PP last_B-NP year_E-NP 's_B-NP $_I-NP 1.72_I-NP billion_E-NP ._O
+88. Canadian_B-NP Pacific_E-NP is_S-VP Soo_B-NP Line_E-NP 's_B-NP biggest_I-NP customer_E-NP and_O has_B-VP owned_E-VP a_B-NP majority_I-NP stake_E-NP in_S-PP the_B-NP U.S._I-NP railroad_E-NP since_S-PP 1947_S-NP ._O
+89. The_B-NP state_E-NP has_B-VP sued_E-VP these_B-NP charities_E-NP in_S-PP state_B-NP court_E-NP ,_O complaining_S-VP that_S-SBAR much_S-NP of_S-PP the_B-NP money_E-NP was_B-VP grossly_I-VP misspent_E-VP ;_O 82_B-NP %_E-NP ,_O says_S-VP Mr._B-NP Ormstedt_E-NP ,_O went_S-VP to_S-PP fund_B-NP raisers_E-NP and_O most_S-NP of_S-PP the_B-NP rest_E-NP to_S-PP the_B-NP people_E-NP who_S-NP ran_S-VP the_B-NP charities_E-NP and_O|S-PP to_S-PP their_B-NP relatives_E-NP --_O for_S-PP fur_B-NP coats_E-NP ,_O trips_S-NP to_S-PP Florida_S-NP ,_O Lucullan_B-NP restaurant_I-NP tabs_E-NP ._O
+90. The_B-NP study_E-NP ,_O which_S-NP received_S-VP funding_S-NP from_S-PP Upjohn_B-NP Co._E-NP ,_O which_S-NP makes_S-VP several_B-NP drugs_E-NP to_B-VP treat_E-VP stress-related_B-NP illnesses_E-NP ,_O also_S-ADVP found_S-VP 47_B-NP %_E-NP of_S-PP the_B-NP managers_E-NP said_S-VP stress_B-NP ,_I-NP anxiety_I-NP and_I-NP depression_E-NP contribute_S-VP to_S-PP decreased_B-NP production_E-NP ._O
+91. The_B-NP percentage_I-NP change_E-NP is_S-VP since_S-PP year-end_S-NP ._O
+92. ``_O I_S-NP 'm_S-VP not_O sure_S-ADJP they_S-NP 're_B-VP going_I-VP to_I-VP make_E-VP it_S-NP work_S-ADVP|S-VP ,_O ''_O says_S-VP Mr._B-NP Anderson_E-NP ._O
+93. Much_S-NP of_S-PP the_B-NP cost_E-NP of_S-PP cleaning_S-VP up_S-PRT after_S-SBAR|S-PP the_B-NP earthquake_E-NP will_B-VP involve_I-VP repairing_E-VP highways_B-NP and_I-NP bridges_E-NP ._O
+94. Technology_B-NP stocks_E-NP ,_O says_S-VP Mr._B-NP Goldman_E-NP ._O
+95. The_B-NP failed_I-NP takeover_E-NP would_B-VP have_I-VP given_E-VP UAL_B-NP employees_E-NP 75_B-NP %_E-NP|I-NP voting_B-NP|I-NP control_E-NP of_S-PP the_B-NP nation_E-NP 's_B-NP second-largest_I-NP airline_E-NP ,_O with_S-PP management_S-NP getting_S-VP 10_B-NP %_I-NP control_E-NP and_O British_B-NP Air_E-NP 15_B-NP|B-ADJP %_E-NP|E-ADJP ._O
+96. The_B-NP key_I-NP corporate_I-NP news_E-NP of_S-PP the_B-NP day_E-NP was_S-VP that_S-SBAR British_B-NP Airways_E-NP decided_B-VP to_I-VP withdraw_E-VP from_S-PP a_B-NP management-led_I-NP bid_E-NP for_S-PP UAL_B-NP Corp._E-NP ,_O the_B-NP parent_E-NP of_S-PP United_B-NP Airlines_E-NP ._O
+97. Dayton_B-NP Hudson_E-NP 's_B-NP repurchase_I-NP offer_E-NP ,_O representing_S-VP about_B-NP 9_I-NP %_E-NP of_S-PP its_B-NP common_I-NP shares_E-NP outstanding_S-ADJP ,_O had_B-VP established_E-VP a_B-NP range_E-NP of_S-PP between_B-NP $_I-NP 60_I-NP and_I-NP $_I-NP 65_E-NP for_S-PP the_B-NP buy-back_E-NP ._O
+98. To_B-VP make_E-VP them_S-NP directly_B-ADJP comparable_E-ADJP ,_O each_B-NP index_E-NP is_B-VP based_E-VP on_S-PP the_B-NP close_E-NP of_S-PP 1969_S-NP equaling_S-VP 100_S-NP ._O
+99. ``_O The_B-NP market_E-NP is_B-VP sending_E-VP nervous_B-NP signals_E-NP ,_O ''_O says_S-VP Peter_B-NP J._I-NP Canelo_E-NP ,_O chief_B-NP market_I-NP strategist_E-NP for_S-PP Bear_B-NP ,_I-NP Stearns_I-NP &_I-NP Co._E-NP ,_O and_O it_S-NP 's_S-VP ``_O unwise_S-ADJP ''_O to_B-VP be_E-VP|I-VP overcommitted_S-ADJP|E-VP to_S-PP stocks_S-NP ._O
+100. Not_O|B-NP exactly_S-VP|I-NP sophisticated_B-NP|I-NP market_I-NP research_E-NP ,_O but_O who_S-NP cares_S-VP as_B-ADVP long_E-ADVP as_S-PP|S-SBAR the_B-NP campaigns_I-NP|E-NP work_E-NP|S-VP ._O
+

@@ -1,0 +1,441 @@
+data folder: data/ready/nerc/conll2002_esp/
+embeddings: polyglot, es
+epochs: 100
+batch size: 8
+initial learning rate: 0.001
+l.r. decay rate: 0.05
+byte lstm units: 64
+word lstm units: 128
+byte embedding dim: 50
+byte lstm layers: 1
+word lstm layers: 1
+use byte embeddings: 1
+use word embeddings: 0
+use crf layer: 1
+
+1.train    L 5.088     acc [B 58.00 E 55.11 O 99.45 T 93.96]   B [P 93.16 R 91.50 F1 92.32]   E [P 88.60 R 87.68 F1 88.14]   EC [P 57.10 R 56.51 F1 56.81]
+1.val      L 5.521     acc [B 52.82 E 51.88 O 99.36 T 92.57]   B [P 92.25 R 90.81 F1 91.52]   E [P 88.33 R 87.50 F1 87.91]   EC [P 51.73 R 51.24 F1 51.48]
+
+2.train    L 3.524     acc [B 64.24 E 64.53 O 99.48 T 95.15]   B [P 95.00 R 91.89 F1 93.42]   E [P 91.37 R 88.57 F1 89.95]   EC [P 64.75 R 62.77 F1 63.74]
+2.val      L 4.240     acc [B 56.68 E 57.83 O 99.45 T 93.50]   B [P 93.76 R 90.14 F1 91.91]   E [P 90.86 R 87.48 F1 89.14]   EC [P 57.47 R 55.33 F1 56.38]
+
+3.train    L 2.866     acc [B 69.94 E 68.65 O 99.67 T 95.83]   B [P 95.07 R 93.54 F1 94.30]   E [P 91.99 R 90.53 F1 91.25]   EC [P 69.52 R 68.41 F1 68.96]
+3.val      L 3.617     acc [B 61.66 E 61.16 O 99.59 T 94.09]   B [P 93.22 R 89.77 F1 91.46]   E [P 90.64 R 87.27 F1 88.93]   EC [P 62.63 R 60.29 F1 61.44]
+
+4.train    L 2.415     acc [B 72.45 E 72.50 O 99.62 T 96.26]   B [P 95.59 R 94.01 F1 94.79]   E [P 92.83 R 91.30 F1 92.06]   EC [P 72.25 R 71.06 F1 71.65]
+4.val      L 3.075     acc [B 65.85 E 65.44 O 99.49 T 94.62]   B [P 93.55 R 90.99 F1 92.25]   E [P 91.05 R 88.56 F1 89.78]   EC [P 66.29 R 64.48 F1 65.37]
+
+5.train    L 2.191     acc [B 73.78 E 73.73 O 99.52 T 96.32]   B [P 95.66 R 94.27 F1 94.96]   E [P 92.84 R 91.49 F1 92.16]   EC [P 73.33 R 72.26 F1 72.79]
+5.val      L 2.866     acc [B 68.19 E 66.91 O 99.40 T 94.76]   B [P 93.95 R 91.77 F1 92.85]   E [P 91.39 R 89.27 F1 90.32]   EC [P 68.50 R 66.91 F1 67.70]
+
+6.train    L 2.104     acc [B 74.29 E 73.67 O 99.63 T 96.42]   B [P 95.70 R 94.80 F1 95.25]   E [P 92.85 R 91.98 F1 92.41]   EC [P 73.56 R 72.87 F1 73.21]
+6.val      L 2.826     acc [B 68.54 E 66.68 O 99.56 T 94.86]   B [P 93.70 R 92.00 F1 92.84]   E [P 91.39 R 89.71 F1 90.54]   EC [P 68.35 R 67.10 F1 67.72]
+
+7.train    L 1.864     acc [B 76.16 E 75.99 O 99.71 T 96.77]   B [P 96.49 R 94.42 F1 95.45]   E [P 94.14 R 92.11 F1 93.11]   EC [P 76.46 R 74.82 F1 75.63]
+7.val      L 2.821     acc [B 66.47 E 66.00 O 99.61 T 94.80]   B [P 94.35 R 90.99 F1 92.64]   E [P 92.35 R 89.04 F1 90.66]   EC [P 67.85 R 65.42 F1 66.61]
+
+8.train    L 1.743     acc [B 77.34 E 77.44 O 99.65 T 96.90]   B [P 96.34 R 94.87 F1 95.60]   E [P 93.83 R 92.40 F1 93.11]   EC [P 76.99 R 75.82 F1 76.40]
+8.val      L 2.726     acc [B 66.63 E 66.94 O 99.60 T 94.93]   B [P 94.76 R 91.93 F1 93.33]   E [P 92.06 R 89.29 F1 90.66]   EC [P 67.12 R 65.10 F1 66.09]
+
+9.train    L 1.633     acc [B 78.74 E 78.62 O 99.72 T 97.11]   B [P 96.49 R 94.96 F1 95.72]   E [P 94.10 R 92.60 F1 93.34]   EC [P 78.57 R 77.32 F1 77.94]
+9.val      L 2.595     acc [B 69.06 E 68.49 O 99.63 T 95.18]   B [P 94.80 R 91.77 F1 93.26]   E [P 92.76 R 89.77 F1 91.24]   EC [P 70.18 R 67.92 F1 69.03]
+
+10.train    L 1.549    acc [B 79.43 E 79.62 O 99.61 T 97.13]   B [P 96.66 R 95.07 F1 95.86]   E [P 94.38 R 92.82 F1 93.59]   EC [P 79.45 R 78.13 F1 78.78]
+10.val      L 2.461    acc [B 71.29 E 69.87 O 99.54 T 95.30]   B [P 94.74 R 92.39 F1 93.55]   E [P 92.60 R 90.28 F1 91.43]   EC [P 71.77 R 69.97 F1 70.86]
+
+11.train    L 1.491    acc [B 79.72 E 80.27 O 99.65 T 97.25]   B [P 96.91 R 95.29 F1 96.09]   E [P 94.65 R 93.07 F1 93.85]   EC [P 79.67 R 78.34 F1 79.00]
+11.val      L 2.521    acc [B 69.80 E 69.67 O 99.58 T 95.30]   B [P 94.66 R 91.31 F1 92.96]   E [P 92.71 R 89.41 F1 91.03]   EC [P 71.22 R 68.68 F1 69.93]
+
+12.train    L 1.394    acc [B 81.32 E 81.68 O 99.56 T 97.35]   B [P 96.74 R 95.25 F1 95.99]   E [P 94.61 R 93.15 F1 93.87]   EC [P 81.29 R 80.04 F1 80.66]
+12.val      L 2.285    acc [B 73.27 E 72.43 O 99.45 T 95.59]   B [P 95.12 R 92.65 F1 93.86]   E [P 92.69 R 90.26 F1 91.46]   EC [P 73.71 R 71.78 F1 72.74]
+
+13.train    L 1.375    acc [B 81.62 E 81.87 O 99.61 T 97.41]   B [P 96.97 R 95.55 F1 96.25]   E [P 94.76 R 93.37 F1 94.06]   EC [P 81.50 R 80.30 F1 80.89]
+13.val      L 2.327    acc [B 73.57 E 72.30 O 99.44 T 95.56]   B [P 94.45 R 92.00 F1 93.21]   E [P 91.95 R 89.55 F1 90.73]   EC [P 73.97 R 72.04 F1 72.99]
+
+14.train    L 1.298    acc [B 82.61 E 83.16 O 99.62 T 97.58]   B [P 96.94 R 95.53 F1 96.23]   E [P 94.86 R 93.48 F1 94.16]   EC [P 82.50 R 81.30 F1 81.89]
+14.val      L 2.312    acc [B 73.20 E 72.42 O 99.44 T 95.58]   B [P 94.92 R 92.32 F1 93.60]   E [P 92.30 R 89.75 F1 91.01]   EC [P 73.68 R 71.65 F1 72.65]
+
+15.train    L 1.248    acc [B 83.25 E 83.35 O 99.73 T 97.70]   B [P 97.03 R 95.72 F1 96.37]   E [P 95.15 R 93.85 F1 94.49]   EC [P 83.16 R 82.02 F1 82.59]
+15.val      L 2.329    acc [B 72.31 E 71.14 O 99.62 T 95.54]   B [P 94.44 R 92.05 F1 93.23]   E [P 92.38 R 90.03 F1 91.19]   EC [P 72.93 R 71.07 F1 71.99]
+
+16.train    L 1.206    acc [B 83.90 E 83.84 O 99.74 T 97.77]   B [P 97.11 R 96.21 F1 96.65]   E [P 95.46 R 94.57 F1 95.01]   EC [P 83.61 R 82.83 F1 83.22]
+16.val      L 2.332    acc [B 73.87 E 72.29 O 99.56 T 95.66]   B [P 94.52 R 91.98 F1 93.23]   E [P 92.61 R 90.10 F1 91.33]   EC [P 74.78 R 72.75 F1 73.75]
+
+17.train    L 1.172    acc [B 84.18 E 83.92 O 99.79 T 97.82]   B [P 97.17 R 95.87 F1 96.52]   E [P 95.59 R 94.30 F1 94.94]   EC [P 84.31 R 83.18 F1 83.74]
+17.val      L 2.284    acc [B 73.25 E 72.08 O 99.65 T 95.71]   B [P 94.71 R 91.79 F1 93.23]   E [P 92.86 R 89.98 F1 91.40]   EC [P 74.41 R 72.10 F1 73.24]
+
+18.train    L 1.129    acc [B 84.85 E 85.12 O 99.75 T 97.94]   B [P 97.33 R 96.16 F1 96.74]   E [P 95.57 R 94.42 F1 94.99]   EC [P 84.68 R 83.66 F1 84.17]
+18.val      L 2.263    acc [B 73.68 E 72.67 O 99.60 T 95.75]   B [P 94.78 R 92.19 F1 93.46]   E [P 92.86 R 90.30 F1 91.57]   EC [P 74.43 R 72.38 F1 73.39]
+
+19.train    L 1.101    acc [B 85.29 E 85.24 O 99.77 T 97.97]   B [P 97.37 R 96.52 F1 96.94]   E [P 95.69 R 94.85 F1 95.27]   EC [P 84.97 R 84.23 F1 84.60]
+19.val      L 2.274    acc [B 74.40 E 72.75 O 99.58 T 95.74]   B [P 94.55 R 92.42 F1 93.47]   E [P 92.48 R 90.37 F1 91.41]   EC [P 74.84 R 73.14 F1 73.98]
+
+20.train    L 1.075    acc [B 85.68 E 85.45 O 99.80 T 98.02]   B [P 97.44 R 96.44 F1 96.94]   E [P 95.84 R 94.86 F1 95.35]   EC [P 85.46 R 84.58 F1 85.02]
+20.val      L 2.276    acc [B 74.14 E 72.74 O 99.60 T 95.76]   B [P 94.88 R 92.00 F1 93.42]   E [P 92.72 R 89.89 F1 91.28]   EC [P 75.07 R 72.77 F1 73.90]
+
+21.train    L 1.037    acc [B 86.07 E 86.06 O 99.82 T 98.11]   B [P 97.44 R 96.32 F1 96.88]   E [P 95.99 R 94.88 F1 95.43]   EC [P 86.11 R 85.11 F1 85.61]
+21.val      L 2.366    acc [B 72.76 E 71.88 O 99.65 T 95.67]   B [P 94.46 R 91.75 F1 93.09]   E [P 92.45 R 89.77 F1 91.09]   EC [P 73.54 R 71.42 F1 72.46]
+
+22.train    L 0.993    acc [B 86.65 E 87.11 O 99.74 T 98.17]   B [P 97.68 R 96.35 F1 97.01]   E [P 96.08 R 94.76 F1 95.41]   EC [P 86.70 R 85.51 F1 86.10]
+22.val      L 2.199    acc [B 74.51 E 73.74 O 99.56 T 95.87]   B [P 95.43 R 92.09 F1 93.73]   E [P 93.21 R 89.94 F1 91.54]   EC [P 75.76 R 73.09 F1 74.40]
+
+23.train    L 0.949    acc [B 87.65 E 87.84 O 99.81 T 98.33]   B [P 97.64 R 96.77 F1 97.20]   E [P 96.29 R 95.43 F1 95.86]   EC [P 87.47 R 86.69 F1 87.08]
+23.val      L 2.206    acc [B 74.95 E 73.38 O 99.58 T 95.84]   B [P 94.66 R 92.14 F1 93.38]   E [P 92.40 R 89.91 F1 91.14]   EC [P 75.63 R 73.60 F1 74.60]
+
+24.train    L 0.945    acc [B 87.52 E 87.98 O 99.77 T 98.31]   B [P 97.68 R 96.81 F1 97.25]   E [P 96.31 R 95.45 F1 95.87]   EC [P 87.38 R 86.59 F1 86.98]
+24.val      L 2.313    acc [B 73.57 E 72.64 O 99.51 T 95.67]   B [P 94.39 R 92.12 F1 93.24]   E [P 92.25 R 90.00 F1 91.11]   EC [P 74.23 R 72.43 F1 73.32]
+
+25.train    L 0.910    acc [B 88.12 E 88.00 O 99.84 T 98.38]   B [P 97.66 R 97.06 F1 97.36]   E [P 96.36 R 95.77 F1 96.06]   EC [P 87.79 R 87.25 F1 87.52]
+25.val      L 2.286    acc [B 74.97 E 73.23 O 99.62 T 95.84]   B [P 94.58 R 92.19 F1 93.37]   E [P 92.17 R 89.82 F1 90.98]   EC [P 75.50 R 73.58 F1 74.53]
+
+26.train    L 0.885    acc [B 88.25 E 88.12 O 99.83 T 98.38]   B [P 97.79 R 97.04 F1 97.41]   E [P 96.48 R 95.74 F1 96.11]   EC [P 87.99 R 87.32 F1 87.65]
+26.val      L 2.232    acc [B 75.34 E 73.54 O 99.61 T 95.88]   B [P 94.69 R 92.28 F1 93.47]   E [P 92.52 R 90.14 F1 91.32]   EC [P 75.78 R 73.83 F1 74.79]
+
+27.train    L 0.858    acc [B 88.61 E 88.95 O 99.82 T 98.47]   B [P 97.86 R 96.99 F1 97.42]   E [P 96.70 R 95.84 F1 96.27]   EC [P 88.62 R 87.83 F1 88.22]
+27.val      L 2.228    acc [B 75.27 E 73.97 O 99.60 T 95.94]   B [P 94.86 R 92.00 F1 93.41]   E [P 92.65 R 89.84 F1 91.23]   EC [P 76.16 R 73.85 F1 74.99]
+
+28.train    L 0.838    acc [B 89.07 E 89.63 O 99.81 T 98.54]   B [P 97.89 R 97.15 F1 97.52]   E [P 96.72 R 95.99 F1 96.36]   EC [P 88.98 R 88.31 F1 88.64]
+28.val      L 2.251    acc [B 75.11 E 73.89 O 99.57 T 95.90]   B [P 95.12 R 92.37 F1 93.73]   E [P 92.88 R 90.17 F1 91.50]   EC [P 76.05 R 73.83 F1 74.92]
+
+29.train    L 0.805    acc [B 89.49 E 90.03 O 99.82 T 98.60]   B [P 98.09 R 97.22 F1 97.66]   E [P 96.92 R 96.06 F1 96.49]   EC [P 89.53 R 88.73 F1 89.13]
+29.val      L 2.176    acc [B 75.71 E 74.42 O 99.62 T 96.02]   B [P 95.01 R 92.28 F1 93.62]   E [P 92.90 R 90.21 F1 91.54]   EC [P 76.60 R 74.38 F1 75.47]
+
+30.train    L 0.793    acc [B 89.83 E 90.17 O 99.79 T 98.60]   B [P 97.83 R 97.36 F1 97.59]   E [P 96.82 R 96.34 F1 96.58]   EC [P 89.60 R 89.15 F1 89.37]
+30.val      L 2.271    acc [B 75.29 E 74.14 O 99.58 T 95.94]   B [P 94.63 R 92.83 F1 93.72]   E [P 92.27 R 90.49 F1 91.37]   EC [P 75.26 R 73.81 F1 74.52]
+
+31.train    L 0.768    acc [B 89.89 E 90.31 O 99.83 T 98.65]   B [P 98.20 R 97.32 F1 97.76]   E [P 97.12 R 96.25 F1 96.69]   EC [P 89.94 R 89.14 F1 89.54]
+31.val      L 2.238    acc [B 74.49 E 73.49 O 99.61 T 95.87]   B [P 94.86 R 92.07 F1 93.45]   E [P 92.78 R 90.03 F1 91.38]   EC [P 75.40 R 73.16 F1 74.26]
+
+32.train    L 0.762    acc [B 90.28 E 90.22 O 99.86 T 98.67]   B [P 98.05 R 97.69 F1 97.87]   E [P 97.08 R 96.72 F1 96.90]   EC [P 89.92 R 89.58 F1 89.75]
+32.val      L 2.278    acc [B 75.57 E 74.02 O 99.65 T 95.99]   B [P 94.72 R 92.35 F1 93.52]   E [P 92.31 R 89.98 F1 91.13]   EC [P 75.77 R 73.85 F1 74.80]
+
+33.train    L 0.733    acc [B 90.66 E 90.86 O 99.87 T 98.76]   B [P 98.19 R 97.66 F1 97.93]   E [P 97.27 R 96.74 F1 97.00]   EC [P 90.50 R 90.01 F1 90.25]
+33.val      L 2.275    acc [B 75.57 E 73.66 O 99.64 T 95.92]   B [P 94.71 R 92.16 F1 93.42]   E [P 92.37 R 89.87 F1 91.10]   EC [P 76.24 R 74.17 F1 75.19]
+
+34.train    L 0.703    acc [B 90.91 E 91.25 O 99.85 T 98.79]   B [P 98.30 R 97.41 F1 97.86]   E [P 97.38 R 96.49 F1 96.94]   EC [P 91.05 R 90.22 F1 90.63]
+34.val      L 2.270    acc [B 75.25 E 73.78 O 99.57 T 95.88]   B [P 94.94 R 91.84 F1 93.36]   E [P 92.59 R 89.55 F1 91.04]   EC [P 76.53 R 74.01 F1 75.25]
+
+35.train    L 0.685    acc [B 91.14 E 91.58 O 99.87 T 98.85]   B [P 98.30 R 97.75 F1 98.03]   E [P 97.45 R 96.90 F1 97.18]   EC [P 91.03 R 90.51 F1 90.77]
+35.val      L 2.283    acc [B 75.57 E 73.66 O 99.63 T 95.92]   B [P 94.58 R 92.23 F1 93.39]   E [P 92.10 R 89.80 F1 90.94]   EC [P 76.13 R 74.22 F1 75.16]
+
+36.train    L 0.683    acc [B 91.38 E 91.97 O 99.85 T 98.87]   B [P 98.33 R 97.89 F1 98.11]   E [P 97.52 R 97.08 F1 97.30]   EC [P 91.17 R 90.76 F1 90.97]
+36.val      L 2.263    acc [B 76.05 E 74.48 O 99.50 T 95.92]   B [P 94.67 R 92.19 F1 93.41]   E [P 92.35 R 89.91 F1 91.12]   EC [P 76.85 R 74.82 F1 75.82]
+
+37.train    L 0.670    acc [B 91.54 E 91.92 O 99.86 T 98.88]   B [P 98.39 R 97.87 F1 98.13]   E [P 97.56 R 97.04 F1 97.30]   EC [P 91.36 R 90.88 F1 91.12]
+37.val      L 2.322    acc [B 75.91 E 74.07 O 99.56 T 95.91]   B [P 94.52 R 92.28 F1 93.38]   E [P 92.09 R 89.89 F1 90.98]   EC [P 76.37 R 74.54 F1 75.44]
+
+38.train    L 0.653    acc [B 91.65 E 92.19 O 99.87 T 98.92]   B [P 98.44 R 98.01 F1 98.22]   E [P 97.58 R 97.14 F1 97.36]   EC [P 91.42 R 91.01 F1 91.22]
+38.val      L 2.234    acc [B 76.42 E 74.75 O 99.53 T 95.99]   B [P 94.59 R 92.35 F1 93.45]   E [P 92.40 R 90.19 F1 91.28]   EC [P 76.98 R 75.14 F1 76.05]
+
+39.train    L 0.638    acc [B 92.00 E 92.50 O 99.85 T 98.94]   B [P 98.32 R 98.01 F1 98.16]   E [P 97.52 R 97.20 F1 97.36]   EC [P 91.71 R 91.41 F1 91.56]
+39.val      L 2.260    acc [B 76.53 E 74.64 O 99.53 T 95.97]   B [P 94.41 R 92.32 F1 93.35]   E [P 91.82 R 89.77 F1 90.79]   EC [P 76.66 R 74.95 F1 75.80]
+
+40.train    L 0.634    acc [B 91.97 E 92.43 O 99.85 T 98.93]   B [P 98.30 R 98.01 F1 98.15]   E [P 97.52 R 97.23 F1 97.38]   EC [P 91.64 R 91.37 F1 91.50]
+40.val      L 2.321    acc [B 75.71 E 74.52 O 99.47 T 95.90]   B [P 94.53 R 92.55 F1 93.53]   E [P 92.07 R 90.12 F1 91.08]   EC [P 75.89 R 74.29 F1 75.08]
+
+41.train    L 0.603    acc [B 92.48 E 92.93 O 99.88 T 99.02]   B [P 98.43 R 98.04 F1 98.23]   E [P 97.69 R 97.30 F1 97.49]   EC [P 92.29 R 91.92 F1 92.11]
+41.val      L 2.263    acc [B 76.35 E 74.86 O 99.58 T 96.04]   B [P 94.88 R 92.42 F1 93.63]   E [P 92.54 R 90.12 F1 91.32]   EC [P 77.11 R 75.09 F1 76.09]
+
+42.train    L 0.591    acc [B 92.50 E 93.05 O 99.86 T 99.02]   B [P 98.43 R 98.11 F1 98.27]   E [P 97.74 R 97.42 F1 97.58]   EC [P 92.27 R 91.97 F1 92.12]
+42.val      L 2.274    acc [B 76.67 E 75.34 O 99.57 T 96.11]   B [P 94.62 R 92.51 F1 93.55]   E [P 92.41 R 90.33 F1 91.35]   EC [P 76.99 R 75.25 F1 76.11]
+
+43.train    L 0.579    acc [B 92.63 E 93.22 O 99.86 T 99.04]   B [P 98.47 R 98.06 F1 98.27]   E [P 97.80 R 97.39 F1 97.60]   EC [P 92.48 R 92.09 F1 92.29]
+43.val      L 2.326    acc [B 76.33 E 75.14 O 99.56 T 96.07]   B [P 94.81 R 92.32 F1 93.55]   E [P 92.49 R 90.05 F1 91.26]   EC [P 76.96 R 74.93 F1 75.93]
+
+44.train    L 0.566    acc [B 92.87 E 93.59 O 99.87 T 99.09]   B [P 98.51 R 98.12 F1 98.32]   E [P 97.92 R 97.53 F1 97.73]   EC [P 92.77 R 92.40 F1 92.58]
+44.val      L 2.339    acc [B 75.75 E 74.68 O 99.60 T 96.04]   B [P 94.92 R 92.67 F1 93.78]   E [P 92.70 R 90.49 F1 91.58]   EC [P 76.32 R 74.49 F1 75.40]
+
+45.train    L 0.547    acc [B 93.24 E 93.55 O 99.91 T 99.13]   B [P 98.51 R 98.23 F1 98.37]   E [P 97.92 R 97.64 F1 97.78]   EC [P 93.02 R 92.75 F1 92.89]
+45.val      L 2.374    acc [B 76.03 E 74.34 O 99.60 T 95.99]   B [P 94.23 R 92.02 F1 93.12]   E [P 92.02 R 89.84 F1 90.92]   EC [P 76.47 R 74.66 F1 75.55]
+
+46.train    L 0.536    acc [B 93.28 E 93.76 O 99.91 T 99.15]   B [P 98.63 R 98.26 F1 98.45]   E [P 98.06 R 97.69 F1 97.87]   EC [P 93.18 R 92.82 F1 93.00]
+46.val      L 2.363    acc [B 76.35 E 74.82 O 99.63 T 96.08]   B [P 94.33 R 92.07 F1 93.18]   E [P 92.16 R 89.94 F1 91.03]   EC [P 76.83 R 74.98 F1 75.89]
+
+47.train    L 0.522    acc [B 93.48 E 94.20 O 99.89 T 99.19]   B [P 98.70 R 98.24 F1 98.47]   E [P 98.13 R 97.68 F1 97.90]   EC [P 93.45 R 93.02 F1 93.23]
+47.val      L 2.293    acc [B 77.13 E 75.82 O 99.58 T 96.19]   B [P 94.77 R 92.05 F1 93.39]   E [P 92.66 R 89.98 F1 91.30]   EC [P 77.99 R 75.74 F1 76.85]
+
+48.train    L 0.570    acc [B 92.59 E 93.44 O 99.89 T 99.09]   B [P 98.59 R 98.36 F1 98.47]   E [P 97.99 R 97.76 F1 97.87]   EC [P 92.35 R 92.12 F1 92.23]
+48.val      L 2.259    acc [B 77.32 E 75.74 O 99.55 T 96.15]   B [P 94.87 R 92.65 F1 93.74]   E [P 92.63 R 90.44 F1 91.52]   EC [P 77.67 R 75.83 F1 76.74]
+
+49.train    L 0.506    acc [B 93.73 E 94.32 O 99.91 T 99.22]   B [P 98.72 R 98.38 F1 98.55]   E [P 98.20 R 97.85 F1 98.03]   EC [P 93.62 R 93.29 F1 93.45]
+49.val      L 2.400    acc [B 76.14 E 75.05 O 99.61 T 96.10]   B [P 94.70 R 92.46 F1 93.57]   E [P 92.54 R 90.33 F1 91.42]   EC [P 76.67 R 74.84 F1 75.74]
+
+50.train    L 0.504    acc [B 93.64 E 94.28 O 99.87 T 99.18]   B [P 98.55 R 98.22 F1 98.39]   E [P 98.02 R 97.69 F1 97.86]   EC [P 93.51 R 93.20 F1 93.36]
+50.val      L 2.300    acc [B 76.74 E 75.96 O 99.56 T 96.18]   B [P 94.94 R 92.71 F1 93.81]   E [P 92.73 R 90.53 F1 91.62]   EC [P 77.10 R 75.28 F1 76.18]
+
+51.train    L 0.495    acc [B 93.82 E 94.57 O 99.89 T 99.23]   B [P 98.65 R 98.43 F1 98.54]   E [P 98.20 R 97.97 F1 98.08]   EC [P 93.66 R 93.44 F1 93.55]
+51.val      L 2.332    acc [B 77.20 E 75.86 O 99.50 T 96.12]   B [P 94.60 R 92.53 F1 93.55]   E [P 92.15 R 90.12 F1 91.12]   EC [P 77.42 R 75.71 F1 76.56]
+
+52.train    L 0.486    acc [B 93.93 E 94.57 O 99.90 T 99.24]   B [P 98.74 R 98.45 F1 98.59]   E [P 98.21 R 97.91 F1 98.06]   EC [P 93.79 R 93.51 F1 93.65]
+52.val      L 2.330    acc [B 76.81 E 75.47 O 99.54 T 96.10]   B [P 94.47 R 92.35 F1 93.40]   E [P 92.12 R 90.03 F1 91.06]   EC [P 77.08 R 75.32 F1 76.19]
+
+53.train    L 0.471    acc [B 94.21 E 94.82 O 99.91 T 99.28]   B [P 98.77 R 98.52 F1 98.64]   E [P 98.28 R 98.03 F1 98.15]   EC [P 94.06 R 93.82 F1 93.94]
+53.val      L 2.386    acc [B 76.53 E 75.19 O 99.63 T 96.13]   B [P 94.79 R 92.35 F1 93.55]   E [P 92.57 R 90.17 F1 91.35]   EC [P 77.14 R 75.14 F1 76.13]
+
+54.train    L 0.464    acc [B 94.26 E 95.02 O 99.89 T 99.28]   B [P 98.77 R 98.42 F1 98.59]   E [P 98.34 R 97.99 F1 98.17]   EC [P 94.24 R 93.90 F1 94.07]
+54.val      L 2.351    acc [B 77.34 E 75.76 O 99.59 T 96.18]   B [P 94.92 R 92.37 F1 93.63]   E [P 92.82 R 90.30 F1 91.54]   EC [P 78.11 R 75.99 F1 77.03]
+
+55.train    L 0.459    acc [B 94.28 E 94.90 O 99.91 T 99.29]   B [P 98.79 R 98.43 F1 98.61]   E [P 98.35 R 97.98 F1 98.17]   EC [P 94.25 R 93.90 F1 94.08]
+55.val      L 2.383    acc [B 76.72 E 75.30 O 99.56 T 96.09]   B [P 94.77 R 92.09 F1 93.41]   E [P 92.38 R 89.75 F1 91.05]   EC [P 77.60 R 75.39 F1 76.48]
+
+56.train    L 0.449    acc [B 94.26 E 95.02 O 99.90 T 99.30]   B [P 98.82 R 98.43 F1 98.62]   E [P 98.41 R 98.02 F1 98.21]   EC [P 94.28 R 93.90 F1 94.09]
+56.val      L 2.358    acc [B 76.53 E 75.31 O 99.56 T 96.09]   B [P 95.08 R 92.32 F1 93.68]   E [P 92.80 R 90.10 F1 91.43]   EC [P 77.56 R 75.30 F1 76.41]
+
+57.train    L 0.436    acc [B 94.44 E 95.11 O 99.90 T 99.31]   B [P 98.86 R 98.53 F1 98.69]   E [P 98.45 R 98.12 F1 98.29]   EC [P 94.40 R 94.08 F1 94.24]
+57.val      L 2.326    acc [B 77.29 E 75.92 O 99.57 T 96.19]   B [P 94.90 R 92.37 F1 93.62]   E [P 92.80 R 90.30 F1 91.53]   EC [P 77.99 R 75.90 F1 76.93]
+
+58.train    L 0.420    acc [B 94.77 E 95.47 O 99.91 T 99.36]   B [P 98.99 R 98.58 F1 98.78]   E [P 98.59 R 98.18 F1 98.38]   EC [P 94.81 R 94.41 F1 94.61]
+58.val      L 2.377    acc [B 76.40 E 75.45 O 99.57 T 96.12]   B [P 94.86 R 91.68 F1 93.24]   E [P 92.60 R 89.48 F1 91.01]   EC [P 77.79 R 75.16 F1 76.45]
+
+59.train    L 0.423    acc [B 94.85 E 95.65 O 99.87 T 99.35]   B [P 98.83 R 98.57 F1 98.70]   E [P 98.43 R 98.16 F1 98.30]   EC [P 94.75 R 94.50 F1 94.63]
+59.val      L 2.367    acc [B 77.34 E 76.15 O 99.47 T 96.14]   B [P 94.92 R 92.37 F1 93.63]   E [P 92.63 R 90.12 F1 91.36]   EC [P 78.13 R 76.01 F1 77.06]
+
+60.train    L 0.407    acc [B 95.14 E 95.76 O 99.92 T 99.40]   B [P 99.01 R 98.73 F1 98.87]   E [P 98.62 R 98.35 F1 98.48]   EC [P 95.08 R 94.81 F1 94.95]
+60.val      L 2.427    acc [B 76.83 E 75.23 O 99.57 T 96.09]   B [P 94.57 R 92.14 F1 93.34]   E [P 92.38 R 89.98 F1 91.17]   EC [P 77.59 R 75.57 F1 76.57]
+
+61.train    L 0.404    acc [B 95.10 E 95.73 O 99.92 T 99.40]   B [P 99.07 R 98.65 F1 98.86]   E [P 98.64 R 98.23 F1 98.44]   EC [P 95.13 R 94.73 F1 94.93]
+61.val      L 2.455    acc [B 76.05 E 75.17 O 99.53 T 96.05]   B [P 94.83 R 91.82 F1 93.30]   E [P 92.74 R 89.77 F1 91.23]   EC [P 77.26 R 74.79 F1 76.01]
+
+62.train    L 0.400    acc [B 95.08 E 95.79 O 99.91 T 99.40]   B [P 98.99 R 98.72 F1 98.85]   E [P 98.61 R 98.33 F1 98.47]   EC [P 95.01 R 94.74 F1 94.88]
+62.val      L 2.386    acc [B 77.29 E 76.09 O 99.59 T 96.23]   B [P 94.95 R 92.14 F1 93.53]   E [P 92.89 R 90.12 F1 91.49]   EC [P 78.33 R 75.99 F1 77.14]
+
+63.train    L 0.396    acc [B 95.21 E 96.00 O 99.91 T 99.43]   B [P 98.98 R 98.74 F1 98.86]   E [P 98.65 R 98.40 F1 98.52]   EC [P 95.15 R 94.91 F1 95.03]
+63.val      L 2.452    acc [B 76.07 E 75.26 O 99.55 T 96.08]   B [P 94.94 R 92.32 F1 93.61]   E [P 93.00 R 90.42 F1 91.69]   EC [P 77.14 R 75.00 F1 76.06]
+
+64.train    L 0.395    acc [B 95.20 E 96.02 O 99.91 T 99.43]   B [P 98.99 R 98.79 F1 98.89]   E [P 98.64 R 98.43 F1 98.53]   EC [P 95.09 R 94.89 F1 94.99]
+64.val      L 2.406    acc [B 77.11 E 75.83 O 99.57 T 96.17]   B [P 94.89 R 92.58 F1 93.72]   E [P 92.79 R 90.51 F1 91.64]   EC [P 77.69 R 75.78 F1 76.72]
+
+65.train    L 0.380    acc [B 95.45 E 96.26 O 99.91 T 99.46]   B [P 99.06 R 98.85 F1 98.96]   E [P 98.76 R 98.54 F1 98.65]   EC [P 95.39 R 95.18 F1 95.28]
+65.val      L 2.451    acc [B 76.65 E 75.41 O 99.53 T 96.08]   B [P 94.69 R 92.25 F1 93.46]   E [P 92.59 R 90.19 F1 91.37]   EC [P 77.35 R 75.34 F1 76.34]
+
+66.train    L 0.374    acc [B 95.63 E 96.28 O 99.94 T 99.48]   B [P 99.09 R 98.88 F1 98.98]   E [P 98.78 R 98.56 F1 98.67]   EC [P 95.57 R 95.36 F1 95.47]
+66.val      L 2.552    acc [B 76.21 E 74.86 O 99.61 T 96.07]   B [P 94.49 R 92.16 F1 93.31]   E [P 92.34 R 90.05 F1 91.18]   EC [P 76.84 R 74.93 F1 75.87]
+
+67.train    L 0.362    acc [B 95.60 E 96.34 O 99.92 T 99.47]   B [P 99.13 R 98.79 F1 98.96]   E [P 98.78 R 98.44 F1 98.61]   EC [P 95.63 R 95.30 F1 95.46]
+67.val      L 2.508    acc [B 76.24 E 75.30 O 99.56 T 96.09]   B [P 95.09 R 92.12 F1 93.58]   E [P 93.00 R 90.07 F1 91.51]   EC [P 77.49 R 75.05 F1 76.25]
+
+68.train    L 0.362    acc [B 95.73 E 96.24 O 99.94 T 99.48]   B [P 99.08 R 99.00 F1 99.04]   E [P 98.79 R 98.70 F1 98.75]   EC [P 95.58 R 95.49 F1 95.54]
+68.val      L 2.450    acc [B 77.57 E 75.87 O 99.60 T 96.21]   B [P 94.65 R 92.25 F1 93.44]   E [P 92.38 R 90.03 F1 91.19]   EC [P 78.21 R 76.22 F1 77.20]
+
+69.train    L 0.352    acc [B 95.86 E 96.50 O 99.93 T 99.50]   B [P 99.14 R 98.98 F1 99.06]   E [P 98.82 R 98.65 F1 98.74]   EC [P 95.75 R 95.59 F1 95.67]
+69.val      L 2.482    acc [B 77.25 E 76.23 O 99.54 T 96.21]   B [P 94.88 R 92.37 F1 93.61]   E [P 92.59 R 90.12 F1 91.34]   EC [P 77.90 R 75.83 F1 76.85]
+
+70.train    L 0.352    acc [B 95.77 E 96.36 O 99.92 T 99.48]   B [P 99.05 R 98.91 F1 98.98]   E [P 98.73 R 98.58 F1 98.66]   EC [P 95.64 R 95.49 F1 95.57]
+70.val      L 2.506    acc [B 76.67 E 75.76 O 99.57 T 96.17]   B [P 94.84 R 92.51 F1 93.66]   E [P 92.70 R 90.40 F1 91.53]   EC [P 77.26 R 75.34 F1 76.29]
+
+71.train    L 0.342    acc [B 96.04 E 96.62 O 99.94 T 99.53]   B [P 99.21 R 98.95 F1 99.08]   E [P 98.92 R 98.66 F1 98.79]   EC [P 96.04 R 95.79 F1 95.91]
+71.val      L 2.523    acc [B 76.95 E 75.68 O 99.59 T 96.17]   B [P 94.80 R 92.09 F1 93.43]   E [P 92.76 R 90.10 F1 91.41]   EC [P 77.93 R 75.69 F1 76.79]
+
+72.train    L 0.337    acc [B 95.98 E 96.54 O 99.94 T 99.52]   B [P 99.18 R 98.91 F1 99.05]   E [P 98.91 R 98.64 F1 98.77]   EC [P 96.01 R 95.74 F1 95.88]
+72.val      L 2.522    acc [B 77.20 E 75.96 O 99.58 T 96.21]   B [P 94.96 R 92.28 F1 93.60]   E [P 92.81 R 90.17 F1 91.47]   EC [P 78.17 R 75.94 F1 77.04]
+
+73.train    L 0.330    acc [B 96.02 E 96.57 O 99.94 T 99.52]   B [P 99.20 R 98.93 F1 99.06]   E [P 98.94 R 98.66 F1 98.80]   EC [P 96.06 R 95.79 F1 95.92]
+73.val      L 2.467    acc [B 77.48 E 76.33 O 99.57 T 96.24]   B [P 94.99 R 92.35 F1 93.65]   E [P 92.93 R 90.33 F1 91.61]   EC [P 78.39 R 76.19 F1 77.28]
+
+74.train    L 0.327    acc [B 96.05 E 96.66 O 99.93 T 99.53]   B [P 99.23 R 99.01 F1 99.12]   E [P 98.98 R 98.76 F1 98.87]   EC [P 96.04 R 95.83 F1 95.94]
+74.val      L 2.509    acc [B 77.15 E 76.11 O 99.59 T 96.24]   B [P 95.12 R 92.71 F1 93.90]   E [P 93.16 R 90.79 F1 91.96]   EC [P 77.98 R 75.99 F1 76.97]
+
+75.train    L 0.316    acc [B 96.25 E 96.92 O 99.94 T 99.56]   B [P 99.22 R 99.04 F1 99.13]   E [P 99.01 R 98.83 F1 98.92]   EC [P 96.25 R 96.07 F1 96.16]
+75.val      L 2.490    acc [B 77.59 E 76.15 O 99.59 T 96.24]   B [P 95.02 R 92.46 F1 93.72]   E [P 92.80 R 90.28 F1 91.52]   EC [P 78.48 R 76.36 F1 77.41]
+
+76.train    L 0.316    acc [B 96.27 E 96.78 O 99.95 T 99.55]   B [P 99.29 R 99.05 F1 99.17]   E [P 99.07 R 98.83 F1 98.95]   EC [P 96.30 R 96.07 F1 96.19]
+76.val      L 2.511    acc [B 77.09 E 75.83 O 99.59 T 96.19]   B [P 95.06 R 92.46 F1 93.74]   E [P 93.08 R 90.51 F1 91.78]   EC [P 78.00 R 75.85 F1 76.91]
+
+77.train    L 0.315    acc [B 96.25 E 96.84 O 99.94 T 99.56]   B [P 99.23 R 99.03 F1 99.13]   E [P 99.03 R 98.83 F1 98.93]   EC [P 96.27 R 96.07 F1 96.17]
+77.val      L 2.499    acc [B 77.34 E 75.95 O 99.58 T 96.20]   B [P 95.06 R 92.53 F1 93.78]   E [P 93.08 R 90.58 F1 91.81]   EC [P 78.16 R 76.06 F1 77.09]
+
+78.train    L 0.301    acc [B 96.53 E 97.05 O 99.94 T 99.58]   B [P 99.26 R 99.06 F1 99.16]   E [P 99.05 R 98.84 F1 98.94]   EC [P 96.55 R 96.35 F1 96.45]
+78.val      L 2.581    acc [B 76.58 E 75.74 O 99.60 T 96.19]   B [P 95.03 R 92.35 F1 93.67]   E [P 92.86 R 90.21 F1 91.52]   EC [P 77.58 R 75.37 F1 76.46]
+
+79.train    L 0.304    acc [B 96.38 E 96.95 O 99.95 T 99.57]   B [P 99.31 R 98.97 F1 99.14]   E [P 99.07 R 98.73 F1 98.90]   EC [P 96.51 R 96.18 F1 96.34]
+79.val      L 2.569    acc [B 76.97 E 75.83 O 99.61 T 96.21]   B [P 95.27 R 92.16 F1 93.69]   E [P 93.09 R 90.03 F1 91.53]   EC [P 78.36 R 75.78 F1 77.05]
+
+80.train    L 0.292    acc [B 96.62 E 97.17 O 99.95 T 99.60]   B [P 99.31 R 99.10 F1 99.21]   E [P 99.11 R 98.90 F1 99.01]   EC [P 96.66 R 96.45 F1 96.56]
+80.val      L 2.538    acc [B 77.41 E 76.12 O 99.59 T 96.24]   B [P 94.85 R 92.32 F1 93.57]   E [P 92.75 R 90.26 F1 91.49]   EC [P 78.13 R 76.03 F1 77.07]
+
+81.train    L 0.291    acc [B 96.73 E 97.35 O 99.94 T 99.62]   B [P 99.37 R 99.07 F1 99.22]   E [P 99.18 R 98.88 F1 99.03]   EC [P 96.86 R 96.57 F1 96.72]
+81.val      L 2.570    acc [B 76.79 E 75.71 O 99.56 T 96.15]   B [P 95.05 R 92.23 F1 93.62]   E [P 92.92 R 90.14 F1 91.51]   EC [P 77.81 R 75.48 F1 76.63]
+
+82.train    L 0.291    acc [B 96.74 E 97.21 O 99.94 T 99.60]   B [P 99.25 R 99.18 F1 99.21]   E [P 99.06 R 98.98 F1 99.02]   EC [P 96.66 R 96.58 F1 96.62]
+82.val      L 2.610    acc [B 76.86 E 75.50 O 99.56 T 96.12]   B [P 94.80 R 92.67 F1 93.72]   E [P 92.62 R 90.51 F1 91.55]   EC [P 77.33 R 75.57 F1 76.44]
+
+83.train    L 0.287    acc [B 96.65 E 97.24 O 99.93 T 99.60]   B [P 99.28 R 99.14 F1 99.21]   E [P 99.07 R 98.93 F1 99.00]   EC [P 96.61 R 96.47 F1 96.54]
+83.val      L 2.632    acc [B 76.74 E 75.74 O 99.55 T 96.15]   B [P 95.02 R 92.46 F1 93.72]   E [P 92.99 R 90.46 F1 91.71]   EC [P 77.66 R 75.55 F1 76.59]
+
+84.train    L 0.281    acc [B 96.81 E 97.34 O 99.94 T 99.62]   B [P 99.27 R 99.20 F1 99.23]   E [P 99.06 R 98.99 F1 99.03]   EC [P 96.72 R 96.65 F1 96.68]
+84.val      L 2.595    acc [B 76.97 E 75.51 O 99.54 T 96.10]   B [P 94.67 R 92.67 F1 93.66]   E [P 92.42 R 90.44 F1 91.42]   EC [P 77.37 R 75.71 F1 76.53]
+
+85.train    L 0.275    acc [B 96.96 E 97.54 O 99.94 T 99.64]   B [P 99.34 R 99.23 F1 99.29]   E [P 99.15 R 99.04 F1 99.10]   EC [P 96.91 R 96.80 F1 96.85]
+85.val      L 2.568    acc [B 76.86 E 75.86 O 99.53 T 96.14]   B [P 94.95 R 92.51 F1 93.71]   E [P 92.88 R 90.46 F1 91.65]   EC [P 77.71 R 75.69 F1 76.68]
+
+86.train    L 0.270    acc [B 96.87 E 97.42 O 99.95 T 99.63]   B [P 99.37 R 99.21 F1 99.29]   E [P 99.21 R 99.04 F1 99.12]   EC [P 96.90 R 96.74 F1 96.82]
+86.val      L 2.605    acc [B 76.60 E 75.59 O 99.53 T 96.11]   B [P 94.83 R 92.32 F1 93.56]   E [P 92.68 R 90.21 F1 91.43]   EC [P 77.55 R 75.48 F1 76.50]
+
+87.train    L 0.267    acc [B 96.86 E 97.43 O 99.95 T 99.64]   B [P 99.39 R 99.24 F1 99.32]   E [P 99.24 R 99.09 F1 99.16]   EC [P 96.88 R 96.73 F1 96.81]
+87.val      L 2.573    acc [B 77.09 E 75.76 O 99.57 T 96.17]   B [P 94.92 R 92.28 F1 93.58]   E [P 92.84 R 90.23 F1 91.52]   EC [P 78.01 R 75.83 F1 76.91]
+
+88.train    L 0.262    acc [B 97.05 E 97.53 O 99.95 T 99.65]   B [P 99.38 R 99.22 F1 99.30]   E [P 99.21 R 99.04 F1 99.13]   EC [P 97.07 R 96.91 F1 96.99]
+88.val      L 2.562    acc [B 77.06 E 75.88 O 99.61 T 96.21]   B [P 94.99 R 92.44 F1 93.70]   E [P 92.94 R 90.42 F1 91.66]   EC [P 77.89 R 75.78 F1 76.82]
+
+89.train    L 0.266    acc [B 96.91 E 97.39 O 99.95 T 99.63]   B [P 99.36 R 99.25 F1 99.30]   E [P 99.18 R 99.07 F1 99.12]   EC [P 96.87 R 96.77 F1 96.82]
+89.val      L 2.700    acc [B 76.35 E 75.49 O 99.58 T 96.14]   B [P 94.77 R 92.44 F1 93.59]   E [P 92.88 R 90.58 F1 91.72]   EC [P 77.10 R 75.18 F1 76.13]
+
+90.train    L 0.257    acc [B 97.05 E 97.54 O 99.95 T 99.65]   B [P 99.35 R 99.27 F1 99.31]   E [P 99.19 R 99.11 F1 99.15]   EC [P 97.01 R 96.93 F1 96.97]
+90.val      L 2.647    acc [B 76.99 E 75.59 O 99.57 T 96.15]   B [P 94.69 R 92.58 F1 93.62]   E [P 92.60 R 90.51 F1 91.54]   EC [P 77.41 R 75.67 F1 76.53]
+
+91.train    L 0.255    acc [B 97.14 E 97.62 O 99.95 T 99.66]   B [P 99.35 R 99.27 F1 99.31]   E [P 99.20 R 99.12 F1 99.16]   EC [P 97.10 R 97.02 F1 97.06]
+91.val      L 2.587    acc [B 77.64 E 76.25 O 99.58 T 96.24]   B [P 94.98 R 92.62 F1 93.79]   E [P 92.81 R 90.49 F1 91.63]   EC [P 78.25 R 76.29 F1 77.25]
+
+92.train    L 0.248    acc [B 97.22 E 97.69 O 99.96 T 99.68]   B [P 99.44 R 99.30 F1 99.37]   E [P 99.29 R 99.15 F1 99.22]   EC [P 97.24 R 97.10 F1 97.17]
+92.val      L 2.577    acc [B 77.55 E 76.37 O 99.55 T 96.24]   B [P 94.82 R 92.48 F1 93.64]   E [P 92.74 R 90.44 F1 91.58]   EC [P 78.16 R 76.22 F1 77.18]
+
+93.train    L 0.246    acc [B 97.22 E 97.71 O 99.95 T 99.67]   B [P 99.40 R 99.30 F1 99.35]   E [P 99.25 R 99.14 F1 99.20]   EC [P 97.20 R 97.10 F1 97.15]
+93.val      L 2.577    acc [B 77.48 E 76.19 O 99.57 T 96.23]   B [P 95.06 R 92.53 F1 93.78]   E [P 92.92 R 90.42 F1 91.65]   EC [P 78.30 R 76.19 F1 77.23]
+
+94.train    L 0.240    acc [B 97.28 E 97.71 O 99.96 T 99.68]   B [P 99.42 R 99.27 F1 99.35]   E [P 99.29 R 99.13 F1 99.21]   EC [P 97.33 R 97.16 F1 97.24]
+94.val      L 2.573    acc [B 76.92 E 75.43 O 99.62 T 96.16]   B [P 95.12 R 92.21 F1 93.64]   E [P 93.01 R 90.14 F1 91.55]   EC [P 78.02 R 75.62 F1 76.80]
+
+95.train    L 0.239    acc [B 97.36 E 97.80 O 99.96 T 99.69]   B [P 99.40 R 99.32 F1 99.36]   E [P 99.28 R 99.20 F1 99.24]   EC [P 97.34 R 97.26 F1 97.30]
+95.val      L 2.626    acc [B 77.34 E 75.90 O 99.62 T 96.23]   B [P 94.84 R 92.48 F1 93.65]   E [P 92.93 R 90.60 F1 91.75]   EC [P 78.03 R 76.08 F1 77.04]
+
+96.train    L 0.236    acc [B 97.39 E 97.77 O 99.96 T 99.68]   B [P 99.36 R 99.34 F1 99.35]   E [P 99.21 R 99.19 F1 99.20]   EC [P 97.30 R 97.27 F1 97.28]
+96.val      L 2.632    acc [B 77.64 E 76.01 O 99.60 T 96.23]   B [P 94.92 R 92.76 F1 93.83]   E [P 92.80 R 90.67 F1 91.72]   EC [P 78.10 R 76.31 F1 77.20]
+
+97.train    L 0.235    acc [B 97.38 E 97.94 O 99.95 T 99.70]   B [P 99.43 R 99.31 F1 99.37]   E [P 99.28 R 99.15 F1 99.21]   EC [P 97.37 R 97.25 F1 97.31]
+97.val      L 2.595    acc [B 77.61 E 76.24 O 99.52 T 96.19]   B [P 94.87 R 92.60 F1 93.72]   E [P 92.75 R 90.51 F1 91.62]   EC [P 78.22 R 76.33 F1 77.26]
+
+98.train    L 0.231    acc [B 97.41 E 97.92 O 99.94 T 99.69]   B [P 99.41 R 99.26 F1 99.34]   E [P 99.24 R 99.09 F1 99.16]   EC [P 97.44 R 97.28 F1 97.36]
+98.val      L 2.626    acc [B 77.41 E 76.33 O 99.57 T 96.25]   B [P 95.04 R 92.55 F1 93.78]   E [P 92.92 R 90.46 F1 91.68]   EC [P 78.19 R 76.13 F1 77.15]
+
+99.train    L 0.228    acc [B 97.47 E 97.97 O 99.95 T 99.70]   B [P 99.47 R 99.37 F1 99.42]   E [P 99.32 R 99.21 F1 99.27]   EC [P 97.45 R 97.35 F1 97.40]
+99.val      L 2.641    acc [B 77.48 E 76.25 O 99.53 T 96.20]   B [P 94.75 R 92.46 F1 93.59]   E [P 92.77 R 90.51 F1 91.63]   EC [P 78.17 R 76.26 F1 77.20]
+
+100.train    L 0.223   acc [B 97.49 E 97.97 O 99.95 T 99.71]   B [P 99.49 R 99.32 F1 99.41]   E [P 99.35 R 99.18 F1 99.27]   EC [P 97.55 R 97.38 F1 97.47]
+100.val      L 2.699   acc [B 77.09 E 75.79 O 99.57 T 96.17]   B [P 95.01 R 92.28 F1 93.62]   E [P 92.97 R 90.28 F1 91.61]   EC [P 78.16 R 75.90 F1 77.01]
+
+
+Best epoch: 75
+Best metric: 77.41
+
+Confusion matrix:
+
+[[  772    17   105    30     8     8     7     0    37]
+ [   16   246    82    16     8     2     1     2    72]
+ [   69    98  1306    93     1     9     5     2   117]
+ [   64     6    51  1052     2     4     5     2    36]
+ [   10     0     1     3   226    15    49    18    15]
+ [    4    23    12     2    13   404   105    11    80]
+ [   15     9    18     5    24   146   955    73   121]
+ [    0     4     5     5     8     9    13   801    14]
+ [   26    22    28    19    17    48    19     5 45172]]
+
+Per-class summary:
+
+LOC             [TP 772 FP 204 FN 213]    [P 79.10 R 78.38 F1 78.74]
+MISC            [TP 226 FP 199 FN 219]    [P 53.18 R 50.79 F1 51.95]
+ORG             [TP 1275 FP 333 FN 425]   [P 79.29 R 75.00 F1 77.09]
+PER             [TP 1050 FP 175 FN 172]   [P 85.71 R 85.92 F1 85.82]
+
+Predicted sentence samples:
+
+1. Sao_B-LOC Paulo_E-LOC (_O Brasil_S-LOC )_O ,_O 23_O may_O (_O EFECOM_S-ORG )_O ._O
+2. -_O
+3. La_O multinacional_O española_O Telefónica_S-ORG ha_O impuesto_O un_O récord_O mundial_O al_O poner_O en_O servicio_O tres_O millones_O de_O nuevas_O líneas_O en_O el_O estado_O brasileño_O de_O Sao_B-LOC Paulo_E-LOC desde_O que_O asumió_O el_O control_O de_O la_O operadora_O Telesp_S-ORG hace_O 20_O meses_O ,_O anunció_O hoy_O el_O presidente_O de_O Telefónica_B-ORG do_I-ORG Brasil_E-ORG ,_O Fernando_B-PER Xavier_I-PER Ferreira_E-PER ._O
+4. En_O un_O balance_O que_O hizo_O de_O la_O gestión_O de_O Telefónica_S-ORG en_O Sao_B-LOC Paulo_E-LOC desde_O agosto_O de_O 1998_O ,_O Ferreira_S-PER subrayó_O que_O la_O empresa_O ha_O cumplido_O todas_O las_O metas_O fijadas_O por_O el_O órgano_O regulador_O del_O sector_O ,_O la_O Agencia_B-ORG Nacional_I-ORG de_I-ORG Telecomunicaciones_E-ORG (_O ANATEL_S-ORG )_O ,_O en_O cuanto_O a_O universalización_O y_O calidad_O del_O servicio_O prestado_O ._O
+5. "_O Telefónica_S-ORG asumió_O un_O compromiso_O con_O Brasil_S-ORG|S-LOC ,_O y_O en_O especial_O con_O Sao_B-ORG|B-LOC Paulo_E-ORG|E-LOC en_O 1998_O (_O año_O de_O privatización_O del_O sistema_O Telebras_S-ORG|S-MISC )_O y_O estamos_O aquí_O para_O prestar_O cuentas_O "_O ,_O dijo_O Ferreira_S-PER en_O el_O acto_O de_O instalación_O de_O la_O línea_O número_O tres_O millones_O de_O la_O gestión_O de_O Telefónica_S-ORG ._O
+6. También_O participaron_O en_O el_O acto_O el_O consejero_O delegado_O de_O Telefónica_B-ORG Internacional_E-ORG ,_O Antonio_B-PER Viana_I-PER Baptista_E-PER ;_O el_O ministro_O de_O Comunicaciones_S-MISC|B-MISC de_O|I-MISC Brasil_S-LOC|E-MISC ,_O Joao_B-PER Pimienta_I-PER da_I-PER Veiga_E-PER ;_O el_O presidente_O de_O la_O ANATEL_S-ORG ,_O Renato_B-PER Navarro_I-PER Guerreiro_E-PER ,_O y_O el_O secretario_O de_O Ciencia._B-MISC Tecnología_I-MISC del_I-MISC Estado_I-MISC de_I-MISC Sao_I-MISC Paulo_E-MISC ,_O José_B-PER Aníbal_I-PER Peres_I-PER de_I-PER Pontes_E-PER ._O
+7. Con_O los_O tres_O millones_O de_O nuevas_O líneas_O fijas_O en_O servicio_O asciende_O a_O diez_O millones_O el_O total_O de_O terminales_O que_O tiene_O Telefónica_S-ORG en_O el_O estado_O de_O Sao_B-LOC Paulo_E-LOC ,_O lo_O que_O convierte_O a_O esta_O región_O brasileña_O en_O el_O área_O con_O mayor_O densidad_O telefónica_O por_O habitante_O de_O América_B-LOC Latina_E-LOC ,_O con_O 25,6_O líneas_O en_O funcionamiento_O por_O cada_O cien_O personas_O ._O
+8. Según_O los_O datos_O difundidos_O hoy_O por_O Telefónica_S-ORG ,_O la_O empresa_O ha_O impuesto_O en_O Sao_B-LOC Paulo_E-LOC una_O marca_O mundial_O en_O la_O expansión_O de_O redes_O de_O telefonía_O fija_O ,_O ya_O que_O instala_O una_O línea_O cada_O 15_O segundos_O ,_O lo_O que_O da_O una_O media_O de_O 180.000_O nuevas_O terminales_O mensuales_O ._O
+9. "_O La_O empresa_O que_O ha_O instalado_O nuevas_O líneas_O a_O un_O ritmo_O más_O rápido_O en_O el_O mundo_O es_O Telefónica_S-ORG ,_O en_O Sao_B-LOC Paulo_E-LOC ,_O y_O por_O eso_O creemos_O que_O a_O fines_O de_O 2001_O cumpliremos_O las_O metas_O previstas_O para_O el_O 2003_O "_O ,_O dijo_O a_O EFE_S-ORG Viana_B-PER Baptista_E-PER ._O
+10. El_O objetivo_O de_O la_O empresa_O es_O instalar_O hasta_O diciembre_O del_O 2001_O otros_O tres_O millones_O de_O nuevas_O líneas_O en_O el_O estado_O de_O Sao_B-LOC Paulo_E-LOC para_O acabar_O con_O la_O lista_O de_O clientes_O en_O espera_O ,_O que_O llegó_O a_O tener_O seis_O millones_O de_O personas_O registradas_O antes_O de_O la_O entrada_O de_O Telefónica_S-ORG ._O
+11. El_O consejero_O delegado_O de_O Telefónica_B-ORG Internacional_E-ORG agregó_O que_O ,_O como_O la_O multinacional_O española_O está_O cumpliendo_O con_O anticipación_O todas_O las_O metas_O fijadas_O por_O la_O ANATEL_S-ORG ,_O los_O directivos_O de_O la_O compañía_O ya_O están_O pensando_O en_O actuar_O a_O nivel_O nacional_O a_O partir_O de_O enero_O de_O 2002_O ,_O cuando_O será_O liberado_O el_O sector_O de_O las_O telecomunicaciones_O en_O Brasil_S-LOC ._O
+12. Telefónica_S-ORG es_O la_O mayor_O operadora_O de_O telefonía_O de_O Brasil_S-LOC ,_O ya_O que_O además_O de_O Telesp_S-ORG ,_O de_O Sao_B-LOC Paulo_E-LOC ,_O tiene_O el_O control_O accionarial_O de_O Tele_B-ORG Sudeste_I-ORG Celular_E-ORG ,_O que_O opera_O la_O telefonía_O móvil_O en_O los_O estados_O de_O Río_B-LOC de_I-LOC Janeiro_E-LOC y_O Espíritu_B-LOC Santo_E-LOC ,_O y_O de_O la_O Compañía_B-ORG Riograndense_I-ORG de_I-ORG Telecomunicaciones_E-ORG (_O CRT_S-ORG )_O ,_O de_O Río_B-LOC Grande_I-LOC do_I-LOC Sul_E-LOC ,_O cuya_O venta_O para_O el_O grupo_O Brasil_B-ORG Telecom_E-ORG se_O definirá_O el_O mes_O próximo_O ._O
+13. La_O empresa_O también_O tiene_O participación_O en_O Tele_B-ORG Leste_I-ORG Celular_E-ORG ,_O operadora_O móvil_O de_O los_O estados_O de_O Bahía_S-LOC y_O Sergipe_S-LOC y_O que_O es_O controlada_O por_O la_O española_O Iberdrola_S-ORG ,_O y_O además_O es_O socia_O de_O Portugal_B-ORG Telecom_E-ORG en_O Telesp_B-ORG Celular_E-ORG ,_O la_O operadora_O móvil_O de_O Sao_B-LOC Paulo_E-LOC ._O
+14. "_O Estamos_O satisfechos_O con_O el_O trabajo_O hecho_O y_O por_O eso_O pensamos_O en_O comprar_O el_O cien_O por_O ciento_O de_O las_O acciones_O de_O las_O empresas_O controladas_O ,_O ya_O que_O creemos_O en_O el_O potencial_O que_O tiene_O Brasil_S-ORG|S-LOC y_O ,_O en_O particular_O ,_O el_O sector_O de_O telecomunicaciones_O "_O ,_O añadió_O Viana_B-PER Baptista_E-PER ._O
+15. Esa_O operación_O de_O compra_O se_O hará_O mediante_O el_O lanzamiento_O de_O una_O Oferta_B-MISC Pública_I-MISC de_I-MISC Acciones_E-MISC (_O OPA_S-MISC )_O ,_O que_O además_O de_O Telesp_S-ORG y_O de_O Tele_B-ORG Sudeste_I-ORG Celular_E-ORG ,_O incluye_O a_O las_O filiales_O del_O grupo_O español_O en_O Argentina_S-LOC y_O Perú_S-LOC ._O
+16. Según_O Viana_B-PER Baptista_E-PER ,_O Telefónica_S-ORG ya_O obtuvo_O la_O autorización_O de_O los_O órganos_O reguladores_O de_O Argentina_S-LOC ,_O Perú_S-LOC ,_O y_O de_O la_O bolsa_O de_O Nueva_B-LOC York_E-LOC ,_O donde_O se_O negociarán_O las_O acciones_O de_O las_O cuatro_O empresas_O como_O American_B-ORG Depositary_I-ORG Receipts_E-ORG (_O ADR's_S-ORG )_O ._O
+17. Sólo_O falta_O el_O visto_O bueno_O de_O las_O autoridades_O brasileñas_O para_O hacer_O efectiva_O la_O operación_O de_O compra_O en_O junio_O próximo_O ._O
+18. "_O Hoy_O tendremos_O una_O reunión_O con_O la_O Comisión_B-ORG de_I-ORG Valores_I-ORG Mobiliarios_E-ORG (_O CVM_S-ORG )_O y_O ,_O si_O conseguimos_O esa_O aprobación_O ,_O lanzaremos_O las_O OPAS_S-MISC de_O forma_O simultánea_O en_O Argentina_S-LOC ,_O Brasil_S-LOC ,_O Perú_S-LOC y_O Estados_B-ORG|B-LOC Unidos_E-ORG|E-LOC "_O ,_O afirmó_O ._O
+19. Por_O Juan_B-PER Miguel_I-PER Núñez_E-PER Madrid_S-LOC ,_O 23_O may_O (_O EFE_S-ORG )_O ._O
+20. -_O
+21. El_O novillero_O salmantino_O Javier_B-PER Castaño_E-PER conoce_O desde_O hoy_O la_O gloria_O del_O toreo_O ,_O de_O la_O salida_O a_O hombros_O por_O la_O Puerta_B-ORG|B-MISC Grande_I-ORG|I-MISC de_I-ORG|I-MISC Las_I-ORG|I-MISC Ventas_E-ORG|E-MISC ,_O reconocimiento_O a_O una_O emocionantísima_O actuación_O ,_O de_O tan_O buena_O compostura_O como_O valor_O ._O
+22. FICHA_B-MISC|O DEL_I-MISC|O FESTEJO_E-MISC|O ._O
+23. -_O
+24. Novillos_O de_O "_B-ORG|B-MISC El_I-ORG|I-MISC Torreón_E-ORG|I-MISC "_O|E-MISC ,_O bien_O presentados_O y_O de_O buen_O juego_O ._O
+25. Los_O seis_O ,_O nobles_O ,_O con_O fijeza_O y_O movilidad_O ,_O aplaudidos_O en_O el_O arrastre_O ._O
+26. Víctor_B-PER de_I-PER la_I-PER Serna_E-PER :_O pinchazo_O ,_O estocada_O y_O tres_O descabellos_O (_O silencio_O tras_O un_O aviso_O )_O ;_O y_O pinchazo_O y_O estocada_O que_O escupe_O (_O silencio_O )_O ._O
+27. Sebastián_B-PER Castella_E-PER :_O estocada_O desprendida_O (_O silencio_O tras_O un_O aviso_O )_O ;_O y_O dos_O pinchazos_O ,_O estocada_O y_O descabello_O (_O silencio_O )_O ._O
+28. Javier_B-PER Castaño_E-PER :_O estocada_O chalequera_O (_O vuelta_O tras_O petición_O de_O oreja_O )_O ;_O y_O estocada_O (_O dos_O orejas_O )_O ._O
+29. Cuadrillas_O :_O Domingo_B-PER Siro_E-PER saludó_O tras_O banderillear_O al_O tercero_O ._O
+30. La_O plaza_O casi_O se_O llenó_O en_O tarde_O de_O nubes_O altas_O y_O agradable_O temperatura_O ._O
+31. -_O
+32. DISPOSICION_O PARA_O TRIUNFAR_O Un_O novillero_O y_O seis_O novillos_O ,_O Javier_B-PER Castaño_E-PER y_O los_O del_O "_B-MISC Torreón_I-MISC "_E-MISC ,_O fueron_O los_O verdaderos_O protagonistas_O de_O la_O tarde_O ._O
+33. Estos_O por_O su_O magnífica_O presentación_O y_O extraordinaria_O condición_O para_O ver_O y_O hacer_O el_O toreo_O :_O una_O verdadera_O corrida_O de_O toros_O ,_O y_O con_O calidad_O ._O
+34. Aquel_S-PER|O ,_O el_O joven_O novillero_O ,_O sobresalió_O por_O sus_O excelentes_O maneras_O y_O disposición_O para_O triunfar_O ,_O aunque_O otras_O circunstancias_O como_O la_O espada_O lo_O impidieron_O a_O última_O hora_O ._O
+35. De_O todas_O las_O evoluciones_O en_O el_O ruedo_O ,_O el_O público_O siguió_O con_O especial_O atención_O las_O de_O Castaño_S-LOC|S-PER ,_O por_O su_O entrega_O y_O arrojo_O ,_O por_O el_O concepto_O de_O toreo_O que_O practica_O ,_O curvilíneo_O y_O cada_O vez_O más_O hacia_O adentro_O ,_O y_O por_O esa_O desmedida_O afición_O que_O le_O hace_O estar_O permanentemente_O presente_O en_O el_O terreno_O del_O toro_O ,_O donde_O parece_O que_O es_O imposible_O pisar_O ._O
+36. Todo_O en_O Castaño_S-LOC|S-PER es_O verdad_O y_O emoción_O ._O
+37. Por_O eso_O interesa_O tanto_O y_O ,_O sin_O duda_O ,_O llegará_O ._O
+38. Los_O lances_O y_O remates_O a_O una_O mano_O al_O primero_O de_O su_O lote_O ,_O sin_O rectificar_O un_O ápice_O ,_O acabaron_O con_O la_O frialdad_O de_O la_O tarde_O ._O
+39. Pero_O para_O entonces_O se_O habían_O arrastrado_O dos_O novillos_O ._O
+40. Luego_O el_O quite_O por_O ceñidas_O chicuelinas_O ,_O que_O provocó_O la_O intervención_O ,_O brillante_O también_O ,_O de_O Víctor_B-LOC|B-PER de_I-LOC|I-PER la_I-LOC|I-PER Serna_E-LOC|E-PER ,_O por_O gaoneras_O ._O
+41. Un_O subalterno_O de_O lujo_O en_O la_O cuadrilla_O del_O salmantino_O ,_O Domingo_B-PER Siro_E-PER ,_O abundó_O en_O mejorar_O el_O ambiente_O con_O dos_O excelentes_O pares_O de_O banderillas_O ._O
+42. La_O faena_O de_O muleta_O tuvo_O fundamentalmente_O mucho_O aguante_O ._O
+43. Muy_O cruzado_O y_O echando_O la_O muleta_O adelante_O ,_O Castaño_S-PER corrió_O la_O mano_O con_O mucha_O firmeza_O para_O marcar_O el_O viaje_O largo_O ._O
+44. Así_O varias_O veces_O ,_O tirar_O del_O novillo_O ,_O templar_O y_O ligar_O los_O muletazos_O ,_O fueron_O las_O características_O del_O conjunto_O ._O
+45. Al_O alejarse_O tras_O un_O remate_O de_O serie_O ,_O perdiéndole_O la_O cara_O al_O animal_O ,_O llegó_O una_O espectacular_O voltereta_O ._O
+46. Más_O emoción_O en_O unas_O bernadinas_O finales_O ._O
+47. Fue_O una_O pena_O que_O la_O espada_O se_O fuera_O al_O sótano_O ,_O porque_O hubiera_O cortado_O una_O oreja_O con_O todo_O merecimiento_O ._O
+48. Claro_O que_O el_O triunfo_O no_O se_O hizo_O esperar_O en_O el_O siguiente_O ._O
+49. Castaño_O|S-PER salió_O otra_O vez_O arreando_O con_O el_O capote_O ._O
+50. Y_O la_O faena_O de_O muleta_O fue_O intensísima_O de_O principio_O a_O fin_O ._O
+51. Esta_O vez_O superó_O su_O propia_O frontera_O ,_O colocándose_O todavía_O más_O allá_O del_O engaño_O ._O
+52. Inverosímil_O el_O espacio_O por_O donde_O tenia_O que_O pasar_O el_O novillo_O ._O
+53. Pero_O ,_O para_O asombro_O del_O tendido_O ,_O terminaba_O pasando_O ._O
+54. Y_O Castaño_O|S-PER sin_O inmutarse_O ._O
+55. El_O !_O huy_O ¡_O se_O confundía_O con_O el_O olé_O ._O
+56. Faena_O no_O apta_O para_O cardiacos_O ._O
+57. Como_O diría_O un_O revistero_O antiguo_O ,_O se_O acabó_O la_O tila_O en_O la_O plaza_O ._O
+58. Claro_O que_O Castaño_S-LOC|S-PER no_O es_O sólo_O valor_O ._O
+59. Porque_O ,_O a_O todo_O esto_O ,_O hizo_O el_O toreo_O de_O muleta_O adelantada_O ,_O traérselo_O enganchado_O ,_O pasándoselo_O tan_O cerca_O como_O se_O adivina_O y_O llevándole_O lejos_O ._O
+60. Uno_O detrás_O de_O otro_O y_O muy_O despacio_O ._O ¡_B-MISC|O Qué_I-MISC|O emoción_I-MISC|O !_E-MISC|O ._O ¡_B-MISC|O Qué_I-MISC|O bonito_I-MISC|O ver_I-MISC|O a_I-MISC|O Castaño_I-MISC|S-PER por_I-MISC|O la_I-MISC|O Puerta_I-MISC|B-MISC Grande_E-MISC con_O las_O dos_O orejas_O !_O ._O
+61. De_B-PER la_I-PER Serna_E-PER toreó_O con_O buena_O apostura_O a_O su_O primero_O ,_O con_O el_O que_O hizo_O asimismo_O buen_O planteamiento_O de_O faena_O ,_O aunque_O terminó_O estropeándolo_O con_O los_O aceros_O ._O
+62. Con_O el_O cuarto_O ,_O que_O se_O quedó_O crudo_O en_O el_O caballo_O ,_O no_O se_O entendió_O del_O todo_O ._O
+63. Castella_S-PER ha_O vuelto_O a_O confirmar_O lo_O que_O ya_O demostró_O en_O esta_O misma_O plaza_O en_O su_O debut_O a_O principio_O de_O temporada_O ,_O como_O ya_O había_O evidenciado_O en_O oportunidades_O tan_O claras_O que_O tuvo_O igualmente_O en_O Las_B-LOC|B-MISC Fallas_I-LOC|E-MISC de_I-LOC|O Valencia_E-LOC|S-LOC y_O La_B-LOC|B-MISC Magdalena_I-LOC|E-MISC de_I-LOC|O Castellón_E-LOC|S-LOC ._O
+64. Sorprende_O que_O el_O maestro_O José_B-PER Antonio_I-PER Campuzano_E-PER esté_O empeñado_O pese_O a_O todo_O en_O hacerle_O torero_O ._O
+65. En_O ninguno_O de_O su_O lote_O se_O aclaró_O ._O
+66. Lo_O de_O Castaño_S-LOC|S-PER fue_O tan_O grande_O que_O todavía_O empequeñece_O lo_O demás_O ._O
+67. Madrid_S-LOC ,_O 23_O may_O (_O EFE_S-ORG )_O ._O
+68. -_O
+69. Tres_O personas_O resultaron_O esta_O tarde_O heridas_O de_O distinta_O consideración_O al_O salirse_O de_O la_O vía_O y_O volcar_O el_O turismo_O en_O el_O que_O viajaban_O ,_O informó_O a_O Efe_S-ORG un_O portavoz_O de_O los_O Bomberos_B-ORG de_I-ORG la_I-ORG Comunidad_E-ORG ._O
+70. El_O accidente_O ocurrió_O minutos_O antes_O de_O las_O ocho_O de_O la_O tarde_O en_O el_O kilómetro_O 31_O de_O la_O carretera_O de_O Extremadura_S-LOC (_O N-V_S-ORG|S-MISC )_O ,_O en_O sentido_O de_O entrada_O a_O Madrid_S-LOC ,_O en_O el_O término_O municipal_O de_O Navalcarnero_S-LOC ._O
+71. El_O reventón_O de_O una_O rueda_O pudo_O ser_O la_O causa_O de_O que_O el_O conductor_O perdiera_O el_O control_O del_O vehículo_O ,_O según_O indicaron_O algunos_O testigos_O al_O teléfono_O de_O emergencias_O 112_O al_O avisar_O del_O suceso_O ._O
+72. Dos_O dotaciones_O de_O los_O bomberos_O acudieron_O al_O lugar_O y_O rescataron_O a_O los_O tres_O ocupantes_O del_O automóvil_O ,_O que_O habían_O quedado_O atrapados_O entre_O el_O amasijo_O de_O hierros_O ._O
+73. El_O más_O grave_O ,_O un_O varón_O que_O sufrió_O traumatismo_O craneoencefálico_O severo_O ,_O fue_O evacuado_O al_O hospital_O Doce_B-PER|B-LOC de_I-PER|I-LOC Octubre_E-PER|E-LOC en_O un_O helicóptero_O del_O Servicio_B-MISC|B-ORG de_I-MISC|I-ORG Emergencia_I-MISC|I-ORG de_I-MISC|I-ORG la_I-MISC|I-ORG Comunidad_E-MISC|E-ORG (_O Sercam_S-MISC|S-ORG )_O ._O
+74. Los_O otras_O dos_O víctimas_O ,_O una_O mujer_O mayor_O y_O otra_O de_O mediana_O edad_O ,_O fueron_O atendidas_O por_O sanitarios_O del_O 061_B-MISC|O del_I-MISC|O Insalud_E-MISC|S-ORG y_O voluntarios_O de_O Cruz_B-LOC|B-ORG Roja_E-LOC|E-ORG y_O trasladas_O a_O los_O hospitales_O de_O Getafe_S-LOC y_O Alcorcón_S-LOC ._O
+75. La_O primera_O presentaba_O un_O traumatismo_O craneoencefálico_O leve_O y_O un_O traumatismo_O facial_O y_O la_O segunda_O ,_O una_O fractura_O en_O la_O pierna_O ._O
+76. Londres_S-LOC ,_O 23_O may_O (_O EFECOM_S-ORG )_O ._O
+77. -_O
+78. Los_O contratos_O futuros_O del_O crudo_O Brent_S-MISC bajaron_O hoy_O ,_O martes_O ,_O en_O el_O mercado_O de_O Londres_S-LOC ._O
+79. El_O crudo_O Brent_S-MISC para_O junio_O cerró_O hoy_O a_O 27,35_O dólares_O el_O barril_O ,_O tras_O descender_O su_O precio_O 26_O centavos_O respecto_O a_O la_O sesión_O anterior_O ._O
+80. EFECOM_S-ORG pa-c_O París_S-LOC ,_O 23_O may_O (_O EFE_S-ORG )_O ._O
+81. -_O
+82. Los_O 51_O países_O miembros_O de_O la_O UEFA_S-ORG tendrán_O equipos_O representantes_O en_O las_O competiciones_O europeas_O de_O la_O próxima_O temporada_O después_O de_O que_O el_O Comité_B-ORG Ejecutivo_E-ORG haya_O aceptado_O hoy_O ,_O en_O París_S-LOC ,_O la_O participación_O del_O campeón_O de_O la_O Liga_B-MISC de_I-MISC San_I-MISC Marino_E-MISC ._O
+83. El_O primer_O clasificado_O de_O este_O país_O entrará_O en_O liza_O en_O la_O primera_O ronda_O eliminatoria_O de_O la_O Copa_B-MISC de_I-MISC la_I-MISC UEFA_E-MISC ,_O en_O la_O que_O también_O estarán_O equipos_O de_O otros_O países_O pequeños_O como_O Andorra_S-LOC ,_O Liechtenstein_S-ORG|S-LOC e_O Islas_B-LOC Feroe_E-LOC ._O
+84. El_O Comité_B-ORG Ejecutivo_E-ORG ha_O entendido_O que_O el_O fútbol_O en_O estos_O países_O ha_O evolucionado_O lo_O suficiente_O para_O participar_O y_O de_O hecho_O ya_O han_O tomado_O parte_O en_O las_O fases_O previas_O de_O los_O Mundiales_S-MISC y_O Eurocopas_S-MISC ._O
+85. La_B-LOC Coruña_E-LOC ,_O 23_O may_O (_O EFE_S-ORG )_O ._O
+86. -_O
+87. Los_O jugadores_O del_O Deportivo_S-ORG reciben_O esta_O noche_O un_O homenaje_O organizado_O por_O la_O fundación_O|B-ORG Fernández_B-PER|I-ORG Latorre_E-PER|E-ORG en_O el_O restaurante_O|B-LOC Playa_B-PER|I-LOC Club_E-PER|E-LOC ,_O de_O La_B-LOC Coruña_E-LOC ,_O para_O agradecer_O la_O consecución_O del_O primer_O título_O de_O liga_O del_O fútbol_O gallego_O ,_O logrado_O en_O Riazor_S-LOC el_O pasado_O domingo_O ._O
+88. Al_O homenaje_O han_O sido_O invitados_O cien_O lectores_O y_O oyentes_O de_O La_B-LOC|B-ORG Voz_I-LOC|I-ORG de_I-LOC|I-ORG Galicia_E-LOC|E-ORG y_O Onda_B-ORG Cero_I-ORG Galicia-radio_I-ORG Voz_E-ORG ;_O 50_O directivos_O ,_O jugadores_O y_O personal_O técnico_O del_O Deportivo_S-ORG y_O de_O la_O empresa_O ._O
+89. Los_O jugadores_O deportivistas_O fueron_O recibidos_O por_O el_O equipo_O directivo_O del_O grupo_O en_O el_O hotel_O ,_O tras_O lo_O que_O se_O celebrará_O una_O cena_O en_O la_O que_O intervendrán_O ,_O entre_O otros_O ,_O el_O capitán_O deportivista_O ,_O Mauro_B-PER Silva_E-PER ,_O el_O entrenador_O del_O equipo_O ,_O Javier_B-PER Irureta_E-PER ,_O y_O el_O presidente_O del_O club_O ,_O Auguto_B-PER César_I-PER Lendoiro_E-PER ._O
+90. También_O intervendrán_O en_O el_O acto_O varios_O miembros_O del_O grupo_O Voz_S-MISC|S-ORG ,_O entre_O ellos_O el_O director_O de_O La_B-LOC|B-ORG Voz_E-LOC|I-ORG de_O|I-ORG Galicia_S-LOC|E-ORG ,_O Ernesto_B-PER Sánchez_I-PER Pombo_E-PER ,_O tras_O lo_O que_O se_O ofrecerá_O un_O obsequio_O a_O toda_O la_O plantilla_O y_O cuerpo_O técnico_O del_O Deportivo_S-ORG ._O
+91. =============================================================_O
+92. Mérida_S-LOC ,_O 23_O may_O (_O EFE_S-ORG )_O ._O
+93. -_O
+94. La_O delegación_O de_O la_O Agencia_B-ORG EFE_E-ORG en_O Extremadura_S-LOC transmitirá_O el_O miércoles_O ,_O 24_O de_O mayo_O ,_O entre_O otras_O ,_O las_O siguientes_O informaciones_O :_O (_O FERIA_B-MISC|O ALFARERIA_E-MISC|O )_O ._O
+95. -_O
+96. Salvatierra_B-LOC de_I-LOC los_I-LOC Barros_E-LOC ._O
+97. -_O
+98. El_O vicepresidente_O de_O la_O Junta_S-ORG ,_O Carlos_B-PER Sánchez_I-PER Polo_E-PER ,_O inaugurará_O la_O VI_B-MISC Feria_I-MISC de_I-MISC la_I-MISC Alfarería._I-MISC el_I-MISC Barro_E-MISC ,_O en_O la_O que_O participan_O 80_O expositores_O españoles_O y_O portugueses_O hasta_O el_O próximo_O día_O 28_O ._O
+99. (_O DESAYUNOS_B-PER|O SALUD_E-PER|O )_O ._O
+100. -_O
+

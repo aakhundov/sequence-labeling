@@ -1,0 +1,470 @@
+data folder: data/ready/pos/wsj/
+embeddings: glove, 6B.100d
+epochs: 100
+batch size: 8
+initial learning rate: 0.001
+l.r. decay rate: 0.05
+byte lstm units: 64
+word lstm units: 128
+byte embedding dim: 50
+byte lstm layers: 1
+word lstm layers: 1
+use byte embeddings: 1
+use word embeddings: 1
+use crf layer: 0
+
+1.train    L 0.123     acc 95.96
+1.val      L 0.128     acc 95.85
+
+2.train    L 0.099     acc 96.69
+2.val      L 0.105     acc 96.54
+
+3.train    L 0.089     acc 97.00
+3.val      L 0.096     acc 96.77
+
+4.train    L 0.085     acc 97.14
+4.val      L 0.092     acc 96.89
+
+5.train    L 0.080     acc 97.26
+5.val      L 0.088     acc 97.03
+
+6.train    L 0.079     acc 97.33
+6.val      L 0.088     acc 97.00
+
+7.train    L 0.076     acc 97.39
+7.val      L 0.086     acc 97.09
+
+8.train    L 0.073     acc 97.48
+8.val      L 0.083     acc 97.17
+
+9.train    L 0.072     acc 97.48
+9.val      L 0.083     acc 97.13
+
+10.train    L 0.070    acc 97.54
+10.val      L 0.081    acc 97.19
+
+11.train    L 0.070    acc 97.55
+11.val      L 0.082    acc 97.13
+
+12.train    L 0.069    acc 97.60
+12.val      L 0.081    acc 97.22
+
+13.train    L 0.068    acc 97.63
+13.val      L 0.080    acc 97.21
+
+14.train    L 0.067    acc 97.67
+14.val      L 0.080    acc 97.25
+
+15.train    L 0.066    acc 97.68
+15.val      L 0.079    acc 97.26
+
+16.train    L 0.066    acc 97.68
+16.val      L 0.080    acc 97.26
+
+17.train    L 0.064    acc 97.72
+17.val      L 0.078    acc 97.29
+
+18.train    L 0.064    acc 97.74
+18.val      L 0.078    acc 97.29
+
+19.train    L 0.063    acc 97.75
+19.val      L 0.077    acc 97.32
+
+20.train    L 0.063    acc 97.76
+20.val      L 0.077    acc 97.34
+
+21.train    L 0.062    acc 97.77
+21.val      L 0.077    acc 97.37
+
+22.train    L 0.061    acc 97.81
+22.val      L 0.077    acc 97.30
+
+23.train    L 0.061    acc 97.83
+23.val      L 0.077    acc 97.38
+
+24.train    L 0.061    acc 97.83
+24.val      L 0.077    acc 97.38
+
+25.train    L 0.061    acc 97.83
+25.val      L 0.077    acc 97.33
+
+26.train    L 0.060    acc 97.84
+26.val      L 0.076    acc 97.39
+
+27.train    L 0.060    acc 97.87
+27.val      L 0.076    acc 97.41
+
+28.train    L 0.059    acc 97.88
+28.val      L 0.075    acc 97.41
+
+29.train    L 0.059    acc 97.89
+29.val      L 0.076    acc 97.42
+
+30.train    L 0.058    acc 97.90
+30.val      L 0.075    acc 97.39
+
+31.train    L 0.058    acc 97.90
+31.val      L 0.076    acc 97.37
+
+32.train    L 0.058    acc 97.93
+32.val      L 0.075    acc 97.42
+
+33.train    L 0.057    acc 97.94
+33.val      L 0.074    acc 97.41
+
+34.train    L 0.057    acc 97.93
+34.val      L 0.075    acc 97.39
+
+35.train    L 0.057    acc 97.95
+35.val      L 0.075    acc 97.44
+
+36.train    L 0.057    acc 97.95
+36.val      L 0.075    acc 97.44
+
+37.train    L 0.056    acc 97.96
+37.val      L 0.074    acc 97.41
+
+38.train    L 0.056    acc 97.98
+38.val      L 0.074    acc 97.44
+
+39.train    L 0.056    acc 97.98
+39.val      L 0.074    acc 97.41
+
+40.train    L 0.055    acc 97.98
+40.val      L 0.074    acc 97.41
+
+41.train    L 0.055    acc 97.98
+41.val      L 0.074    acc 97.39
+
+42.train    L 0.055    acc 97.99
+42.val      L 0.075    acc 97.43
+
+43.train    L 0.055    acc 98.00
+43.val      L 0.075    acc 97.43
+
+44.train    L 0.054    acc 98.01
+44.val      L 0.074    acc 97.43
+
+45.train    L 0.054    acc 98.03
+45.val      L 0.074    acc 97.42
+
+46.train    L 0.054    acc 98.03
+46.val      L 0.074    acc 97.43
+
+47.train    L 0.054    acc 98.03
+47.val      L 0.074    acc 97.42
+
+48.train    L 0.054    acc 98.04
+48.val      L 0.074    acc 97.41
+
+49.train    L 0.054    acc 98.04
+49.val      L 0.074    acc 97.44
+
+50.train    L 0.053    acc 98.07
+50.val      L 0.074    acc 97.47
+
+51.train    L 0.053    acc 98.06
+51.val      L 0.074    acc 97.42
+
+52.train    L 0.053    acc 98.06
+52.val      L 0.074    acc 97.44
+
+53.train    L 0.053    acc 98.07
+53.val      L 0.074    acc 97.43
+
+54.train    L 0.052    acc 98.07
+54.val      L 0.073    acc 97.47
+
+55.train    L 0.052    acc 98.08
+55.val      L 0.074    acc 97.47
+
+56.train    L 0.052    acc 98.07
+56.val      L 0.074    acc 97.45
+
+57.train    L 0.052    acc 98.10
+57.val      L 0.073    acc 97.46
+
+58.train    L 0.052    acc 98.09
+58.val      L 0.073    acc 97.48
+
+59.train    L 0.052    acc 98.10
+59.val      L 0.073    acc 97.47
+
+60.train    L 0.051    acc 98.11
+60.val      L 0.073    acc 97.45
+
+61.train    L 0.051    acc 98.10
+61.val      L 0.074    acc 97.45
+
+62.train    L 0.051    acc 98.10
+62.val      L 0.074    acc 97.46
+
+63.train    L 0.051    acc 98.13
+63.val      L 0.073    acc 97.48
+
+64.train    L 0.051    acc 98.12
+64.val      L 0.073    acc 97.46
+
+65.train    L 0.050    acc 98.12
+65.val      L 0.073    acc 97.44
+
+66.train    L 0.050    acc 98.14
+66.val      L 0.074    acc 97.45
+
+67.train    L 0.050    acc 98.15
+67.val      L 0.073    acc 97.47
+
+68.train    L 0.050    acc 98.13
+68.val      L 0.073    acc 97.44
+
+69.train    L 0.050    acc 98.15
+69.val      L 0.073    acc 97.43
+
+70.train    L 0.050    acc 98.15
+70.val      L 0.073    acc 97.44
+
+71.train    L 0.050    acc 98.18
+71.val      L 0.073    acc 97.47
+
+72.train    L 0.049    acc 98.18
+72.val      L 0.073    acc 97.45
+
+73.train    L 0.049    acc 98.16
+73.val      L 0.073    acc 97.44
+
+74.train    L 0.049    acc 98.15
+74.val      L 0.073    acc 97.45
+
+75.train    L 0.049    acc 98.18
+75.val      L 0.073    acc 97.47
+
+76.train    L 0.049    acc 98.17
+76.val      L 0.073    acc 97.44
+
+77.train    L 0.049    acc 98.16
+77.val      L 0.073    acc 97.45
+
+78.train    L 0.049    acc 98.18
+78.val      L 0.073    acc 97.48
+
+79.train    L 0.049    acc 98.18
+79.val      L 0.073    acc 97.45
+
+80.train    L 0.049    acc 98.20
+80.val      L 0.073    acc 97.49
+
+81.train    L 0.048    acc 98.21
+81.val      L 0.073    acc 97.49
+
+82.train    L 0.048    acc 98.20
+82.val      L 0.073    acc 97.49
+
+83.train    L 0.048    acc 98.20
+83.val      L 0.073    acc 97.48
+
+84.train    L 0.048    acc 98.22
+84.val      L 0.073    acc 97.49
+
+85.train    L 0.048    acc 98.21
+85.val      L 0.074    acc 97.46
+
+86.train    L 0.048    acc 98.22
+86.val      L 0.073    acc 97.49
+
+87.train    L 0.048    acc 98.22
+87.val      L 0.073    acc 97.51
+
+88.train    L 0.048    acc 98.22
+88.val      L 0.073    acc 97.49
+
+89.train    L 0.048    acc 98.23
+89.val      L 0.073    acc 97.49
+
+90.train    L 0.047    acc 98.23
+90.val      L 0.073    acc 97.47
+
+91.train    L 0.047    acc 98.22
+91.val      L 0.073    acc 97.48
+
+92.train    L 0.047    acc 98.24
+92.val      L 0.073    acc 97.50
+
+93.train    L 0.047    acc 98.24
+93.val      L 0.073    acc 97.50
+
+94.train    L 0.047    acc 98.25
+94.val      L 0.073    acc 97.51
+
+95.train    L 0.047    acc 98.26
+95.val      L 0.073    acc 97.48
+
+96.train    L 0.047    acc 98.25
+96.val      L 0.073    acc 97.48
+
+97.train    L 0.047    acc 98.23
+97.val      L 0.073    acc 97.48
+
+98.train    L 0.047    acc 98.24
+98.val      L 0.073    acc 97.49
+
+99.train    L 0.047    acc 98.26
+99.val      L 0.073    acc 97.50
+
+100.train    L 0.047   acc 98.26
+100.val      L 0.073   acc 97.49
+
+
+Best epoch: 87
+Best metric: 97.51
+
+Confusion matrix:
+
+[[   31     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0  1144     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0   991     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0   181     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0   181     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0  7086     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0  5468     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     3     0     0     0     0   636     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0  3363     0     6     0     1     1     0     0     0     0     0     0     0     0     1     0     0     0     0     7     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0  5206     0     0     0     0     8     0     0     0     0     2     1     0     6     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     2     0 11159     0     1    34     2     0     0     0     0     8     3     0     0     7     0     0     0     7     0     0     0     0     0     0     0     0     0     0     0     0     7     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0   116     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     6     3     0     0     0     0     0     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     3     0    16     0     1 13444     5     0     0     0     0     0     1     0     0     0     0     0     0   117     0     0    56     0     0     0     0     0     0     0     0     0     8     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     1     2  7585     1     0     0     0   176    46     0     4     3     0     1     1    48     0     0     0     0     0     0     5     4    49   168     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     8   411     0     0     0     1     1     0     0     0     0     0     0     0    23     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0   254     0     0     0     1     0     0     0     0     0     0     0     0     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1293     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     1    13     3     0     1     6   398     2     0     0     3 17715   189     0    45     2     0    12     0    14     0     0     0     0     0     0    29     3    86     6    10     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     6     8     0     1     6    79     0     0     0     3    38 12859   161     7     0     0     0     0     3     0     0     0     0     0     0     0     0     8     4     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0    55   341    15     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     8     0     0     0     0     5     0     0     0     0    24    17    19  7941     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0    28     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     9     0     0     0     1     0     0     0     0     0     0     0     0    52     0     0     0     2     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1237     0     0     0     0     0     0     0     0     0     0     0     0     0     0     4     0     0     0     0     0]
+ [    0     0     0     0     1     0     0     0     0     1     0     0     0     0     0     0     0     0     0     5     0     0     0     0     1  2374     3     0     0     0     0     0     0     0     1     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1184     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     4     0    13     3     0    91    79     7     1     0     0    19     3     0     1     1     0     0     0  3846    37     0    61     0     0     1     3     0     0     0     1     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    59     0     0     0     0     0     0     0     0     0     0     0     2   168     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    11     0     0     0     0     0     0     0     0     0     0     0     0    40     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0    35     2     0     0     0     0     0     0     0     0     0     0     0     0    23     0     0   303     0     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     4     0     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  3074     0     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     1     0     0     0     0     0     0     1     0     0     4     0     0     0     0     1     0     0     0     0     0     6     0     0     0     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     9     1     0     0     0    22     3     0     0     0     0     0     0     3     0     0     0     0     0     0  3404    10     0     6    45     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     4     0     0     0     1     3     2     0     0     0     0     0     0     0     0     0     0     0     0     0     2  4523     0    80     5     1     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0    16     0     0     0     0    79     1     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1860     0     0     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0    93     0     0     0     0     6     1     0     0     0     0     0     0     0     0     0     0     0     0     0     2   117     0  2604     2     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     1     3     0     0     0     0     8     1     0     0     0     0     0     0     1     0     0     0     0     0     0    23     4     0     2  1443     0     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    20     0     4     0     0     0     0     0     0     0     0     0     0     0     0     0     1  2790     0     0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     3     0     0     5     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   536     1     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     4   315     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0    16     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0   270     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0     0  1022]]
+
+Predicted sentence samples:
+
+1. The_DT Arizona_NNP Corporations_NNPS|NNP Commission_NNP authorized_VBD an_DT 11.5_CD %_NN rate_NN increase_NN at_IN Tucson_NNP Electric_NNP Power_NNP Co._NNP ,_, substantially_RB lower_JJR than_IN recommended_VBN last_JJ month_NN by_IN a_DT commission_NN hearing_VBG|NN officer_NN and_CC barely_RB half_PDT the_DT rise_NN sought_VBN by_IN the_DT utility_NN ._.
+2. The_DT ruling_NN follows_VBZ a_DT host_NN of_IN problems_NNS at_IN Tucson_NNP Electric_NNP ,_, including_VBG major_JJ write-downs_NNS ,_, a_DT 60_CD %_NN slash_NN in_IN the_DT common_JJ stock_NN dividend_NN and_CC the_DT departure_NN of_IN former_JJ Chairman_NNP Einar_NNP Greve_NNP during_IN a_DT company_NN investigation_NN of_IN his_PRP$ stock_NN sales_NNS ._.
+3. The_DT Arizona_NNP regulatory_JJ ruling_NN calls_VBZ for_IN $_$ 42_CD million_CD in_IN added_JJ revenue_NN yearly_RB ,_, compared_VBN with_IN a_DT $_$ 57_CD million_CD boost_NN proposed_VBN by_IN the_DT commission_NN hearing_VBG|NN officer_NN ._.
+4. The_DT company_NN had_VBD sought_VBN increases_NNS totaling_VBG $_$ 80.3_CD million_CD ,_, or_CC 22_CD %_NN ._.
+5. The_DT decision_NN was_VBD announced_VBN after_IN trading_NN ended_VBD ._.
+6. Tucson_NNP Electric_NNP closed_VBD at_IN $_$ 20.875_CD a_DT share_NN ,_, down_RB 25_CD cents_NNS ,_, in_IN New_NNP York_NNP Stock_NNP Exchange_NNP composite_JJ trading_NN ._.
+7. A_DT Tucson_NNP Electric_NNP spokesman_NN said_VBD the_DT utility_NN was_VBD disappointed_VBN by_IN the_DT commission_NN 's_POS decision_NN and_CC ``_`` concerned_JJ about_IN the_DT financial_JJ integrity_NN of_IN the_DT company_NN ._.
+8. South_JJ Korean_JJ President_NNP Roh_NNP Tae_NNP Woo_NNP ,_, brushing_VBG aside_RP suggestions_NNS that_IN the_DT won_NN be_VB revalued_VBN again_RB ,_, said_VBD the_DT currency_NN 's_POS current_JJ level_NN against_IN the_DT dollar_NN is_VBZ ``_`` appropriate_JJ ._. ''_''
+9. His_PRP$ comments_NNS ,_, made_VBN in_IN response_NN to_TO reporters_NNS '_POS questions_NNS at_IN the_DT National_NNP Press_NNP Club_NNP here_RB ,_, signaled_VBD that_IN Seoul_NNP is_VBZ resisting_VBG U.S._NNP pressure_NN for_IN a_DT further_JJ|JJR rise_NN in_IN the_DT currency_NN 's_POS value_NN ._.
+10. The_DT U.S._NNP wants_VBZ a_DT higher_JJR won_VBN|NN to_TO make_VB South_NNP Korea_NNP 's_POS exports_NNS more_RBR expensive_JJ and_CC help_VB trim_VB Seoul_NNP 's_POS trade_NN surplus_NN ._.
+11. Many_JJ South_JJ Korean_JJ business_NN people_NNS want_VBP a_DT devaluation_NN instead_RB ,_, arguing_VBG that_IN the_DT won_NN|VBN 's_POS recent_JJ gains_NNS already_RB have_VBP weakened_VBN the_DT country_NN 's_POS export_NN performance_NN ._.
+12. Mr._NNP Roh_NNP also_RB said_VBD South_NNP Korea_NNP is_VBZ taking_VBG steps_NNS that_WDT would_MD free_VB the_DT won_NN to_TO respond_VB to_TO market_NN forces_NNS ._.
+13. Seoul_NNP has_VBZ pointed_VBN to_TO its_PRP$ lack_NN of_IN a_DT foreign_JJ exchange_NN market_NN as_IN one_CD reason_NN the_DT won_NN 's_POS value_NN remains_VBZ heavily_RB controlled_VBN ._.
+14. Mr._NNP Roh_NNP said_VBD a_DT U.S._NNP demand_NN for_IN the_DT removal_NN of_IN South_JJ Korean_JJ import_NN quotas_NNS on_IN beef_NN will_MD be_VB resolved_VBN ``_`` satisfactorily_RB ''_'' but_CC gave_VBD no_DT hint_NN when_WRB that_DT will_MD happen_VB ._.
+15. Speaking_VBG to_TO a_DT joint_JJ meeting_NN of_IN Congress_NNP earlier_RBR ,_, he_PRP said_VBD South_NNP Korea_NNP ca_MD n't_RB move_VB quickly_RB on_IN such_JJ agricultural_JJ trade_NN issues_NNS ``_`` without_IN causing_VBG political_JJ and_CC social_JJ trauma_NN ._.
+16. Great_NNP American_NNP Bank_NNP said_VBD its_PRP$ board_NN approved_VBD the_DT formation_NN of_IN a_DT holding_VBG|NN company_NN enabling_VBG the_DT savings_NNS bank_NN to_TO pursue_VB nontraditional_JJ banking_NN activities_NNS under_IN a_DT new_JJ federal_JJ law_NN ._.
+17. The_DT proposed_VBN|JJ holding_VBG|NN company_NN 's_POS primary_JJ purpose_NN would_MD be_VB to_TO allow_VB Great_NNP American_NNP to_TO continue_VB engaging_VBG|JJ in_IN real_JJ estate_NN development_NN activities_NNS ,_, it_PRP said_VBD ._.
+18. Those_DT activities_NNS generated_VBD $_$ 26.1_CD million_CD in_IN operating_NN profit_NN last_JJ year_NN ._.
+19. But_CC according_VBG to_TO Great_NNP American_JJ|NNP ,_, such_JJ profits_NNS do_VBP n't_RB count_VB toward_IN meeting_VBG the_DT San_NNP Diego_NNP savings_NNS bank_NN 's_POS new_JJ capitalization_NN requirements_NNS under_IN 1989_CD federal_JJ law_NN ._.
+20. The_DT new_JJ real_JJ estate_NN unit_NN would_MD have_VB a_DT separate_JJ capital_NN structure_NN to_TO comply_VB with_IN the_DT law_NN ._.
+21. The_DT proposed_VBN|JJ holding_VBG|NN company_NN would_MD also_RB consolidate_VB Great_NNP American_NNP Bank_NNP in_IN San_NNP Diego_NNP and_CC its_PRP$ Tucson_NNP ,_, Ariz._NNP ,_, savings_NNS bank_NN into_IN a_DT single_JJ ,_, federally_RB chartered_VBN|JJ institution_NN in_IN San_NNP Diego_NNP ._.
+22. The_DT consolidation_NN is_VBZ expected_VBN to_TO save_VB $_$ 1_CD million_CD a_DT year_NN in_IN administrative_JJ costs_NNS ,_, a_DT Great_JJ|NNP American_JJ|NNP spokesman_NN said_VBD ._.
+23. Dale_NNP Lang_NNP ,_, who_WP this_DT week_NN completed_VBD the_DT acquisition_NN of_IN the_DT publisher_NN of_IN Ms._NNP and_CC Sassy_NNP ,_, is_VBZ candid_JJ about_IN the_DT challenge_NN he_PRP is_VBZ taking_VBG on_RP ._.
+24. Mr._NNP Lang_NNP admits_VBZ that_IN|DT Ms._NNP is_VBZ ``_`` in_IN dire_JJ straits_NNS ''_'' and_CC that_IN Sassy_NNP needs_VBZ big_JJ promotional_JJ dollars_NNS to_TO keep_VB it_PRP alive_JJ ._.
+25. But_CC the_DT 57-year-old_JJ publisher_NN has_VBZ moved_VBN quickly_RB and_CC boldly_RB to_TO deal_VB with_IN the_DT magazines_NNS '_POS problems_NNS ._.
+26. Last_JJ Friday_NNP ,_, he_PRP told_VBD the_DT staff_NN of_IN Ms._NNP that_IN the_DT magazine_NN in_IN January_NNP would_MD begin_VB publishing_VBG without_IN advertising_NN ._.
+27. Mr._NNP Lang_NNP will_MD do_VB away_RB|RP with_IN expensive_JJ circulation_NN drives_NNS|VBZ ,_, not_RB to_TO mention_VB sales_NNS staff_NN ,_, and_CC attempt_VB to_TO publish_VB the_DT 17-year-old_JJ magazine_NN supported_VBN by_IN circulation_NN revenue_NN alone_RB ._.
+28. ``_`` Any_DT fool_NN can_MD publish_VB a_DT money-losing_JJ magazine_NN ._.
+29. I_PRP want_VBP to_TO publish_VB one_CD|NN that_WDT succeeds_VBZ ,_, ''_'' said_VBD Mr._NNP Lang_NNP ._.
+30. ``_`` For_IN Ms._NNP ,_, it_PRP 's_VBZ time_NN to_TO publish_VB for_IN the_DT reader_NN ,_, not_RB the_DT advertiser_NN ._. ''_''
+31. As_IN for_IN Sassy_NNP ,_, which_WDT competes_VBZ directly_RB with_IN News_NNP Corp._NNP 's_POS Seventeen_CD|NNP magazine_NN ,_, Mr._NNP Lang_NNP says_VBZ that_IN in_IN the_DT next_JJ two_CD years_NNS he_PRP will_MD spend_VB $_$ 6_CD million_CD promoting_VBG and_CC improving_VBG the_DT magazine_NN ._.
+32. Though_IN|NNP Sassy_NNP has_VBZ grown_VBN quickly_RB since_IN its_PRP$ debut_NN in_IN March_NNP 1988_CD ,_, it_PRP has_VBZ been_VBN the_DT target_NN of_IN conservative_JJ lobbyists_NNS and_CC skittish_JJ advertisers_NNS who_WP bristled_VBD at_IN its_PRP$ frank_JJ editorial_NN|JJ matter_NN on_IN teen-age_JJ problems_NNS ._.
+33. Mr._NNP Lang_NNP said_VBD the_DT former_JJ Australian_JJ owners_NNS of_IN Sassy_NNP were_VBD ``_`` blind-sided_JJ by_IN the_DT Moral_NNP Majority_NNP ..._: ._.
+34. Their_PRP$ reaction_NN was_VBD to_TO do_VB nothing_NN and_CC ride_VB it_PRP out_RP ._. ''_''
+35. He_PRP said_VBD Sassy_NNP will_MD keep_VB its_PRP$ irreverent_JJ tone_NN ,_, but_CC added_VBD ,_, ``_`` We_PRP will_MD keep_VB a_DT close_JJ watch_NN on_IN the_DT editorial_NN|JJ content_NN of_IN the_DT magazine_NN ._. ''_''
+36. Sassy_NNP already_RB has_VBZ recovered_VBN ;_: circulation_NN has_VBZ quickly_RB passed_VBN the_DT 500,000_CD mark_NN and_CC advertising_NN pages_NNS have_VBP stabilized_VBN this_DT year_NN at_IN more_JJR than_IN 300_CD ._.
+37. What_WP 's_VBZ more_JJR ,_, Mr._NNP Lang_NNP says_VBZ he_PRP has_VBZ what_WP all_DT publishers_NNS wish_VBP for_IN :_: a_DT bona_FW|JJ fide_NN|JJ niche_NN ._.
+38. ``_`` Seventeen_CD|NNP is_VBZ written_VBN more_RBR for_IN mothers_NNS ,_, not_RB their_PRP$ daughters_NNS ,_, ''_'' said_VBD Mr._NNP Lang_NNP ._.
+39. ``_`` But_CC Sassy_NNP has_VBZ a_DT different_JJ spirit_NN ._.
+40. It_PRP gets_VBZ more_JJR mail_NN in_IN a_DT month_NN than_IN McCall_NNP 's_POS got_VBD in_IN a_DT year_NN ,_, and_CC it_PRP 's_VBZ not_RB from_IN mothers_NNS ._.
+41. I_PRP feel_VBP about_IN Sassy_NNP like_IN I_PRP did_VBD about_IN Working_NNP Woman_NNP 10_CD years_NNS ago_RB ._. ''_''
+42. Mr._NNP Lang_NNP took_VBD on_IN|RP Ms._NNP and_CC Sassy_NNP with_IN the_DT acquisition_NN of_IN Matilda_NNP Publications_NNPS|NNP Inc._NNP by_IN his_PRP$ newly_RB formed_VBN Lang_NNP Communications_NNPS|NNP ._.
+43. Lang_NNP owns_VBZ 70_CD %_NN of_IN Matilda_NNP ,_, while_IN Citicorp_NNP owns_VBZ the_DT rest_NN through_IN its_PRP$ Citicorp_NNP Venture_NNP Capital_NNP Partners_NNPS|NNP ._.
+44. Two_CD weeks_NNS ago_RB ,_, Citicorp_NNP and_CC Mr._NNP Lang_NNP pumped_VBD $_$ 800,000_CD into_IN Matilda_NNP just_RB to_TO keep_VB the_DT doors_NNS open_JJ ._.
+45. Industry_NN observers_NNS have_VBP congratulated_VBN Mr._NNP Lang_NNP on_IN what_WP some_DT call_VBP|VB his_PRP$ ``_`` courageous_JJ ''_'' handling_NN of_IN Ms._NNP ,_, but_CC his_PRP$ track_NN record_NN in_IN magazine_NN publishing_NN in_IN general_NN|JJ has_VBZ gotten_VBN mixed_JJ reviews_NNS ._.
+46. Besides_IN Ms._NNP and_CC Sassy_NNP ,_, closely_RB held_VBN Lang_NNP Communications_NNPS|NNP includes_VBZ Success_NNP ,_, a_DT magazine_NN for_IN entrepreneurs_NNS and_CC small_JJ businesses_NNS ,_, and_CC Working_NNP Woman_NNP and_CC Working_NNP Mother_NNP ,_, two_CD monthly_JJ magazines_NNS ._.
+47. Working_VBG|NNP Woman_NNP ,_, with_IN circulation_NN near_IN one_CD million_CD ,_, and_CC Working_NNP Mother_NNP ,_, with_IN 625,000_CD circulation_NN ,_, are_VBP legitimate_JJ magazine_NN success_NN stories_NNS ._.
+48. The_DT magazine_NN Success_NNP ,_, however_RB ,_, was_VBD for_IN years_NNS lackluster_JJ and_CC unfocused_JJ ._.
+49. Only_RB recently_RB has_VBZ it_PRP been_VBN attractively_RB redesigned_VBN and_CC its_PRP$ editorial_NN|JJ product_NN improved_VBN ._.
+50. Success_NN|NNP is_VBZ expected_VBN to_TO gain_VB at_IN least_JJS because_IN of_IN the_DT recent_JJ folding_NN of_IN rival_JJ Venture_NNP ,_, another_DT magazine_NN for_IN growing_VBG companies_NNS ._.
+51. Working_VBG|NNP Woman_NNP and_CC Working_NNP Mother_NNP have_VB|VBP operated_VBN as_IN part_NN of_IN Working_NNP Woman/McCall_NNP 's_POS Group_NNP ,_, a_DT less-than-successful_JJ joint_JJ venture_NN between_IN Mr._NNP Lang_NNP and_CC Time_NNP|NN Warner_NNP Inc_NNP ._.
+52. The_DT joint_JJ venture_NN is_VBZ being_VBG undone_VBN ,_, with_IN McCall_NNP 's_POS magazine_NN being_VBG sold_VBN last_JJ summer_NN to_TO the_DT New_NNP York_NNP Times_NNP Co._NNP 's_POS Magazine_NNP Group_NNP for_IN about_IN|RB $_$ 80_CD million_CD ,_, and_CC Time_NNP|NN Warner_NNP agreeing_VBG to_TO sell_VB back_RP its_PRP$ 50_CD %_NN interest_NN in_IN Working_NNP Woman_NNP and_CC Working_NNP Mother_NNP to_TO Mr._NNP Lang_NNP ._.
+53. Executives_NNS at_IN Time_NNP Inc_NNP ._. Magazine_NNP Co._NNP ,_, a_DT subsidiary_NN of_IN Time_NNP Warner_NNP ,_, have_VBP said_VBD|VBN the_DT joint_JJ venture_NN with_IN Mr._NNP Lang_NNP was_VBD n't_RB a_DT good_JJ one_CD ._.
+54. The_DT venture_NN ,_, formed_VBN in_IN 1986_CD ,_, was_VBD supposed_VBN to_TO be_VB Time_NNP 's_POS low-cost_JJ ,_, safe_JJ entry_NN into_IN women_NNS 's_POS magazines_NNS ._.
+55. Mr._NNP Lang_NNP surprised_VBD Time_NNP soon_RB after_IN joining_VBG forces_NNS when_WRB he_PRP said_VBD he_PRP would_MD negotiate_VB rates_NNS individually_RB with_IN advertisers_NNS ,_, a_DT practice_NN common_JJ in_IN broadcasting_VBG|NN but_CC considered_VBN taboo_NN by_IN magazine_NN publishers_NNS ._.
+56. In_IN addition_NN ,_, McCall_NNP 's_POS put_VBN|VBD in_IN|RP a_DT less_JJR|RBR than_IN stellar_JJ performance_NN ._.
+57. Until_IN a_DT recent_JJ comeback_NN ,_, it_PRP saw_VBD steep_JJ losses_NNS in_IN ad_NN pages_NNS and_CC circulation_NN ._.
+58. Time_NN|NNP executives_NNS complained_VBD about_IN the_DT shoddy_JJ editorial_NN|JJ quality_NN ,_, and_CC in_IN the_DT end_NN ,_, one_CD Time_NNP executive_NN who_WP asked_VBD not_RB to_TO be_VB identified_VBN said_VBD ,_, ``_`` Frankly_RB ,_, McCall_NNP 's_POS and_CC the_DT joint_JJ venture_NN were_VBD an_DT embarrassment_NN ._. ''_''
+59. Mr._NNP Lang_NNP feels_VBZ that_IN|DT Time_NNP 's_POS priorities_NNS changed_VBD ._.
+60. ``_`` Their_PRP$ management_NN changed_VBD right_RB after_IN {_( the_DT venture_NN was_VBD formed_VBN }_) ,_, and_CC I_PRP do_VBP n't_RB think_VB they_PRP were_VBD comfortable_JJ getting_VBG into_IN the_DT competitive_JJ wars_NNS of_IN women_NNS 's_POS service_NN magazines_NNS ._. ''_''
+61. Today_NN ,_, Mr._NNP Lang_NNP believes_VBZ his_PRP$ magazines_NNS will_MD offer_VB what_WP many_JJ women_NNS 's_POS magazines_NNS do_VBP n't_RB ._.
+62. ``_`` We_PRP write_VBP straight_RB for_IN women_NNS on_IN their_PRP$ level_NN ,_, ''_'' he_PRP said_VBD ._.
+63. ``_`` We_PRP do_VBP n't_RB have_VB passive_JJ readers_NNS ._. ''_''
+64. Mr._NNP Lang_NNP points_VBZ out_RP that_IN even_RB Success_NNP ,_, in_IN part_NN ,_, fits_VBZ the_DT company_NN 's_POS image_NN ,_, since_IN about_IN|RB 30_CD %_NN of_IN its_PRP$ readership_NN is_VBZ female_JJ ._.
+65. Mr._NNP Lang_NNP has_VBZ named_VBN Carol_NNP Taber_NNP ,_, 43_CD ,_, as_IN group_NN publisher_NN of_IN New_NNP York-based_JJ Lang_NNP Communications_NNPS|NNP ._.
+66. She_PRP will_MD oversee_VB Working_NNP Woman_NNP ,_, Working_VBG|NNP Mother_NNP and_CC Success_NNP magazines_NNS ,_, and_CC retain_VB her_PRP$|PRP post_NN as_IN publisher_NN of_IN Working_NNP Woman_NNP ._.
+67. The_DT sale_NN price_NN of_IN McCall_NNP 's_POS --_: twice_RB what_WP Mr._NNP Lang_NNP originally_RB paid_VBD for_IN it_PRP --_: will_MD finance_VB Lang_NNP Communications_NNP '_POS buy-back_NN of_IN Time_NNP Warner_NNP 's_POS 50_CD %_NN interest_NN in_IN Working_NNP Woman_NNP and_CC Working_NNP Mother_NNP ._.
+68. Mr._NNP Lang_NNP says_VBZ he_PRP is_VBZ n't_RB scouting_VBG new_JJ acquisitions_NNS ,_, at_IN least_JJS for_IN now_RB ._.
+69. ``_`` We_PRP would_MD have_VB to_TO go_VB outside_RB to_TO banks_NNS to_TO get_VB the_DT money_NN and_CC I_PRP am_VBP not_RB ready_JJ to_TO do_VB that_DT ,_, ''_'' he_PRP said_VBD ._.
+70. ``_`` Besides_IN|RB ,_, we_PRP have_VBP enough_RB|NN on_IN our_PRP$ plate_NN ._.
+71. There_EX is_VBZ plenty_NN of_IN work_NN to_TO be_VB done_VBN on_IN what_WP we_PRP have_VBP ._.
+72. Britain_NNP 's_POS Monopolies_NNPS|NNP and_CC Mergers_NNP Commission_NNP Wednesday_NNP cleared_VBD Rhone-Poulenc_NNP S.A._NNP 's_POS purchase_NN of_IN a_DT specialty_NN bulk-chemical_NN unit_NN from_IN Monsanto_NNP Co._NNP ,_, saying_VBG the_DT purchase_NN was_VBD unlikely_JJ to_TO have_VB any_DT lasting_JJ impact_NN on_IN U.K._NNP industrial_JJ consumers_NNS ._.
+73. The_DT commission_NN ,_, which_WDT was_VBD asked_VBN to_TO study_VB the_DT deal_NN by_IN the_DT Department_NNP of_IN Trade_NNP and_CC Industry_NNP after_IN its_PRP$ announcement_NN in_IN February_NNP ,_, said_VBD the_DT diversity_NN of_IN global_JJ supply_NN of_IN chemicals_NNS used_VBN in_IN making_VBG analgesic_JJ drugs_NNS was_VBD great_JJ enough_RB to_TO offset_VB the_DT dominant_JJ U.K._NNP market_NN share_NN Rhone-Poulenc_NNP would_MD gain_VB through_IN the_DT acquisition_NN ._.
+74. The_DT French_JJ|NNP chemical_NN giant_NN would_MD hold_VB an_DT 80_CD %_NN share_NN of_IN the_DT U.K._NNP market_NN for_IN salicylic_JJ acid_NN ,_, methyl_NN salicylate_NN and_CC bulk_JJ aspirin_NN ._.
+75. The_DT commission_NN found_VBD that_IN if_IN the_DT British_JJ government_NN attempted_VBD to_TO block_VB the_DT merger_NN ,_, Rhone-Poulenc_NNP would_MD likely_RB respond_VB by_IN closing_VBG the_DT salicylates_NNS plant_NN Monsanto_NNP operates_VBZ in_IN Wales_NNP ,_, removing_VBG the_DT matter_NN from_IN U.K._NNP jurisdiction_NN ._.
+76. Morrison_NNP Knudsen_NNP Corp._NNP posted_VBD third-quarter_JJ net_JJ income_NN of_IN $_$ 7.9_CD million_CD ,_, or_CC 69_CD cents_NNS a_DT share_NN ,_, continuing_VBG a_DT rebound_NN from_IN steep_JJ year-ago_JJ losses_NNS ._.
+77. In_IN the_DT third_JJ quarter_NN a_DT year-earlier_JJ|NN ,_, the_DT construction_NN and_CC engineering_NN concern_NN posted_VBD a_DT loss_NN of_IN $_$ 51.2_CD million_CD ,_, or_CC $_$ 4.68_CD a_DT share_NN ._.
+78. Revenue_NN in_IN the_DT latest_JJS quarter_NN rose_VBD 14_CD %_NN to_TO $_$ 589_CD million_CD from_IN $_$ 515.1_CD million_CD ._.
+79. In_IN composite_JJ trading_NN on_IN the_DT New_NNP York_NNP Stock_NNP Exchange_NNP ,_, Morrison_NNP gained_VBD $_$ 2.25_CD to_TO $_$ 44.125_CD ._.
+80. Morrison_NNP said_VBD the_DT engineering_NN and_CC construction_NN segment_NN performed_VBD well_RB ,_, with_IN the_DT mining_NN and_CC MK-Ferguson_NNP operations_NNS making_VBG important_JJ contributions_NNS ._.
+81. Boise_NNP ,_, Idaho-based_JJ Morrison_NNP had_VBD losses_NNS totaling_VBG $_$ 186_CD million_CD over_IN the_DT two_CD years_NNS ended_VBN in_IN December_NNP ,_, but_CC it_PRP has_VBZ surged_VBN back_RB to_TO profitability_NN as_IN a_DT result_NN of_IN cost-cutting_NN and_CC shedding_NN of_IN unprofitable_JJ operations_NNS ._.
+82. In_IN the_DT nine_CD months_NNS ,_, the_DT company_NN 's_POS net_JJ income_NN was_VBD $_$ 21.5_CD million_CD ,_, or_CC $_$ 1.88_CD a_DT share_NN ,_, compared_VBN with_IN a_DT year-earlier_JJ loss_NN of_IN $_$ 97.8_CD million_CD ,_, or_CC $_$ 8.96_CD a_DT share_NN ._.
+83. Revenue_NN rose_VBD 17_CD %_NN to_TO $_$ 1.62_CD billion_CD from_IN $_$ 1.39_CD billion_CD ._.
+84. The_DT House_NNP Ethics_NNP Committee_NNP officially_RB cited_VBD Rep._NNP Jim_NNP Bates_NNP (_( D._NNP ,_, Calif_NNP ._. )_) for_IN sexually_RB harassing_VBG two_CD female_JJ employees_NNS ,_, but_CC did_VBD n't_RB recommend_VB formal_JJ disciplinary_JJ action_NN ._.
+85. Rep._NNP Bates_NNP said_VBD he_PRP accepted_VBD the_DT finding_NN ,_, but_CC one_CD of_IN the_DT victims_NNS ,_, Dorena_NNP Bertussi_NNP ,_, denounced_VBD the_DT ethics_NNS panel_NN 's_POS action_NN as_IN ``_`` absurd_JJ ._. ''_''
+86. Acting_VBG more_JJR|RBR than_IN a_DT year_NN after_IN Ms._NNP Bertussi_NNP filed_VBD a_DT complaint_NN ,_, the_DT panel_NN issued_VBD a_DT ``_`` letter_NN of_IN reproval_NN ''_'' saying_VBG Rep._NNP Bates_NNP had_VBD admitted_VBN conduct_NN that_WDT violated_VBD a_DT House_NNP rule_NN forbidding_VBG discrimination_NN against_IN employees_NNS on_IN account_NN of_IN their_PRP$ sex_NN ._.
+87. It_PRP ordered_VBD Rep._NNP Bates_NNP to_TO write_VB letters_NNS of_IN apology_NN to_TO Ms._NNP Bertussi_NNP and_CC to_TO a_DT second_JJ complainant_NN ,_, Karen_NNP Dryden_NNP ._.
+88. Rep._NNP Bates_NNP said_VBD he_PRP would_MD write_VB the_DT letters_NNS as_IN ordered_VBN ._.
+89. ``_`` I_PRP accept_VBP the_DT resolution_NN of_IN the_DT matter_NN by_IN the_DT Ethics_NNP Committee_NNP ,_, ''_'' he_PRP said_VBD ._.
+90. The_DT panel_NN also_RB warned_VBD Rep._NNP Bates_NNP that_IN any_DT further_JJ violations_NNS ``_`` may_MD result_VB in_IN a_DT recommendation_NN that_IN disciplinary_JJ action_NN be_VB considered_VBN ._. ''_''
+91. But_CC Ms._NNP Bertussi_NNP asked_VBD ,_, ``_`` Who_WP in_IN their_PRP$ right_JJ mind_NN is_VBZ going_VBG to_TO file_VB another_DT complaint_NN with_IN the_DT Ethics_NNP Committee_NNP ?_. ''_''
+92. Rep._NNP Bates_NNP has_VBZ publicly_RB begged_VBN for_IN forgiveness_NN from_IN voters_NNS and_CC was_VBD re-elected_VBN with_IN 60_CD %_NN of_IN the_DT vote_NN last_JJ November_NNP ._.
+93. Mesa_NNP Airlines_NNPS|NNP said_VBD the_DT takeover_NN offer_NN it_PRP received_VBD earlier_RBR this_DT week_NN from_IN StatesWest_NNP Airlines_NNPS|NNP is_VBZ for_IN a_DT combination_NN of_IN cash_NN and_CC securities_NNS valued_VBN by_IN StatesWest_NNP at_IN $_$ 10_CD a_DT Mesa_NNP share_NN ._.
+94. Both_DT companies_NNS are_VBP regional_JJ carriers_NNS in_IN the_DT Southwest_NNP ._.
+95. When_WRB it_PRP made_VBD the_DT offer_NN ,_, StatesWest_NNP declined_VBD to_TO disclose_VB details_NNS and_CC asked_VBD Mesa_NNP to_TO do_VB the_DT same_JJ ._.
+96. But_CC Farmington_NNP ,_, N.M.-based_JJ Mesa_NNP said_VBD the_DT offer_NN was_VBD for_IN $_$ 7_CD in_IN cash_NN and_CC unspecified_JJ StatesWest_NNP securities_NNS valued_VBN at_IN $_$ 3_CD a_DT share_NN ._.
+97. Based_VBN on_IN the_DT number_NN of_IN Mesa_NNP shares_NNS outstanding_JJ not_RB already_RB owned_VBN by_IN StatesWest_NNP ,_, the_DT proposed_VBN|JJ takeover_NN would_MD have_VB a_DT value_NN of_IN about_IN|RB $_$ 15.3_CD million_CD ._.
+98. StatesWest_NNP owns_VBZ 7.25_CD %_NN of_IN Mesa_NNP ._.
+99. Last_JJ week_NN ,_, Mesa_NNP rejected_VBD a_DT general_JJ proposal_NN from_IN StatesWest_NNP|JJS that_IN the_DT two_CD carriers_NNS combine_VBP|VB ._.
+100. In_IN response_NN to_TO the_DT specific_JJ offer_NN ,_, Gary_NNP Risley_NNP ,_, Mesa_NNP vice_NN president_NN ,_, said_VBD management_NN will_MD ask_VB directors_NNS to_TO employ_VB a_DT financial_JJ consultant_NN to_TO advise_VB them_PRP ._.
+

@@ -1,0 +1,14 @@
+processed 96499 tokens with 6178 phrases; found: 5703 phrases; correct: 3908.
+accuracy:  95.87%; precision:  68.53%; recall:  63.26%; FB1:  65.79
+              LOC: precision:  74.88%; recall:  70.40%; FB1:  72.57  1604
+         LOCderiv: precision:  76.73%; recall:  86.99%; FB1:  81.54  636
+          LOCpart: precision:  63.64%; recall:  44.95%; FB1:  52.69  77
+              ORG: precision:  56.88%; recall:  50.70%; FB1:  53.61  1025
+         ORGderiv: precision:   0.00%; recall:   0.00%; FB1:   0.00  0
+          ORGpart: precision:  63.91%; recall:  49.42%; FB1:  55.74  133
+              OTH: precision:  53.09%; recall:  37.02%; FB1:  43.62  486
+         OTHderiv: precision:  63.16%; recall:  30.77%; FB1:  41.38  19
+          OTHpart: precision:  75.00%; recall:  14.29%; FB1:  24.00  8
+              PER: precision:  71.57%; recall:  74.80%; FB1:  73.15  1713
+         PERderiv: precision:   0.00%; recall:   0.00%; FB1:   0.00  2
+          PERpart: precision:   0.00%; recall:   0.00%; FB1:   0.00  0

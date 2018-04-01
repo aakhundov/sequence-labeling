@@ -1,0 +1,20 @@
+processed 152728 tokens with 11257 phrases; found: 11680 phrases; correct: 9713.
+accuracy:  97.66%; precision:  83.16%; recall:  86.28%; FB1:  84.69
+         CARDINAL: precision:  81.72%; recall:  82.25%; FB1:  81.98  941
+             DATE: precision:  78.90%; recall:  84.52%; FB1:  81.62  1716
+            EVENT: precision:  50.00%; recall:  47.62%; FB1:  48.78  60
+              FAC: precision:  66.12%; recall:  59.26%; FB1:  62.50  121
+              GPE: precision:  93.95%; recall:  94.29%; FB1:  94.12  2248
+         LANGUAGE: precision:  90.00%; recall:  40.91%; FB1:  56.25  10
+              LAW: precision:  59.38%; recall:  47.50%; FB1:  52.78  32
+              LOC: precision:  66.50%; recall:  75.42%; FB1:  70.68  203
+            MONEY: precision:  84.21%; recall:  86.62%; FB1:  85.40  323
+             NORP: precision:  84.00%; recall:  89.89%; FB1:  86.85  900
+          ORDINAL: precision:  79.13%; recall:  93.33%; FB1:  85.65  230
+              ORG: precision:  81.34%; recall:  84.74%; FB1:  83.00  1870
+          PERCENT: precision:  87.64%; recall:  89.40%; FB1:  88.51  356
+           PERSON: precision:  88.83%; recall:  92.81%; FB1:  90.77  2077
+          PRODUCT: precision:  60.94%; recall:  51.32%; FB1:  55.71  64
+         QUANTITY: precision:  73.91%; recall:  80.95%; FB1:  77.27  115
+             TIME: precision:  58.08%; recall:  62.74%; FB1:  60.32  229
+      WORK_OF_ART: precision:  32.43%; recall:  36.14%; FB1:  34.19  185
