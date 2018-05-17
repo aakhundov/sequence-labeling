@@ -60,7 +60,7 @@ def train():
     parser.add_argument("-lrd", "--lr-decay-rate", type=float, default=0.05)
     parser.add_argument("-blu", "--byte-lstm-units", type=int, default=64)
     parser.add_argument("-wlu", "--word-lstm-units", type=int, default=128)
-    parser.add_argument("-bed", "--byte-embedding-dim", type=int, default=50)
+    parser.add_argument("-bpd", "--byte-projection-dim", type=int, default=50)
     parser.add_argument("-bll", "--byte-lstm-layers", type=int, default=1)
     parser.add_argument("-wll", "--word-lstm-layers", type=int, default=1)
     parser.add_argument("-be", "--use-byte-embeddings", type=int, default=1)
@@ -111,7 +111,7 @@ def train():
             embedding_words=emb_words_placeholder, embedding_vectors=emb_vectors_placeholder,
             byte_lstm_units=args.byte_lstm_units, word_lstm_units=args.word_lstm_units,
             byte_lstm_layers=args.byte_lstm_layers, word_lstm_layers=args.word_lstm_layers,
-            byte_embedding_dim=args.byte_embedding_dim, training=True,
+            byte_projection_dim=args.byte_projection_dim, training=True,
             initial_learning_rate=args.initial_learning_rate, lr_decay_rate=args.lr_decay_rate,
             use_byte_embeddings=bool(args.use_byte_embeddings),
             use_word_embeddings=bool(args.use_word_embeddings),
@@ -151,7 +151,7 @@ def train():
         echo(log, "l.r. decay rate: {}".format(args.lr_decay_rate))
         echo(log, "byte lstm units: {}".format(args.byte_lstm_units))
         echo(log, "word lstm units: {}".format(args.word_lstm_units))
-        echo(log, "byte embedding dim: {}".format(args.byte_embedding_dim))
+        echo(log, "byte projection dim: {}".format(args.byte_projection_dim))
         echo(log, "byte lstm layers: {}".format(args.byte_lstm_layers))
         echo(log, "word lstm layers: {}".format(args.word_lstm_layers))
         echo(log, "use byte embeddings: {}".format(args.use_byte_embeddings))

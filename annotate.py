@@ -65,7 +65,7 @@ def annotate():
     embeddings_name, embeddings_id = params["embeddings"].split(", ")
     byte_lstm_units = int(params["byte lstm units"]) if "byte lstm units" in params else 64
     word_lstm_units = int(params["word lstm units"]) if "word lstm units" in params else 128
-    byte_embedding_dim = int(params["byte embedding dim"]) if "byte embedding dim" in params else 50
+    byte_projection_dim = int(params["byte projection dim"]) if "byte projection dim" in params else 50
     byte_lstm_layers = int(params["byte lstm layers"]) if "byte lstm layers" in params else 1
     word_lstm_layers = int(params["word lstm layers"]) if "word lstm layers" in params else 1
     use_byte_embeddings = int(params["use byte embeddings"]) if "use byte embeddings" in params else 1
@@ -101,7 +101,7 @@ def annotate():
         embedding_words=emb_words_placeholder, embedding_vectors=emb_vectors_placeholder,
         byte_lstm_units=byte_lstm_units, word_lstm_units=word_lstm_units,
         byte_lstm_layers=byte_lstm_layers, word_lstm_layers=word_lstm_layers,
-        byte_embedding_dim=byte_embedding_dim,
+        byte_projection_dim=byte_projection_dim,
         use_byte_embeddings=bool(use_byte_embeddings),
         use_word_embeddings=bool(use_word_embeddings),
         use_crf_layer=bool(use_crf_layer)

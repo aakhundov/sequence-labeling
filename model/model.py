@@ -4,15 +4,15 @@ import tensorflow.contrib.crf as crf
 import tensorflow.contrib.lookup as lookup
 
 
-def get_byte_embeddings(byte_tensor, embedding_dim):
-    """Convert an int tensor of UTF-8 bytes into a float32 tensor of byte embeddings."""
-    byte_embeddings = tf.get_variable(
-        name="byte_embeddings", shape=[256, embedding_dim],
+def get_byte_projections(byte_tensor, projection_dim):
+    """Convert an int tensor of UTF-8 bytes into a float32 tensor of byte projections."""
+    byte_projections = tf.get_variable(
+        name="byte_embeddings", shape=[256, projection_dim],
         initializer=tf.initializers.random_normal(),
         trainable=True
     )
 
-    return tf.nn.embedding_lookup(byte_embeddings, tf.cast(byte_tensor, tf.int32))
+    return tf.nn.embedding_lookup(byte_projections, tf.cast(byte_tensor, tf.int32))
 
 
 def get_word_embeddings(word_tensor, embedding_words, embedding_vectors):
@@ -57,7 +57,7 @@ def create_layered_bi_lstm(num_layers, num_units, dropout_rate):
 
 
 def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
-             byte_lstm_units, word_lstm_units, byte_lstm_layers, word_lstm_layers, byte_embedding_dim,
+             byte_lstm_units, word_lstm_units, byte_lstm_layers, word_lstm_layers, byte_projection_dim,
              training=False, initial_learning_rate=0.001, lr_decay_rate=0.05,
              use_byte_embeddings=True, use_word_embeddings=True, use_crf_layer=True):
 
@@ -72,14 +72,14 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     dropout_rate = tf.placeholder_with_default(0.0, shape=[])
     completed_epochs = tf.placeholder_with_default(0.0, shape=[])
 
-    # byte (morphology) and word (semantics) embeddings created with the helper methods
-    # embeddings are created (and further processed) only once for each words in a batch
-    byte_embeddings = get_byte_embeddings(unique_word_bytes, byte_embedding_dim)
+    # byte projections and word embeddings of each unique word
+    # in a batch are created (and further processed) only once
+    byte_projections = get_byte_projections(unique_word_bytes, byte_projection_dim)
     word_embeddings = get_word_embeddings(unique_words, embedding_words, embedding_vectors)
 
-    # dropping out byte embeddings
-    dropped_byte_embeddings = tf.layers.dropout(
-        byte_embeddings, dropout_rate,
+    # dropping out byte projections
+    dropped_byte_projections = tf.layers.dropout(
+        byte_projections, dropout_rate,
         training=tf.greater(dropout_rate, 0.0)
     )
 
@@ -90,7 +90,7 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     )
 
     # byte-bi-LSTM configuration
-    byte_inputs = dropped_byte_embeddings
+    byte_inputs = dropped_byte_projections
     byte_seq_len = tf.reshape(unique_word_len, [-1])
     byte_lstm_fw, byte_lstm_bw = create_layered_bi_lstm(
         byte_lstm_layers, byte_lstm_units, dropout_rate
@@ -104,8 +104,8 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     )
 
     # fetching and concatenating a pair (fw and bw) of last outputs
-    # for every item in the batch (used as byte-embedding of a word)
-    last_byte_outputs = tf.reshape(
+    # for every item in the batch (used as byte embedding of a word)
+    byte_embeddings = tf.reshape(
         tf.concat([
             tf.gather_nd(
                 byte_outputs_fw,
@@ -122,10 +122,10 @@ def model_fn(input_values, label_vocab, embedding_words, embedding_vectors,
     if use_byte_embeddings:
         if use_word_embeddings:
             # combining (computed) byte and (pre-trained) word embeddings for unique words in a batch
-            unique_word_features = tf.concat([dropped_word_embeddings, last_byte_outputs], axis=1)
+            unique_word_features = tf.concat([dropped_word_embeddings, byte_embeddings], axis=1)
         else:
             # using only (computed) byte embeddings
-            unique_word_features = last_byte_outputs
+            unique_word_features = byte_embeddings
     else:
         # using only (pre-trained) word embeddings
         unique_word_features = dropped_word_embeddings
