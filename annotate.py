@@ -36,19 +36,33 @@ def fix_initial_i_tags(labels):
 
 
 def annotate():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-i", "--input-file", type=str, required=True)
-    parser.add_argument("-r", "--results-folder", type=str, required=True)
-    parser.add_argument("-o", "--output-file", type=str, default="")
-    parser.add_argument("-b", "--batch-size", type=int, default=2000)
-    parser.add_argument("-iob", "--convert-to-iob", type=int, default=0)
-    parser.add_argument("-fix", "--fix-i-tags", type=int, default=0)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "-i", metavar="input-file", type=str, required=True,
+        help="the file with the data to annotate in the appropriate format")
+    parser.add_argument(
+        "-r", metavar="results-folder", type=str, required=True,
+        help="the path to the folder with the training results")
+    parser.add_argument(
+        "-o", metavar="output-file", type=str, default="<suffix>",
+        help="the path to the file to write the annotated output to")
+    parser.add_argument(
+        "-b", metavar="batch-size", type=int, default=2000,
+        help="the batch size used for the annotation")
+    parser.add_argument(
+        "-iob", metavar="convert-to-iob", type=int, default=0,
+        help="convert to IOB tagging scheme (1) or not (0)")
+    parser.add_argument(
+        "-fix", metavar="fix-i-tags", type=int, default=0,
+        help="fix inconsistent I-tags (not following a B-tag with the same class) "
+             "in predictions (1) or not (0)")
     args = parser.parse_args()
 
     assert os.path.exists(args.input_file)
     assert os.path.exists(args.results_folder)
 
-    if args.output_file == "":
+    if args.output_file == "<suffix>":
         args.output_file = os.path.splitext(args.input_file)[0] + ".labeled.txt"
 
     print("Input file: {}".format(args.input_file))

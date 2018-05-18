@@ -49,23 +49,58 @@ def create_training_artifacts(data_folder):
 
 
 def train():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--data-folder", type=str, required=True)
-    parser.add_argument("-em", "--embeddings-name", type=str, default="glove")
-    parser.add_argument("-emid", "--embeddings-id", type=str, default="6B.100d")
-    parser.add_argument("-ep", "--epochs", type=int, default=100)
-    parser.add_argument("-b", "--batch-size", type=int, default=8)
-    parser.add_argument("-eb", "--eval-batch-size", type=int, default=2000)
-    parser.add_argument("-lr", "--initial-learning-rate", type=float, default=0.001)
-    parser.add_argument("-lrd", "--lr-decay-rate", type=float, default=0.05)
-    parser.add_argument("-blu", "--byte-lstm-units", type=int, default=64)
-    parser.add_argument("-wlu", "--word-lstm-units", type=int, default=128)
-    parser.add_argument("-bpd", "--byte-projection-dim", type=int, default=50)
-    parser.add_argument("-bll", "--byte-lstm-layers", type=int, default=1)
-    parser.add_argument("-wll", "--word-lstm-layers", type=int, default=1)
-    parser.add_argument("-be", "--use-byte-embeddings", type=int, default=1)
-    parser.add_argument("-we", "--use-word-embeddings", type=int, default=1)
-    parser.add_argument("-crf", "--use-crf-layer", type=int, default=1)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "-d", metavar="data-folder", type=str, required=True,
+        help="the path to the folder with prepared "
+             "train/val/test data and the labels")
+    parser.add_argument(
+        "-em", metavar="embeddings-name", type=str, default="glove",
+        help="the word embeddings to use ('glove', 'polyglot', or 'senna')")
+    parser.add_argument(
+        "-emid", metavar="embeddings-id", type=str, default="6B.100d",
+        help="the version of the word embeddings (e.g. 'en' for 'polyglot')")
+    parser.add_argument(
+        "-ep", metavar="epochs", type=int, default=100,
+        help="the number of epochs to train")
+    parser.add_argument(
+        "-b", metavar="batch-size", type=int, default=8,
+        help="the batch size (number of sentences per batch) for training")
+    parser.add_argument(
+        "-eb", metavar="eval-batch-size", type=int, default=2000,
+        help="the batch size (number of sentences per batch) for validation")
+    parser.add_argument(
+        "-lr", metavar="initial-learning-rate", type=float, default=0.001,
+        help="the initial value of the learning rate (during the first epoch)")
+    parser.add_argument(
+        "-lrd", metavar="lr-decay-rate", type=float, default=0.05,
+        help="the learning rate decay factor: LR_t = "
+             "LR_init / (1 + LR_decay_factor * (t - 1))")
+    parser.add_argument(
+        "-blu", metavar="byte-lstm-units", type=int, default=64,
+        help="the hidden state size (cell size) for the Byte Bi-LSTM")
+    parser.add_argument(
+        "-wlu", metavar="word-lstm-units", type=int, default=128,
+        help="the hidden state size (cell size) for the Word Bi-LSTM")
+    parser.add_argument(
+        "-bpd", metavar="byte-projection-dim", type=int, default=50,
+        help="the dimensionality of the byte projections")
+    parser.add_argument(
+        "-bll", metavar="byte-lstm-layers", type=int, default=1,
+        help="the number of layers in the Byte Bi-LSTM")
+    parser.add_argument(
+        "-wll", metavar="word-lstm-layers", type=int, default=1,
+        help="the number of layers in the Word Bi-LSTM")
+    parser.add_argument(
+        "-be", metavar="use-byte-embeddings", type=int, default=1,
+        help="use byte embeddings (1) or not (0)")
+    parser.add_argument(
+        "-we", metavar="use-word-embeddings", type=int, default=1,
+        help="use word embeddings (1) or not (0)")
+    parser.add_argument(
+        "-crf", metavar="use-crf-layer", type=int, default=1,
+        help="use CRF layer (1) or not (0)")
     args = parser.parse_args()
 
     assert os.path.exists(args.data_folder)

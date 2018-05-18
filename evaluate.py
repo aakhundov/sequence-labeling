@@ -13,11 +13,21 @@ from util.misc import fetch_in_batches, read_params_from_log
 
 
 def evaluate():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-r", "--results-folder", type=str, required=True)
-    parser.add_argument("-f", "--data-file", type=str, default="val.txt")
-    parser.add_argument("-b", "--batch-size", type=int, default=2000)
-    parser.add_argument("-v", "--num-to-show", type=int, default=0)
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        "-r", metavar="results-folder", type=str, required=True,
+        help="the path to the folder with the training results")
+    parser.add_argument(
+        "-f", metavar="data-file", type=str, default="val.txt",
+        help="the file (within the original data folder) "
+             "with the data to evaluate the model on")
+    parser.add_argument(
+        "-b", metavar="batch-size", type=int, default=2000,
+        help="the batch size used for the evaluation")
+    parser.add_argument(
+        "-v", metavar="num-to-show", type=int, default=0,
+        help="the number of predicted sentence samples to visualize")
     args = parser.parse_args()
 
     assert os.path.exists(args.results_folder)
