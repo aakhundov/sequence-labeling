@@ -1,7 +1,7 @@
 Sequence Labeling: A Practical Approach
 ===============
 
-Accompanying repository of the paper "Sequence Labeling: A Practical Approach". Works well with TensorFlow 1.3 and 1.4 (for some unknown reason, the performance drops substantially under the version 1.5 and above). The resources within the repo are structured as follows:
+Accompanying repository of the paper ["Sequence Labeling: A Practical Approach"](https://arxiv.org/abs/1808.03926). Works well with TensorFlow 1.3 and 1.4 (for some unknown reason, the performance drops substantially under the version 1.5 and above). The resources within the repo are structured as follows:
 
 * **convert** - the folder with several scripts for converting the standard sequence labeling datasets (including those mentioned in the paper) to the standardized format recognizable by the code. The instructions on converting each particular standard dataset are in the heading comments of the respective conversion script. The recognizable format is: 
     * two files with the data - **train.txt** and **val.txt** - each containing the respective part of the dataset (training and validation/development set). Each line of these files should contain the space-separated list of tokens of one sentence, separated by a tab from the space-separated list of the corresponding labels.
